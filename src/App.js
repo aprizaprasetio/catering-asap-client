@@ -2,11 +2,11 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import LoginForm from './components/pages/LoginForm'
 import RegisterForm from './components/pages/RegisterForm'
+import UserHome from './components/pages/UserHome'
 import store from './redux/store'
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { $CombinedState } from '@reduxjs/toolkit'
 
 const App = () => {
   const [account, setAccount] = React.useState(null)
@@ -34,7 +34,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/">
-        <Route index element={<h1>Hello {account.email}</h1>} />
+        <Route index element={<UserHome />} />
       </Route>
     </Routes>
   )

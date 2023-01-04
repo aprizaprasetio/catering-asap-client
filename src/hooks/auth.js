@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:8000'
+const BASE_URL = 'http://192.168.53.226:8000'
 
 const getJwt = () => localStorage.getItem('JWT_AUTHENTICATION')
 

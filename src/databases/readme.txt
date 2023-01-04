@@ -1,0 +1,1 @@
+Run npx json-server --host 192.168.53.226 ./src/databases/dummy.json --port 8000
