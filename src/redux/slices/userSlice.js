@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { requestUser } from '../../hooks/auth'
+import { fetchUser } from '../../api/auth'
 
 const userSlicer = createSlice({
     name: 'user',
@@ -26,7 +26,7 @@ const userSlicer = createSlice({
 const userReducer = userSlicer.reducer
 
 const getUser = createAsyncThunk('user/getUser', async ({ email, password }, { rejectWithValue }) => {
-    const response = await requestUser(email, password)
+    const response = await fetchUser(email, password)
     if (response === null) return rejectWithValue('Mohon periksa kembali email atau password')
     return response
 })

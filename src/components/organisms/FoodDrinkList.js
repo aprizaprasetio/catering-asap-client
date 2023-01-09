@@ -1,12 +1,13 @@
 import React from 'react'
 import { Grid } from '@mui/material'
 import FoodDrinkItemUser from './FoodDrinkItemUser'
+import { useFoodDrinkList } from '../../api/catalogUser'
 
 const listConfig = {
     spacing: 2,
     columns: {
         xs: 3,
-        sm: 8,
+        sm: 10,
         md: 12,
         lg: 16,
     },
@@ -15,12 +16,24 @@ const listConfig = {
 const FoodDrinkList = () => {
     return (
         <Grid container {...listConfig}>
-            {Array.from(Array(10)).map((_, index) => (
-                <FoodDrinkItemUser key={index} />
-            ))
+            {
+                Array.from(Array(10)).map((_, index) => (
+                    <FoodDrinkItemUser key={index} />
+                ))
             }
-        </Grid >
+        </Grid>
     )
+    // const [data, status] = useFoodDrinkList()
+
+    // if (status === 'loading') return null
+
+    // return (
+    //     <Grid container {...listConfig}>
+    //         {
+    //             data.map(item => <FoodDrinkItemUser key={item.id} {...item} />)
+    //         }
+    //     </Grid >
+    // )
 }
 
 export default FoodDrinkList

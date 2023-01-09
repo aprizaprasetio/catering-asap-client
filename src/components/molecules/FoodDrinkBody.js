@@ -2,6 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CardContent, Typography, Grid } from '@mui/material'
 
+const currency = Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+})
+
 const cardConfig = {
     direction: {
         xs: 'column',
@@ -24,7 +29,7 @@ const FoodDrinkBody = ({ name, price }) => {
     return (
         <CardContent component={Grid} container {...cardConfig}>
             <Typography variant="h3" sx={titleStyle}>{name}</Typography>
-            <Typography variant="subtitle1" sx={priceStyle}>{price}</Typography>
+            <Typography variant="subtitle1" sx={priceStyle}>{currency.format(price)}</Typography>
         </CardContent>
     )
 }

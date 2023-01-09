@@ -8,7 +8,6 @@ const footerConfig = {
         md: 'row',
     },
     justifyContent: 'space-between',
-    align: 'center',
     gap: 2,
 }
 

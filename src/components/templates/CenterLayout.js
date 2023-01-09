@@ -1,13 +1,17 @@
 import React from 'react'
 import { Container, Grid } from '@mui/material'
 import PropTypes from 'prop-types'
+import ButtonScrollTop from '../molecules/ButtonScrollTop'
+
+const gridStyle = {
+    marginY: 3,
+}
 
 const CenterLayout = ({ children }) => {
     return (
-        <Container>
-            <Grid container direction="column" justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
-                {children}
-            </Grid>
+        <Container sx={gridStyle}>
+            {children}
+            <ButtonScrollTop />
         </Container>
     )
 }

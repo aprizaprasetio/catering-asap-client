@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Grid } from '@mui/material'
+import { Card, CardContent, CardActions, Box, Grid } from '@mui/material'
 import SmallHeading from '../atoms/SmallHeading'
 import MediumSubtitle from '../atoms/MediumSubtitle'
 import ButtonWithEvent from '../molecules/ButtonWithEvent'
@@ -9,38 +9,59 @@ const BoxForm = ({ title, subtitle, buttonLabel, handleSubmit, helper, children 
   const buttonConfig = {
     label: buttonLabel,
     type: 'submit',
-    fullWidth: true,
   }
 
-  const boxStyle = {
-    maxWidth: 400,
-    minWidth: 270,
-    paddingX: 4,
-    paddingY: 6,
-    border: 1,
-    borderColor: 'primary.main',
-    borderRadius: 4,
-    boxShadow: 1,
+  const cardConfig = {
+    component: 'form',
+    onSubmit: handleSubmit,
+    sx: {
+      paddingX: {
+        xs: 1,
+        md: 4,
+      },
+      paddingY: 6,
+      width: {
+        md: 350,
+      },
+      display: 'grid',
+      gap: 4,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 4,
+      boxShadow: 6,
+      boxSizing: 'border-box',
+    },
+  }
+
+  const contentStyle = {
+    display: 'grid',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 4,
+  }
+
+  const footerStyle = {
+    display: 'grid',
+    alignItems: 'center',
+    gap: 2,
   }
 
   return (
-    <Box component="article" display="grid" justifyContent="center" gap={4} sx={boxStyle}>
-      <Grid container direction="column">
-        <SmallHeading content={title} />
-        <MediumSubtitle content={subtitle} />
-      </Grid>
-      <form onSubmit={handleSubmit}>
-        <Box display="grid" gap={6}>
-          <Box display="grid" gap={2} sx={{ maxWidth: 300 }}>
-            {children}
-          </Box>
-          <Box display="grid" justifyItems="center" gap={1}>
-            <ButtonWithEvent config={buttonConfig} />
-            {helper}
-          </Box>
+    <Card {...cardConfig}>
+      <CardContent sx={contentStyle}>
+        <Box component="header">
+          <SmallHeading content={title} />
+          <MediumSubtitle content={subtitle} />
         </Box>
-      </form >
-    </Box >
+        <Box display="grid" gap={2}>
+          {children}
+        </Box>
+      </CardContent>
+      <CardActions sx={footerStyle}>
+        <ButtonWithEvent config={buttonConfig} />
+        {helper}
+      </CardActions>
+    </Card>
   )
 }
 
