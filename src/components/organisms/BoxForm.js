@@ -21,7 +21,11 @@ const BoxForm = ({ title, subtitle, buttonLabel, handleSubmit, helper, children 
       },
       paddingY: 6,
       width: {
-        md: 350,
+        sm: 350,
+      },
+      margin: {
+        xs: 0.66,
+        sm: 'auto',
       },
       display: 'grid',
       gap: 4,

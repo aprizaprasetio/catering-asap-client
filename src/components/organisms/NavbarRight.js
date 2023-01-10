@@ -39,7 +39,6 @@ const NavbarRight = () => {
     const menuTrigger = Event => {
         if (open === false) {
             if (Event.currentTarget.tagName !== 'BUTTON') return
-            console.info(Event.currentTarget.tagName)
             setOpen(true)
             setTarget(Event.currentTarget)
             return

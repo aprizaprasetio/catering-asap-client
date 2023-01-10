@@ -5,7 +5,7 @@ import { CardActions, Grid } from '@mui/material'
 const footerConfig = {
     direction: {
         xs: 'column',
-        md: 'row',
+        sm: 'row',
     },
     justifyContent: 'space-between',
     gap: 2,

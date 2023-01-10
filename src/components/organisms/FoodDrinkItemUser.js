@@ -16,6 +16,13 @@ const FoodDrinkItemUser = ({ name = 'Judul', price = 192000 }) => {
         dislike: 99,
     }
 
+    const addStyle = {
+        display: {
+            xs: 'none',
+            sm: 'block',
+        }
+    }
+
     const buttonStyle = {
         display: {
             md: 'none',
@@ -30,7 +37,7 @@ const FoodDrinkItemUser = ({ name = 'Judul', price = 192000 }) => {
             <FoodDrinkBody name={name} price={price} />
             <FoodDrinkFooter>
                 <FoodDrinkReact values={reactValues} />
-                <Grid item>
+                <Grid sx={addStyle} item>
                     <FoodDrinkButton>
                         <AddShoppingCart />
                         <Typography component="p" sx={buttonStyle}>Tambah</Typography>

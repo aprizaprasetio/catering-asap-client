@@ -24,7 +24,8 @@ const yupConfig = yup.object({
         .required('Mohon pastikan email terisi'),
     password: yup
         .string()
-        .required('Mohon pastikan kata sandi terisi'),
+        .required('Mohon pastikan kata sandi terisi')
+        .min(8, 'Mohon buat kata sandi di atas 8 kata'),
     confirmation: yup
         .string()
         .oneOf([yup.ref('password'), null], 'Mohon periksa kesamaan kata sandi')

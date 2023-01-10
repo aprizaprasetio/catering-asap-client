@@ -9,8 +9,7 @@ const cardStyle = {
 
 const gridConfig = {
     xs: 3,
-    sm: 5,
-    md: 4,
+    sm: 4,
 }
 
 const FoodDrinkItem = ({ children }) => {

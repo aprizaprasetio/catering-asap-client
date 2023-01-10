@@ -38,7 +38,7 @@ const SearchBar = () => {
     return (
         <Box sx={boxStyle}>
             <Search sx={iconStyle} />
-            <InputBase components="div" placeholder="Pencarian" sx={inputStyle} />
+            <InputBase component="div" placeholder="Pencarian" sx={inputStyle} />
         </Box>
     )
 }

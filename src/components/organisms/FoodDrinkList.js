@@ -6,10 +6,10 @@ import { useFoodDrinkList } from '../../api/catalogUser'
 const listConfig = {
     spacing: 2,
     columns: {
-        xs: 3,
-        sm: 10,
-        md: 12,
-        lg: 16,
+        xs: 6,
+        sm: 12,
+        md: 16,
+        lg: 20,
     },
 }
 

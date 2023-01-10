@@ -1,11 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { MoodRounded, SentimentNeutralRounded, MoodBadRounded } from '@mui/icons-material'
-import { Grid, Button, Typography } from '@mui/material'
+import { Grid, List, Stack } from '@mui/material'
+import ReactListItem from './ReactListItem'
 
 const gridConfig = {
     direction: 'row',
-    justifyContent: 'space-evenly',
+    gap: 0,
+}
+
+const iconStyle = {
+    padding: 0,
+    margin: 0,
+}
+
+const listConfig = {
+    component: Stack,
+    direction: {
+        xs: 'column',
+        sm: 'row',
+    },
+    spacing: 1,
 }
 
 const FoodDrinkReact = ({ values }) => {
@@ -13,20 +28,11 @@ const FoodDrinkReact = ({ values }) => {
 
     return (
         <Grid item>
-            <Grid container {...gridConfig}>
-                <Button disabled>
-                    <MoodRounded />
-                    <Typography fontFamily="sans-serif" component="span">{like}</Typography>
-                </Button>
-                <Button disabled>
-                    <SentimentNeutralRounded />
-                    <Typography fontFamily="sans-serif" component="span">{ok}</Typography>
-                </Button>
-                <Button disabled>
-                    <MoodBadRounded />
-                    <Typography fontFamily="sans-serif" component="span">{dislike}</Typography>
-                </Button>
-            </Grid>
+            <List {...listConfig}>
+                <ReactListItem icon={<MoodRounded />} content={like} />
+                <ReactListItem icon={<SentimentNeutralRounded />} content={ok} />
+                <ReactListItem icon={<MoodBadRounded />} content={dislike} />
+            </List>
         </Grid>
     )
 }

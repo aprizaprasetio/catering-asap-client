@@ -8,21 +8,18 @@ const currency = Intl.NumberFormat('id-ID', {
 })
 
 const cardConfig = {
-    direction: {
-        xs: 'column',
-        md: 'row',
-    },
+    direction: 'column',
     justifyContent: 'space-between',
 }
 
 const titleStyle = {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 14,
 }
 
 const priceStyle = {
     fontFamily: 'sans-serif',
-    fontSize: 14,
+    fontWeight: 'bold',
+    fontSize: 16,
 }
 
 const FoodDrinkBody = ({ name, price }) => {
