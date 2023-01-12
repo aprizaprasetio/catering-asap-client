@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { fetchToken, fetchRegister } from 'api/connections/authRequest'
@@ -10,13 +9,11 @@ const useLogin = () => {
     // Initiate mutation for post request
     const { data, isSuccess, isLoading, mutate } = useMutation({
         mutationFn: fetchToken,
+        onSuccess: () => {
+            storeToken(data)
+            navigate('/')
+        },
     })
-    // Storing web token when request is success
-    useEffect(() => {
-        if (isSuccess === false) return
-        storeToken(data)
-        navigate('/')
-    }, [isSuccess])
     return { data, isSuccess, isLoading, mutate }
 }
 
@@ -26,8 +23,11 @@ const useRegister = () => {
     // Initiate mutation for post request
     const { data, isSuccess, isLoading, mutate } = useMutation({
         mutationFn: fetchRegister,
+        onSuccess: () => {
+            navigate('/login')
+        },
     })
-    return { data, isLoading, mutate }
+    return { data, isSuccess, isLoading, mutate }
 }
 
 export {
