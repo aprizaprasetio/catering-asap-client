@@ -1,18 +1,15 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import BoxForm from '../organisms/BoxForm'
-import Field from '../molecules/Field'
-import PasswordField from '../molecules/PasswordField'
-import LabeledRadio from '../molecules/LabeledRadio'
-import RadioField from '../molecules/RadioField'
-import HelperForm from '../molecules/HelperForm'
-import CenterLayout from '../templates/CenterLayout'
-
-// Fungsi tombol submit
-const submitAction = values => {
-    console.info(values)
-}
+import LoadingFull from 'components/atoms/LoadingFull'
+import Field from 'components/molecules/Field'
+import PasswordField from 'components/molecules/PasswordField'
+import LabeledRadio from 'components/molecules/LabeledRadio'
+import RadioField from 'components/molecules/RadioField'
+import HelperForm from 'components/molecules/HelperForm'
+import BoxForm from 'components/organisms/BoxForm'
+import CenterLayout from 'components/templates/CenterLayout'
+import { useRegister } from 'api/hooks/authHook'
 
 const yupConfig = yup.object({
     email: yup
@@ -35,7 +32,9 @@ const yupConfig = yup.object({
         .required('Mohon pastikan jenis kelamin terisi'),
 })
 
-const LoginForm = () => {
+const RegisterForm = () => {
+    const { mutate, isLoading } = useRegister()
+
     const formikConfig = useFormik({
         initialValues: {
             email: '',
@@ -46,7 +45,7 @@ const LoginForm = () => {
         },
         validationSchema: yupConfig,
         validateOnChange: false,
-        onSubmit: submitAction,
+        onSubmit: () => mutate(formikConfig.values),
     })
 
     const emailConfig = {
@@ -90,12 +89,13 @@ const LoginForm = () => {
 
     return (
         <CenterLayout>
+            {isLoading && <LoadingFull />}
             <BoxForm
                 title="Daftar Akun Catering"
                 subtitle="Daftarkan akun baru untuk memulai pesanan"
                 buttonLabel="Daftar"
                 handleSubmit={formikConfig.handleSubmit}
-                helper={<HelperForm path="/" label="Masuk" content="Sudah mempunyai akun?" />}
+                helper={<HelperForm path="/login" label="Masuk" content="Sudah mempunyai akun?" />}
             >
                 <Field config={emailConfig} />
                 <Field config={nameConfig} />
@@ -110,4 +110,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm
+export default RegisterForm

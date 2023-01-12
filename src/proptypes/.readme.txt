@@ -1,0 +1,4 @@
+"./src/proptypes"
+
+This folder used to initiate proptypes of the component.
+Read the documentation at https://reactjs.org/docs/typechecking-with-proptypes.html. Do not forget to use destruction import.

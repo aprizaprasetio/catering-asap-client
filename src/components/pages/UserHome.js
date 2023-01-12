@@ -1,7 +1,7 @@
 import React from 'react'
-import CenterLayout from '../templates/CenterLayout'
-import FoodDrinkList from '../organisms/FoodDrinkList'
-import FloatingNavbar from '../organisms/FloatingNavbar'
+import CenterLayout from 'components/templates/CenterLayout'
+import FoodDrinkList from 'components/organisms/FoodDrinkList'
+import FloatingNavbar from 'components/organisms/FloatingNavbar'
 
 const UserHome = () => {
     return (

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Paper, Box, IconButton, SwipeableDrawer as Drawer, List, Divider } from '@mui/material'
+import { Paper, Box, IconButton, SwipeableDrawer, MenuList, Divider } from '@mui/material'
 import { Menu as MenuIcon, Person, Logout, HourglassBottom, Cached, LocalShipping, Schedule } from '@mui/icons-material'
-import PressListItem from '../molecules/PressListItem'
+import PressListItem from 'components/molecules/PressListItem'
 
 const boxStyle = {
     display: {
@@ -10,10 +10,11 @@ const boxStyle = {
     }
 }
 
-const paperStyle = {
+const listStyle = {
+    padding: 1,
+    marginBottom: 1,
     borderRadius: 3,
     boxShadow: 4,
-    marginBottom: 1,
 }
 
 const dividerStyle = {
@@ -29,9 +30,6 @@ const NavbarRightMobile = () => {
         open: open,
         onOpen: openTrigger,
         onClose: openTrigger,
-        BackdropProps: {
-            invisible: true,
-        },
         PaperProps: {
             sx: {
                 padding: 1,
@@ -44,23 +42,19 @@ const NavbarRightMobile = () => {
             <IconButton onClick={openTrigger}>
                 <MenuIcon />
             </IconButton>
-            <Drawer {...drawerConfig}>
-                <Paper sx={paperStyle}>
-                    <List>
-                        <PressListItem icon={<Person />} content="Apriza Prasetio" />
-                        <PressListItem icon={<Logout />} content="Keluar" />
-                    </List>
-                </Paper>
-                <Paper sx={paperStyle}>
-                    <List>
-                        <PressListItem icon={<HourglassBottom />} content="Menunggu Verifikasi" />
-                        <PressListItem icon={<Cached />} content="Sedang Diproses" />
-                        <PressListItem icon={<LocalShipping />} content="Dalam Perjalanan" />
-                        <Divider sx={dividerStyle} />
-                        <PressListItem icon={<Schedule />} content="Riwayat Pesanan" />
-                    </List>
-                </Paper>
-            </Drawer>
+            <SwipeableDrawer {...drawerConfig}>
+                <MenuList component={Paper} sx={listStyle}>
+                    <PressListItem icon={<Person />} content="Apriza Prasetio" />
+                    <PressListItem icon={<Logout />} content="Keluar" />
+                </MenuList>
+                <MenuList component={Paper} sx={listStyle}>
+                    <PressListItem icon={<HourglassBottom />} content="Menunggu Verifikasi" />
+                    <PressListItem icon={<Cached />} content="Sedang Diproses" />
+                    <PressListItem icon={<LocalShipping />} content="Dalam Perjalanan" />
+                    <Divider sx={dividerStyle} />
+                    <PressListItem icon={<Schedule />} content="Riwayat Pesanan" />
+                </MenuList>
+            </SwipeableDrawer>
         </Box >
     )
 }

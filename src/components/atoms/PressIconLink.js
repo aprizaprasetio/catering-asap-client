@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import PressIcon from './PressIcon'
-import PropTypes from 'prop-types'
+import PressIconLinkProps from 'proptypes/atoms/PressIconLinkProps'
+import PressIcon from 'components/atoms/PressIcon'
 
 const PressIconLink = ({ href, children }) => {
     return (
@@ -13,9 +13,6 @@ const PressIconLink = ({ href, children }) => {
     )
 }
 
-PressIconLink.propTypes = {
-    href: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-}
+PressIconLink.propTypes = PressIconLinkProps
 
 export default PressIconLink

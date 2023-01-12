@@ -1,0 +1,13 @@
+"./src/components"
+This folder contain all of functional component.
+
+Syntax writing rules is following the Atomic Design Concept. Please understand the concept for better code.
+Do not forget to use proptypes for better debugging experience.
+Also for the import, please follow the priority rules.
+
+* Priority order *
+- React library.
+- External library.
+- Proptypes.
+- Components.
+- Api.

@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Grid, Button } from '@mui/material'
+import FoodDrinkButtonProps from 'proptypes/molecules/FoodDrinkButtonProps'
 
 const buttonStyle = {
     borderRadius: 6,
@@ -9,16 +9,12 @@ const buttonStyle = {
 
 const FoodDrinkButton = ({ children }) => {
     return (
-        <Grid item>
-            <Button sx={buttonStyle}>
-                {children}
-            </Button>
-        </Grid>
+        <Button component={Grid} item sx={buttonStyle}>
+            {children}
+        </Button>
     )
 }
 
-FoodDrinkButton.propTypes = {
-    children: PropTypes.node.isRequired,
-}
+FoodDrinkButton.propTypes = FoodDrinkButtonProps
 
 export default FoodDrinkButton

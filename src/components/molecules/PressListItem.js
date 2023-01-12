@@ -1,6 +1,6 @@
 import React from 'react'
-import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import PropTypes from 'prop-types'
+import { MenuItem, ListItemButton, ListItemIcon } from '@mui/material'
+import PressListItemProps from 'proptypes/molecules/PressListItemProps'
 
 const PressListItem = ({ icon, content }) => {
     const buttonStyle = {
@@ -8,20 +8,15 @@ const PressListItem = ({ icon, content }) => {
     }
 
     return (
-        <ListItem sx={{ padding: 0.66 }}>
-            <ListItemButton sx={buttonStyle}>
-                <ListItemIcon>
-                    {icon}
-                </ListItemIcon>
-                <ListItemText primary={content} />
-            </ListItemButton>
-        </ListItem>
+        <MenuItem component={ListItemButton} sx={buttonStyle}>
+            <ListItemIcon>
+                {icon}
+            </ListItemIcon>
+            {content}
+        </MenuItem>
     )
 }
 
-PressListItem.propTypes = {
-    icon: PropTypes.element.isRequired,
-    content: PropTypes.string.isRequired,
-}
+PressListItem.propTypes = PressListItemProps
 
 export default PressListItem

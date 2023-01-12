@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { CardActions, Grid } from '@mui/material'
+import FoodDrinkFooterProps from 'proptypes/molecules/FoodDrinkFooterProps'
 
 const footerConfig = {
     direction: {
@@ -13,7 +13,7 @@ const footerConfig = {
 
 const FoodDrinkFooter = ({ children }) => {
     return (
-        <CardActions>
+        <CardActions component={Grid}>
             <Grid container {...footerConfig}>
                 {children}
             </Grid>
@@ -21,8 +21,6 @@ const FoodDrinkFooter = ({ children }) => {
     )
 }
 
-FoodDrinkFooter.propTypes = {
-    children: PropTypes.node.isRequired,
-}
+FoodDrinkFooter.propTypes = FoodDrinkFooterProps
 
 export default FoodDrinkFooter

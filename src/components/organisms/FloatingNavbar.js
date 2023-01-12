@@ -1,9 +1,9 @@
 import React from 'react'
 import { AppBar, Container, Toolbar } from '@mui/material'
-import NavbarLeft from '../molecules/NavbarLeft'
-import NavbarCenter from '../molecules/NavbarCenter'
-import NavbarRight from './NavbarRight'
-import NavbarRightMobile from './NavbarRightMobile'
+import NavbarLeft from 'components/molecules/NavbarLeft'
+import NavbarCenter from 'components/molecules/NavbarCenter'
+import NavbarRight from 'components/organisms/NavbarRight'
+import NavbarRightMobile from 'components/organisms/NavbarRightMobile'
 
 const menuStyle = {
     display: 'flex',
@@ -12,15 +12,13 @@ const menuStyle = {
 
 const FloatingNavbar = () => {
     return (
-        <AppBar component="nav" position="sticky">
-            <Container>
-                <Toolbar sx={menuStyle}>
-                    <NavbarLeft />
-                    <NavbarCenter />
-                    <NavbarRight />
-                    <NavbarRightMobile />
-                </Toolbar>
-            </Container>
+        <AppBar position="sticky">
+            <Toolbar component={Container} sx={menuStyle}>
+                <NavbarLeft />
+                <NavbarCenter />
+                <NavbarRight />
+                <NavbarRightMobile />
+            </Toolbar>
         </AppBar >
     )
 }

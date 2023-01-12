@@ -1,15 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import FoodDrinkItem from './FoodDrinkItem'
-import FoodDrinkImage from '../molecules/FoodDrinkImage'
-import FoodDrinkFooter from '../molecules/FoodDrinkFooter'
-import FoodDrinkBody from '../molecules/FoodDrinkBody'
-import FoodDrinkReact from '../molecules/FoodDrinkReact'
-import FoodDrinkButton from '../molecules/FoodDrinkButton'
 import { Grid, Typography } from '@mui/material'
 import { AddShoppingCart } from '@mui/icons-material'
+import FoodDrinkItemUserProps from 'proptypes/organisms/FoodDrinkItemUserProps'
+import FoodDrinkItem from 'components/organisms/FoodDrinkItem'
+import FoodDrinkImage from 'components/molecules/FoodDrinkImage'
+import FoodDrinkFooter from 'components/molecules/FoodDrinkFooter'
+import FoodDrinkBody from 'components/molecules/FoodDrinkBody'
+import FoodDrinkReact from 'components/molecules/FoodDrinkReact'
+import FoodDrinkButton from 'components/molecules/FoodDrinkButton'
 
-const FoodDrinkItemUser = ({ name = 'Judul', price = 192000 }) => {
+const FoodDrinkItemUser = ({ name, price }) => {
     const reactValues = {
         like: 99,
         ok: 99,
@@ -37,20 +37,15 @@ const FoodDrinkItemUser = ({ name = 'Judul', price = 192000 }) => {
             <FoodDrinkBody name={name} price={price} />
             <FoodDrinkFooter>
                 <FoodDrinkReact values={reactValues} />
-                <Grid sx={addStyle} item>
-                    <FoodDrinkButton>
-                        <AddShoppingCart />
-                        <Typography component="p" sx={buttonStyle}>Tambah</Typography>
-                    </FoodDrinkButton>
-                </Grid>
+                <FoodDrinkButton component={Grid} item sx={addStyle}>
+                    <AddShoppingCart />
+                    <Typography component="p" sx={buttonStyle}>Tambah</Typography>
+                </FoodDrinkButton>
             </FoodDrinkFooter>
         </FoodDrinkItem>
     )
 }
 
-FoodDrinkItemUser.propTypes = {
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-}
+FoodDrinkItemUser.propTypes = FoodDrinkItemUserProps
 
 export default FoodDrinkItemUser

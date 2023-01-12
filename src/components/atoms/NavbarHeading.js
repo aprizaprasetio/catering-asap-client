@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography } from '@mui/material'
-import PropTypes from 'prop-types'
+import NavbarHeadingProps from 'proptypes/atoms/NavbarHeadingProps'
 
 const brandStyle = {
     fontSize: 22,
@@ -9,8 +9,6 @@ const brandStyle = {
 
 const NavbarHeading = ({ content }) => <Typography variant="h1" sx={brandStyle}>{content}</Typography>
 
-NavbarHeading.propTypes = {
-    content: PropTypes.string.isRequired,
-}
+NavbarHeading.propTypes = NavbarHeadingProps
 
 export default NavbarHeading

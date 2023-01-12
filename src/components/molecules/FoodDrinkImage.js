@@ -1,11 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { CardMedia } from '@mui/material'
+import FoodDrinkImageProps from 'proptypes/molecules/FoodDrinkImageProps'
 
 const FoodDrinkImage = ({ image }) => <CardMedia component="img" height="150" image={image} />
 
-FoodDrinkImage.propTypes = {
-    image: PropTypes.string.isRequired,
-}
+FoodDrinkImage.propTypes = FoodDrinkImageProps
 
 export default FoodDrinkImage

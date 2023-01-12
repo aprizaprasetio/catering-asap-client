@@ -1,7 +1,8 @@
 import React from 'react'
 import { Grid } from '@mui/material'
-import FoodDrinkItemUser from './FoodDrinkItemUser'
-import { useFoodDrinkList } from '../../api/catalogUser'
+import FoodDrinkItemUser from 'components/organisms/FoodDrinkItemUser'
+import LoadingFull from 'components/atoms/LoadingFull'
+import { useFoodDrinkList } from 'api/hooks/catalogUserHook'
 
 const listConfig = {
     spacing: 2,
@@ -14,26 +15,15 @@ const listConfig = {
 }
 
 const FoodDrinkList = () => {
-    return (
+    const { data, isSuccess, isLoading } = useFoodDrinkList()
+    if (isLoading) return <LoadingFull />
+    if (isSuccess) return (
         <Grid container {...listConfig}>
             {
-                Array.from(Array(10)).map((_, index) => (
-                    <FoodDrinkItemUser key={index} />
-                ))
+                data.map(item => <FoodDrinkItemUser key={item.id} {...item} />)
             }
-        </Grid>
+        </Grid >
     )
-    // const [data, status] = useFoodDrinkList()
-
-    // if (status === 'loading') return null
-
-    // return (
-    //     <Grid container {...listConfig}>
-    //         {
-    //             data.map(item => <FoodDrinkItemUser key={item.id} {...item} />)
-    //         }
-    //     </Grid >
-    // )
 }
 
 export default FoodDrinkList

@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconButton, Avatar } from '@mui/material'
-import PropTypes from 'prop-types'
+import PressAvatarProps from 'proptypes/atoms/PressAvatarProps'
 
 const buttonStyle = {
     width: 50,
@@ -15,9 +15,6 @@ const PressAvatar = ({ onClick, children }) => {
     )
 }
 
-PressAvatar.propTypes = {
-    onClick: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-}
+PressAvatar.propTypes = PressAvatarProps
 
 export default PressAvatar

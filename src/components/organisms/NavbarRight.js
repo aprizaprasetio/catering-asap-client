@@ -1,10 +1,11 @@
 import React from 'react'
-import { Box, Menu, MenuItem, ListItemIcon, Paper, Divider, alpha, useTheme } from '@mui/material'
+import { Box, Menu, MenuList, Stack, Paper, Divider } from '@mui/material'
 import { Person, ShoppingCart, HelpCenter, HourglassBottom, Cached, LocalShipping, Schedule, Logout } from '@mui/icons-material'
-import PressIconLink from '../atoms/PressIconLink'
-import PressIcon from '../atoms/PressIcon'
-import PressAvatar from '../atoms/PressAvatar'
-import MenuItemVertical from '../molecules/MenuItemVertical'
+import PressIconLink from 'components/atoms/PressIconLink'
+import PressIcon from 'components/atoms/PressIcon'
+import PressAvatar from 'components/atoms/PressAvatar'
+import PressListItem from 'components/molecules/PressListItem'
+import ListItemVertical from 'components/molecules/ListItemVertical'
 
 const boxStyle = {
     display: {
@@ -17,23 +18,16 @@ const dividerStyle = {
     marginY: 1,
 }
 
-const topStyle = {
-    marginBottom: 0.66,
-    borderRadius: 3,
-}
-
-const bottomStyle = {
-    padding: 0.66,
-    borderRadius: 3,
-}
-
-const historyStyle = {
-    borderRadius: 3,
+const listConfig = {
+    sx: {
+        padding: 1,
+        marginTop: 1,
+        borderRadius: 3,
+    },
+    elevation: 3,
 }
 
 const NavbarRight = () => {
-    const { black } = useTheme().palette.common
-
     const [open, setOpen] = React.useState(false)
     const [target, setTarget] = React.useState(null)
     const menuTrigger = Event => {
@@ -53,15 +47,40 @@ const NavbarRight = () => {
         onClose: menuTrigger,
         onClick: menuTrigger,
         disableScrollLock: true,
+        spacing: 1,
         PaperProps: {
             sx: {
-                marginTop: 1.5,
-                marginLeft: -3,
-                borderRadius: 4,
+                borderRadius: 3,
                 padding: 1,
-                backgroundColor: alpha(black, 0.66),
+                overflow: 'visible',
+                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                mt: 1.5,
+                '& .MuiAvatar-root': {
+                    width: 32,
+                    height: 32,
+                },
+                '&:before': {
+                    content: '""',
+                    display: 'block',
+                    position: 'absolute',
+                    top: 5,
+                    right: 15,
+                    width: 20,
+                    height: 20,
+                    bgcolor: 'background.paper',
+                    transform: 'translateY(-50%) rotate(45deg)',
+                    zIndex: 0,
+                },
             },
-            elevation: 0,
+            elevation: 3,
+        },
+        transformOrigin: {
+            horizontal: 'right',
+            vertical: 'top',
+        },
+        anchorOrigin: {
+            horizontal: 'right',
+            vertical: 'bottom',
         },
     }
 
@@ -77,42 +96,27 @@ const NavbarRight = () => {
                 <Person />
             </PressAvatar>
             <Menu {...menuConfig}>
-                <Paper sx={topStyle}>
-                    <MenuItem>
-                        <ListItemIcon>
-                            <Person />
-                            Apriza Prasetio
-                        </ListItemIcon>
-                    </MenuItem>
-                    <MenuItem>
-                        <ListItemIcon>
-                            <Logout />
-                            Keluar
-                        </ListItemIcon>
-                    </MenuItem>
-                </Paper>
-                <Paper sx={bottomStyle}>
-                    <Box display="flex">
-                        <MenuItemVertical href="order/wait" icon={<HourglassBottom />}>
+                <MenuList component={Paper}{...listConfig}>
+                    <PressListItem icon={<Person />} content="Apriza Prasetio" />
+                    <PressListItem icon={<Logout />} content="Keluar" />
+                </MenuList>
+                <MenuList component={Paper} {...listConfig}>
+                    <Stack direction="row">
+                        <ListItemVertical href="order/wait" icon={<HourglassBottom />}>
                             Menunggu<br />Verifikasi
-                        </MenuItemVertical>
-                        <MenuItemVertical href="order/onprocess" icon={<Cached />}>
+                        </ListItemVertical>
+                        <ListItemVertical href="order/onprocess" icon={<Cached />}>
                             Sedang<br />Diproses
-                        </MenuItemVertical>
-                        <MenuItemVertical href="order/ondelivery" icon={<LocalShipping />}>
+                        </ListItemVertical>
+                        <ListItemVertical href="order/ondelivery" icon={<LocalShipping />}>
                             Dalam<br />Perjalanan
-                        </MenuItemVertical>
-                    </Box>
+                        </ListItemVertical>
+                    </Stack>
                     <Divider sx={dividerStyle} />
-                    <MenuItem sx={historyStyle}>
-                        <ListItemIcon>
-                            <Schedule />
-                            Riwayat Pesanan
-                        </ListItemIcon>
-                    </MenuItem>
-                </Paper>
+                    <PressListItem icon={<Schedule />} content="Riwayat Pesanan" />
+                </MenuList>
             </Menu>
-        </Box>
+        </Box >
     )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextField, FormControl } from '@mui/material'
-import PropTypes from 'prop-types'
+import FieldProps from 'proptypes/molecules/FieldProps'
 
 const helperConfig = {
     sx: {
@@ -22,14 +22,6 @@ const Field = ({ config }) => {
     )
 }
 
-Field.propTypes = {
-    config: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired,
-        helperText: PropTypes.string,
-    }),
-}
+Field.propTypes = FieldProps
 
 export default Field

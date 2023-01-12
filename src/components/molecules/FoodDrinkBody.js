@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { CardContent, Typography, Grid } from '@mui/material'
+import FoodDrinkBodyProps from 'proptypes/molecules/FoodDrinkBodyProps'
 
 const currency = Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -31,9 +31,6 @@ const FoodDrinkBody = ({ name, price }) => {
     )
 }
 
-FoodDrinkBody.propTypes = {
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-}
+FoodDrinkBody.propTypes = FoodDrinkBodyProps
 
 export default FoodDrinkBody

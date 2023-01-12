@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormControl, FormLabel, RadioGroup } from '@mui/material'
-import PropTypes from 'prop-types'
+import RadioFieldProps from 'proptypes/molecules/RadioFieldProps'
 
 const RadioField = ({ config, children }) => {
     return (
@@ -18,13 +18,6 @@ const RadioField = ({ config, children }) => {
     )
 }
 
-RadioField.propTypes = {
-    config: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired,
-    }),
-}
+RadioField.propTypes = RadioFieldProps
 
 export default RadioField

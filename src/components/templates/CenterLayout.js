@@ -1,7 +1,7 @@
 import React from 'react'
-import { Container, Grid } from '@mui/material'
-import PropTypes from 'prop-types'
-import ButtonScrollTop from '../molecules/ButtonScrollTop'
+import { Container } from '@mui/material'
+import CenterLayoutProps from 'proptypes/templates/CenterLayoutProps'
+import ButtonScrollTop from 'components/molecules/ButtonScrollTop'
 
 const gridStyle = {
     marginY: 3,
@@ -16,8 +16,6 @@ const CenterLayout = ({ children }) => {
     )
 }
 
-CenterLayout.propTypes = {
-    children: PropTypes.node.isRequired,
-}
+CenterLayout.propTypes = CenterLayoutProps
 
 export default CenterLayout

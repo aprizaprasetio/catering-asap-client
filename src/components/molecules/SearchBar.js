@@ -8,13 +8,14 @@ const SearchBar = () => {
     const boxStyle = {
         paddingX: 1,
         display: 'flex',
+        alignItems: 'center',
         backgroundColor: alpha(white, 0.5),
         color: white,
         borderRadius: 3,
     }
 
     const iconStyle = {
-        alignSelf: 'center',
+        // alignSelf: 'center',
     }
 
     const inputStyle = {

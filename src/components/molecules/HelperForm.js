@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link as LinkRoute } from 'react-router-dom'
 import { Link } from '@mui/material'
-import MediumSubtitle from '../atoms/MediumSubtitle'
-import PropTypes from 'prop-types'
+import HelperFormProps from 'proptypes/molecules/HelperFormProps'
+import MediumSubtitle from 'components/atoms/MediumSubtitle'
 
 const HelperForm = ({ content, path, label }) => {
     return (
@@ -12,10 +12,6 @@ const HelperForm = ({ content, path, label }) => {
     )
 }
 
-HelperForm.propTypes = {
-    content: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-}
+HelperForm.propTypes = HelperFormProps
 
 export default HelperForm

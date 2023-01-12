@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@mui/material'
-import PropTypes from 'prop-types'
+import ButtonWithEventProps from 'proptypes/molecules/ButtonWithEventProps'
 
 const buttonStyle = {
     maxWidth: 250,
@@ -9,10 +9,6 @@ const buttonStyle = {
 
 const ButtonWithEvent = ({ config }) => <Button variant="contained" {...config} style={buttonStyle}>{config.label}</Button>
 
-ButtonWithEvent.propTypes = {
-    config: PropTypes.objectOf(
-        PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-    ),
-}
+ButtonWithEvent.propTypes = ButtonWithEventProps
 
 export default ButtonWithEvent

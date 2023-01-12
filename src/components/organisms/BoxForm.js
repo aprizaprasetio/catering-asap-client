@@ -1,9 +1,9 @@
 import React from 'react'
 import { Card, CardContent, CardActions, Box, Grid } from '@mui/material'
-import SmallHeading from '../atoms/SmallHeading'
-import MediumSubtitle from '../atoms/MediumSubtitle'
-import ButtonWithEvent from '../molecules/ButtonWithEvent'
-import PropTypes from 'prop-types'
+import BoxFormProps from 'proptypes/organisms/BoxFormProps'
+import SmallHeading from 'components/atoms/SmallHeading'
+import MediumSubtitle from 'components/atoms/MediumSubtitle'
+import ButtonWithEvent from 'components/molecules/ButtonWithEvent'
 
 const BoxForm = ({ title, subtitle, buttonLabel, handleSubmit, helper, children }) => {
   const buttonConfig = {
@@ -69,13 +69,6 @@ const BoxForm = ({ title, subtitle, buttonLabel, handleSubmit, helper, children 
   )
 }
 
-BoxForm.propTypes = {
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  buttonLabel: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  helper: PropTypes.element,
-  children: PropTypes.node.isRequired,
-}
+BoxForm.propTypes = BoxFormProps
 
 export default BoxForm

@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { ListItem, ListItemIcon } from '@mui/material'
+import ReactListItemProps from 'proptypes/molecules/ReactListItemProps'
 
 const ReactListItem = ({ content, icon }) => {
     return (
@@ -13,9 +13,6 @@ const ReactListItem = ({ content, icon }) => {
     )
 }
 
-ReactListItem.propTypes = {
-    content: PropTypes.number.isRequired,
-    icon: PropTypes.element.isRequired,
-}
+ReactListItem.propTypes = ReactListItemProps
 
 export default ReactListItem

@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconButton } from '@mui/material'
-import PropTypes from 'prop-types'
+import PressIconProps from 'proptypes/atoms/PressIconProps'
 
 const buttonStyle = {
     width: 50,
@@ -9,8 +9,6 @@ const buttonStyle = {
 
 const PressIcon = ({ children }) => <IconButton sx={buttonStyle}>{children}</IconButton>
 
-PressIcon.propTypes = {
-    children: PropTypes.node.isRequired
-}
+PressIcon.propTypes = PressIconProps
 
 export default PressIcon

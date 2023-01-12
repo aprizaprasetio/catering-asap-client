@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@mui/material'
-import NavbarHeading from '../atoms/NavbarHeading'
+import NavbarHeading from 'components/atoms/NavbarHeading'
 
 const boxStyle = {
     display: {

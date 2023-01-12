@@ -1,12 +1,9 @@
 import React from 'react'
 import { FormControlLabel, Radio } from '@mui/material'
-import PropTypes from 'prop-types'
+import LabeledRadioProps from 'proptypes/molecules/LabeledRadioProps'
 
 const LabeledRadio = (props) => <FormControlLabel control={<Radio />} {...props} />
 
-LabeledRadio.propTypes = {
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-}
+LabeledRadio.propTypes = LabeledRadioProps
 
 export default LabeledRadio

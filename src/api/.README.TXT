@@ -1,0 +1,21 @@
+"./src/api"
+This folder contain all of api request and custom hook functions.
+
+* Syntax writing rules *
+
+"./connections"
+- Please give the file name with Request at the end. Like exampleNameRequest.
+- This folder only contain a raw function that request the api directly.
+
+"./hooks"
+- Please give the file name with Hook at the end. Like exampleNameHook.
+- This folder only contain a function that handle any hooks or function from library like react-query or react.
+- Please consider write function code in this folder, so that the component will be pure element code.
+
+"./initiate.js"
+- This file store any of uncategorized declaration. Neither in connections or hooks.
+
+"./path.js"
+- This file only contains object declaration.
+- All of api path will be store in the object. 
+- The static path become a string and the dynamic path(path parameter) become a function with single or more parameter.
