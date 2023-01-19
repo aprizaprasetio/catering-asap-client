@@ -1,5 +1,6 @@
 import axiosOriginal from 'axios'
 import { QueryClient } from '@tanstack/react-query'
+import { getToken } from 'commands/api/tokenCommand'
 
 // Initiate your query client
 const client = new QueryClient({
@@ -10,15 +11,16 @@ const client = new QueryClient({
         },
     },
 })
-// Initiate api base url
-const axios = axiosOriginal.create({ baseURL: 'https://192.168.52.147:5001/api/' })
-// All about web token
-const getToken = () => localStorage.getItem('JWT_AUTHENTICATION')
-const storeToken = token => localStorage.setItem('JWT_AUTHENTICATION', token)
+
+// Initiate api base url and auth headers
+const axios = axiosOriginal.create({
+    baseURL: 'https://192.168.52.180:5001/api/',
+    headers: {
+        'Authorization': getToken() ? `Bearer ${getToken()}` : null,
+    },
+})
 
 export {
     client,
     axios,
-    getToken,
-    storeToken,
 }

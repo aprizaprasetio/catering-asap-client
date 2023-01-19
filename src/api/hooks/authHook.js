@@ -1,31 +1,28 @@
+import { Navigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { useNavigate } from 'react-router-dom'
+import { client } from 'api/initiates/queryInitiate'
 import { fetchToken, fetchRegister } from 'api/connections/authRequest'
-import { storeToken } from 'api/initiate'
+import { storeToken } from 'commands/api/tokenCommand'
 
 const useLogin = () => {
-    // Initite function to navigate the route
-    const navigate = useNavigate()
     // Initiate mutation for post request
-    const { data, isSuccess, isLoading, mutate } = useMutation({
+    const { data, isSuccess, isError, isLoading, mutate } = useMutation({
+        mutationKey: ['user'],
         mutationFn: fetchToken,
-        onSuccess: () => {
-            storeToken(data)
-            navigate('/')
-        },
+        onSuccess: res => {
+            storeToken(res.token)
+            client.setQueryData(['user'], res.data)
+            return <Navigate to="/" />
+        }
     })
-    return { data, isSuccess, isLoading, mutate }
+    return { data, isSuccess, isError, isLoading, mutate }
 }
 
 const useRegister = () => {
-    // Initite function to navigate the route
-    const navigate = useNavigate()
     // Initiate mutation for post request
     const { data, isSuccess, isLoading, mutate } = useMutation({
         mutationFn: fetchRegister,
-        onSuccess: () => {
-            navigate('/login')
-        },
+        onSuccess: () => <Navigate to="/login" />,
     })
     return { data, isSuccess, isLoading, mutate }
 }

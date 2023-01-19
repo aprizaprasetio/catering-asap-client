@@ -26,7 +26,7 @@ const ButtonScrollTop = () => {
     if (isBottom === false) return null
 
     return (
-        <Fade in={isBottom}>
+        <Fade in={isBottom} >
             <Fab {...fabConfig} >
                 <KeyboardArrowUp />
             </Fab>

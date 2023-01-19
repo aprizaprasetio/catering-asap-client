@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, CardActions, Box, Grid } from '@mui/material'
+import { Card, CardContent, CardActions, Box } from '@mui/material'
 import BoxFormProps from 'proptypes/organisms/BoxFormProps'
 import SmallHeading from 'components/atoms/SmallHeading'
 import MediumSubtitle from 'components/atoms/MediumSubtitle'

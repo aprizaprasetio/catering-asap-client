@@ -1,7 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-// import { useLogin } from '../../api/auth'
 import LoadingFull from 'components/atoms/LoadingFull'
 import Field from 'components/molecules/Field'
 import PasswordField from 'components/molecules/PasswordField'
@@ -9,18 +8,6 @@ import HelperForm from 'components/molecules/HelperForm'
 import BoxForm from 'components/organisms/BoxForm'
 import CenterLayout from 'components/templates/CenterLayout'
 import { useLogin } from 'api/hooks/authHook'
-// import store from '../../redux/store'
-// import { getUser } from '../../redux/slices/userSlice'
-// Fungsi tombol submit
-// const submitAction = (values, action) => {
-//   store.dispatch(getUser(values)).then(() => {
-//     const apiError = store.getState().user.error
-//     if (!apiError) return
-//     action.setErrors({
-//       email: apiError,
-//     })
-//   })
-// }
 
 const yupConfig = yup.object({
   email: yup
@@ -33,7 +20,7 @@ const yupConfig = yup.object({
 })
 
 const LoginForm = () => {
-  const { mutate, isLoading } = useLogin()
+  const { mutate, isLoading, isError } = useLogin()
 
   const formikConfig = useFormik({
     initialValues: {
@@ -50,7 +37,8 @@ const LoginForm = () => {
     label: 'Email',
     value: formikConfig.values.email,
     onChange: formikConfig.handleChange,
-    helperText: formikConfig.touched.email && formikConfig.errors.email,
+    helperText: formikConfig.touched.email &&
+      (isError ? 'Mohon pastikan email atau password benar' : formikConfig.errors.email),
   }
 
   const passwordConfig = {

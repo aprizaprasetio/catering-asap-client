@@ -1,10 +1,10 @@
 import React from 'react'
 import { Grid, Card } from '@mui/material'
 import FoodDrinkItemProps from 'proptypes/organisms/FoodDrinkItemProps'
+import { useTrigger } from 'commands/builders/commonBuilder'
 
 const FoodDrinkItem = ({ children }) => {
-    const [hover, setHover] = React.useState(false)
-    const hoverTrigger = () => setHover(current => !current)
+    const [hover, hoverTrigger] = useTrigger()
 
     const gridConfig = {
         xs: 3,
@@ -17,6 +17,8 @@ const FoodDrinkItem = ({ children }) => {
         scale: hover ? '1.1 !important' : 1,
         transition: 'all',
         transitionDuration: '.33s',
+        height: '100%',
+        display: 'grid',
     }
 
     return (

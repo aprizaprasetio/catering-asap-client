@@ -1,10 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
-import { fetchFoodDrinkList } from 'api/connections/catalogUserRequest'
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
+import { fetchFoodDrinkList, fetchFoodDrinkList2 } from 'api/connections/catalogUserRequest'
 
+// This is the old hook, not compatible and do not use this hook
 const useFoodDrinkList = () => {
     const { data, isSuccess, isLoading } = useQuery({
         queryKey: ['foodDrinkList'],
-        queryFn: () => fetchFoodDrinkList(),
+        queryFn: fetchFoodDrinkList,
     }, {
         initialData: [],
     })
@@ -12,6 +13,33 @@ const useFoodDrinkList = () => {
     return { data, isSuccess, isLoading }
 }
 
+const useFoodDrinkList2 = () => {
+    const {
+        data, isSuccess, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage, isFetching
+    } = useInfiniteQuery({
+        queryKey: ['foodDrinkList'],
+        queryFn: fetchFoodDrinkList2,
+        getNextPageParam: (current, pages) => {
+            // Fetching will stop if the last data founded less than 10
+            // Because each fetch limited to 10, ofcourse that case must be stop
+            const isLimit = pages.find(current => current.length !== 10)
+            if (isLimit) return
+            return pages.length + 1
+        },
+    })
+
+    return {
+        data,
+        isSuccess,
+        isLoading,
+        isFetchingNextPage,
+        hasNextPage,
+        fetchNextPage,
+        isFetching,
+    }
+}
+
 export {
     useFoodDrinkList,
+    useFoodDrinkList2,
 }

@@ -1,21 +1,24 @@
 import React from 'react'
-import { Box, InputBase, alpha, useTheme } from '@mui/material'
+import { Box, InputBase, alpha } from '@mui/material'
 import { Search } from '@mui/icons-material'
+import { useTrigger } from 'commands/builders/commonBuilder'
 
 const SearchBar = () => {
-    const { white } = useTheme().palette.common
+    const [rotate, rotateTrigger] = useTrigger()
 
     const boxStyle = {
         paddingX: 1,
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: alpha(white, 0.5),
-        color: white,
+        backgroundColor: alpha('#fff', 0.5),
+        color: 'white',
         borderRadius: 3,
     }
 
     const iconStyle = {
-        // alignSelf: 'center',
+        rotate: rotate ? '90deg' : '0deg',
+        transition: 'all',
+        transitionDuration: '1s',
     }
 
     const inputStyle = {
@@ -33,13 +36,13 @@ const SearchBar = () => {
             xs: 20,
             md: 18,
         },
-        color: white,
+        color: 'white',
     }
 
     return (
         <Box sx={boxStyle}>
             <Search sx={iconStyle} />
-            <InputBase component="div" placeholder="Pencarian" sx={inputStyle} />
+            <InputBase component="input" placeholder="Pencarian" onFocus={rotateTrigger} onBlur={rotateTrigger} sx={inputStyle} />
         </Box>
     )
 }

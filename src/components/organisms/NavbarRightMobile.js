@@ -2,6 +2,9 @@ import React from 'react'
 import { Paper, Box, IconButton, SwipeableDrawer, MenuList, Divider } from '@mui/material'
 import { Menu as MenuIcon, Person, Logout, HourglassBottom, Cached, LocalShipping, Schedule } from '@mui/icons-material'
 import PressListItem from 'components/molecules/PressListItem'
+import { useStale } from 'commands/builders/hookBuilder'
+import { useTrigger } from 'commands/builders/commonBuilder'
+import { logout } from 'commands/user/authCommand'
 
 const boxStyle = {
     display: {
@@ -22,8 +25,8 @@ const dividerStyle = {
 }
 
 const NavbarRightMobile = () => {
-    const [open, setOpen] = React.useState(false)
-    const openTrigger = () => setOpen(current => !current)
+    const [user] = useStale('user')
+    const [open, openTrigger] = useTrigger()
 
     const drawerConfig = {
         anchor: 'right',
@@ -44,8 +47,8 @@ const NavbarRightMobile = () => {
             </IconButton>
             <SwipeableDrawer {...drawerConfig}>
                 <MenuList component={Paper} sx={listStyle}>
-                    <PressListItem icon={<Person />} content="Apriza Prasetio" />
-                    <PressListItem icon={<Logout />} content="Keluar" />
+                    <PressListItem icon={<Person />} content={user?.name ?? 'No Name'} />
+                    <PressListItem onClick={logout} icon={<Logout />} content="Keluar" />
                 </MenuList>
                 <MenuList component={Paper} sx={listStyle}>
                     <PressListItem icon={<HourglassBottom />} content="Menunggu Verifikasi" />

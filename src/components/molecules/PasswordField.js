@@ -26,6 +26,7 @@ const PasswordField = ({ config }) => {
                 FormHelperTextProps={helperConfig}
                 variant="standard"
                 type={hidden ? 'password' : 'text'}
+                autoComplete="current-password"
                 error={!!config.helperText}
                 {...config}
             />

@@ -1,5 +1,5 @@
-import { axios } from 'api/initiate'
-import { authPath } from 'api/path'
+import { axios } from 'api/initiates/queryInitiate'
+import { authPath } from 'api/initiates/pathInitiate'
 
 // Requesting a single user data by id as a primary key
 const fetchUser = async id => {
@@ -20,7 +20,7 @@ const fetchRegister = async user => {
         male: 0,
         female: 1,
     }
-    // Modifying string gender to enum 0 or 1
+    // Modifying string gender to enum 0x or 1
     user.gender = genderEnum[user.gender]
     const createdUser = await axios.post(authPath.register, user)
     return createdUser.data

@@ -6,6 +6,8 @@ import PressIcon from 'components/atoms/PressIcon'
 import PressAvatar from 'components/atoms/PressAvatar'
 import PressListItem from 'components/molecules/PressListItem'
 import ListItemVertical from 'components/molecules/ListItemVertical'
+import { useStale } from 'commands/builders/hookBuilder'
+import { logout } from 'commands/user/authCommand'
 
 const boxStyle = {
     display: {
@@ -28,6 +30,7 @@ const listConfig = {
 }
 
 const NavbarRight = () => {
+    const [user] = useStale('user')
     const [open, setOpen] = React.useState(false)
     const [target, setTarget] = React.useState(null)
     const menuTrigger = Event => {
@@ -97,8 +100,8 @@ const NavbarRight = () => {
             </PressAvatar>
             <Menu {...menuConfig}>
                 <MenuList component={Paper}{...listConfig}>
-                    <PressListItem icon={<Person />} content="Apriza Prasetio" />
-                    <PressListItem icon={<Logout />} content="Keluar" />
+                    <PressListItem icon={<Person />} content={user?.name ?? 'No Name'} />
+                    <PressListItem onClick={logout} icon={<Logout />} content="Keluar" />
                 </MenuList>
                 <MenuList component={Paper} {...listConfig}>
                     <Stack direction="row">

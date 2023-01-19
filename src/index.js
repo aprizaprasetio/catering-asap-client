@@ -1,20 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { client } from 'api/initiate'
-// import myStore from './redux/store'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { CssBaseline } from '@mui/material'
+import App from 'App'
+import { client } from 'api/initiates/queryInitiate'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <QueryClientProvider client={client}>
-        <CssBaseline />
-        <App />
-      </QueryClientProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <BrowserRouter>
+    <QueryClientProvider client={client}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <CssBaseline />
+      <App />
+    </QueryClientProvider>
+  </BrowserRouter>
+  // </React.StrictMode>
 )

@@ -15,6 +15,7 @@ const Field = ({ config }) => {
                 FormHelperTextProps={helperConfig}
                 variant="standard"
                 sx={{ color: 'error.main' }}
+                autoComplete={config.name}
                 error={!!config.helperText}
                 {...config}
             />

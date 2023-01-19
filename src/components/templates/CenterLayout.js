@@ -1,18 +1,30 @@
 import React from 'react'
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
 import CenterLayoutProps from 'proptypes/templates/CenterLayoutProps'
 import ButtonScrollTop from 'components/molecules/ButtonScrollTop'
 
-const gridStyle = {
-    marginY: 3,
-}
+const CenterLayout = ({ admin, children }) => {
+    const gridStyle = {
+        marginY: 3,
+        display: 'grid',
+        gap: 3,
+        marginLeft: {
+            xs: 'auto',
+            sm: admin ? '100px' : 'auto',
+        },
+        maxWidth: {
+            xs: 'auto',
+            sm: 'calc(100% - 100px)'
+        },
+    }
 
-const CenterLayout = ({ children }) => {
     return (
-        <Container sx={gridStyle}>
-            {children}
-            <ButtonScrollTop />
-        </Container>
+        <>
+            <Container sx={gridStyle}>
+                {children}
+                <ButtonScrollTop />
+            </Container>
+        </>
     )
 }
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Grid } from '@mui/material'
 import FoodDrinkItemUser from 'components/organisms/FoodDrinkItemUser'
-import LoadingFull from 'components/atoms/LoadingFull'
-import { useFoodDrinkList } from 'api/hooks/catalogUserHook'
+import SkeletonList from './SkeletonList'
+import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
 
 const listConfig = {
     spacing: 2,
@@ -15,13 +15,30 @@ const listConfig = {
 }
 
 const FoodDrinkList = () => {
-    const { data, isSuccess, isLoading } = useFoodDrinkList()
-    if (isLoading) return <LoadingFull />
-    if (isSuccess) return (
-        <Grid container {...listConfig}>
+    const { data, isFetching, hasNextPage, fetchNextPage } = useFoodDrinkList2()
+
+    const dispatchEventRefetch = () => {
+        window.onscroll = () => {
+            const { innerHeight, pageYOffset } = window
+            const isBottom = (innerHeight + pageYOffset) >= document.body.offsetHeight
+            if (isBottom && hasNextPage && !isFetching) fetchNextPage()
+        }
+    }
+
+    return (
+        <Grid onLoad={dispatchEventRefetch} container {...listConfig}>
             {
-                data.map(item => <FoodDrinkItemUser key={item.id} {...item} />)
+                data?.pages?.map((group, index) => {
+                    return (
+                        <React.Fragment key={index}>
+                            {
+                                group?.map(item => <FoodDrinkItemUser key={item.id} {...item} />)
+                            }
+                        </React.Fragment>
+                    )
+                })
             }
+            {isFetching && <SkeletonList />}
         </Grid >
     )
 }
