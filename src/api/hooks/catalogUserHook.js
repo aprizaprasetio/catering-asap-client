@@ -14,9 +14,7 @@ const useFoodDrinkList = () => {
 }
 
 const useFoodDrinkList2 = () => {
-    const {
-        data, isSuccess, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage, isFetching
-    } = useInfiniteQuery({
+    const foodDrinkQuery = useInfiniteQuery({
         queryKey: ['foodDrinkList'],
         queryFn: fetchFoodDrinkList2,
         getNextPageParam: (current, pages) => {
@@ -28,15 +26,7 @@ const useFoodDrinkList2 = () => {
         },
     })
 
-    return {
-        data,
-        isSuccess,
-        isLoading,
-        isFetchingNextPage,
-        hasNextPage,
-        fetchNextPage,
-        isFetching,
-    }
+    return foodDrinkQuery
 }
 
 export {

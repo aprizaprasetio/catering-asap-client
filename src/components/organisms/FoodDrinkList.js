@@ -17,16 +17,19 @@ const listConfig = {
 const FoodDrinkList = () => {
     const { data, isFetching, hasNextPage, fetchNextPage } = useFoodDrinkList2()
 
-    const dispatchEventRefetch = () => {
-        window.onscroll = () => {
+    React.useEffect(() => {
+        const refetch = () => {
             const { innerHeight, pageYOffset } = window
             const isBottom = (innerHeight + pageYOffset) >= document.body.offsetHeight
-            if (isBottom && hasNextPage && !isFetching) fetchNextPage()
+            if (!isFetching && (isBottom && hasNextPage)) fetchNextPage()
         }
-    }
+
+        window.onscroll = refetch
+        return () => window.onscroll = null
+    }, [isFetching])
 
     return (
-        <Grid onLoad={dispatchEventRefetch} container {...listConfig}>
+        <Grid container {...listConfig}>
             {
                 data?.pages?.map((group, index) => {
                     return (
