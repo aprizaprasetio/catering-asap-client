@@ -20,6 +20,7 @@ const fetchRegister = async user => {
         male: 0,
         female: 1,
     }
+    if (!(user.gender in genderEnum)) return
     // Modifying string gender to enum 0x or 1
     user.gender = genderEnum[user.gender]
     const createdUser = await axios.post(authPath.register, user)

@@ -53,7 +53,8 @@ const RegisterForm = () => {
         label: 'Email',
         value: formikConfig.values.email,
         onChange: formikConfig.handleChange,
-        helperText: formikConfig.touched.email && formikConfig.errors.email,
+        helperText: formikConfig.touched.email &&
+            (formikConfig.errors.email ?? formikConfig.errors.gender),
     }
 
     const nameConfig = {
@@ -83,7 +84,7 @@ const RegisterForm = () => {
     const genderConfig = {
         name: 'gender',
         label: 'Jenis Kelamin',
-        value: formikConfig.values.gender,
+        value: '' || formikConfig.values.gender,
         onChange: formikConfig.handleChange,
     }
 

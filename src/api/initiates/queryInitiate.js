@@ -14,7 +14,7 @@ const client = new QueryClient({
 
 // Initiate api base url and auth headers
 const axios = axiosOriginal.create({
-    baseURL: 'https://192.168.52.180:5001/api/',
+    baseURL: 'https://localhost:5001/api/',
     headers: {
         'Authorization': getToken() ? `Bearer ${getToken()}` : null,
     },
