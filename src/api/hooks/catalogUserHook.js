@@ -31,7 +31,7 @@ const useFoodDrinkList2 = () => {
 
     useEffect(() => {
         foodDrinkQuery?.refetch()
-    }, [search?.keyword])
+    }, [search])
 
     return foodDrinkQuery
 }

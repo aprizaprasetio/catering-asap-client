@@ -25,6 +25,7 @@ const fetchFoodDrinkList2 = async ({ pageParam = 1 }) => {
             PageSize: 10,
         },
     })
+    console.info(client.getQueryData(['search']))
     return foodDrinkList.data.data
 }
 

@@ -12,7 +12,10 @@ const UserHome = () => {
         <>
             <FloatingNavbar />
             <CenterLayout>
-                {!search?.keyword && <FoodDrinkPromotion />}
+                {
+                    (!search?.keyword && !search?.sortBy) &&
+                    <FoodDrinkPromotion />
+                }
                 <FoodDrinkList />
             </CenterLayout>
         </>
