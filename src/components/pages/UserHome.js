@@ -6,13 +6,13 @@ import FloatingNavbar from 'components/organisms/FloatingNavbar'
 import { useStale } from 'commands/builders/hookBuilder'
 
 const UserHome = () => {
-    const [keyword] = useStale('search')
+    const [search] = useStale('search')
 
     return (
         <>
             <FloatingNavbar />
             <CenterLayout>
-                {!keyword && <FoodDrinkPromotion />}
+                {!search?.keyword && <FoodDrinkPromotion />}
                 <FoodDrinkList />
             </CenterLayout>
         </>

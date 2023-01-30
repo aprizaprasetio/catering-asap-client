@@ -15,7 +15,7 @@ const useFoodDrinkList = () => {
 }
 
 const useFoodDrinkList2 = () => {
-    const [keyword] = useStale('search')
+    const [search] = useStale('search')
 
     const foodDrinkQuery = useInfiniteQuery({
         queryKey: ['foodDrinkList'],
@@ -31,7 +31,7 @@ const useFoodDrinkList2 = () => {
 
     useEffect(() => {
         foodDrinkQuery?.refetch()
-    }, [keyword])
+    }, [search?.keyword])
 
     return foodDrinkQuery
 }
