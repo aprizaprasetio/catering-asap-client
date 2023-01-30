@@ -22,8 +22,8 @@ const CenterLayout = ({ admin, children }) => {
         <>
             <Container sx={gridStyle}>
                 {children}
-                <ButtonScrollTop />
             </Container>
+            <ButtonScrollTop />
         </>
     )
 }

@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
+import { useStale } from 'commands/builders/hookBuilder'
 import { fetchFoodDrinkList, fetchFoodDrinkList2 } from 'api/connections/catalogUserRequest'
 
 // This is the old hook, not compatible and do not use this hook
@@ -6,7 +8,6 @@ const useFoodDrinkList = () => {
     const { data, isSuccess, isLoading } = useQuery({
         queryKey: ['foodDrinkList'],
         queryFn: fetchFoodDrinkList,
-    }, {
         initialData: [],
     })
 
@@ -14,6 +15,8 @@ const useFoodDrinkList = () => {
 }
 
 const useFoodDrinkList2 = () => {
+    const [keyword] = useStale('search')
+
     const foodDrinkQuery = useInfiniteQuery({
         queryKey: ['foodDrinkList'],
         queryFn: fetchFoodDrinkList2,
@@ -25,6 +28,10 @@ const useFoodDrinkList2 = () => {
             return pages.length + 1
         },
     })
+
+    useEffect(() => {
+        foodDrinkQuery?.refetch()
+    }, [keyword])
 
     return foodDrinkQuery
 }

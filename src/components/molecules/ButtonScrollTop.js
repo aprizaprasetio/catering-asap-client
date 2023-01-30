@@ -17,11 +17,17 @@ const fabConfig = {
 const ButtonScrollTop = () => {
     const [isBottom, setIsBottom] = React.useState(false)
 
-    window.onscroll = () => {
-        const isTop = window.scrollY === 0
-        if (isTop) return setIsBottom(false)
-        setIsBottom(true)
-    }
+    React.useState(() => {
+        const buttonTrigger = () => {
+            const isTop = window.scrollY <= 200
+            if (isTop) return setIsBottom(false)
+            setIsBottom(true)
+        }
+        window.addEventListener('scroll', buttonTrigger)
+
+        return () => window.removeEventListener('scroll', buttonTrigger)
+    }, [])
+
 
     if (isBottom === false) return null
 

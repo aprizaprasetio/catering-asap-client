@@ -15,7 +15,7 @@ const listConfig = {
 }
 
 const FoodDrinkList = () => {
-    const { data, isFetching, hasNextPage, fetchNextPage } = useFoodDrinkList2()
+    const { data, isFetching, isLoading, hasNextPage, fetchNextPage } = useFoodDrinkList2()
 
     React.useEffect(() => {
         const refetch = () => {
@@ -24,8 +24,8 @@ const FoodDrinkList = () => {
             if (!isFetching && (isBottom && hasNextPage)) fetchNextPage()
         }
 
-        window.onscroll = refetch
-        return () => window.onscroll = null
+        window.addEventListener('scroll', refetch)
+        return () => window.removeEventListener('scroll', refetch)
     }, [isFetching])
 
     return (
@@ -41,7 +41,7 @@ const FoodDrinkList = () => {
                     )
                 })
             }
-            {isFetching && <SkeletonList />}
+            {(isFetching || isLoading) && <SkeletonList />}
         </Grid >
     )
 }

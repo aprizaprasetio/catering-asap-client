@@ -1,10 +1,10 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 import PrivateRoute from 'components/routes/PrivateRoute'
-import { useSubscribe } from 'commands/builders/hookBuilder'
+import { useStale } from 'commands/builders/hookBuilder'
 
 const SwitchRoute = ({ adminElem, userElem }) => {
-    const user = useSubscribe('user')
+    const [user] = useStale('user')
     // Restricted from unauthenticated user
     if (!user) return <Navigate to="/login" replace={false} />
     // Return Switch

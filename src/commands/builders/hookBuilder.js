@@ -4,7 +4,11 @@ import { client } from 'api/initiates/queryInitiate'
 import { useQuery } from '@tanstack/react-query'
 
 const useStale = queryKey => {
-    const { data: stale } = useQuery({ queryKey: [queryKey] })
+    const { data: stale } = useQuery({
+        queryKey: [queryKey],
+        queryFn: () => client.getQueryData([queryKey]),
+        initialData: client.getQueryData([queryKey]),
+    })
     const setStale = value => client.setQueryData([queryKey], value)
     // Getter and setter query state (stale)
     return [stale, setStale]

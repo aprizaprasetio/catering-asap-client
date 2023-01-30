@@ -1,5 +1,6 @@
 const authPath = {
     token: 'Users/Authenticate',
+    validate: 'Users/ValidateToken',
     register: 'Users/Register',
     userParam: id => `Users/${id}`,
 }

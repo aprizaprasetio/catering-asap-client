@@ -7,6 +7,13 @@ const fetchUser = async id => {
     return user.data.userDtos
 }
 
+const fetchUserByToken = async token => {
+    const user = await axios.post(authPath.validate, {
+        token: token,
+    })
+    return user.data
+}
+
 // Requesting a new token when the user logged
 const fetchToken = async user => {
     const token = await axios.post(authPath.token, user)
@@ -29,6 +36,7 @@ const fetchRegister = async user => {
 
 export {
     fetchUser,
+    fetchUserByToken,
     fetchToken,
     fetchRegister,
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 import PrivateRouteProps from 'proptypes/routes/PrivateRouteProps'
-import { useSubscribe } from 'commands/builders/hookBuilder'
+import { useStale } from 'commands/builders/hookBuilder'
 
 const PrivateRoute = ({ element, role = 'user' }) => {
-    const user = useSubscribe('user')
+    const [user] = useStale('user')
     // Restricted from unauthenticated user
     if (!user) return <Navigate to="/login" replace={false} />
     if (role !== 'admin') return element

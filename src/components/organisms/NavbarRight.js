@@ -12,7 +12,7 @@ import { logout } from 'commands/user/authCommand'
 const boxStyle = {
     display: {
         xs: 'none',
-        sm: 'block'
+        md: 'block'
     },
 }
 

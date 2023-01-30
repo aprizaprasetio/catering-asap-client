@@ -7,6 +7,7 @@ import PasswordField from 'components/molecules/PasswordField'
 import HelperForm from 'components/molecules/HelperForm'
 import BoxForm from 'components/organisms/BoxForm'
 import CenterLayout from 'components/templates/CenterLayout'
+import { getToken } from 'commands/api/tokenCommand'
 import { useLogin } from 'api/hooks/authHook'
 
 const yupConfig = yup.object({
@@ -48,6 +49,8 @@ const LoginForm = () => {
     onChange: formikConfig.handleChange,
     helperText: formikConfig.touched.password && formikConfig.errors.password,
   }
+
+  if (getToken()) return <LoadingFull />
 
   return (
     <CenterLayout>

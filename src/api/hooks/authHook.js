@@ -1,11 +1,12 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
+import { useQuery, useMutation } from '@tanstack/react-query'
 import { client } from 'api/initiates/queryInitiate'
-import { fetchToken, fetchRegister } from 'api/connections/authRequest'
-import { storeToken } from 'commands/api/tokenCommand'
+import { fetchUserByToken, fetchToken, fetchRegister } from 'api/connections/authRequest'
+import { getToken, storeToken } from 'commands/api/tokenCommand'
+import { logout } from 'commands/user/authCommand'
 
 const useLogin = () => {
-    const navigate = useNavigate()
     // Initiate mutation for post request
     const mutation = useMutation({
         mutationKey: ['user'],
@@ -13,10 +14,35 @@ const useLogin = () => {
         onSuccess: res => {
             storeToken(res.token)
             client.setQueryData(['user'], res.data)
-            navigate('/')
         }
     })
     return mutation
+}
+
+const useLoginOnLoad = () => {
+    // An automatic login
+    // If user has token, mutation will request user data by token
+    const { mutate } = useMutation({
+        mutationFn: async () => {
+            if (!getToken()) return null
+            return await fetchUserByToken(getToken())
+        },
+        onSuccess: res => {
+            client.setQueryData(['user'], res.data)
+        },
+        onError: logout,
+    })
+
+    // Initiate user query state with mutate property for his function
+    const { data } = useQuery({
+        queryKey: ['user'],
+        queryFn: mutate,
+        initialData: client.getQueryData(['user']) ?? null,
+    })
+
+    useEffect(mutate, [])
+
+    return data
 }
 
 const useRegister = () => {
@@ -31,5 +57,6 @@ const useRegister = () => {
 
 export {
     useLogin,
+    useLoginOnLoad,
     useRegister,
 }
