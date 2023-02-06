@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import PressListItem2Props from 'proptypes/molecules/PressListItem2Props'
 
@@ -18,9 +18,11 @@ const iconStyle = {
 }
 
 const PressListItem2 = ({ icon, content }) => {
+    const navigate = useNavigate()
+
     return (
         <ListItem disablePadding>
-            <ListItemButton component={Link} href="#" sx={itemStyle}>
+            <ListItemButton onClick={() => navigate('#')} sx={itemStyle}>
                 <ListItemIcon sx={iconStyle}>{icon}</ListItemIcon>
                 <ListItemText>{content}</ListItemText>
             </ListItemButton>

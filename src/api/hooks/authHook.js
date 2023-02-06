@@ -22,27 +22,26 @@ const useLogin = () => {
 const useLoginOnLoad = () => {
     // An automatic login
     // If user has token, mutation will request user data by token
-    const { mutate } = useMutation({
+    const mutation = useMutation({
         mutationFn: async () => {
             if (!getToken()) return null
             return await fetchUserByToken(getToken())
         },
         onSuccess: res => {
+            if (!res?.data) return logout()
             client.setQueryData(['user'], res.data)
         },
         onError: logout,
     })
 
     // Initiate user query state with mutate property for his function
-    const { data } = useQuery({
+    useQuery({
         queryKey: ['user'],
-        queryFn: mutate,
-        initialData: client.getQueryData(['user']) ?? null,
+        queryFn: mutation?.mutate,
+        initialData: null,
     })
 
-    useEffect(mutate, [])
-
-    return data
+    useEffect(mutation?.mutate, [])
 }
 
 const useRegister = () => {

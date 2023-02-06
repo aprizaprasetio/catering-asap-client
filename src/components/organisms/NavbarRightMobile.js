@@ -47,7 +47,7 @@ const NavbarRightMobile = () => {
             </IconButton>
             <SwipeableDrawer {...drawerConfig}>
                 <MenuList component={Paper} sx={listStyle}>
-                    <PressListItem icon={<Person />} content={user?.name ?? 'No Name'} />
+                    <PressListItem href="profile" icon={<Person />} content={user?.name ?? 'No Name'} />
                     <PressListItem onClick={logout} icon={<Logout />} content="Keluar" />
                 </MenuList>
                 <MenuList component={Paper} sx={listStyle}>

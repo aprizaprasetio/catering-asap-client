@@ -1,4 +1,5 @@
 const authPath = {
+    root: 'Users',
     token: 'Users/Authenticate',
     validate: 'Users/ValidateToken',
     register: 'Users/Register',

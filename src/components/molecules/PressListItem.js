@@ -1,17 +1,20 @@
 import React from 'react'
-import { MenuItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { MenuItem, ListItemIcon, ListItemText } from '@mui/material'
 import PressListItemProps from 'proptypes/molecules/PressListItemProps'
 
 const itemStyle = {
     borderRadius: 3,
 }
 
-const PressListItem = ({ onClick, icon, content }) => {
+const PressListItem = ({ href, onClick = undefined, icon, content }) => {
+    const navigate = useNavigate()
+
     return (
-        <MenuItem component={ListItemButton} onClick={onClick} sx={itemStyle}>
+        <MenuItem onClick={onClick ?? (() => navigate(href))} sx={itemStyle} >
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText>{content}</ListItemText>
-        </MenuItem>
+        </MenuItem >
     )
 }
 

@@ -1,6 +1,6 @@
 import { string, node } from 'prop-types'
 
 export default {
-    href: string.isRequired,
+    href: string,
     children: node.isRequired,
 }
