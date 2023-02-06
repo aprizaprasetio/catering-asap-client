@@ -1,5 +1,5 @@
 import React from 'react'
-import { Drawer, List, BottomNavigation, Paper, BottomNavigationAction } from '@mui/material'
+import { Drawer, List } from '@mui/material'
 import { Timeline, Assignment, Groups, RestaurantMenu } from '@mui/icons-material'
 import PressListItem2 from 'components/molecules/PressListItem2'
 

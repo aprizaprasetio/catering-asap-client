@@ -4,8 +4,6 @@ import * as yup from 'yup'
 import { Box, Typography, IconButton } from '@mui/material'
 import { Edit, Close } from '@mui/icons-material'
 import { useProfile } from 'api/hooks/manageUserHook'
-import CenterLayout from 'components/templates/CenterLayout'
-import DynamicNavbar from 'components/organisms/DynamicNavbar'
 import ProfileContainer from 'components/organisms/ProfileContainer'
 import ProfileField from 'components/molecules/ProfileField'
 import { useStale } from 'commands/builders/hookBuilder'
@@ -21,7 +19,7 @@ const yupConfig = yup.object({
         .number('Mohon periksa telepon'),
 })
 
-const PrivateProfile = () => {
+const PrivateProfileTab = () => {
     const { mutate } = useProfile()
     const [user] = useStale('user')
     const [isEditMode, isEditModeTrigger] = useTrigger()
@@ -72,35 +70,30 @@ const PrivateProfile = () => {
     }
 
     return (
-        <>
-            <DynamicNavbar />
-            <CenterLayout>
-                <ProfileContainer isEditMode={isEditMode} onSubmit={formikConfig.handleSubmit}>
-                    <ProfileField isEditMode={isEditMode} config={nameConfig} />
-                    <ProfileField isEditMode={isEditMode} config={emailConfig} />
-                    <ProfileField isEditMode={isEditMode} config={phoneConfig} />
-                    <Box>
-                        <Typography variant="h3" sx={{ fontSize: 14, fontWeight: 'medium' }}>
-                            Jenis Kelamin
-                        </Typography>
-                        <Typography variant="body1" sx={{ fontSize: 16 }}>
-                            {user.gender ? 'Wanita' : 'Perempuan'}
-                        </Typography>
-                    </Box>
-                    {
-                        <IconButton onClick={isEditModeTrigger} sx={{
-                            position: 'absolute',
-                            top: 0,
-                            right: 0,
-                            padding: 3,
-                        }}>
-                            {isEditMode ? <Close /> : <Edit />}
-                        </IconButton>
-                    }
-                </ProfileContainer>
-            </CenterLayout>
-        </>
+        <ProfileContainer isEditMode={isEditMode} onSubmit={formikConfig.handleSubmit}>
+            <ProfileField isEditMode={isEditMode} config={nameConfig} />
+            <ProfileField isEditMode={isEditMode} config={emailConfig} />
+            <ProfileField isEditMode={isEditMode} config={phoneConfig} />
+            <Box>
+                <Typography variant="h3" sx={{ fontSize: 14, fontWeight: 'medium' }}>
+                    Jenis Kelamin
+                </Typography>
+                <Typography variant="body1" sx={{ fontSize: 16 }}>
+                    {user.gender ? 'Wanita' : 'Perempuan'}
+                </Typography>
+            </Box>
+            {
+                <IconButton onClick={isEditModeTrigger} sx={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    padding: 3,
+                }}>
+                    {isEditMode ? <Close /> : <Edit />}
+                </IconButton>
+            }
+        </ProfileContainer>
     )
 }
 
-export default PrivateProfile
+export default PrivateProfileTab

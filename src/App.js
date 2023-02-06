@@ -4,7 +4,7 @@ import LoginForm from 'components/pages/LoginForm'
 import RegisterForm from 'components/pages/RegisterForm'
 import UserHome from 'components/pages/UserHome'
 import AdminHome from 'components/pages/AdminHome'
-import PrivateProfile from 'components/pages/PrivateProfile'
+import UserManage from 'components/pages/UserManage'
 import SwitchRoute from 'components/routes/SwitchRoute'
 import PrivateRoute from 'components/routes/PrivateRoute'
 import GuestRoute from 'components/routes/GuestRoute'
@@ -28,7 +28,7 @@ const App = () => {
           />
         }
       />
-      <Route path="/profile" element={<PrivateRoute element={<PrivateProfile />} />} exact />
+      <Route path="/profile" element={<PrivateRoute element={<UserManage />} />} exact />
       <Route path="/login" element={<GuestRoute element={<LoginForm />} />} exact />
       <Route path="/register" element={<GuestRoute element={<RegisterForm />} />} exact />
       <Route path="/admin" element={<AdminHome />} exact />

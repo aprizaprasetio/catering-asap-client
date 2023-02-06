@@ -10,7 +10,7 @@ const DynamicNavbar = () => {
                 display: 'flex',
                 justifyContent: 'space-between',
             }}>
-                <PressIconLink>
+                <PressIconLink href="/">
                     <ArrowBackIosNew />
                 </PressIconLink>
                 <Typography variant="h2" sx={{
