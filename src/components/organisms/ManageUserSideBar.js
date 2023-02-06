@@ -3,7 +3,6 @@ import { Paper, List, Stack } from '@mui/material'
 import { ManageAccounts, Key } from '@mui/icons-material'
 import PressListItem from 'components/molecules/PressListItem'
 import ListItemVertical from 'components/molecules/ListItemVertical'
-import PressIconLink from 'components/atoms/PressIconLink'
 
 const listStyle = {
     paddingY: 3,
@@ -11,6 +10,18 @@ const listStyle = {
     display: 'grid',
     gap: 1,
 }
+
+const tabList = []
+tabList.push({
+    icon: ManageAccounts,
+    href: '/profile',
+    content: 'Biodata'
+})
+tabList.push({
+    icon: Key,
+    href: '/profile/password',
+    content: 'Kata Sandi'
+})
 
 const ManageUserSideBar = () => {
     return (
@@ -25,8 +36,15 @@ const ManageUserSideBar = () => {
                 },
             }}>
                 <List sx={listStyle}>
-                    <PressListItem icon={<ManageAccounts />} content="Biodata" />
-                    <PressListItem icon={<Key />} content="Ubah Kata Sandi" />
+                    {
+                        tabList.map(item =>
+                            <PressListItem
+                                icon={<item.icon />}
+                                href={item.href}
+                                content={item.content}
+                            />
+                        )
+                    }
                 </List>
             </Paper>
             <Paper sx={{
@@ -38,12 +56,13 @@ const ManageUserSideBar = () => {
                 boxShadow: 3,
             }}>
                 <List component={Stack} direction="row">
-                    <ListItemVertical icon={<ManageAccounts />}>
-                        Biodata
-                    </ListItemVertical>
-                    <ListItemVertical icon={<Key />}>
-                        Kata Sandi
-                    </ListItemVertical>
+                    {
+                        tabList.map(item =>
+                            <ListItemVertical icon={<item.icon />}>
+                                {item.content}
+                            </ListItemVertical>
+                        )
+                    }
                 </List>
             </Paper>
         </>
