@@ -4,7 +4,7 @@ import { Menu as MenuIcon, Person, Logout, HourglassBottom, Cached, LocalShippin
 import PressListItem from 'components/molecules/PressListItem'
 import { useStale } from 'commands/builders/hookBuilder'
 import { useTrigger } from 'commands/builders/commonBuilder'
-import { logout } from 'commands/user/authCommand'
+import { logout } from 'commands/application/authCommand'
 
 const boxStyle = {
     display: {

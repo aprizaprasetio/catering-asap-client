@@ -2,12 +2,11 @@ import React from 'react'
 import { Box, Menu, MenuList, Stack, Paper, Divider } from '@mui/material'
 import { Person, ShoppingCart, HelpCenter, HourglassBottom, Cached, LocalShipping, Schedule, Logout } from '@mui/icons-material'
 import PressIconLink from 'components/atoms/PressIconLink'
-import PressIcon from 'components/atoms/PressIcon'
 import PressAvatar from 'components/atoms/PressAvatar'
 import PressListItem from 'components/molecules/PressListItem'
 import ListItemVertical from 'components/molecules/ListItemVertical'
 import { useStale } from 'commands/builders/hookBuilder'
-import { logout } from 'commands/user/authCommand'
+import { logout } from 'commands/application/authCommand'
 
 const boxStyle = {
     display: {
@@ -92,9 +91,9 @@ const NavbarRight = () => {
             <PressIconLink href="/register">
                 <HelpCenter />
             </PressIconLink>
-            <PressIcon>
+            <PressIconLink href="/cart">
                 <ShoppingCart />
-            </PressIcon>
+            </PressIconLink>
             <PressAvatar onClick={menuTrigger}>
                 <Person />
             </PressAvatar>
