@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import PressListItem2Props from 'proptypes/molecules/PressListItem2Props'
 
@@ -17,12 +17,13 @@ const iconStyle = {
     justifyContent: 'center',
 }
 
-const PressListItem2 = ({ icon, content }) => {
+const PressListItem2 = ({ icon, content, href }) => {
     const navigate = useNavigate()
+    const { pathname } = useLocation()
 
     return (
         <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate('#')} sx={itemStyle}>
+            <ListItemButton selected={pathname === href} onClick={() => navigate(href)} sx={itemStyle}>
                 <ListItemIcon sx={iconStyle}>{icon}</ListItemIcon>
                 <ListItemText>{content}</ListItemText>
             </ListItemButton>

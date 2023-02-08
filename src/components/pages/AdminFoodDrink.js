@@ -2,14 +2,13 @@ import React from 'react'
 import FoodDrinkTableHeader from 'components/organisms/FoodDrinkTableHeader'
 import FoodDrinkTableContainer from 'components/organisms/FoodDrinkTableContainer'
 import FoodDrinkTableItem from 'components/organisms/FoodDrinkTableItem'
-import SideNavbar from 'components/organisms/SideNavbar'
+import AdminNavbar from 'components/organisms/AdminNavbar'
 import CenterLayout from 'components/templates/CenterLayout'
-
 
 const AdminFoodDrink = () => {
     return (
         <>
-            <SideNavbar />
+            <AdminNavbar />
             <CenterLayout admin>
                 <FoodDrinkTableContainer header={<FoodDrinkTableHeader />}>
                     <FoodDrinkTableItem />

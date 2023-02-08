@@ -4,6 +4,7 @@ import LoginForm from 'components/pages/LoginForm'
 import RegisterForm from 'components/pages/RegisterForm'
 import UserHome from 'components/pages/UserHome'
 import AdminHome from 'components/pages/AdminHome'
+import AdminFoodDrink from 'components/pages/AdminFoodDrink'
 import UserManage from 'components/pages/UserManage'
 import UserCart from 'components/pages/UserCart'
 import SwitchRoute from 'components/routes/SwitchRoute'
@@ -34,6 +35,7 @@ const App = () => {
       <Route path="/login" element={<GuestRoute element={<LoginForm />} />} exact />
       <Route path="/register" element={<GuestRoute element={<RegisterForm />} />} exact />
       <Route path="/admin" element={<AdminHome />} exact />
+      <Route path="/admin/menus" element={<AdminFoodDrink />} exact />
       <Route path="*" element={<Navigate to="/" replace={false} />} exact />
     </Routes>
   )

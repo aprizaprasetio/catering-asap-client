@@ -13,8 +13,6 @@ function FoodDrinkTableContainer({ children, header }) {
 
                 <TableHead sx={{
                     fontWeight: 'bold',
-                    // backgroundColor: theme.palette.primary.dark,
-                    // color: theme.palette.getContrastText(theme.palette.primary.dark)
                 }}>
                 </TableHead>
                 {header}
