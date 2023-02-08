@@ -42,6 +42,7 @@ const ManageUserSideBar = () => {
                                 icon={<item.icon />}
                                 href={item.href}
                                 content={item.content}
+                                key={item.href}
                             />
                         )
                     }
@@ -58,7 +59,11 @@ const ManageUserSideBar = () => {
                 <List component={Stack} direction="row">
                     {
                         tabList.map(item =>
-                            <ListItemVertical icon={<item.icon />}>
+                            <ListItemVertical
+                                icon={<item.icon />}
+                                href={item.href}
+                                key={item.content}
+                            >
                                 {item.content}
                             </ListItemVertical>
                         )

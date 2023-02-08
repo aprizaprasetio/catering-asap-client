@@ -4,7 +4,7 @@ import { useQuery, useMutation } from '@tanstack/react-query'
 import { client } from 'api/initiates/queryInitiate'
 import { fetchUserByToken, fetchToken, fetchRegister } from 'api/connections/authRequest'
 import { getToken, storeToken } from 'commands/api/tokenCommand'
-import { logout } from 'commands/user/authCommand'
+import { logout } from 'commands/application/authCommand'
 
 const useLogin = () => {
     // Initiate mutation for post request
