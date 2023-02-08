@@ -3,7 +3,7 @@ import { AppBar, Container, Toolbar, Typography } from '@mui/material'
 import { ArrowBackIosNew } from '@mui/icons-material'
 import PressIconLink from 'components/atoms/PressIconLink'
 
-const DynamicNavbar = () => {
+const DynamicNavbar = ({ children }) => {
     return (
         <AppBar position="sticky">
             <Toolbar component={Container} sx={{
@@ -16,7 +16,7 @@ const DynamicNavbar = () => {
                 <Typography variant="h2" sx={{
                     fontSize: 18,
                 }}>
-                    Profil
+                    {children}
                 </Typography>
                 <Typography children="" />
             </Toolbar>

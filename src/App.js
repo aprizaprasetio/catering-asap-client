@@ -5,6 +5,7 @@ import RegisterForm from 'components/pages/RegisterForm'
 import UserHome from 'components/pages/UserHome'
 import AdminHome from 'components/pages/AdminHome'
 import UserManage from 'components/pages/UserManage'
+import UserCart from 'components/pages/UserCart'
 import SwitchRoute from 'components/routes/SwitchRoute'
 import PrivateRoute from 'components/routes/PrivateRoute'
 import GuestRoute from 'components/routes/GuestRoute'
@@ -29,6 +30,7 @@ const App = () => {
         }
       />
       <Route path="/profile" element={<PrivateRoute element={<UserManage />} />} exact />
+      <Route path="/cart" element={<PrivateRoute element={<UserCart />} />} exact />
       <Route path="/login" element={<GuestRoute element={<LoginForm />} />} exact />
       <Route path="/register" element={<GuestRoute element={<RegisterForm />} />} exact />
       <Route path="/admin" element={<AdminHome />} exact />
