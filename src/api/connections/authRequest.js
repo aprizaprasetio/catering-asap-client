@@ -7,10 +7,8 @@ const fetchUser = async id => {
     return user.data.userDtos
 }
 
-const fetchUserByToken = async token => {
-    const user = await axios.post(authPath.validate, {
-        token: token,
-    })
+const fetchUserByToken = async () => {
+    const user = await axios.get(authPath.validate)
     return user.data
 }
 
