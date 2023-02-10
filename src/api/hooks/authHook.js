@@ -25,7 +25,7 @@ const useLoginOnLoad = () => {
     const mutation = useMutation({
         mutationFn: async () => {
             if (!getToken()) return null
-            return await fetchUserByToken(getToken())
+            return await fetchUserByToken()
         },
         onSuccess: res => {
             if (!res?.data) return logout()
