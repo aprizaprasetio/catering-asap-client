@@ -1,17 +1,18 @@
-import { TableHead, TableRow, TableCell } from '@mui/material'
+import { TableHead, TableRow, TableCell, Box } from '@mui/material'
 
-function FoodDrinkTableHeader(props) {
+function FoodDrinkTableHeader() {
     return (
         <TableHead>
             <TableRow>
-                <TableCell sx={{ textAlign: 'center' }} align="left">No</TableCell>
-                <TableCell sx={{ textAlign: 'center' }} align="justify">Name</TableCell>
-                <TableCell sx={{ textAlign: 'center' }} align="justify">Description</TableCell>
-                <TableCell sx={{ textAlign: 'center' }} align="left">Price</TableCell>
-                <TableCell sx={{ textAlign: 'center' }} align="left">Min Order</TableCell>
-                <TableCell sx={{ textAlign: 'center' }} align="center">Reaction</TableCell>
+                <TableCell />
+                <TableCell>Number</TableCell>
+                <TableCell widht={50} align="center">Name</TableCell>
+                <TableCell width={50} align="center">Price</TableCell>
+                <TableCell width={200} align="center">Minimum Order</TableCell>
+                <TableCell widht={200} align='center' sx={{ textAlign: 'center' }} >Reaction</TableCell>
+                <TableCell />
+
             </TableRow>
-            {props.Header}
         </TableHead>
     )
 }
