@@ -1,8 +1,7 @@
 import React from 'react'
 import { Box, Button, IconButton, Paper, Collapse, Icon, InputAdornment, TextField, Typography, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, InputBase } from '@mui/material'
 import CenterLayout from 'components/templates/CenterLayout'
-import SideNavbar from 'components/organisms/SideNavbar'
-import BottomNavbar from 'components/organisms/BottomNavbar'
+import AdminNavbar from 'components/organisms/AdminNavbar'
 import NumberCard from 'components/organisms/NumberCard'
 import AdminWelcome from 'components/organisms/AdminWelcome'
 import { useStale } from 'commands/builders/hookBuilder'
@@ -19,10 +18,7 @@ const AdminHome = () => {
 
     return (
         <>
-            {/* <SideNavbar /> */}
-            <BottomNavbar />
-            <DynamicNavbar>Makanan & Minuman</DynamicNavbar>
-            <AdminScretchHeader addStatus={open} addTrigger={openTrigger} />
+            <AdminNavbar />
             <CenterLayout admin>
                 <TableContainer sx={{ marginTop: 5, boxShadow: 2, }}>
                     <Table>

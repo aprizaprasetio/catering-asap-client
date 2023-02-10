@@ -1,7 +1,7 @@
 import React from 'react'
 import { Drawer, List } from '@mui/material'
-import { Timeline, Assignment, Groups, RestaurantMenu } from '@mui/icons-material'
 import PressListItem2 from 'components/molecules/PressListItem2'
+import SideNavbarProps from 'proptypes/organisms/SideNavbarProps'
 
 const listStyle = {
     paddingX: 1,
@@ -15,17 +15,16 @@ const listStyle = {
     position: 'sticky',
 }
 
-const SideNavbar = () => {
+const SideNavbar = ({ navbarData }) => {
     return (
         <Drawer variant="permanent" anchor="left">
             <List sx={listStyle}>
-                <PressListItem2 icon={<Timeline />} content="Grafik" />
-                <PressListItem2 icon={<Assignment />} content="Pesanan" />
-                <PressListItem2 icon={<Groups />} content="User" />
-                <PressListItem2 icon={<RestaurantMenu />} content="Menu" />
+                {navbarData.map(item => <PressListItem2 {...item} key={item.href} />)}
             </List>
         </Drawer>
     )
 }
+
+SideNavbar.propTypes = SideNavbarProps
 
 export default SideNavbar
