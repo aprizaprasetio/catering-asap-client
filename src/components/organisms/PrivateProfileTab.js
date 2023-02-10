@@ -79,7 +79,7 @@ const PrivateProfileTab = () => {
                     Jenis Kelamin
                 </Typography>
                 <Typography variant="body1" sx={{ fontSize: 16 }}>
-                    {user.gender ? 'Wanita' : 'Perempuan'}
+                    {user.gender ? 'Wanita' : 'Pria'}
                 </Typography>
             </Box>
             {
