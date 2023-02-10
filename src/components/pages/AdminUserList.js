@@ -19,14 +19,6 @@ const AdminUserList = () => {
                     <UserItemMobile />
                     <UserItemMobile />
                     <UserItemMobile />
-                    <UserItemMobile />
-                    <UserItemMobile />
-                    <UserItemMobile />
-                    <UserItemMobile />
-                    <UserItemMobile />
-                    <UserItemMobile />
-                    <UserItemMobile />
-                    <UserItemMobile />
                 </UsersWrapperMobile>
             </CenterLayout>
             <BottomNavbar />

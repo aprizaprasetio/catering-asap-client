@@ -14,7 +14,7 @@ const UserListMobileHeader = () => {
             <Box sx={{
                 bottom: '20%',
                 position: 'absolute',
-                left: '5%',
+                left: '10%',
             }}>
                 <Typography
                     sx={{
