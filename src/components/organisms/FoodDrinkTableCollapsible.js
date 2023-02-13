@@ -1,7 +1,7 @@
 import { Typography, Table, TableBody, TableRow, TableHead, TableCell, Box } from "@mui/material"
 import React from 'react'
 
-function FoodDrinkTableCollapsible() {
+function FoodDrinkTableCollapsible({ Deskripsi }) {
     return (
         <TableRow>
             <Box sx={{ margin: 1 }}>
@@ -9,7 +9,7 @@ function FoodDrinkTableCollapsible() {
                     Description
                 </Typography>
                 <Typography sx={{ fontSize: 12 }} gutterBottom component="div">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. A, totam vitae veniam architecto nemo dolore ducimus ratione consequuntur, quaerat excepturi cum quos dignissimos ullam provident dolorum in. Quia, placeat voluptate.
+                    {Deskripsi}
                 </Typography>
 
             </Box >

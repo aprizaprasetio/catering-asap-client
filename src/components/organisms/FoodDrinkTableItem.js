@@ -1,6 +1,6 @@
 import {
     TableRow, TableCell,
-    List, Stack, Collapse, Grid, Button, IconButton
+    List, Stack, Collapse, IconButton
 
 } from '@mui/material'
 import * as React from 'react';
@@ -11,9 +11,10 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import FoodDrinkTableCollapsible from './FoodDrinkTableCollapsible';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import FoodDrinkListAdmin from './FoodDrinkListAdmin';
 
 
-function FoodDrinkTableItem() {
+const FoodDrinkTableItem = ({ Name, Price, MinimumOrder, Deskripsi }) => {
     const nilai = {
         like: 99,
         ok: 99,
@@ -44,13 +45,13 @@ function FoodDrinkTableItem() {
 
                 <TableCell width={1} sx={{ textAlign: 'center' }} component="th" scope="row">1</TableCell>
                 <TableCell width={250} sx={{ textAlign: 'center' }} component="th" scope="row" align="center">
-                    Sambal Matah
+                    {Name}
                 </TableCell>
                 <TableCell widht={10} sx={{ textAlign: 'center' }} component="th" scope="row" align="center">
-                    60.000
+                    {Price}
                 </TableCell>
                 <TableCell widht={2} sx={{ textAlign: 'center' }} component="th" scope="row" align="center">
-                    20
+                    {MinimumOrder}
                 </TableCell>
                 <TableCell width={200} align='center' component="th" scope="row">
                     <List component={Stack} direction="row" disablePadding>
@@ -73,7 +74,7 @@ function FoodDrinkTableItem() {
             <TableRow >
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <FoodDrinkTableCollapsible />
+                        <FoodDrinkTableCollapsible Deskripsi={Deskripsi} />
                     </Collapse>
                 </TableCell>
             </TableRow>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 
-const UserListMobileHeader = () => {
+const UserListMobileHeader = ({ name1, name2 }) => {
     return (
         <Box
             sx={{
@@ -24,14 +24,14 @@ const UserListMobileHeader = () => {
                     }}
                     variant="h1"
                 >
-                    Welcome to color
+                    {name1}
                 </Typography>
                 <Typography sx={{
                     fontSize: 32,
                     color: 'white',
                     fontWeight: 'bold'
                 }}
-                    variant="subtitle1">Nama Lu</Typography>
+                    variant="subtitle1">{name2}</Typography>
             </Box>
         </Box>
     )
