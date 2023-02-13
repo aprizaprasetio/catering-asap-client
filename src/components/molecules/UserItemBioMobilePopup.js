@@ -11,7 +11,6 @@ const UserItemBioMobilePopup = ({ image, name, email, phone }) => {
     }}>
         <Avatar
             sx={{
-                bgcolor: deepOrange[500],
                 width: 48,
                 height: 48,
                 boxShadow: 2

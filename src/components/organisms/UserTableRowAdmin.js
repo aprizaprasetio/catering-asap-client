@@ -1,9 +1,13 @@
 import React from 'react'
 import { formatIDR } from 'commands/application/priceCommand'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar } from '@mui/material'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar, IconButton } from '@mui/material'
+import { Delete } from '@mui/icons-material'
 import UserTableRowAdminProps from 'proptypes/organisms/UserTableRowAdminProps'
+import { useDeleteUser } from 'api/hooks/usersManagementHook'
 
-const UserTableRowAdmin = ({ name, email, image, phone, item, orderTotalPrice, gender }) => {
+const UserTableRowAdmin = ({ id, name, email, image, phone, item, orderTotalPrice, gender }) => {
+    const mutation  = useDeleteUser()
+
     return (
         <TableRow
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -20,11 +24,16 @@ const UserTableRowAdmin = ({ name, email, image, phone, item, orderTotalPrice, g
             <TableCell align="left">{phone}</TableCell>
             <TableCell align="left">{item}</TableCell>
             <TableCell align="left">{formatIDR(orderTotalPrice)}</TableCell>
-            <TableCell align="left">{gender}</TableCell>
+            <TableCell align="left">{gender ? 'Wanita' : 'Pria'}</TableCell>
+            <TableCell align="left">
+                <IconButton onClick={() => mutation.mutate(id)}>
+                    <Delete />
+                </IconButton>
+            </TableCell>
         </TableRow>
     )
 }
 
-UserTableRowAdmin.propTypes = UserTableRowAdminProps 
+UserTableRowAdmin.propTypes = UserTableRowAdminProps
 
 export default UserTableRowAdmin
