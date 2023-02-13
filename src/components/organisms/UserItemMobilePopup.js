@@ -3,11 +3,11 @@ import UserItemMobilePopupContainer from './UserItemMobilePopupContainer'
 import UserItemBioMobilePopup from 'components/molecules/UserItemBioMobilePopup'
 import UserItemContentMobilePopup from 'components/molecules/UserItemContentMobilePopup'
 
-const UserItemMobilePopup = () => {
+const UserItemMobilePopup = ({userBio, userContent}) => {
   return (
     <UserItemMobilePopupContainer>
-      <UserItemBioMobilePopup />
-      <UserItemContentMobilePopup />
+      <UserItemBioMobilePopup {...userBio}/>
+      <UserItemContentMobilePopup {...userContent}/>
     </UserItemMobilePopupContainer>
   )
 }

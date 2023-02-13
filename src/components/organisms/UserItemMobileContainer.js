@@ -5,13 +5,10 @@ import PopUp from 'components/molecules/PopUp'
 import { useTrigger } from 'commands/builders/commonBuilder'
 import UserItemMobilePopup from './UserItemMobilePopup'
 
-const UserItemMobileContainer = ({ children }) => {
-
-    const [openPopup, popupTrigger] = useTrigger()
-
+const UserItemMobileContainer = ({ popupTrigger, children }) => {
     return (
         <>
-            <Grid item xs={6}>
+            <Grid item xs={6} sm={4}>
                 <Box
                     component={Paper}
                     onClick={popupTrigger}
@@ -19,25 +16,18 @@ const UserItemMobileContainer = ({ children }) => {
                         display: 'flex',
                         flexDirection: 'column',
                         gap: 2,
-                        padding: 3,
+                        padding: 1,
                         width: 'auto',
-                        backgroundColor: grey[400],
                         borderRadius: 3,
+                        backgroundColor: grey[100],
                         boxShadow: 3,
                         cursor: 'pointer',
                         ":hover": {
                             backgroundColor: 'darkgray',
-                            scale: 3,
-                            transition: '0.3s'
+                            transition: '0.3s',
                         }
                     }}>{children}</Box>
             </Grid>
-
-            <PopUp
-                openPopup={openPopup}
-                setOpenPopup={popupTrigger}>
-                <UserItemMobilePopup />
-            </PopUp>
         </>
     )
 }
