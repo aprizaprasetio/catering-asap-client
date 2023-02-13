@@ -1,13 +1,17 @@
 import React from 'react'
-import { Box, Paper, Typography } from '@mui/material'
+import { Grid, Box, Paper, Typography, Icon } from '@mui/material'
+import { Home } from '@mui/icons-material'
 import { Dashboard } from '@mui/icons-material'
 import AdminWelcomeProps from 'proptypes/organisms/AdminWelcomeProps'
 
 const boxStyle = {
+    height: '100%',
     paddingX: 6,
     paddingY: 8,
     display: 'flex',
     gap: 3,
+    justifyContent: 'space-between',
+    alignItems: 'end',
     backgroundColor: 'primary.main',
     borderRadius: 4,
     boxShadow: 4,
@@ -35,14 +39,19 @@ const iconStyle = {
 
 const AdminWelcome = ({ header, message, body }) => {
     return (
-        <Box component={Paper} sx={boxStyle}>
-            <Box>
-                <Typography variant="subtitle1" sx={messageStyle}>{message}</Typography>
-                <Typography variant="h2" sx={headerStyle}>{header}</Typography>
-                <Typography variant="body1">{body}</Typography>
+        <Grid item xs={7}>
+            <Box component={Paper} sx={boxStyle}>
+                <Box>
+                    <Home sx={{
+                        fontSize: 50,
+                    }} />
+                    <Typography variant="subtitle1" sx={messageStyle}>{message}</Typography>
+                    <Typography variant="h2" sx={headerStyle}>{header}</Typography>
+                    <Typography variant="body1">{body}</Typography>
+                </Box>
+                <Dashboard sx={iconStyle} />
             </Box>
-            <Dashboard sx={iconStyle} />
-        </Box>
+        </Grid>
     )
 }
 
