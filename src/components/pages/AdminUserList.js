@@ -10,6 +10,7 @@ import UserListAdminMobile from 'components/organisms/UserListAdminMobile'
 import UserListDekstop from 'components/organisms/UserListDekstop'
 
 const AdminUserList = () => {
+
     return (
         <>
             <AdminNavbar />

@@ -2,8 +2,10 @@ import React from 'react'
 import { grey } from '@mui/material/colors'
 import { Box, IconButton, Typography } from '@mui/material'
 import { People } from '@mui/icons-material'
+import useUserStore from 'factory/store/useUserStore'
 
 const UsersDashboardMobile = () => {
+    const totalUser = useUserStore(state => state.totalUser)
 
     const display = {
         xs: 'block',
@@ -39,7 +41,7 @@ const UsersDashboardMobile = () => {
                     }}
                     variant="h2"
                 >Total User</Typography>
-                <IconButton sx={{ fontSize: 40}}><People fontSize='large'/>53</IconButton>
+                <IconButton sx={{ fontSize: 40}}><People fontSize='large'/>{totalUser}</IconButton>
             </Box>
         </Box>
     )

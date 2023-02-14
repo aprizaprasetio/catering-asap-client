@@ -1,14 +1,14 @@
 import { axios } from 'api/initiates/queryInitiate'
 import { authPath } from "api/initiates/pathInitiate"
 
-const fetchUserList = async ({ pageParam = 1 }) => {
+const fetchUserList = async pageParam => {
     const userList = await axios.get(authPath.root, {
         params: {
             PageNumber: pageParam,
             PageSize: 10,
         },
     })
-    return userList.data.data
+    return userList.data
 }
 
 const deleteUser = async userId => {
