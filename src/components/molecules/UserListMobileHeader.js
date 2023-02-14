@@ -5,8 +5,7 @@ const UserListMobileHeader = () => {
     return (
         <Box
             sx={{
-                width: '100%',
-                height: 176,
+                height: 120,
                 backgroundColor: 'primary.dark',
                 position: 'relative',
             }}
@@ -14,24 +13,27 @@ const UserListMobileHeader = () => {
             <Box sx={{
                 bottom: '20%',
                 position: 'absolute',
-                left: '10%',
+                paddingLeft: '3%',
+                marginLeft: {
+                    sm: '100px'
+                }
             }}>
                 <Typography
                     sx={{
-                        fontSize: 40,
+                        fontSize: 30,
                         fontWeight: 'bold',
                         color: 'white'
                     }}
                     variant="h1"
                 >
-                    Welcome to color
+                    Daftar user
                 </Typography>
                 <Typography sx={{
-                    fontSize: 32,
+                    fontSize: 22,
                     color: 'white',
                     fontWeight: 'bold'
                 }}
-                    variant="subtitle1">Nama Lu</Typography>
+                    variant="subtitle1">Admin</Typography>
             </Box>
         </Box>
     )

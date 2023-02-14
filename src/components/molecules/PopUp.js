@@ -1,11 +1,23 @@
 import React from 'react'
-import { Button, Dialog, DialogContent } from '@mui/material'
+import { Dialog, DialogContent, Paper } from '@mui/material'
 
-const PopUp = ({ openPopup, setOpenPopup, children }) => {
+const PopUp = ({ openPopup, children }) => {
+
+    const PaperProps = {
+        display: 'flex',
+        flexDirection: 'column',
+        padding: 3,
+        gap: 2,
+        borderRadius: 3,
+        boxShadow: 3,
+        cursor: 'default',
+    }
+
     return (
-        <Dialog open={openPopup}>
-            <Button onClick={setOpenPopup}>Close</Button>
-            <DialogContent dividers>
+        <Dialog open={openPopup} PaperProps={{
+            sx: PaperProps
+        }}>
+            <DialogContent>
                 {children}
             </DialogContent>
         </Dialog>

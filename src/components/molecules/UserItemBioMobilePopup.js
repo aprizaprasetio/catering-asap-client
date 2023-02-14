@@ -3,42 +3,41 @@ import { Box, Typography, Avatar, Icon } from '@mui/material'
 import { Male, Female, Man } from '@mui/icons-material'
 import { deepOrange } from '@mui/material/colors'
 
-const UserItemBioMobilePopup = () => {
+const UserItemBioMobilePopup = ({ image, name, email, phone }) => {
   return (
     <Box sx={{
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
     }}>
         <Avatar
             sx={{
-                bgcolor: deepOrange[500],
-                width: 65,
-                height: 65,
+                width: 48,
+                height: 48,
                 boxShadow: 2
             }}
             alt="Remy Sharp"
-            src="/broken-image.jpg"
+            src={image}
         >
             B
         </Avatar>
-        <Box>
+        <Box sx={{marginLeft: 3}}>
             <Typography sx={{
                 fontSize: 24,
-                fontWeight: 'bold'
+                fontWeight: 'bold',
             }}
-                variant="h3">Name</Typography>
+                variant="h3">{name}</Typography>
             <Typography sx={{
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: 600
             }}
-                variant="h3">Email@gmail.com</Typography>
+                variant="h3">{email}</Typography>
             <Typography sx={{
-                fontSize: 18,
+                fontSize: 14,
                 fontWeight: 600
             }}
-                variant="h3">083675456734</Typography>
+                variant="h3">{phone}</Typography>
         </Box>
-        <Icon><Man /></Icon>
+        <Icon><Female fontSize='medium'/></Icon>
     </Box>
   )
 }

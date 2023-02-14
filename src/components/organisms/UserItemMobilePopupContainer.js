@@ -11,7 +11,7 @@ const UserItemMobilePopupContainer = ({children}) => {
                 flexDirection: 'column',
                 padding: 3,
                 gap: 2,
-                width: 400,
+                width: 335,
                 borderRadius: 3,
                 boxShadow: 3,
                 cursor: 'default',
