@@ -1,38 +1,47 @@
 import React from 'react'
 import { grey } from '@mui/material/colors'
-import { Box, Typography } from '@mui/material'
+import { Box, IconButton, Typography } from '@mui/material'
+import { People } from '@mui/icons-material'
+import useUserStore from 'factory/store/useUserStore'
 
 const UsersDashboardMobile = () => {
+    const totalUser = useUserStore(state => state.totalUser)
+
+    const display = {
+        xs: 'block',
+        md: 'none'
+        
+    }
+
     return (
         <Box sx={{
             alignItems: 'center',
             width: '100%',
-            height: 80,
-            backgroundColor: grey[400],
-            borderRadius: 4,
+            height: 50,
+            backgroundColor: grey[100],
+            borderRadius: 3,
+            boxShadow: 4,
+            display: display
         }}>
             <Box
                 sx={{
-                    color: 'white',
                     display: 'flex',
                     paddingX: 10,
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-evenly',
                     marginBottom: 5,
                     alignItems: 'center',
-                    height: '100%'
+                    height: '100%',
+                    fontWeight: 'bold',
+                    color: grey[600]
                 }}>
                 <Typography
                     sx={{
-                        fontSize: 32,
+                        fontSize: 18,
                         fontWeight: 'medium'
                     }}
                     variant="h2"
                 >Total User</Typography>
-                <Typography
-                sx={{
-                    fontSize: 60,
-                }}
-                >53</Typography>
+                <IconButton sx={{ fontSize: 40}}><People fontSize='large'/>{totalUser}</IconButton>
             </Box>
         </Box>
     )
