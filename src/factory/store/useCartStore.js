@@ -4,8 +4,12 @@ import { formatQuantity } from 'commands/application/priceCommand'
 const useCartStore = create((set, get) => (
     {
         data: null,
-        setCart: value => set({
+        quantity: '0',
+        setQuantity: value => set({
             data: value,
+        }),
+        setQuantity: value => set({
+            quantity: value,
         }),
         isNoCheck: () => {
             const isSingleCheck = get().data.some(item => {

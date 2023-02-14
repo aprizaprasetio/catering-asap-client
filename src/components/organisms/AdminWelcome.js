@@ -12,9 +12,8 @@ const boxStyle = {
     gap: 3,
     justifyContent: 'space-between',
     alignItems: 'end',
-    backgroundColor: 'primary.main',
+    background: 'linear-gradient(to right bottom, #009FFD, #2A2A72)',
     borderRadius: 4,
-    boxShadow: 4,
     color: 'white',
 }
 
@@ -40,7 +39,7 @@ const iconStyle = {
 const AdminWelcome = ({ header, message, body }) => {
     return (
         <Grid item xs={7}>
-            <Box component={Paper} sx={boxStyle}>
+            <Box component={Paper} sx={boxStyle} elevation={3}>
                 <Box>
                     <Home sx={{
                         fontSize: 50,
