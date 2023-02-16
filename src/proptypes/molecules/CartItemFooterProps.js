@@ -1,6 +1,8 @@
 import { number, shape, func, bool } from 'prop-types'
 
 export default {
+    cartId: number.isRequired,
+    minOrder: number.isRequired,
     quantity: number.isRequired,
     quantityClick: shape({
         add: func.isRequired,

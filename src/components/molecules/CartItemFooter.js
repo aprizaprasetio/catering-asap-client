@@ -1,15 +1,20 @@
 import React from 'react'
 import { Typography, CardActions, Checkbox, Button, ButtonGroup, IconButton } from '@mui/material'
 import { Add, Remove, Delete } from '@mui/icons-material'
+import { useCheckboxCart, useOneQuantityCart, useRemoveCartSingle } from 'api/hooks/cartHook'
 import CartItemFooterProps from 'proptypes/molecules/CartItemFooterProps'
 
-const CartItemFooter = ({ quantity, quantityClick, removeClick, isChecked, checkboxHandler }) => {
+const CartItemFooter = ({ cartId, minOrder, quantity, quantityClick, removeClick, isChecked, checkboxHandler }) => {
+    const checkboxTrigger = useCheckboxCart(cartId, checkboxHandler)
+    const [increase, decrease] = useOneQuantityCart(cartId, quantityClick)
+    const remove = useRemoveCartSingle(cartId, removeClick)
+
     return (
         <CardActions sx={{
             display: 'grid',
             justifyItems: 'flex-end',
         }}>
-            <Checkbox onChange={checkboxHandler} checked={isChecked} />
+            <Checkbox onChange={checkboxTrigger} checked={isChecked} />
             <ButtonGroup
                 size="small"
                 variant="contained"
@@ -24,7 +29,9 @@ const CartItemFooter = ({ quantity, quantityClick, removeClick, isChecked, check
                     bottom: 0,
                 }}
             >
-                <Button onClick={quantityClick.add}><Add /></Button>
+                <Button onClick={increase}>
+                    <Add />
+                </Button>
                 <Button variant="text" disabled>
                     <Typography variant="body2" sx={{
                         color: 'primary.main',
@@ -32,16 +39,21 @@ const CartItemFooter = ({ quantity, quantityClick, removeClick, isChecked, check
                         {quantity}
                     </Typography>
                 </Button>
-                <Button onClick={quantityClick.remove}><Remove /></Button>
+                <Button
+                    onClick={decrease}
+                    disabled={quantity === minOrder}
+                >
+                    <Remove />
+                </Button>
             </ButtonGroup>
             <IconButton
-                onClick={removeClick}
+                onClick={remove}
                 size="small"
                 sx={{
                 }}>
                 <Delete />
             </IconButton>
-        </CardActions>
+        </CardActions >
     )
 }
 

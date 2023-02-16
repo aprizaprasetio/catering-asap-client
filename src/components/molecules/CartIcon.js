@@ -1,13 +1,13 @@
 import React from 'react'
 import { Badge } from '@mui/material'
 import { ShoppingCart } from '@mui/icons-material'
-import useCartStore from 'factory/store/useCartStore'
+import { useCurrentCartQuantity } from 'api/hooks/cartHook'
 
 const CartIcon = () => {
-    const quantity = useCartStore(state => state.quantity)
+    const quantity = useCurrentCartQuantity()
 
     return (
-        <Badge badgeContent={quantity ?? undefined} color="error">
+        <Badge badgeContent={quantity} color="error">
             <ShoppingCart />
         </Badge>
     )

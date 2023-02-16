@@ -2,9 +2,12 @@ import React from 'react'
 import { Paper, Button, FormControlLabel, Checkbox } from '@mui/material'
 import { Delete } from '@mui/icons-material'
 import useCartStore from 'factory/store/useCartStore'
+import { useCheckboxAllCart, useRemoveCartMultiple } from 'api/hooks/cartHook'
 
 const CartHeader = () => {
     const carts = useCartStore()
+    const checkAll = useCheckboxAllCart(carts.checkboxTriggerAll)
+    const removeChecked = useRemoveCartMultiple(carts.removeChecked)
 
     return (
         <Paper sx={{
@@ -18,7 +21,7 @@ const CartHeader = () => {
                 size="small"
                 color="error"
                 startIcon={<Delete />}
-                onClick={carts.removeChecked}
+                onClick={removeChecked}
                 sx={{
                     paddingX: 3,
                     borderRadius: 6,
@@ -33,7 +36,7 @@ const CartHeader = () => {
                 control={
                     <Checkbox
                         checked={carts.isCheckedAll()}
-                        onChange={carts.checkboxTriggerAll}
+                        onChange={checkAll}
                     />
                 }
             />
