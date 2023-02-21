@@ -27,7 +27,7 @@ const CartList = () => {
                                         cartBody={bodyItem}
                                         cartFooter={{
                                             cartId: id,
-                                            minOrder: item.foodDrinkMenu.min_Order,
+                                            minOrder: item.food_Drink_Menu_Min_Order,
                                             quantity: quantity,
                                             quantityClick: {
                                                 add: () => store.increaseQuantity(id),

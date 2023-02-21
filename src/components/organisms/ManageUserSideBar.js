@@ -1,76 +1,34 @@
 import React from 'react'
-import { Paper, List, Stack } from '@mui/material'
-import { ManageAccounts, Key } from '@mui/icons-material'
-import PressListItem from 'components/molecules/PressListItem'
-import ListItemVertical from 'components/molecules/ListItemVertical'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { Paper, Tabs, Tab, useMediaQuery } from '@mui/material'
 
-const listStyle = {
-    paddingY: 3,
-    paddingX: 1,
-    display: 'grid',
-    gap: 1,
-}
+const ManageUserSideBar = ({ tabList }) => {
+    const navigate = useNavigate()
+    const { pathname } = useLocation()
+    const isMobile = useMediaQuery('(max-width:768px)')
 
-const tabList = []
-tabList.push({
-    icon: ManageAccounts,
-    href: '/profile',
-    content: 'Biodata'
-})
-tabList.push({
-    icon: Key,
-    href: '/profile/password',
-    content: 'Kata Sandi'
-})
-
-const ManageUserSideBar = () => {
     return (
-        <>
-            <Paper sx={{
-                height: 'calc(100vh - 64px)',
-                boxShadow: 4,
-                padding: 0,
-                display: {
-                    xs: 'none',
-                    md: 'block',
-                },
-            }}>
-                <List sx={listStyle}>
-                    {
-                        tabList.map(item =>
-                            <PressListItem
-                                icon={<item.icon />}
-                                href={item.href}
-                                content={item.content}
-                                key={item.href}
-                            />
-                        )
-                    }
-                </List>
-            </Paper>
-            <Paper sx={{
-                display: {
-                    xs: 'block',
-                    md: 'none',
-                },
-                paddingX: 1,
-                boxShadow: 3,
-            }}>
-                <List component={Stack} direction="row">
-                    {
-                        tabList.map(item =>
-                            <ListItemVertical
-                                icon={<item.icon />}
-                                href={item.href}
-                                key={item.content}
-                            >
-                                {item.content}
-                            </ListItemVertical>
-                        )
-                    }
-                </List>
-            </Paper>
-        </>
+        <Tabs
+            value={pathname}
+            orientation={isMobile ? 'horizontal' : 'vertical'}
+            component={Paper}
+            sx={{
+                height: isMobile ? 'auto' : 'calc(100vh - 64px)',
+            }}
+        >
+            {tabList.map(item => (
+                <Tab
+                    onClick={() => navigate(item.href)}
+                    value={item.href}
+                    label={item.content}
+                    icon={<item.icon />}
+                    sx={{
+                        paddingX: isMobile ? 0 : 4,
+                    }}
+                    key={item.href}
+                />
+            ))}
+        </Tabs>
     )
 }
 

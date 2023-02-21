@@ -1,17 +1,16 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import { Box, useMediaQuery } from '@mui/material'
 import CenterLayout from 'components/templates/CenterLayout'
 import ManageUserSideBar from 'components/organisms/ManageUserSideBar'
 
-const ManageUserContainer = ({ children }) => {
+const ManageUserContainer = ({ tabList, children }) => {
+    const isMobile = useMediaQuery('(max-width:768px)')
+
     return (
         <Box sx={{
-            display: {
-                xs: 'grid',
-                md: 'flex',
-            },
+            display: isMobile ? 'grid' : 'flex',
         }}>
-            <ManageUserSideBar />
+            <ManageUserSideBar tabList={tabList} />
             <CenterLayout>
                 {children}
             </CenterLayout>
