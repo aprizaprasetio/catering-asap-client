@@ -16,12 +16,16 @@ const fetchQuantityCart = async () => {
 }
 
 const fetchAddCart = async foodDrink => {
-    const cartInfo = await axios.post('Carts', foodDrink)
+    const cartInfo = await axios.post('Carts', {}, {
+        params: foodDrink,
+    })
     return cartInfo.data
 }
 
 const fetchCheckboxTrigger = async config => {
-    await axios.put('Carts/CheckboxTrigger', config)
+    await axios.put('Carts/CheckboxTrigger', {}, {
+        params: config,
+    })
 }
 
 const fetchCheckboxAll = async config => {
@@ -34,7 +38,7 @@ const fetchOneQuantity = async config => {
 
 const fetchRemoveSingle = async config => {
     await axios.delete('Carts/Remove/Single', {
-        data: config,
+        params: config,
     })
 }
 

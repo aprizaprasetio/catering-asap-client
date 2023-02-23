@@ -11,6 +11,7 @@ const ManageUserSideBar = ({ tabList }) => {
         <Tabs
             value={pathname}
             orientation={isMobile ? 'horizontal' : 'vertical'}
+            variant="scrollable"
             component={Paper}
             sx={{
                 height: isMobile ? 'auto' : 'calc(100vh - 64px)',
@@ -23,7 +24,7 @@ const ManageUserSideBar = ({ tabList }) => {
                     label={item.content}
                     icon={<item.icon />}
                     sx={{
-                        paddingX: isMobile ? 0 : 4,
+                        paddingX: 4,
                     }}
                     key={item.href}
                 />
