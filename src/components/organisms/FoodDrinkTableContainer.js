@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Table, TableBody, Paper, TableContainer, TableHead, Box } from '@mui/material'
+import { Table, TableBody, Paper, TableContainer, TableHead, } from '@mui/material'
 
 
 function FoodDrinkTableContainer({ children, header }) {
@@ -8,6 +8,11 @@ function FoodDrinkTableContainer({ children, header }) {
 
         <TableContainer component={Paper} sx={{
             borderRadius: 3,
+            display: {
+                xs: 'none',
+                lg: 'block',
+            }
+
         }} >
             <Table sx={{
                 minWidth: 650
