@@ -28,7 +28,16 @@ const fetchFoodDrinkList2 = async ({ pageParam = 1 }) => {
     return foodDrinkList.data.data
 }
 
+const fetchFoodDrinkMenuDetail = async id => {
+    const dataFoodDrinkMenu = await axios.get('FoodDrinkMenus/detail', {
+        params: { id },
+    })
+    // console.table(dataFoodDrinkMenu.data)
+    return dataFoodDrinkMenu.data
+}
+
 export {
     fetchFoodDrinkList,
     fetchFoodDrinkList2,
+    fetchFoodDrinkMenuDetail,
 }
