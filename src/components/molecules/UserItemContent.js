@@ -4,7 +4,7 @@ import { Assignment } from '@mui/icons-material'
 import { formatIDR } from 'commands/application/priceCommand'
 import UserItemContentProps from 'proptypes/molecules/UserItemContentProps'
 
-const UserItemContent = ({ orderTotalPrice }) => {
+const UserItemContent = ({ quantity, totalPriceOrdered }) => {
     return (
         <Box sx={{
             display: 'flex',
@@ -25,7 +25,7 @@ const UserItemContent = ({ orderTotalPrice }) => {
                     fontSize: 12,
                     fontWeight: 'bold'
                 }} variant="body2">Total</Typography>
-                <IconButton sx={{ padding: 0, fontSize: 12, fontWeight: 'bold' }} disabled><Assignment fontSize='small'/>53</IconButton>
+                <IconButton sx={{ padding: 0, fontSize: 12, fontWeight: 'bold' }} disabled><Assignment fontSize='small'/>{quantity}</IconButton>
             </Box>
             <Box sx={{
                 width: '100%',
@@ -40,7 +40,7 @@ const UserItemContent = ({ orderTotalPrice }) => {
                 boxShadow: 1
             }}>
                 <Typography sx={{ fontSize: 12, fontWeight: 'bold'}}>Total</Typography>
-                <Typography sx={{fontSize: 10, fontWeight: 'bold'}}>{formatIDR(orderTotalPrice)}</Typography>
+                <Typography sx={{fontSize: 10, fontWeight: 'bold'}}>{formatIDR(totalPriceOrdered)}</Typography>
             </Box>
         </Box>
     )

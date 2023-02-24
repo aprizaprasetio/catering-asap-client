@@ -3,7 +3,7 @@ import { Box, Typography, Avatar, Icon } from '@mui/material'
 import { Male, Female, Man } from '@mui/icons-material'
 import { deepOrange } from '@mui/material/colors'
 
-const UserItemBioMobilePopup = ({ image, name, email, phone }) => {
+const UserItemBioMobilePopup = ({ image, name, email, phone, gender }) => {
   return (
     <Box sx={{
         display: 'flex',
@@ -17,9 +17,7 @@ const UserItemBioMobilePopup = ({ image, name, email, phone }) => {
             }}
             alt="Remy Sharp"
             src={image}
-        >
-            B
-        </Avatar>
+        />
         <Box sx={{marginLeft: 3}}>
             <Typography sx={{
                 fontSize: 24,
@@ -37,7 +35,7 @@ const UserItemBioMobilePopup = ({ image, name, email, phone }) => {
             }}
                 variant="h3">{phone}</Typography>
         </Box>
-        <Icon><Female fontSize='medium'/></Icon>
+        <Icon>{gender ? <Female fontSize='small' /> : <Male  fontSize='small'/>}</Icon>
     </Box>
   )
 }

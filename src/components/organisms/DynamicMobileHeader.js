@@ -1,11 +1,17 @@
 import React from 'react'
+import ManagementOrderDasboard from 'components/molecules/ManagementOrderDasboard'
 import { Box, Typography, AppBar, Toolbar } from '@mui/material'
 
-const UserListMobileHeader = ({ title, style, style1, menu }) => {
+const DynamicMobileHeader = ({ title, isMenuVisible }) => {
     return (
         <>
-            <Box sx={style}>
-                <Box sx={style1}>
+            <Box sx={{
+                paddingTop: 6,
+                background: 'linear-gradient(to left bottom, #009FFD, #2A2A72)',
+            }}>
+                <Box sx={{
+                    padding: 3
+                }}>
                     <Typography
                         sx={{
                             fontSize: 30,
@@ -23,11 +29,18 @@ const UserListMobileHeader = ({ title, style, style1, menu }) => {
                     }}
                         variant="subtitle1">Admin</Typography>
                 </Box>
-                <Box sx={{ position: 'absolute', bottom: 0 }}>
-                </Box>
             </Box>
+            {
+                isMenuVisible && (
+                    <AppBar position="sticky">
+                        <Toolbar>
+                            <ManagementOrderDasboard />
+                        </Toolbar>
+                    </AppBar>
+                )
+            }
         </>
     )
 }
 
-export default UserListMobileHeader
+export default DynamicMobileHeader

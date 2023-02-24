@@ -5,7 +5,7 @@ import { Delete } from '@mui/icons-material'
 import UserTableRowAdminProps from 'proptypes/organisms/UserTableRowAdminProps'
 import { useDeleteUser } from 'api/hooks/usersManagementHook'
 
-const UserTableRowAdmin = ({ id, name, email, image, phone, item, orderTotalPrice, gender }) => {
+const UserTableRowAdmin = ({ id, name, email, image, phone, quantity, totalPriceOrdered, gender }) => {
     const mutation  = useDeleteUser()
 
     return (
@@ -22,8 +22,8 @@ const UserTableRowAdmin = ({ id, name, email, image, phone, item, orderTotalPric
             <TableCell align="left">{name}</TableCell>
             <TableCell align="left">{email}</TableCell>
             <TableCell align="left">{phone}</TableCell>
-            <TableCell align="left">{item}</TableCell>
-            <TableCell align="left">{formatIDR(orderTotalPrice)}</TableCell>
+            <TableCell align="left">{quantity}</TableCell>
+            <TableCell align="left">{formatIDR(totalPriceOrdered)}</TableCell>
             <TableCell align="left">{gender ? 'Wanita' : 'Pria'}</TableCell>
             <TableCell align="left">
                 <IconButton onClick={() => mutation.mutate(id)}>

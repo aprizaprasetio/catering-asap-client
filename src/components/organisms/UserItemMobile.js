@@ -13,14 +13,16 @@ const UserItemMobile = ({ userBio, userContent }) => {
   const [openPopup, setOpenPopup] = useTrigger()
 
   return (
-    <UserItemMobileContainer popupTrigger={setOpenPopup}>
-      <UserItemBioMobile {...userBio} />
-      <UserItemContent {...userContent} />
+    <>
+      <UserItemMobileContainer popupTrigger={setOpenPopup}>
+        <UserItemBioMobile {...userBio} />
+        <UserItemContent {...userContent} />
+      </UserItemMobileContainer>
       <PopUp openPopup={openPopup} setOpenPopup={setOpenPopup}>
         <UserItemBioMobilePopup {...userBio} />
         <UserItemContentMobilePopup {...userContent} />
       </PopUp>
-    </UserItemMobileContainer>
+    </>
   )
 }
 

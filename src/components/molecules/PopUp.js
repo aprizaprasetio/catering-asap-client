@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dialog, DialogContent, Paper } from '@mui/material'
 
-const PopUp = ({ openPopup, children }) => {
+const PopUp = ({ openPopup, setOpenPopup, children }) => {
 
     const PaperProps = {
         display: 'flex',
@@ -14,7 +14,7 @@ const PopUp = ({ openPopup, children }) => {
     }
 
     return (
-        <Dialog open={openPopup} PaperProps={{
+        <Dialog open={openPopup}  onClose={setOpenPopup} PaperProps={{
             sx: PaperProps
         }}>
             <DialogContent>

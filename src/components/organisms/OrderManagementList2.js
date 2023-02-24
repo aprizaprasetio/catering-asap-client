@@ -1,11 +1,10 @@
 import React from 'react'
-import UsersWrapperMobile from 'components/organisms/UsersWrapperMobile'
-import UserItemMobile from 'components/organisms/UserItemMobile'
-import { useUserList } from 'api/hooks/usersManagementHook'
-import LoadingFull from 'components/atoms/LoadingFull'
+import CardItemManagementOrder from 'components/molecules/CardItemManagementOrder'
+import OrderManagementWrapper from './OrderManagementWrapper'
+import { useOrderListWaiting, useOrderSwitch } from 'api/hooks/OrdersManagementHook'
 
-const UserListAdminMobile = () => {
-    const { data, isFetching, isLoading, hasNextPage, fetchNextPage } = useUserList()
+const OrderManagementList2 = () => {
+    const { data, isFetching, isLoading, hasNextPage, fetchNextPage } = useOrderSwitch()
 
     React.useEffect(() => {
         const refetch = () => {
@@ -19,21 +18,20 @@ const UserListAdminMobile = () => {
     }, [isFetching])
 
     return (
-        <UsersWrapperMobile>
+        <OrderManagementWrapper>
             {
-                data?.pages?.map((userItem, index) => {
+                data?.pages?.map((orderItem, index) => {
                     return (
                         <React.Fragment key={index}>
                             {
-                                userItem?.map(item => <UserItemMobile key={item.id} userBio={item} userContent={item} />)
+                                orderItem.map(item => <CardItemManagementOrder key={item.id} {...item} />)
                             }
                         </React.Fragment>
                     )
                 })
             }
-            {(isFetching || isLoading) && <LoadingFull />}
-        </UsersWrapperMobile>
+        </OrderManagementWrapper>
     )
 }
 
-export default UserListAdminMobile
+export default OrderManagementList2
