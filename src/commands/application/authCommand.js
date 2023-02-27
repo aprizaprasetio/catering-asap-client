@@ -9,6 +9,9 @@ const logout = () => {
     axios.defaults.headers.common['Authorization'] = null
 }
 
+const isUser = () => client.getQueryData(['user'])?.role === 'user'
+
 export {
     logout,
+    isUser,
 }

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Box, Menu, MenuList, Stack, Paper, Divider } from '@mui/material'
-import { Person, ShoppingCart, HelpCenter, HourglassBottom, Cached, LocalShipping, Schedule, Logout } from '@mui/icons-material'
+import { Person, HelpCenter, HourglassBottom, Cached, LocalShipping, Schedule, Logout } from '@mui/icons-material'
 import PressIconLink from 'components/atoms/PressIconLink'
 import PressAvatar from 'components/atoms/PressAvatar'
 import PressListItem from 'components/molecules/PressListItem'
 import ListItemVertical from 'components/molecules/ListItemVertical'
+import CartIcon from 'components/molecules/CartIcon'
 import { useStale } from 'commands/builders/hookBuilder'
 import { logout } from 'commands/application/authCommand'
 
@@ -92,7 +93,7 @@ const NavbarRight = () => {
                 <HelpCenter />
             </PressIconLink>
             <PressIconLink href="/cart">
-                <ShoppingCart />
+                <CartIcon />
             </PressIconLink>
             <PressAvatar onClick={menuTrigger}>
                 <Person />

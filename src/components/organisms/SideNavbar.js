@@ -6,7 +6,6 @@ import SideNavbarProps from 'proptypes/organisms/SideNavbarProps'
 const listStyle = {
     paddingX: 1,
     width: 100,
-    marginY: 'auto',
     display: {
         xs: 'none',
         sm: 'grid',

@@ -7,9 +7,9 @@ const buttonStyle = {
     width: '100%',
 }
 
-const FoodDrinkButton = ({ children }) => {
+const FoodDrinkButton = ({ onClick, children }) => {
     return (
-        <Button component={Grid} item sx={buttonStyle}>
+        <Button onClick={onClick} component={Grid} item sx={buttonStyle}>
             {children}
         </Button>
     )
