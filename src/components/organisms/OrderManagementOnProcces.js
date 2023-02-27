@@ -1,14 +1,14 @@
 import React from 'react'
 import CardItemManagementOrder from 'components/molecules/CardItemManagementOrder'
 import OrderManagementWrapper from './OrderManagementWrapper'
-import { useOrderListOnProcces } from 'api/hooks/OrdersManagementHook'
+import { useOrderListOnProcces } from 'api/hooks/ordersManagementHook'
 
 const OrderManagementOnProcces = () => {
     const { data, isFetching, isLoading, hasNextPage, fetchNextPage } = useOrderListOnProcces()
 
     React.useEffect(() => {
         console.log(data)
-    },[])
+    }, [])
 
     React.useEffect(() => {
         const refetch = () => {

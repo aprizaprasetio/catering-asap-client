@@ -5,7 +5,7 @@ import PopUp from 'components/molecules/PopUp'
 import { CreditCard } from '@mui/icons-material'
 import { grey } from '@mui/material/colors'
 import { useNavigate } from 'react-router-dom'
-import { useUpdateOrder } from 'api/hooks/OrdersManagementHook'
+import { useUpdateOrder } from 'api/hooks/ordersManagementHook'
 
 const FormOrderDataDekstop = ({ id, name, orderTime, mealDate, address, bankName, bankNumber, paymentUrl, refetch, status }) => {
     const [openPopup, setOpenPopup] = useTrigger()
@@ -95,9 +95,9 @@ const FormOrderDataDekstop = ({ id, name, orderTime, mealDate, address, bankName
                     </Card>
                 </Box>
                 {<Button sx={{ marginX: 3, borderRadius: 3, paddingY: 1 }} variant="contained" onClick={() => {
-                mutate({}, { onSuccess: refetch })
-                navigate(content[status].afterHref)
-            }} >{content[status]?.buttonText}</Button>}
+                    mutate({}, { onSuccess: refetch })
+                    navigate(content[status].afterHref)
+                }} >{content[status]?.buttonText}</Button>}
             </Box>
 
             <PopUp openPopup={openPopup} setOpenPopup={setOpenPopup}>

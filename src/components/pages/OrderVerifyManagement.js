@@ -7,7 +7,7 @@ import OrderVerifyContainer from 'components/organisms/OrderVerifyContainer'
 import DynamicNavbar from 'components/organisms/DynamicNavbar'
 import { useLocation, useParams } from 'react-router-dom'
 import FormVerifyOrderDekstop from 'components/organisms/FormVerifyOrderDekstop'
-import { useOrderList } from 'api/hooks/OrdersManagementHook'
+import { useOrderList } from 'api/hooks/ordersManagementHook'
 
 const OrderVerifyManagement = () => {
     const { data, isFetching, isLoading, status, refetch } = useOrderList()
