@@ -6,6 +6,12 @@ const fetchEditUser = async edited => {
     return edited
 }
 
+const fetchEditPassword = async password => {
+    const res = await axios.put('Users/ChangePassword', password)
+    return res
+}
+
 export {
-    fetchEditUser
+    fetchEditUser,
+    fetchEditPassword,
 }

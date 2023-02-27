@@ -1,7 +1,7 @@
 import React from 'react'
 import CardItemManagementOrder from 'components/molecules/CardItemManagementOrder'
 import OrderManagementWrapper from './OrderManagementWrapper'
-import { useOrderListWaiting } from 'api/hooks/OrdersManagementHook'
+import { useOrderListWaiting } from 'api/hooks/ordersManagementHook'
 
 const OrderManagementList = () => {
     const { data, isFetching, isLoading, hasNextPage, fetchNextPage } = useOrderListWaiting()

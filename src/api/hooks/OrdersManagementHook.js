@@ -1,10 +1,10 @@
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
-import { useParams,useLocation } from "react-router-dom"
-import { fetchOrderList, fetchOrderListOnProcces, fetchOrderListOnDelivery, fetchOrderListSuccessful, fetchOrderListWaiting, updateOrder, fetchListMenuOrder, fetchListSwitch } from "api/connections/OrdersManagementRequest"
+import { useParams, useLocation } from "react-router-dom"
+import { fetchOrderList, fetchOrderListOnProcces, fetchOrderListOnDelivery, fetchOrderListSuccessful, fetchOrderListWaiting, updateOrder, fetchListMenuOrder, fetchListSwitch } from "api/connections/ordersManagementRequest"
 import { useEffect } from "react"
 
 const useOrderList = () => {
-    const { orderId }  = useParams()
+    const { orderId } = useParams()
     const orderListQuery = useQuery({
         queryKey: ['orders'],
         queryFn: () => fetchOrderList(orderId),
@@ -23,27 +23,27 @@ const useUpdateOrder = id => {
 }
 
 const useOrderListMenu = () => {
-    const { orderId }  = useParams()
+    const { orderId } = useParams()
     const orderListMenu = useQuery({
         queryKey: ['foodDrinkMenu'],
         queryFn: () => fetchListMenuOrder(orderId),
     })
     useEffect(() => {
         orderListMenu.refetch()
-        return orderListMenu.remove 
+        return orderListMenu.remove
     }, [orderId])
     return orderListMenu
 }
 
 const useOrderSwitch = () => {
-    const {pathname} = useLocation()
+    const { pathname } = useLocation()
 
     const orderSwitch = useInfiniteQuery({
         queryKey: ['orderList'],
-        queryFn:  ({ pageParam = 1 }) => fetchListSwitch(pageParam, pathname),
+        queryFn: ({ pageParam = 1 }) => fetchListSwitch(pageParam, pathname),
         getNextPageParam: (current, pages) => {
             const isLimit = pages.find(current => current.length !== 10)
-            if(isLimit) return
+            if (isLimit) return
             return pages.length + 1
         },
         refetchOnMount: true,
@@ -54,7 +54,7 @@ const useOrderSwitch = () => {
         orderSwitch.refetch()
         return orderSwitch.remove
     }, [pathname])
- 
+
     return orderSwitch
 }
 
@@ -66,5 +66,5 @@ export {
     // useOrderListSuccessful,
     useUpdateOrder,
     useOrderListMenu,
-    useOrderSwitch ,
+    useOrderSwitch,
 }

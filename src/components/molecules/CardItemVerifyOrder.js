@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import { formatIDR } from 'commands/application/priceCommand'
-import { useOrderListMenu } from 'api/hooks/OrdersManagementHook'
+import { useOrderListMenu } from 'api/hooks/ordersManagementHook'
 import { grey } from '@mui/material/colors'
 
 const CardItemVerifyOrder = () => {

@@ -3,7 +3,7 @@ import { Box, Typography, Button, CardMedia, Card } from '@mui/material'
 import { useTrigger } from 'commands/builders/commonBuilder'
 import PopUp from 'components/molecules/PopUp'
 import { useNavigate } from 'react-router-dom'
-import { useUpdateOrder } from 'api/hooks/OrdersManagementHook'
+import { useUpdateOrder } from 'api/hooks/ordersManagementHook'
 
 const FormItemOrderVerifyManagement = ({ id, orderTime, mealDate, address, name, bankName, bankNumber, paymentUrl, status, refetch, display }) => {
     const [openPopup, setOpenPopup] = useTrigger()

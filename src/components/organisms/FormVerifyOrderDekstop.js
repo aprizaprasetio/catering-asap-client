@@ -7,7 +7,7 @@ import FormOrderDataDekstop from './FormOrderDataDekstop'
 import CardItemVerifyDekstop from 'components/molecules/CardItemVerifyDekstop'
 import { formatIDR } from 'commands/application/priceCommand'
 import FormOrderVerifyDekstopWrapper from './FormOrderVerifyDekstopWrapper'
-import { useOrderListMenu, useOrderListWaiting } from 'api/hooks/OrdersManagementHook'
+import { useOrderListMenu, useOrderListWaiting } from 'api/hooks/ordersManagementHook'
 
 const FormVerifyOrderDekstop = ({ result, totalPriceOrdered }) => {
     const orderListMenu = useOrderListMenu()
