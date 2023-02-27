@@ -9,19 +9,7 @@ const AdminOrderManagement = () => {
         <>
             <AdminNavbar />
             <CenterLayout admin header={<DynamicMobileHeader title='Management Orders' isMenuVisible />}>
-            <OrderManagementList2 />
-                {/* <ManageTab url="/admin/orders" component={<>
-                    <OrderManagementList />
-                </>} />
-                <ManageTab url="/admin/orders/waiting" component={<>
-                    <OrderManagementOnProcces />
-                </>} />
-                <ManageTab url="/admin/orders/delivering" component={<>
-                    <OrderManagementOnDelivery />
-                </>} />
-                <ManageTab url="/admin/orders/success" component={<>
-                    <OrderManagementSuccessful />
-                </>} /> */}
+                <OrderManagementList2 />
             </CenterLayout>
         </>
     )

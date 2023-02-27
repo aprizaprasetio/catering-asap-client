@@ -11,7 +11,7 @@ const OrderVerifyContainer = ({ display, mobile}) => {
         <Box display={display}>
             <Box>
                 {
-                   mobile && <OrderItem />
+                   mobile && <OrderItem {...data}/>
                 }
             </Box>
             <FormItemOrderVerifyManagement refetch={refetch} {...data} />
