@@ -26,7 +26,7 @@ const OrderVerifyManagement = () => {
     return (
         <>
             <AdminNavbar />
-            <DynamicNavbar href='/admin/orders/'>Verifikasi</DynamicNavbar>
+            <DynamicNavbar href={-1}>Verifikasi</DynamicNavbar>
             <CenterLayout admin>
                 <OrderVerifyContainer mobile display={display} />
                 <FormVerifyOrderDekstop {...data} result={data} />

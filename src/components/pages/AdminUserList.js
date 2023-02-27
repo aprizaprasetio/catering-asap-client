@@ -6,6 +6,7 @@ import AdminNavbar from 'components/organisms/AdminNavbar'
 import UserListAdminMobile from 'components/organisms/UserListAdminMobile'
 import UserListDekstop from 'components/organisms/UserListDekstop'
 import DynamicMobileHeader from 'components/organisms/DynamicMobileHeader'
+import SearchContainerAdminMobile from 'components/organisms/SearchContainerAdminMobile'
 
 const AdminUserList = () => {
     return (
@@ -13,7 +14,8 @@ const AdminUserList = () => {
             <AdminNavbar />
             <CenterLayout admin header={<DynamicMobileHeader title="Daftar User" />}>
                 <UserListDekstop />
-                <UsersDashboardMobile />
+                {/* <UsersDashboardMobile /> */}
+                <SearchContainerAdminMobile />
                 <UserListAdminMobile />
             </CenterLayout>
         </>

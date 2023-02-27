@@ -13,62 +13,6 @@ const useOrderList = () => {
     })
     return orderListQuery
 }
-// const useOrderListWaiting = () => {
-//     const orderLisWaitingtQuery = useInfiniteQuery({
-//         queryKey: ['waiting'],
-//         queryFn: fetchOrderListWaiting,
-//         getNextPageParam: (current, pages) => {
-//             const isLimit = pages.find(current => current.length !== 10)
-//             if(isLimit) return
-//             return pages.length + 1
-//         },
-//         refetchOnMount: true,
-//         refetchOnWindowFocus: true,
-//     })
-//     return orderLisWaitingtQuery
-// }
-// const useOrderListOnProcces = () => {
-//     const orderOnProccesListQuery = useInfiniteQuery({
-//         queryKey: ['onProcces'],
-//         queryFn: fetchOrderListOnProcces,
-//         getNextPageParam: (current, pages) => {
-//             const isLimit = pages.find(current => current.length !== 10)
-//             if(isLimit) return
-//             return pages.length + 1
-//         },
-//         refetchOnMount: true,
-//         refetchOnWindowFocus: true,
-//     })
-//     return orderOnProccesListQuery
-// }
-// const useOrderListOnDelivery = () => {
-//     const orderOnDeliveryListQuery = useInfiniteQuery({
-//         queryKey: ['onDelivery'],
-//         queryFn: fetchOrderListOnDelivery,
-//         getNextPageParam: (current, pages) => {
-//             const isLimit = pages.find(current => current.length !== 10)
-//             if(isLimit) return
-//             return pages.length + 1
-//         },
-//         refetchOnMount: true,
-//         refetchOnWindowFocus: true,
-//     })
-//     return orderOnDeliveryListQuery
-// }
-// const useOrderListSuccessful = () => {
-//     const orderSuccessfulListQuery = useInfiniteQuery({
-//         queryKey: ['successful'],
-//         queryFn: fetchOrderListSuccessful,
-//         getNextPageParam: (current, pages) => {
-//             const isLimit = pages.find(current => current.length !== 10)
-//             if(isLimit) return
-//             return pages.length + 1
-//         },
-//         refetchOnMount: true,
-//         refetchOnWindowFocus: true,
-//     })
-//     return orderSuccessfulListQuery
-// }
 
 const useUpdateOrder = id => {
     const updateOrderQuery = useMutation({

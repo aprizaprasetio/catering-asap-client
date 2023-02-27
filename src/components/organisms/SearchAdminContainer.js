@@ -1,22 +1,33 @@
 import React from 'react'
 import AdminDashboardUser from 'components/molecules/AdminDashboardUser'
 import SearchBar from 'components/molecules/SearchBar'
+import SearcBarAdmin from './SearcBarAdmin'
 import { Box } from '@mui/material'
 
-const SearchAdminContainer = () => {
+const SearchAdminContainer = ({ display }) => {
   return (
-    <Box sx={{
-      width: 800,
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 3,
-      position: 'absolute',
-      top: '10%',
-      left: '30%',
-    }}>
-      <AdminDashboardUser />
-      <SearchBar />
-    </Box>
+    <Box sx={{display: display}}>
+      <Box sx={{
+        width: '100%',
+        display: 'flex',
+        borderRadius: 3,
+        boxShadow: 3,
+        background: '#537FE7',
+        justifyContent: 'space-evenly'
+      }}>
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          width: '60%',
+        }}>
+          <SearcBarAdmin />
+        </Box>
+        <Box sx={{
+        }}>
+          <AdminDashboardUser />
+        </Box>
+      </Box>
+    </Box >
   )
 }
 

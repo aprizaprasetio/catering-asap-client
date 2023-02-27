@@ -11,7 +11,6 @@ import { useOrderListMenu, useOrderListWaiting } from 'api/hooks/OrdersManagemen
 
 const FormVerifyOrderDekstop = ({ result, totalPriceOrdered }) => {
     const orderListMenu = useOrderListMenu()
-    // const orderListWaiting = useOrderListWaiting()
     const display = {
         xs: 'none',
         md: 'block'

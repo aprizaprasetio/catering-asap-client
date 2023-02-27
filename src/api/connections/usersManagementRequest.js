@@ -1,9 +1,11 @@
-import { axios } from 'api/initiates/queryInitiate'
-import { authPath } from "api/initiates/pathInitiate"
+import { axios, client } from 'api/initiates/queryInitiate'
+import useUserStore from 'factory/store/useUserStore'
+import { authPath } from 'api/initiates/pathInitiate'
 
-const fetchUserList = async pageParam => {
+const fetchUserList = async (pageParam, keyword) => {
     const userList = await axios.get(authPath.root, {
         params: {
+            Keyword: keyword,
             PageNumber: pageParam,
             PageSize: 10,
         },

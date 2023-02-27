@@ -24,6 +24,10 @@ const FormOrderDataDekstop = ({ id, name, orderTime, mealDate, address, bankName
             afterHref: '/admin/orders/successful',
             buttonText: 'Selesai',
         },
+        {
+            afterHref: '/admin/graphs',
+            buttonText: 'Simpan Ke Grafik',
+        },
     ]
 
     return (
@@ -32,7 +36,8 @@ const FormOrderDataDekstop = ({ id, name, orderTime, mealDate, address, bankName
                 margin: 5,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 3
+                gap: 3,
+                width: 400
             }}>
                 <Box>
                     <Typography sx={{ fontWeight: 'bold' }}>Nama</Typography>

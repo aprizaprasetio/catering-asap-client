@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import UserTableRowAdmin from './UserTableRowAdmin'
 import { useUserList } from 'api/hooks/usersManagementHook'
 import LoadingFull from 'components/atoms/LoadingFull'
+import SearchAdminContainer from './SearchAdminContainer'
 
 const UserListDekstop = () => {
     const { data, isFetching, isLoading, hasNextPage, fetchNextPage } = useUserList()
@@ -26,7 +27,8 @@ const UserListDekstop = () => {
 
     return (
         <>
-            <TableContainer component={Paper} sx={{ display: display }}>
+            <SearchAdminContainer display={display}/>
+            <TableContainer component={Paper} sx={{ display: display, boxShadow: 3 }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
