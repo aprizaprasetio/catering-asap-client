@@ -10,9 +10,7 @@ const OrderVerifyContainer = ({ display, mobile }) => {
     return (
         <Box display={display}>
             <Box>
-                {
-                    mobile && <OrderItem />
-                }
+                {mobile && <OrderItem {...data} />}
             </Box>
             <FormItemOrderVerifyManagement refetch={refetch} {...data} />
         </Box>

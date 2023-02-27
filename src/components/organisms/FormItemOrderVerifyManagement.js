@@ -22,6 +22,10 @@ const FormItemOrderVerifyManagement = ({ id, orderTime, mealDate, address, name,
             afterHref: '/admin/orders/successful',
             buttonText: 'Selesai',
         },
+        {
+            afterHref: '/admin/orders/success',
+            buttonText: 'Simpan ke Grafik',
+        },
     ]
 
     return (
@@ -82,7 +86,7 @@ const FormItemOrderVerifyManagement = ({ id, orderTime, mealDate, address, name,
                 </Box>
             </Box>
 
-            {<Button sx={{ marginX: 3, borderRadius: 3, paddingY: 1 }} variant="contained" onClick={() => {
+            {<Button sx={{ marginX: 3, borderRadius: 3, paddingY: 1, width: '92%'}} variant="contained" onClick={() => {
                 mutate({}, { onSuccess: refetch })
                 navigate(content[status].afterHref)
             }} >{content[status]?.buttonText}</Button>}
