@@ -13,7 +13,7 @@ const FormVerifyOrderDekstop = ({ result, totalPriceOrdered }) => {
     const orderListMenu = useOrderListMenu()
     const display = {
         xs: 'none',
-        md: 'block'
+        md: 'block',
     }
 
     return (
@@ -25,17 +25,32 @@ const FormVerifyOrderDekstop = ({ result, totalPriceOrdered }) => {
                 position: 'relative',
                 backgroundColor: grey[100]
             }}>
-                <Card sx={{ width: 1200, padding: 5, borderRadius: 3 }}>
-                    <Typography sx={{ fontSize: 23, fontWeight: 'bold', marginLeft: 7 }}>List Pesanan</Typography>
-                    <Box sx={{ marginTop: 2, overflow: 'auto', height: 590 }}>
+                <Card sx={{ 
+                    // width: 600, 
+                    padding: 4, 
+                    borderRadius: 3 
+                    }}>
+                    <Typography sx={{ fontSize: 23, fontWeight: 'bold' }}>List Pesanan</Typography>
+                    <Box sx={{ 
+                        marginTop: 1, 
+                        overflow: 'auto', 
+                        height: 590
+                        }}>
                         <FormOrderVerifyDekstopWrapper>
                             {
                                 orderListMenu.data?.map(item => <CardItemVerifyDekstop key={item.id} {...item} />)
                             }
                         </FormOrderVerifyDekstopWrapper>
                     </Box>
-                    <Card sx={{ position: 'absolute', bottom: 0, left: 0, width: 1200, borderRadius: 3, height: 200, padding: 5 }}>
-                        <Box sx={{ marginLeft: 7 }}>
+                    <Card sx={{ 
+                        position: 'absolute', 
+                        bottom: 0, 
+                        left: 0, 
+                        boxShadow: 0,
+                        height: 200, 
+                        padding: 2 
+                        }}>
+                        <Box sx={{ marginLeft: 2 }}>
                             <Typography sx={{ fontSize: 24 }}>Total</Typography>
                             <Typography sx={{ fontWeight: 'bold', fontSize: 36 }}>{formatIDR(totalPriceOrdered)}</Typography>
                         </Box>
