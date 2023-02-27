@@ -35,6 +35,7 @@ const PrivatePasswordTab = () => {
                 {...item}
                 onEdit={() => (setValueFromTarget(item.id), formOpenTrigger())}
                 onRemove={() => removeMutate(item.id)}
+                key={item.bankNumber}
             />)}
             {!data?.isLimit && <BankAddButton onClick={() => (setValueToEmpty(), formOpenTrigger())} />}
             <BankItemForm

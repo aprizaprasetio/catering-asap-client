@@ -14,9 +14,7 @@ const fetchUserByToken = async () => {
 
 // Requesting a new token when the user logged
 const fetchToken = async user => {
-    const token = await axios.post(authPath.token, {}, {
-        params: user,
-    })
+    const token = await axios.post(authPath.token, user)
     return token.data
 }
 

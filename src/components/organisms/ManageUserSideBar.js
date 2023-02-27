@@ -1,8 +1,10 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Paper, Tabs, Tab, useMediaQuery } from '@mui/material'
+import { useStale } from 'commands/builders/hookBuilder'
 
 const ManageUserSideBar = ({ tabList }) => {
+    const [user] = useStale('user')
     const navigate = useNavigate()
     const { pathname } = useLocation()
     const isMobile = useMediaQuery('(max-width:768px)')
@@ -17,18 +19,35 @@ const ManageUserSideBar = ({ tabList }) => {
                 height: isMobile ? 'auto' : 'calc(100vh - 64px)',
             }}
         >
-            {tabList.map(item => (
-                <Tab
-                    onClick={() => navigate(item.href)}
-                    value={item.href}
-                    label={item.content}
-                    icon={<item.icon />}
-                    sx={{
-                        paddingX: 4,
-                    }}
-                    key={item.href}
-                />
-            ))}
+            {
+                (user.role === 'admin') ?
+                    tabList.map(item => (
+                        item.isAdminVisible && (
+                            <Tab
+                                onClick={() => navigate(item.href)}
+                                value={item.href}
+                                label={item.content}
+                                icon={<item.icon />}
+                                sx={{
+                                    paddingX: 4,
+                                }}
+                                key={item.href}
+                            />
+                        )
+                    )) :
+                    tabList.map(item => (
+                        <Tab
+                            onClick={() => navigate(item.href)}
+                            value={item.href}
+                            label={item.content}
+                            icon={<item.icon />}
+                            sx={{
+                                paddingX: 4,
+                            }}
+                            key={item.href}
+                        />
+                    ))
+            }
         </Tabs>
     )
 }

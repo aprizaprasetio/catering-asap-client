@@ -9,7 +9,6 @@ import { logout } from 'commands/application/authCommand'
 import useCartStore from 'factory/store/useCartStore'
 
 const useLogin = () => {
-    const setQuantity = useCartStore(state => state.setQuantity)
     // Initiate mutation for post request
     const mutation = useMutation({
         mutationKey: ['user'],

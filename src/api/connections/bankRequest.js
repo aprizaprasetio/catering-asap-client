@@ -7,14 +7,17 @@ const fetchBankByToken = async () => {
 }
 
 const fetchBankAdd = async bank => {
-    const bankRes = await axios.post('BankAccounts', bank)
+    const bankRes = await axios.post('BankAccounts', {
+        token: axios.defaults.headers.Authorization,
+        ...bank,
+    })
     return bankRes.data
 }
 
 const fetchBankEdit = async bank => {
-    const { id, ...bankBody } = bank
-    const bankRes = await axios.put('BankAccounts', bankBody, {
-        params: { id },
+    const bankRes = await axios.put('BankAccounts', {
+        token: axios.defaults.headers.Authorization,
+        ...bank,
     })
     return bankRes.data
 }
