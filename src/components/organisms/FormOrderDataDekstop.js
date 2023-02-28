@@ -63,8 +63,8 @@ const FormOrderDataDekstop = ({ id, name, orderTime, mealDate, address, bankName
                     <Card sx={{ paddingX: 3, borderRadius: 3, }}>
                         <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Box>
-                                <Typography>{bankName}</Typography>
-                                <Typography sx={{ fontWeight: 'bold', fontSize: 24 }}>{name}</Typography>
+                                <Typography sx={{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: 16}}>{bankName}</Typography>
+                                <Typography sx={{ fontWeight: 'bold', fontSize: 24, fontFamily: 'monospace' }}>{name}</Typography>
                                 <Typography sx={{ backgroundColor: grey[100], borderRadius: 3, paddingX: 1 }} variant='subtitle1' color='GrayText'>{bankNumber}</Typography>
                             </Box>
                             <CreditCard sx={{ fontSize: 100 }} />

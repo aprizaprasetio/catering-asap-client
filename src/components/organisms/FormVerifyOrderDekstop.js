@@ -34,7 +34,7 @@ const FormVerifyOrderDekstop = ({ result, totalPriceOrdered }) => {
                     <Box sx={{ 
                         marginTop: 1, 
                         overflow: 'auto', 
-                        height: 590
+                        height: 600
                         }}>
                         <FormOrderVerifyDekstopWrapper>
                             {
@@ -50,7 +50,7 @@ const FormVerifyOrderDekstop = ({ result, totalPriceOrdered }) => {
                         height: 200, 
                         padding: 2 
                         }}>
-                        <Box sx={{ marginLeft: 2 }}>
+                        <Box sx={{ marginLeft: 2, marginTop: 4 }}>
                             <Typography sx={{ fontSize: 24 }}>Total</Typography>
                             <Typography sx={{ fontWeight: 'bold', fontSize: 36 }}>{formatIDR(totalPriceOrdered)}</Typography>
                         </Box>
