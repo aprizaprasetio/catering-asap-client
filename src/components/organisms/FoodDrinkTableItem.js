@@ -12,8 +12,10 @@ import { useTrigger } from 'commands/builders/commonBuilder'
 import ReactListItem from 'components/molecules/ReactListItem'
 import FoodDrinkTableCell from 'components/molecules/FoodDrinkTableCell'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import { UseFoodDrinkDelete, useFoodDrinkDetail } from 'api/hooks/catalogAdminHook'
 
 const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url }) => {
+
     const nilai = {
         like: 99,
         ok: 99,
@@ -38,7 +40,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
             .string()
             .required(),
     })
-
+    const { mutate: deleteHandler } = UseFoodDrinkDelete()
     const formikConfig = useFormik({
         initialValues: {
             image_Url: image_Url,
@@ -52,7 +54,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
         onSubmit: () => { },
     })
 
-    const image_UrlConfig = {
+    const imageUrlConfig = {
         name: 'image_Url',
         label: 'foto Profile',
         value: formikConfig.values.image_Url,
@@ -103,7 +105,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
 
                     </IconButton>
                 </TableCell>
-                <TableCell width={1} sx={{ textAlign: 'center' }} component='th'>1</TableCell>
+                <TableCell width={1} sx={{ textAlign: 'center' }} component='th'>{id}</TableCell>
                 <TableCell width={1} sx={{ textAlign: 'center' }} component='th'><Avatar
                     alt="Remy Sharp" variant='square' src="/static/images/avatar/1.jpg" />
                 </TableCell>
@@ -171,7 +173,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
                             <CheckCircleIcon /> : <Edit />
                         }
                     </IconButton>
-                    <IconButton color='error'>
+                    <IconButton onClick={() => deleteHandler(id)} color='error'>
                         <Delete />
                     </IconButton>
                     <IconButton size='small' sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
