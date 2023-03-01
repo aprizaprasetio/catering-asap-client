@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
-import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
-import { fetchFoodDrinkMenuDetail } from 'api/connections/catalogUserRequest'
-import { useParams } from 'react-router-dom'
+import { useQuery, useInfiniteQuery, useMutation } from '@tanstack/react-query'
+import { fetchFoodDrinkMenuDetail, fetchPost } from 'api/connections/catalogUserRequest'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
+import { fetchFoodDrinkCreate } from 'api/connections/catalogAdminRequest'
 
 const useFoodDrinkDetail = () => {
     const { menuId } = useParams()
@@ -14,6 +16,19 @@ const useFoodDrinkDetail = () => {
 
     return foodDetail
 }
+
+const UseFoodDrinkCreate = () => {
+    const { refetch } = useFoodDrinkList2()
+
+    const mutation = useMutation({
+        mutationFn: fetchFoodDrinkCreate,
+        onSuccess: refetch,
+    })
+
+    return mutation
+}
+
 export {
     useFoodDrinkDetail,
+    UseFoodDrinkCreate,
 }

@@ -1,29 +1,42 @@
-import { Card, Typography, TextField, List, Button, Box } from '@mui/material'
+import { Typography, TextField, Button, Box } from '@mui/material'
 import React from 'react'
-import { Formik, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { number } from 'prop-types'
+import { UseFoodDrinkCreate } from 'api/hooks/catalogAdminHook'
 
+// limitasi karakter
+// const coba = () =>{
+//     const [num, setNum] = React.useState();
+//     const limitChar = 12;
+//     const handleChange = (e) => {
+//         if (e.target.value.toString().length <= limitChar) {
+//             setNum(e.target.value);
+//         }
+// }
 
 const yupConfig = yup.object({
     name: yup
-        .string()
+        .string('Masukan alphabet')
         .required('Harus Diisi'),
     price: yup
-        .number()
-        .required('Harus Diisi'),
+        .number('Masukan Angka')
+        .required('Harus Diisi')
+        .positive('Masukan Angka Postive')
+        .integer(),
     minOrder: yup
         .number()
-        .required('Harus Diisi'),
+        .required('Harus Diisi')
+        .positive('Masukan Angka Postive')
+        .max(99, 'Maximal Min order 99')
+        .integer(),
     description: yup
         .string()
         .required('Harus Diisi')
 })
-const AdminFoodDrinkFormPopup = (name, price, minOrder, description, image_Url) => {
-
+const AdminFoodDrinkFormPopup = () => {
+    const { mutate, isLoading, } = UseFoodDrinkCreate()
     const formikConfig = useFormik({
         initialValues: {
-            image_Url: '',
             name: '',
             price: '',
             minOrder: '',
@@ -31,47 +44,44 @@ const AdminFoodDrinkFormPopup = (name, price, minOrder, description, image_Url) 
         },
         validationSchema: yupConfig,
         validateOnChange: false,
-        onSubmit: () => { }
+        onSubmit: () => mutate(formikConfig.values),
     })
-    const image_UrlConfig = {
-        name: 'image_Url',
-        label: 'foto Profile',
-        value: formikConfig.values.image_Url,
-        onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.image_Url,
-    }
 
     const nameConfig = {
-        name: name,
-        label: 'Makanan & Minuman',
+        name: 'name',
+        label: 'Name',
         value: formikConfig.values.name,
         onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.email
-    }
-    const priceConfig = {
-        name: price,
-        label: 'Harga',
-        value: formikConfig.values.price,
-        onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.price
-    }
-    const minOrderConfig = {
-        name: minOrder,
-        label: 'Min. Pemesanan',
-        value: formikConfig.values.minOrder,
-        onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.minOrder,
-    }
-    const descriptionConfig = {
-        name: description,
-        label: 'Deskripsi',
-        value: formikConfig.values.description,
-        onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.description,
+        helperText: formikConfig.touched.name && formikConfig.errors.name,
     }
 
+    const priceConfig = {
+        name: 'price',
+        label: 'Price',
+        value: formikConfig.values.price,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.touched.price && formikConfig.errors.price
+    }
+
+    const minOrderConfig = {
+        name: 'minOrder',
+        label: 'MinOrder',
+        value: formikConfig.values.minOrder,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.touched.minOrder && formikConfig.errors.minOrder,
+    }
+
+    const descriptionConfig = {
+        name: 'description',
+        label: 'Description',
+        value: formikConfig.values.description,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.touched.description && formikConfig.errors.description,
+    }
+    // console.log(formikConfig)
+
     return (
-        <Box sx={{
+        <Box component="form" onSubmit={formikConfig.handleSubmit} sx={{
             alignItems: 'center',
             justifyContent: 'center',
         }}>
@@ -79,30 +89,50 @@ const AdminFoodDrinkFormPopup = (name, price, minOrder, description, image_Url) 
                 display: 'grid',
                 gap: 1,
 
-
             }}>
                 <Typography fontWeight='bold' fontSize={20} >Tambah Menu</Typography>
                 <TextField id="outlined-basic" margin='dense' label="Nama Makan/Minuman" variant="outlined"
-                    config={nameConfig}
+                    FormHelperTextProps={{
+                        sx: {
+                            color: 'error.main',
+                        },
+                    }}
+                    {...nameConfig}
                 />
 
                 <TextField id="outlined-basic" type='number' label="Harga"
+                    FormHelperTextProps={{
+                        sx: {
+                            color: 'error.main',
+                        },
+                    }}
                     InputProps={{ inputProps: { min: 1 } }} variant="outlined"
-                    config={priceConfig} />
+                    {...priceConfig}
+                />
 
                 <TextField id="outlined-basic" type='number' label="Min.Order"
-                    InputProps={{ inputProps: { min: 1 } }} variant="outlined"
-                    config={minOrderConfig} />
+                    FormHelperTextProps={{
+                        sx: {
+                            color: 'error.main',
+                        },
+                    }}
+                    InputProps={{ inputProps: { min: 1 }, maxLength: 2 }} variant="outlined"
+                    {...minOrderConfig}
+                />
 
                 <TextField id="outlined-basic" label="Deskripsi" variant="outlined" multiline rows={4}
-                    config={descriptionConfig} />
+                    FormHelperTextProps={{
+                        sx: {
+                            color: 'error.main',
+                        },
+                    }}
+                    {...descriptionConfig} />
             </Box>
             <Button sx={{
                 borderRadius: 20,
                 justifyContent: 'center',
                 marginY: 2,
-            }} variant='contained' fullWidth size="medium">Medium</Button>
-
+            }} variant='contained' type="submit" fullWidth size="medium">Unggah</Button>
         </Box>
     )
 }

@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import { useStale } from 'commands/builders/hookBuilder'
-import { fetchFoodDrinkList, fetchFoodDrinkList2 } from 'api/connections/catalogUserRequest'
+import { fetchFoodDrinkList, fetchFoodDrinkList2, fetchFoodDrinkMenuDetail } from 'api/connections/catalogUserRequest'
+import { useParams } from 'react-router-dom'
 
 // This is the old hook, not compatible and do not use this hook
 const useFoodDrinkList = () => {
@@ -35,6 +36,8 @@ const useFoodDrinkList2 = () => {
 
     return foodDrinkQuery
 }
+
+
 
 export {
     useFoodDrinkList,
