@@ -13,8 +13,6 @@ import ReactListItem from 'components/molecules/ReactListItem'
 import FoodDrinkTableCell from 'components/molecules/FoodDrinkTableCell'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
-
-
 const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url }) => {
     const nilai = {
         like: 99,
@@ -107,7 +105,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
                 </TableCell>
                 <TableCell width={1} sx={{ textAlign: 'center' }} component='th'>1</TableCell>
                 <TableCell width={1} sx={{ textAlign: 'center' }} component='th'><Avatar
-                    alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    alt="Remy Sharp" variant='square' src="/static/images/avatar/1.jpg" />
                 </TableCell>
                 <FoodDrinkTableCell open={isEditMode} config={nameConfig} />
                 <FoodDrinkTableCell open={isEditMode} config={priceConfig} />
