@@ -7,12 +7,12 @@ function FoodDrinkTableHeader() {
         <TableHead>
             <TableRow>
                 <TableCell />
-                <TableCell>No</TableCell>
-                <TableCell align='center'>Foto Profile</TableCell>
+                <TableCell>Id</TableCell>
+                <TableCell width={100} align='center'>Foto</TableCell>
                 <TableCell align="center">Nama</TableCell>
                 <TableCell align="center">Harga</TableCell>
-                <TableCell align="center">Min. Pemesanan</TableCell>
-                <TableCell width={200} align='right' sx={{ textAlign: 'center' }} >Ulasan</TableCell>
+                <TableCell align="center">Min.Pemesanan</TableCell>
+                <TableCell width={2} align='right' sx={{ textAlign: 'center' }} >Ulasan</TableCell>
                 <TableCell align="right" sx={{ marginRight: 10 }}>
                     <Button
                         size="small"

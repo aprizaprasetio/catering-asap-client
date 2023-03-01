@@ -106,7 +106,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
                     </IconButton>
                 </TableCell>
                 <TableCell width={1} sx={{ textAlign: 'center' }} component='th'>{id}</TableCell>
-                <TableCell width={1} sx={{ textAlign: 'center' }} component='th'><Avatar
+                <TableCell width={20} sx={{ justifyContent: 'center' }} align='center' component='th'><Avatar
                     alt="Remy Sharp" variant='square' src="/static/images/avatar/1.jpg" />
                 </TableCell>
                 <FoodDrinkTableCell open={isEditMode} config={nameConfig} />
