@@ -29,7 +29,7 @@ const fetchFoodDrinkList2 = async ({ pageParam = 1 }) => {
 }
 
 const fetchFoodDrinkMenuDetail = async id => {
-    const dataFoodDrinkMenu = await axios.get('FoodDrinkMenus/detail', {
+    const dataFoodDrinkMenu = await axios.get(`FoodDrinkMenus/${id}/detail`, {
         params: { id },
     })
     // console.table(dataFoodDrinkMenu.data)
