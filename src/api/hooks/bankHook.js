@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { client } from 'api/initiates/queryInitiate'
-import { fetchBankByToken, fetchBankAdd, fetchBankEdit, fetchBankRemove } from 'api/connections/bankRequest'
+import { fetchBankByToken, fetchBankAdd, fetchBankEdit, fetchBankRemove, fetchBankChoose } from 'api/connections/bankRequest'
 
 const useBankList = () => {
     const banks = useQuery({
@@ -36,6 +36,14 @@ const useBankEdit = () => {
     return bankMutation
 }
 
+const useBankChoose = () => {
+    const bankMutation = useMutation({
+        mutationFn: fetchBankChoose,
+    })
+
+    return bankMutation
+}
+
 const useBankRemove = () => {
     const bankMutation = useMutation({
         mutationFn: fetchBankRemove,
@@ -51,5 +59,6 @@ export {
     useBankList,
     useBankAdd,
     useBankEdit,
+    useBankChoose,
     useBankRemove,
 }

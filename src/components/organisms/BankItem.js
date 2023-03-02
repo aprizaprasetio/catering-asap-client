@@ -56,17 +56,19 @@ const BankItem = ({ bankName, bankNumber, name, onEdit, onRemove }) => {
                     fontSize: 100,
                 }} />
             </CardContent >
-            <CardActions sx={{
-                display: 'flex',
-                justifyContent: 'end',
-            }}>
-                <IconButton color="primary" onClick={onEdit}>
-                    <Edit />
-                </IconButton>
-                <IconButton color="error" onClick={onRemove}>
-                    <Delete />
-                </IconButton>
-            </CardActions>
+            {onEdit && (
+                <CardActions sx={{
+                    display: 'flex',
+                    justifyContent: 'end',
+                }}>
+                    <IconButton color="primary" onClick={onEdit}>
+                        <Edit />
+                    </IconButton>
+                    <IconButton color="error" onClick={onRemove}>
+                        <Delete />
+                    </IconButton>
+                </CardActions>
+            )}
         </Card>
     )
 }

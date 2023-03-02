@@ -3,11 +3,17 @@ import { Typography, CardActions, Checkbox, Button, ButtonGroup, IconButton } fr
 import { Add, Remove, Delete } from '@mui/icons-material'
 import { useCheckboxCart, useOneQuantityCart, useRemoveCartSingle } from 'api/hooks/cartHook'
 import CartItemFooterProps from 'proptypes/molecules/CartItemFooterProps'
+import useSound from 'use-sound'
+import Upward from 'sfx/03 Primary System Sounds/navigation_forward-selection-minimal.ogg'
+import Backward from 'sfx/03 Primary System Sounds/navigation_backward-selection-minimal.ogg'
 
 const CartItemFooter = ({ cartId, minOrder, quantity, quantityClick, removeClick, isChecked, checkboxHandler }) => {
     const checkboxTrigger = useCheckboxCart(cartId, checkboxHandler)
     const [increase, decrease] = useOneQuantityCart(cartId, quantityClick)
     const remove = useRemoveCartSingle(cartId, removeClick)
+
+    const [playUpward] = useSound(Upward)
+    const [playBackward] = useSound(Backward)
 
     return (
         <CardActions sx={{
@@ -29,7 +35,7 @@ const CartItemFooter = ({ cartId, minOrder, quantity, quantityClick, removeClick
                     bottom: 0,
                 }}
             >
-                <Button onClick={increase}>
+                <Button onClick={() => (playUpward(), increase())}>
                     <Add />
                 </Button>
                 <Button variant="text" disabled>
@@ -40,7 +46,7 @@ const CartItemFooter = ({ cartId, minOrder, quantity, quantityClick, removeClick
                     </Typography>
                 </Button>
                 <Button
-                    onClick={decrease}
+                    onClick={() => (playBackward(), decrease())}
                     disabled={quantity === minOrder}
                 >
                     <Remove />

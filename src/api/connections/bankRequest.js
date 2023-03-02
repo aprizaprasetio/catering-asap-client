@@ -22,6 +22,12 @@ const fetchBankEdit = async bank => {
     return bankRes.data
 }
 
+const fetchBankChoose = async id => {
+    await axios.put('BankAccounts/Choose', {}, {
+        params: { id },
+    })
+}
+
 const fetchBankRemove = async id => {
     await axios.delete('BankAccounts', {
         params: { id },
@@ -32,5 +38,6 @@ export {
     fetchBankByToken,
     fetchBankAdd,
     fetchBankEdit,
+    fetchBankChoose,
     fetchBankRemove,
 }
