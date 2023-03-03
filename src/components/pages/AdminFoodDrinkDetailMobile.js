@@ -15,6 +15,8 @@ import EditIcon from '@mui/icons-material/Edit'
 import { useFoodDrinkDetail } from 'api/hooks/catalogAdminHook'
 import { useEffect } from 'react'
 import LoadingFull from 'components/atoms/LoadingFull'
+import { useNavigate } from 'react-router-dom'
+import { UseFoodDrinkDelete } from 'api/hooks/catalogAdminHook'
 
 const AdminFoodDrinkDetailMobile = () => {
     const { data, isFetchedAfterMount } = useFoodDrinkDetail()
@@ -25,6 +27,8 @@ const AdminFoodDrinkDetailMobile = () => {
         ok: 99,
         dislike: 99,
     }
+    const navigate = useNavigate()
+    const { mutate: deleteHandler } = UseFoodDrinkDelete()
 
     return (
         <>
@@ -128,7 +132,7 @@ const AdminFoodDrinkDetailMobile = () => {
                         }}>
                         {isEditMode ? 'Simpan' : 'Ubah'}
                     </Button>
-                    <Button sx={{
+                    <Button onClick={() => navigate('/admin/menus')} sx={{
                         borderRadius: 2,
                         // border: 2,
                         // borderColor: grey[300],
