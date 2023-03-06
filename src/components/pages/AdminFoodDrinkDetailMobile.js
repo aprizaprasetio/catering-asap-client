@@ -132,7 +132,7 @@ const AdminFoodDrinkDetailMobile = () => {
                         }}>
                         {isEditMode ? 'Simpan' : 'Ubah'}
                     </Button>
-                    <Button onClick={() => navigate('/admin/menus')} sx={{
+                    <Button onClick={() => deleteHandler(data.id, { onSuccess: () => navigate('/admin/menus') })} sx={{
                         borderRadius: 2,
                         // border: 2,
                         // borderColor: grey[300],
