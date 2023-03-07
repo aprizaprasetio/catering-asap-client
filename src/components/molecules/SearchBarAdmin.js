@@ -43,11 +43,11 @@ const SearchBarAdmin = () => {
         position: 'relative',
         // paddingRight: 40,
         width: {
-            lg: '80%',
+            lg: '83%',
             xs: '95%'
         },
         marginX: {
-            xs: 0.5,
+            // xs: 0.5,
             // lg: 20,
         },
         alignItems: 'center',

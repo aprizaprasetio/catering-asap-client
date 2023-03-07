@@ -10,7 +10,7 @@ const AdminFoodDrinkAddButton = () => {
             sx={{
                 display: 'flex',
                 marginLeft: {
-                    lg: '25%',
+                    lg: '20%',
                     sx: 'auto'
                 }
             }}
