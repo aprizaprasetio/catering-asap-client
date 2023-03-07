@@ -9,6 +9,8 @@ const fetchFoodDrinkCreate = async foodDrink => {
         min_Order: minOrder,
         image_Url: '',
         ...foodDrinkData,
+    }, {
+        headers: axios.defaults.headers.Authorization,
     })
     return foodDrinkList.data.data
 }
@@ -24,7 +26,19 @@ const fetchFoodDrinkDelete = async foodDrinkId => {
     })
 }
 
+const fetchFoodDrinkUpdate = async edited => {
+    const { id, minOrder, imageUrl, ...data } = edited
+    await axios.put(`FoodDrinkMenus/${id}/edit`, {
+        ...edited,
+        min_Order: minOrder,
+        image_Url: imageUrl,
+    }, {
+        params: { id },
+    })
+}
+
 export {
     fetchFoodDrinkCreate,
     fetchFoodDrinkDelete,
+    fetchFoodDrinkUpdate,
 }

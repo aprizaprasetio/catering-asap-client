@@ -12,7 +12,8 @@ import { useTrigger } from 'commands/builders/commonBuilder'
 import ReactListItem from 'components/molecules/ReactListItem'
 import FoodDrinkTableCell from 'components/molecules/FoodDrinkTableCell'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { UseFoodDrinkDelete, useFoodDrinkDetail } from 'api/hooks/catalogAdminHook'
+import { UseFoodDrinkDelete, useFoodDrinkDetail, UseFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
+import { isError } from '@tanstack/react-query'
 
 const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url }) => {
 
@@ -41,9 +42,10 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
             .required(),
     })
     const { mutate: deleteHandler } = UseFoodDrinkDelete()
+    const { mutate: updateHandler } = UseFoodDrinkUpdate()
     const formikConfig = useFormik({
         initialValues: {
-            image_Url: image_Url,
+            imageUrl: image_Url,
             name: name,
             price: price,
             minOrder: minOrder,
@@ -51,51 +53,50 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
         },
         validationSchema: yupConfig,
         validateOnChange: false,
-        onSubmit: () => { },
     })
 
-    const imageUrlConfig = {
-        name: 'image_Url',
-        label: 'foto Profile',
-        value: formikConfig.values.image_Url,
-        onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.image_Url,
-    }
+    // const imageUrlConfig = {
+    //     name: 'image_Url',
+    //     label: 'foto Profile',
+    //     value: formikConfig.values.image_Url,
+    //     onChange: formikConfig.handleChange,
+    //     isError: formikConfig.errors.image_Url,
+    // }
 
     const nameConfig = {
         name: 'name',
         label: 'Makanan & Minuman',
         value: formikConfig.values.name,
         onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.email
+        helperText: formikConfig.errors.email
     }
     const priceConfig = {
         name: 'price',
         label: 'Harga',
         value: formikConfig.values.price,
         onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.price
+        helperText: formikConfig.errors.price
     }
     const minOrderConfig = {
         name: 'minorder',
         label: 'Min. Pemesanan',
         value: formikConfig.values.minOrder,
         onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.minOrder,
+        helperText: formikConfig.errors.minOrder,
     }
     const descriptionConfig = {
         name: 'description',
         label: 'Deskripsi',
         value: formikConfig.values.description,
         onChange: formikConfig.handleChange,
-        isError: formikConfig.errors.description,
+        helperText: formikConfig.errors.description,
     }
 
     const [open, setOpen] = React.useState(false)
 
     return (
         <>
-            <TableRow>
+            <TableRow >
                 <TableCell width={1} sx={{ '& > *': { borderBottom: 'unset' } }}>
                     <IconButton
                         aria-label='expand row'
@@ -168,11 +169,21 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
                     </List>
                 </TableCell>
                 <TableCell component="th" scope="row" align="right">
-                    <IconButton onClick={isEditModeTrigger}>
-                        {isEditMode ?
-                            <CheckCircleIcon /> : <Edit />
-                        }
-                    </IconButton>
+                    {isEditMode ? (
+                        <IconButton onClick={() => {
+                            updateHandler(
+                                { id, ...formikConfig.values },
+                                { onSuccess: isEditModeTrigger },
+                            )
+                        }}>
+                            <CheckCircleIcon />
+                        </IconButton>
+
+                    ) : (
+                        <IconButton onClick={isEditModeTrigger}>
+                            <Edit />
+                        </IconButton>
+                    )}
                     <IconButton onClick={() => deleteHandler(id)} color='error'>
                         <Delete />
                     </IconButton>
