@@ -42,10 +42,13 @@ const SearchBarAdmin = () => {
         display: 'flex',
         position: 'relative',
         // paddingRight: 40,
-
+        width: {
+            lg: '80%',
+            xs: '95%'
+        },
         marginX: {
             xs: 0.5,
-            lg: 20,
+            // lg: 20,
         },
         alignItems: 'center',
         backgroundColor: 'white',
@@ -73,7 +76,7 @@ const SearchBarAdmin = () => {
             md: 1,
         },
         width: '100%',
-        paddingLeft: 1,
+        // paddingLeft: 1,
         fontSize: {
             xs: 15,
             md: 18,

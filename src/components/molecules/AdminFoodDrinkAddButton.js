@@ -5,13 +5,13 @@ import { blue, grey } from '@mui/material/colors';
 
 const AdminFoodDrinkAddButton = () => {
     return (
-
         <Button
             // onClick={console.log(alert('hai'))}
             sx={{
                 display: 'flex',
                 marginLeft: {
-                    lg: 27,
+                    lg: '25%',
+                    sx: 'auto'
                 }
             }}
             variant="contained" endIcon={< AddIcon />}>
