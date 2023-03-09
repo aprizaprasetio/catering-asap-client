@@ -13,26 +13,106 @@ import CenterLayout from 'components/templates/CenterLayout'
 import { useTrigger } from 'commands/builders/commonBuilder'
 import EditIcon from '@mui/icons-material/Edit'
 import { useFoodDrinkDetail } from 'api/hooks/catalogAdminHook'
-import { useEffect } from 'react'
-import LoadingFull from 'components/atoms/LoadingFull'
 import { useNavigate } from 'react-router-dom'
-import { UseFoodDrinkDelete } from 'api/hooks/catalogAdminHook'
+import { UseFoodDrinkDelete, UseFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import TextBoxFormMobileFoodDrink from 'components/molecules/TextBoxFormMobileFoodDrink'
+import LoadingFull from 'components/atoms/LoadingFull'
+import TextBoxFormMobileFoodDrinkDesk from 'components/molecules/TextBoxFormMobileFoodDrinkDesk'
+
+
 
 const AdminFoodDrinkDetailMobile = () => {
     const { data, isFetchedAfterMount } = useFoodDrinkDetail()
     const [isEditMode, isEditModeTrigger] = useTrigger()
+    const { mutate: updateHandler } = UseFoodDrinkUpdate()
+    const navigate = useNavigate()
+    const { mutate: deleteHandler } = UseFoodDrinkDelete()
+
 
     const nilai = {
         like: 99,
         ok: 99,
         dislike: 99,
     }
-    const navigate = useNavigate()
-    const { mutate: deleteHandler } = UseFoodDrinkDelete()
+
+    const yupConfig = yup.object({
+        image_Url: yup
+            .string()
+            .required(),
+        name: yup
+            .string()
+            .required(),
+        price: yup
+            .number()
+            .required(),
+        minOrder: yup
+            .number()
+            .required(),
+        description: yup
+            .string()
+            .required(),
+    })
+
+    const formikConfig = useFormik({
+        initialValues: {
+            // imageUrl: data,
+            id: '',
+            name: '',
+            price: '',
+            minOrder: '',
+            description: '',
+        },
+        validationSchema: yupConfig,
+        validateOnChange: false,
+    })
+
+    React.useEffect(() => {
+        if (!isFetchedAfterMount) return
+
+        formikConfig.setValues({
+            id: data.id,
+            name: data.name,
+            price: data.price,
+            minOrder: data.min_Order,
+            description: data.description,
+        })
+    }, [isFetchedAfterMount])
+
+    const nameConfig = {
+        name: 'name',
+        label: 'Makanan & Minuman',
+        value: formikConfig.values.name,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.errors.email
+    }
+    const priceConfig = {
+        name: 'price',
+        label: 'Harga',
+        value: formikConfig.values.price,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.errors.price
+    }
+    const minOrderConfig = {
+        name: 'minorder',
+        label: 'Min. Pemesanan',
+        value: formikConfig.values.minOrder,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.errors.minOrder,
+    }
+    const descriptionConfig = {
+        name: 'description',
+        label: 'Deskripsi',
+        value: formikConfig.values.description,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.errors.description,
+    }
+
+    if (!isFetchedAfterMount) return <LoadingFull />
 
     return (
         <>
-
             <DynamicNavbar>{data?.name}</DynamicNavbar>
             <CenterLayout>
                 <Box
@@ -87,51 +167,69 @@ const AdminFoodDrinkDetailMobile = () => {
                             )
                     }
 
-                    <CardContent>
-                        {
-                            isEditMode ? (
-                                <TextField size='small' label='Nama Makanan' margin='dense' fullWidth />
-                            ) : (
-                                <Typography variant='subtitle1' fontWeight={500}>
-                                    {data?.name}
-                                </Typography>
-                            )
-                        }
-                        {
+                    <List component={Stack} margin={0} direction='column'>
+                        <TextBoxFormMobileFoodDrink
+                            open={isEditMode} config={nameConfig} />
+                        <TextBoxFormMobileFoodDrink
+                            open={isEditMode} config={priceConfig} />
+                        <TextBoxFormMobileFoodDrink
+                            open={isEditMode} config={minOrderConfig} />
+
+                        <TextBoxFormMobileFoodDrinkDesk
+                            open={isEditMode} config={descriptionConfig} />
+
+                        {/* {
                             isEditMode ?
-                                (<TextField size='small' label='Harga' margin='dense' fullWidth />) : (
-                                    <Typography variant='subtitle1' fontWeight={1}>
-                                        {data?.price}
-                                    </Typography>
-                                )
-                        }
-                        {
-                            isEditMode ?
-                                (<TextField size='small' label='Deskripsi' margin='dense' multiline rows={5} fullWidth />) : (
+                                (<TextField name='description' size='small'
+                                    label='Deskripsi' margin='dense' multiline rows={5}
+                                    fullWidth config={descriptionConfig}
+                                    autoComplete={descriptionConfig} />
+                                ) : (
                                     <Typography variant="body2" color="text.secondary">
                                         {data?.description}
                                     </Typography>
                                 )
-                        }
+                        } */}
 
                         <List component={Stack} direction="row" width={'50%'} >
                             <MoodRounded content={nilai.like} />
                             <SentimentNeutralRounded content={nilai.ok} />
                             <MoodBadRounded content={nilai.dislike} />
                         </List>
-                    </CardContent>
+                    </List>
                 </Box>
                 <List component={Stack} direction='column' gap={1} >
-                    <Button
-                        onClick={isEditModeTrigger}
-                        variant='contained'
-                        sx={{
-                            borderRadius: 2,
-                            backgroundColor: blue[300],
-                            color: 'succes'
-                        }}>
-                        {isEditMode ? 'Simpan' : 'Ubah'}
-                    </Button>
+
+                    {isEditMode ? (
+                        <Button
+                            onClick={() => {
+                                updateHandler(
+                                    { ...formikConfig.values },
+                                    { onSuccess: isEditModeTrigger },
+                                )
+                            }}
+                            // onClick={isEditModeTrigger}
+                            variant='contained'
+                            sx={{
+                                borderRadius: 2,
+                                backgroundColor: blue[300],
+                            }}>
+                            Simpan
+                        </Button>
+                    ) : (
+                        <Button
+                            onClick={isEditModeTrigger}
+                            variant='contained'
+                            sx={{
+                                borderRadius: 2,
+                                backgroundColor: blue[300],
+                            }}>
+                            Ubah
+                        </Button>
+                    )
+
+                    }
+
                     <Button onClick={() => deleteHandler(data.id, { onSuccess: () => navigate('/admin/menus') })} sx={{
                         borderRadius: 2,
                         // border: 2,
