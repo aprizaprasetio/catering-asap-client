@@ -1,6 +1,7 @@
 import React, { Children } from 'react'
 import { Box, Icon, Typography } from '@mui/material'
 import { blue, grey } from '@mui/material/colors'
+import useFoodDrinkStore from 'factory/store/UseFoodDrinkStore'
 
 const FoodDrinkMenuDynamic = ({ icon }) => {
     const box = {
@@ -15,6 +16,7 @@ const FoodDrinkMenuDynamic = ({ icon }) => {
         // bottom: 22,
 
     }
+    const totalFoodDrink = useFoodDrinkStore(state => state.totalFoodDrink)
 
     return (
         <Box sx={{
@@ -47,7 +49,7 @@ const FoodDrinkMenuDynamic = ({ icon }) => {
                 marginX: 2,
             }}>
                 {icon}
-                60
+                {totalFoodDrink}
             </Typography>
             {/* </Box> */}
         </Box>
