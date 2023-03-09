@@ -13,16 +13,19 @@ import ReactListItem from 'components/molecules/ReactListItem'
 import FoodDrinkTableCell from 'components/molecules/FoodDrinkTableCell'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { UseFoodDrinkDelete, useFoodDrinkDetail, UseFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
-import { isError } from '@tanstack/react-query'
+
+
 
 const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url }) => {
+    const [isEditMode, isEditModeTrigger] = useTrigger()
+    const { mutate: deleteHandler } = UseFoodDrinkDelete()
+    const { mutate: updateHandler } = UseFoodDrinkUpdate()
 
     const nilai = {
         like: 99,
         ok: 99,
         dislike: 99,
     }
-    const [isEditMode, isEditModeTrigger] = useTrigger()
 
     const yupConfig = yup.object({
         image_Url: yup
@@ -41,8 +44,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
             .string()
             .required(),
     })
-    const { mutate: deleteHandler } = UseFoodDrinkDelete()
-    const { mutate: updateHandler } = UseFoodDrinkUpdate()
+
     const formikConfig = useFormik({
         initialValues: {
             imageUrl: image_Url,
@@ -161,7 +163,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
                             <TextField sx={{ width: 'fit-content' }} size='small' label='Minimum Order' value={MinimumOrder} /> : <Typography>{MinimumOrder}</Typography>
                     }
                 </TableCell> */}
-                <TableCell align='center' component="th" scope="row">
+                <TableCell align='center' component="th" scope="row" size='small' sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
                     <List component={Stack} direction="row" disablePadding>
                         <ReactListItem icon={<MoodRounded />} content={nilai.like} />
                         <ReactListItem icon={<SentimentNeutralRounded />} content={nilai.ok} />
