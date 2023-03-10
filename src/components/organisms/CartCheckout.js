@@ -1,26 +1,18 @@
 import React from 'react'
-import { Box, Paper, Select, MenuItem, List, ListItem, Divider, Button, Card, CardContent, CardActions, Typography, Stack, TextField, ToggleButton, ToggleButtonGroup }
+import { Box, Divider, Button, Card, CardContent, CardActions, Typography, Stack, TextField }
     from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import BankItem from 'components/organisms/BankItem'
 import useCartStore from 'factory/store/useCartStore'
 import { formatIDR } from 'commands/application/priceCommand'
 import { storageBuilder, useInput } from 'commands/builders/commonBuilder'
+import CartCheckoutBanks from 'components/organisms/CartCheckoutBanks'
 import { useBankList } from 'api/hooks/bankHook'
-import CartCheckoutBanks from './CartCheckoutBanks'
 
 const CartCheckout = () => {
     const navigate = useNavigate()
 
-    const banks = useBankList()
-    const cartTotal = useCartStore(state => state.checkedTotal)
+    const { isCartExist, checkedTotal: cartTotal, isNoCheck } = useCartStore()
     const addressLocal = storageBuilder('USER_ADDRESS')
-    // const [bank, bankHandler] = useInput()
-    const [bank, setBank] = React.useState(null)
-
-    const bankHandler = (Event, newValue) => {
-        setBank(newValue)
-    }
 
     const [address, addressHandler] = useInput(addressLocal.get())
 
@@ -86,6 +78,7 @@ const CartCheckout = () => {
                 <Button
                     onClick={() => navigate('/cart/checkout')}
                     variant="contained"
+                    disabled={!isCartExist() || isNoCheck()}
                     fullWidth
                     disableElevation
                     sx={{

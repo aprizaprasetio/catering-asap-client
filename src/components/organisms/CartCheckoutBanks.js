@@ -1,10 +1,6 @@
 import React from 'react'
 import { Box, Typography, ToggleButton, ToggleButtonGroup } from '@mui/material'
-import useCartStore from 'factory/store/useCartStore'
-import { formatIDR } from 'commands/application/priceCommand'
-import { storageBuilder } from 'commands/builders/commonBuilder'
 import { useBankChoose, useBankList } from 'api/hooks/bankHook'
-import { client } from 'api/initiates/queryInitiate'
 
 const CartCheckoutBanks = () => {
     const banks = useBankList()
@@ -17,7 +13,7 @@ const CartCheckoutBanks = () => {
     }
 
     const getChoosenBankId = () => (
-        banks.data?.data?.find(item => item.isChoosen).id
+        banks.data?.data?.find(item => item.isChoosen)?.id
     )
 
     React.useEffect(() => banks.remove, [])

@@ -1,20 +1,18 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import { Typography, Box, TextField, Stack, Card, CardContent, CardActions, Button } from '@mui/material'
 import { DateTimePicker } from '@mui/x-date-pickers'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { useCartCheckout } from 'api/hooks/cartHook'
 import { formatIDR } from 'commands/application/priceCommand'
+import useCheckoutStore from 'factory/store/useCheckoutStore'
+import { useCartCheckout } from 'api/hooks/cartHook'
 
 const CheckoutConfirmation = () => {
-    const { data } = useCartCheckout()
-    const [date, setDate] = React.useState(moment().add(1, 'day'))
-
     const navigate = useNavigate()
-
-    const dateHandler = newValue => setDate(newValue)
+    const { data } = useCartCheckout()
+    const { mealDate, setMealDate } = useCheckoutStore()
 
     return (
         <Card sx={{
@@ -33,8 +31,8 @@ const CheckoutConfirmation = () => {
                         <DateTimePicker
                             zone
                             label="Waktu Santap"
-                            value={date}
-                            onChange={dateHandler}
+                            value={mealDate}
+                            onChange={setMealDate}
                             renderInput={params => <TextField {...params} fullWidth />}
                             minDate={moment().add(1, 'day')}
                             maxDate={moment().add(1, 'year')}
@@ -52,9 +50,15 @@ const CheckoutConfirmation = () => {
                 </Stack>
             </CardContent>
             <CardActions>
-                <Button onClick={() => navigate('/cart/payment')} variant="contained" fullWidth sx={{
-                    borderRadius: 4,
-                }}>
+                <Button
+                    onClick={() => navigate('/cart/payment')}
+                    variant="contained"
+                    disabled={!data.usedBank}
+                    fullWidth
+                    sx={{
+                        borderRadius: 4,
+                    }}
+                >
                     Konfirmasi
                 </Button>
             </CardActions>

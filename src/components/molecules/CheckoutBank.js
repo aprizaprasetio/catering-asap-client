@@ -1,9 +1,26 @@
 import React from 'react'
-import { Typography, Box, Paper } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
+import { Typography, Box, Paper, Link } from '@mui/material'
 import { useCartCheckout } from 'api/hooks/cartHook'
 
 const CheckoutBank = () => {
     const { data } = useCartCheckout()
+
+    if (!data.usedBank) return (
+        <Box>
+            <Typography variant="h3" fontSize={16} fontWeight="bold" marginBottom={1}>
+                Rekening Bank
+            </Typography>
+            <Typography fontSize={14}>
+                Belum ada rekening bank yang terdaftar!
+            </Typography>
+            <Link component={RouterLink} to="/profile/bank" underline="none" variant="text" sx={{
+                borderRadius: 4,
+            }}>
+                Daftarkan rekening bank
+            </Link>
+        </Box>
+    )
 
     return (
         <Box>

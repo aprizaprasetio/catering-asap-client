@@ -1,10 +1,13 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom'
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Typography } from '@mui/material'
 import { useCartCheckout } from 'api/hooks/cartHook'
 import { formatIDR } from 'commands/application/priceCommand'
 
 const CheckoutTable = () => {
     const { data } = useCartCheckout()
+
+    if (!data.carts) return <Navigate to="/" />
 
     return (
         <TableContainer sx={{

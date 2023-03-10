@@ -28,7 +28,22 @@ const fetchFoodDrinkList2 = async ({ pageParam = 1 }) => {
     return foodDrinkList.data.data
 }
 
+const fetchOrder = async checkoutData => {
+    const order = await axios.post('Orders', checkoutData)
+    return order.data.data
+}
+
+const fetchOrderUser = async orderId => {
+    const order = await axios.get('Orders/User', {
+        params: { orderId },
+    })
+
+    return order.data.data
+}
+
 export {
     fetchFoodDrinkList,
     fetchFoodDrinkList2,
+    fetchOrder,
+    fetchOrderUser,
 }

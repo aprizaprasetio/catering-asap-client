@@ -6,6 +6,11 @@ const fetchBankByToken = async () => {
     return res
 }
 
+const fetchUsedBankByToken = async () => {
+    const banks = await axios.get('BankAccounts/UsedBank')
+    return banks.data.data
+}
+
 const fetchBankAdd = async bank => {
     const bankRes = await axios.post('BankAccounts', {
         token: axios.defaults.headers.Authorization,
@@ -36,6 +41,7 @@ const fetchBankRemove = async id => {
 
 export {
     fetchBankByToken,
+    fetchUsedBankByToken,
     fetchBankAdd,
     fetchBankEdit,
     fetchBankChoose,

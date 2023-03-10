@@ -1,12 +1,24 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { client } from 'api/initiates/queryInitiate'
-import { fetchBankByToken, fetchBankAdd, fetchBankEdit, fetchBankRemove, fetchBankChoose } from 'api/connections/bankRequest'
+import { fetchBankByToken, fetchBankAdd, fetchBankEdit, fetchBankRemove, fetchBankChoose, fetchUsedBankByToken } from 'api/connections/bankRequest'
 
 const useBankList = () => {
     const banks = useQuery({
         queryKey: ['bankCollections'],
         queryFn: fetchBankByToken,
+    })
+
+    useEffect(() => banks.remove, [])
+
+    return banks
+}
+
+const useUsedBank = () => {
+    const banks = useQuery({
+        queryKey: ['usedBank'],
+        queryFn: fetchUsedBankByToken,
     })
 
     useEffect(() => banks.remove, [])
@@ -57,6 +69,7 @@ const useBankRemove = () => {
 
 export {
     useBankList,
+    useUsedBank,
     useBankAdd,
     useBankEdit,
     useBankChoose,
