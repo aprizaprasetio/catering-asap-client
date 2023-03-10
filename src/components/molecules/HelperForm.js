@@ -11,7 +11,6 @@ const HelperForm = ({ content, path, label }) => {
         </MediumSubtitle>
     )
 }
-
 HelperForm.propTypes = HelperFormProps
 
 export default HelperForm
