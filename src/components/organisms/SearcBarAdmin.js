@@ -46,8 +46,8 @@ const SearcBarAdmin = () => {
         <>
             <Box sx={{
                 backgroundColor: alpha('#fff', 0.5),
-                borderRadius: 9,
-                width: '80%',
+                borderRadius: 3,
+                width: '100%',
                 display: 'flex',
                 position: 'relative',
                 marginX: 1,
@@ -60,8 +60,8 @@ const SearcBarAdmin = () => {
                     sx={inputStyle}
                     onFocus={searchTrigger}
                     onChange={searchValueChange}
-                    onKeyDown={Event => {
-                        if (Event.key !== 'Enter') return
+                    onKeyDown={ e => {
+                        if (e.key !== 'Enter') return
                         searchTrigger()
                         setKeyword(searchValue)
                     }}

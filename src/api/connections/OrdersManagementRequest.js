@@ -9,44 +9,6 @@ const fetchOrderList = async id => {
     return orderList.data
 }
 
-// const fetchOrderListWaiting = async ({ pageParam = 1 }) => {
-//     const orderList = await axios.get('Orders/Waiting', {
-//         params: {
-//             PageNumber: pageParam,
-//             PageSize: 10,
-//         },
-//     })
-//     return orderList.data.data
-// }
-
-// const fetchOrderListOnProcces = async ({ pageParam = 1 }) => {
-//     const orderList = await axios.get('Orders/OnProcces', {
-//         params: {
-//             PageNumber: pageParam,
-//             PageSize: 10,
-//         },
-//     })
-//     return orderList.data.data
-// }
-// const fetchOrderListOnDelivery = async ({ pageParam = 1 }) => {
-//     const orderList = await axios.get('Orders/OnDelivery', {
-//         params: {
-//             PageNumber: pageParam,
-//             PageSize: 10,
-//         },
-//     })
-//     return orderList.data.data
-// }
-// const fetchOrderListSuccessful = async ({ pageParam = 1 }) => {
-//     const orderList = await axios.get('Orders/Successful', {
-//         params: {
-//             PageNumber: pageParam,
-//             PageSize: 10,
-//         },
-//     })
-//     return orderList.data.data
-// }
-
 const updateOrder = async id => {
     const orderList = await axios.put('Orders/Update', {
         id: id,
@@ -62,16 +24,17 @@ const fetchListMenuOrder = async id => {
     return orderList.data.data
 }
 
-const fetchListSwitch = async (page = 1, status) => {
+const fetchListSwitch = async (page = 1, status, sortBy) => {
     const switchOrder = {
-        '/admin/orders': 0,
-        '/admin/orders/waiting': 1,
-        '/admin/orders/delivering': 2,
-        '/admin/orders/success': 3,
+        '/orders': 0,
+        '/orders/waiting': 1,
+        '/orders/delivering': 2,
+        '/orders/success': 3,
     }
     const orderList = await axios.get('Orders/Switch', {
         params: {
-            SortBy: switchOrder[status],
+            Filter: switchOrder[status],
+            SortBy: sortBy,
             PageNumber: page,
             PageSize: 10,
         },
@@ -79,13 +42,36 @@ const fetchListSwitch = async (page = 1, status) => {
     return orderList.data.data
 }
 
+const fetchListUserGraph = async (page = 1) => {
+    const userList = await axios.get('Orders/Graph', {
+        params: {
+            PageNumber: page,
+            PageSize: 10
+        }
+    })
+    return userList.data.data
+}
+
+const fetchDataGraph = async () => {
+    const dataGraph = await axios.get('Orders/DataGraph')
+    return dataGraph.data.data
+}
+
+const fetchOrderById = async id => {
+    const dataOrder = await axios.get('/Orders/UserId',{
+        params: {
+            id: id
+        }
+    })
+    return dataOrder.data.data
+}
+
 export {
     fetchOrderList,
-    // fetchOrderListWaiting,
-    // fetchOrderListOnDelivery,
-    // fetchOrderListOnProcces,
-    // fetchOrderListSuccessful,
     fetchListMenuOrder,
     fetchListSwitch,
-    updateOrder
+    updateOrder,
+    fetchListUserGraph,
+    fetchDataGraph,
+    fetchOrderById
 }

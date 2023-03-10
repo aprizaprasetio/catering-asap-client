@@ -1,21 +1,35 @@
-import React from 'react'
-import { Grid, Box, Card, CardContent, CardMedia, Typography, Icon } from '@mui/material'
+import { FastfoodOutlined } from '@mui/icons-material'
+import { Card, CardContent, Grid, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 import { formatIDR } from 'commands/application/priceCommand'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Fastfood, FastfoodOutlined } from '@mui/icons-material'
 
-const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) => {
+const CardItemUserDetail = ({ id, userName, quantity, totalPriceOrdered }) => {
     const navigate = useNavigate()
-
+    const iconResponsive = {
+        md: 70,
+        lg: 100
+    }
+    const fontSizeResponsive = {
+        md: 26,
+        lg: 32        
+    }
+    const noPesananResponsive = {
+        md: 16,
+        lg: 20
+    }
     return (
-        <Grid item xs={12} sm={6} lg={4} xl={3}>
+        <Grid item xs={12}>
             <Card sx={{
                 display: 'flex',
                 boxShadow: 6,
-                borderRadius: 5,
+                borderRadius: 3,
                 cursor: 'pointer',
                 paddingX: 1,
-                position: 'relative'
+                position: 'relative',
+                // gap: 4,
+                // justifyContent: 'space-around'
             }}
                 onClick={() => navigate(`/admin/orders/verify/${id}`)}
             >
@@ -25,14 +39,11 @@ const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) 
                     alignItems: 'center',
                     marginX: 2
                 }}>
-                    <FastfoodOutlined sx={{ fontSize: 70 }} />
+                    <FastfoodOutlined sx={{ fontSize: iconResponsive }} />
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
-                        <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: 15 }}>
-                            No.Pesanan: {id}
-                        </Typography>
-                        <Typography component="div" sx={{ fontSize: 28, fontWeight: 'bold' }}>
+                        <Typography component="div" sx={{ fontSize: fontSizeResponsive, fontWeight: 'bold' }}>
                             {userName}
                         </Typography>
                         <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: 18 }}>{formatIDR(totalPriceOrdered)}</Typography>
@@ -41,9 +52,10 @@ const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) 
                         </Box>
                     </CardContent>
                 </Box>
+                <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: noPesananResponsive, marginLeft: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>No.Pesanan: {id}</Typography>
             </Card>
         </Grid>
     )
 }
 
-export default CardItemManagementOrder
+export default CardItemUserDetail

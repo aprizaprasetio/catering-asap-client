@@ -1,9 +1,22 @@
-import { AutoGraph } from '@mui/icons-material'
-import { Box, Typography, Icon, Card } from '@mui/material'
+import { AutoGraph, KeyboardArrowDown, KeyboardArrowUp, KeyboardDoubleArrowDown, KeyboardDoubleArrowUp } from '@mui/icons-material'
+import { Box, Typography, Icon, Card, Paper } from '@mui/material'
 import { width } from '@mui/system'
 import React from 'react'
+import { useDataGraph } from 'api/hooks/ordersManagementHook'
+import { formatIDR } from 'commands/application/priceCommand'
+
+const Arrow = ({ percent }) => {
+    if (percent > 0)
+        return (percent >= 5) ?
+            <KeyboardDoubleArrowUp sx={{ fontSize: 50, color: '#1bf538' }} /> : <KeyboardArrowUp sx={{ fontSize: 50, color: '#1bf538' }} />
+
+    return (percent <= -5) ?
+        <KeyboardDoubleArrowDown sx={{ fontSize: 50, color: '#f52020' }} /> : <KeyboardArrowDown sx={{ fontSize: 50, color: '#f52020' }} />
+}
 
 const CardItemGraphicTablet = () => {
+    const { data } = useDataGraph()
+
     const display = {
         xs: 'none',
         md: 'block'
@@ -14,42 +27,50 @@ const CardItemGraphicTablet = () => {
                 display: 'flex',
                 gap: 3,
             }}>
-                <Card sx={{
+                <Paper sx={{
+                    flex: 2,
                     borderRadius: 3,
                     boxShadow: 5,
                     padding: 3,
                     display: 'flex',
-                    gap: 3,
-                    width: 500
+                    gap: 5,
+                    // width: 500
                 }}>
-                    <Icon sx={{ fontSize: 50 }}><AutoGraph fontSize='large' /></Icon>
+                    <AutoGraph sx={{ fontSize: 60, marginY: 'auto' }} />
                     <Box>
-                        <Typography sx={{ fontWeight: 'bold' }}>Profit</Typography>
-                        <Typography sx={{ fontSize: 32, fontWeight: 'bold' }}>IDR.2.000.000.000</Typography>
+                        <Typography sx={{ fontWeight: 'bold' }}>Total Pendapatan</Typography>
+                        <Typography sx={{ fontSize: 46, fontWeight: 'bold' }}>{formatIDR(data?.totalIncome)}</Typography>
                     </Box>
-                </Card>
+                </Paper>
                 <Box sx={{
+                    flex: 1,
                     display: 'flex',
                     gap: 3,
                 }}>
-                    <Card sx={{
+                    <Paper sx={{
+                        flex: 1,
                         borderRadius: 3,
                         boxShadow: 5,
                         padding: 3,
-                        width: 200
                     }}>
-                        <Typography sx={{ fontWeight: 'bold' }}>Profit</Typography>
-                        <Typography sx={{ fontSize: 42, fontWeight: 'bold' }}>60%</Typography>
-                    </Card>
-                    <Card sx={{
+                        <Typography sx={{ fontWeight: 'bold' }}>Komparasi Pendapatan</Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+                            <Arrow percent={data?.dataComparison} />
+                            <Typography sx={{ fontSize: 56, fontWeight: 'bold' }}>{data?.dataComparison}%</Typography>
+                        </Box>
+                    </Paper>
+                    <Paper sx={{
+                        flex: 1,
                         borderRadius: 3,
                         boxShadow: 5,
                         padding: 3,
-                        width: 200
                     }}>
-                        <Typography sx={{ fontWeight: 'bold' }}>Profit</Typography>
-                        <Typography sx={{ fontSize: 42, fontWeight: 'bold' }}>40%</Typography>
-                    </Card>
+                        <Typography sx={{ fontWeight: 'bold' }}>Total Pesanan</Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+                            <Typography sx={{ fontSize: 56, fontWeight: 'bold' }}>{data?.totalOrdered}</Typography>
+                            <Typography sx={{ fontWeight: 'bold', position: 'absolute', right: '10%', bottom: 0 }}>pcs</Typography>
+                        </Box>
+                    </Paper>
                 </Box>
             </Box>
         </Box>

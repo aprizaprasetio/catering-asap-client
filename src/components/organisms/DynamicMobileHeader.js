@@ -25,7 +25,7 @@ tabList.push({
 const DynamicMobileHeader = ({ title, isMenuVisible }) => {
     const { pathname } = useLocation()
     const navigate = useNavigate()
-
+  
     return (
         <>
             <Box sx={{
@@ -78,15 +78,6 @@ const DynamicMobileHeader = ({ title, isMenuVisible }) => {
                     </Tabs>
                 )
             }
-            {/* {
-                isMenuVisible && (
-                    <AppBar position="sticky">
-                        <Toolbar>
-                            <ManagementOrderDasboard />
-                        </Toolbar>
-                    </AppBar>
-                )
-            } */}
         </>
     )
 }
