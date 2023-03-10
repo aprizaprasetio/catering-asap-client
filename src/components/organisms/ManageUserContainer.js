@@ -18,5 +18,4 @@ const ManageUserContainer = ({ children }) => {
         </Box>
     )
 }
-
 export default ManageUserContainer

@@ -10,7 +10,6 @@ const listStyle = {
     display: 'grid',
     gap: 1,
 }
-
 const tabList = []
 tabList.push({
     icon: ManageAccounts,
@@ -22,7 +21,6 @@ tabList.push({
     href: '/profile/password',
     content: 'Kata Sandi'
 })
-
 const ManageUserSideBar = () => {
     return (
         <>
@@ -73,5 +71,4 @@ const ManageUserSideBar = () => {
         </>
     )
 }
-
 export default ManageUserSideBar

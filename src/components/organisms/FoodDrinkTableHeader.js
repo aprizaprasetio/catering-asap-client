@@ -1,4 +1,4 @@
-import { TableHead, TableRow, TableCell, Box, Checkbox, Button } from '@mui/material'
+import { TableHead, TableRow, TableCell, Checkbox, Button } from '@mui/material'
 import { Delete } from '@mui/icons-material'
 
 function FoodDrinkTableHeader() {
@@ -27,9 +27,6 @@ function FoodDrinkTableHeader() {
                     </Button>
                     <Checkbox />
                 </TableCell>
-
-                {/* <TableCell widths */}
-                {/* <TableCell /> */}
             </TableRow>
         </TableHead>
     )

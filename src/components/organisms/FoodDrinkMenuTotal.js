@@ -1,17 +1,13 @@
 import { Box, Paper, Stack, Typography } from '@mui/material'
-import FoodDrinkMenuTotalFoodItem from 'components/molecules/FoodDrinkMenuTotalFoodItem'
-import FoodDrinkMenuTotalDrinkItem from 'components/molecules/FoodDrinkMenuTotalDrinkItem'
 import LunchDining from '@mui/icons-material/LunchDining'
 import FoodDrinkMenuDynamic from 'components/organisms/FoodDrinkMenuDynamic'
 import WineBarIcon from '@mui/icons-material/WineBar'
-
 
 const FoodDrinkMenuTotal = () => {
     return (
         <Box
             component={Paper}
             sx={{
-                // position: 'relative',
                 paddingX: 1,
                 paddingY: 1,
                 borderRadius: 2,
@@ -34,12 +30,7 @@ const FoodDrinkMenuTotal = () => {
                 <FoodDrinkMenuDynamic icon={<LunchDining />} />
                 <FoodDrinkMenuDynamic icon={<WineBarIcon />} />
             </Box>
-            {/* <FoodDrinkMenuTotalFoodItem />
-            <FoodDrinkMenuTotalDrinkItem /> */}
-
         </Box >
-
     )
-
 }
 export default FoodDrinkMenuTotal

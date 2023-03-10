@@ -8,7 +8,8 @@ const FoodDrinkTableCollapsible = ({ openEdit, openCollapse, config }) => {
                 {
                     openEdit ?
                         (<TextField size='small' margin='dense' multiline rows={2} fullWidth {...config} />)
-                        : <Box>
+                        :
+                        <Box>
                             <Typography paddingTop={2} fontWeight="bold">Deskripsi</Typography>
                             <Typography paddingBottom={2} noWrap>{config.value}</Typography>
                         </Box>
