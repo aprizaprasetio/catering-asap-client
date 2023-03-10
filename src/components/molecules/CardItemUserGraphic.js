@@ -1,7 +1,7 @@
 import { Avatar, Box, Typography, Grid } from '@mui/material'
 import React from 'react'
 
-const CardItemUserGraphic = () => {
+const CardItemUserGraphic = ({ userName, orderTime }) => {
     return (
         <>
             <Grid item xs={12}>
@@ -10,23 +10,22 @@ const CardItemUserGraphic = () => {
                         boxShadow: 3,
                         borderRadius: 3,
                         display: 'flex',
-                        gap: 6,
-                        paddingX: 5,
-                        paddingY: 2
+                        gap: 4,
+                        paddingX: 3,
+                        paddingY: 1
                     }}>
                         <Avatar
                             sx={{
-                                // bgcolor: deepOrange[500],
-                                width: 56,
-                                height: 56,
+                                width: 42,
+                                height: 42,
                                 fontSize: 16,
                             }}
                             alt="Remy Sharp"
                             src=''
                         />
                         <Box>
-                            <Typography sx={{ fontWeight: 'bold', fontSize: 20 }}>Syawal</Typography>
-                            <Typography>16 Februari 2023</Typography>
+                            <Typography sx={{ fontWeight: 'bold', fontSize: 18 }}>{userName}</Typography>
+                            <Typography sx={{ fontSize: 14 }}>{orderTime}</Typography>
                         </Box>
                     </Box>
                 </Box>
