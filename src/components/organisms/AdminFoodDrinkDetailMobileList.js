@@ -1,6 +1,5 @@
 import React from 'react'
 import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
-import FoodDrinkTableItem from './FoodDrinkTableItem'
 import AdminFoodDrinkDetailMobile from 'components/pages/AdminFoodDrinkDetailMobile'
 
 const AdminFoodDrinkDetailMobileList = () => {
@@ -9,7 +8,6 @@ const AdminFoodDrinkDetailMobileList = () => {
     React.useEffect(() => {
         console.log(data)
     }, [])
-
 
     return data?.pages?.map((group, index) => (
         <React.Fragment key={index}>

@@ -2,6 +2,8 @@ import React from 'react'
 import UsersWrapperMobile from './UsersWrapperMobile'
 import FoodDrinkTableItem from './FoodDrinkTableItem'
 import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
+import { Grid } from '@mui/material'
+import SkeletonList from './SkeletonList'
 
 const FoodDrinkListAdminDesktop = () => {
     const { data, isFetching, isLoading, hasNextPage, fetchNextPage } = useFoodDrinkList2()
@@ -65,13 +67,19 @@ const FoodDrinkListAdminDesktop = () => {
     //     })
     // )
 
-    return data?.pages?.map((group, index) => (
-        <React.Fragment key={index}>
-            {
-                group?.map(item => <FoodDrinkTableItem key={item.id} minOrder={item.min_Order} {...item} />)
-            }
-        </React.Fragment>
-    ))
+    return (
+        data?.pages?.map((group, index) => {
+            return (
+                <React.Fragment key={index}>
+                    {
+                        group?.map(item => <FoodDrinkTableItem key={item.id} minOrder={item.min_Order} {...item} />)
+                    }
+                </React.Fragment>
+            )
+        })
+
+
+    )
 }
 
 

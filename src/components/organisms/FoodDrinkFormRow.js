@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Paper, Icon, TextField, IconButton, InputAdornment, Table, TableBody, TableRow, TableCell, InputBase } from '@mui/material'
+import { TextField, IconButton, InputAdornment, TableRow, TableCell } from '@mui/material'
 import { AddPhotoAlternate } from '@mui/icons-material'
 
 const FoodDrinkFormRow = () => {
@@ -24,7 +24,6 @@ const FoodDrinkFormRow = () => {
                     }}
                     fullWidth
                 />
-
             </TableCell>
             <TableCell colSpan={2}>
                 <TextField placeholder="Rp. xxx.xxx,xx" />
@@ -37,5 +36,4 @@ const FoodDrinkFormRow = () => {
         </TableRow>
     )
 }
-
 export default FoodDrinkFormRow

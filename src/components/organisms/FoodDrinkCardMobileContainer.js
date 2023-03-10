@@ -1,13 +1,9 @@
 import * as React from 'react'
-import { Table, TableBody, Paper, TableContainer, TableHead, } from '@mui/material'
-import FoodDrinkCardMobile from 'components/molecules/FoodDrinkCardMobile'
+import { Paper } from '@mui/material'
 import { Box } from '@mui/system'
 
-
 const FoodDrinkCardMobileContainer = ({ children }) => {
-
     return (
-
         <Box sx={{
             display: {
                 xs: 'flex',
@@ -20,9 +16,6 @@ const FoodDrinkCardMobileContainer = ({ children }) => {
                 {children}
             </Paper>
         </Box>
-
     )
 }
-
-
 export default FoodDrinkCardMobileContainer

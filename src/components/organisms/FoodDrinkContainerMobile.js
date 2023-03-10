@@ -1,12 +1,10 @@
 import React from 'react'
 import { Box, Paper, Grid } from '@mui/material'
-import { grey } from '@mui/material/colors'
 
 const FoodDrinkContainerMobile = ({ children }) => {
     return (
         <>
             <Grid >
-                {/* item xs={6} sm={4} */}
                 <Box
                     component={Paper}
                     sx={{

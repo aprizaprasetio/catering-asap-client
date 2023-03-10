@@ -4,16 +4,6 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { UseFoodDrinkCreate } from 'api/hooks/catalogAdminHook'
 
-// limitasi karakter
-// const coba = () =>{
-//     const [num, setNum] = React.useState();
-//     const limitChar = 12;
-//     const handleChange = (e) => {
-//         if (e.target.value.toString().length <= limitChar) {
-//             setNum(e.target.value);
-//         }
-// }
-
 const yupConfig = yup.object({
     name: yup
         .string('Masukan alphabet')
@@ -34,7 +24,7 @@ const yupConfig = yup.object({
         .required('Harus Diisi')
 })
 const AdminFoodDrinkFormPopup = () => {
-    const { mutate, isLoading, } = UseFoodDrinkCreate()
+    const { mutate } = UseFoodDrinkCreate()
     const formikConfig = useFormik({
         initialValues: {
             name: '',
@@ -78,7 +68,6 @@ const AdminFoodDrinkFormPopup = () => {
         onChange: formikConfig.handleChange,
         helperText: formikConfig.touched.description && formikConfig.errors.description,
     }
-    // console.log(formikConfig)
 
     return (
         <Box component="form" onSubmit={formikConfig.handleSubmit} sx={{
