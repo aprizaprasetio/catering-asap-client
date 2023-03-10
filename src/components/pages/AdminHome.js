@@ -1,20 +1,14 @@
 import React from 'react'
-import { Box, Button, IconButton, Paper, Collapse, Icon, InputAdornment, TextField, Typography, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, InputBase } from '@mui/material'
+import { Collapse, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, } from '@mui/material'
 import CenterLayout from 'components/templates/CenterLayout'
 import AdminNavbar from 'components/organisms/AdminNavbar'
-import NumberCard from 'components/organisms/NumberCard'
-import AdminWelcome from 'components/organisms/AdminWelcome'
 import { useStale } from 'commands/builders/hookBuilder'
-
-// Test Development
-import AdminScretchHeader from 'components/organisms/AdminScretchHeader'
 import FoodDrinkFormRow from 'components/organisms/FoodDrinkFormRow'
 import { useTrigger } from 'commands/builders/commonBuilder'
-import DynamicNavbar from 'components/organisms/DynamicNavbar'
 
 const AdminHome = () => {
     const [user] = useStale('user')
-    const [open, openTrigger] = useTrigger()
+    const [open] = useTrigger()
 
     return (
         <>
@@ -59,14 +53,6 @@ const AdminHome = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                {/* <AdminWelcome
-                    header={user?.name ?? 'No Name'}
-                    message="Selamat datang"
-                    body="Kelola data katering lewat website dimana pun anda berada." />
-                <Box display="flex" gap={1}>
-                    <NumberCard />
-                    <NumberCard />
-                </Box> */}
             </CenterLayout>
         </>
     )

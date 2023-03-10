@@ -1,9 +1,6 @@
 import React from 'react'
 import {
-    Box, Paper, Stack,
-    List, CardMedia, CardContent,
-    Typography, Button, TextField
-    , IconButton
+    Box, Paper, Stack, List, CardMedia, Button, IconButton
 }
     from '@mui/material'
 import { MoodBadRounded, MoodRounded, SentimentNeutralRounded } from '@mui/icons-material'
@@ -21,22 +18,17 @@ import TextBoxFormMobileFoodDrink from 'components/molecules/TextBoxFormMobileFo
 import LoadingFull from 'components/atoms/LoadingFull'
 import TextBoxFormMobileFoodDrinkDesk from 'components/molecules/TextBoxFormMobileFoodDrinkDesk'
 
-
-
 const AdminFoodDrinkDetailMobile = () => {
     const { data, isFetchedAfterMount } = useFoodDrinkDetail()
     const [isEditMode, isEditModeTrigger] = useTrigger()
     const { mutate: updateHandler } = UseFoodDrinkUpdate()
     const navigate = useNavigate()
     const { mutate: deleteHandler } = UseFoodDrinkDelete()
-
-
     const nilai = {
         like: 99,
         ok: 99,
         dislike: 99,
     }
-
     const yupConfig = yup.object({
         image_Url: yup
             .string()
@@ -57,7 +49,6 @@ const AdminFoodDrinkDetailMobile = () => {
 
     const formikConfig = useFormik({
         initialValues: {
-            // imageUrl: data,
             id: '',
             name: '',
             price: '',
@@ -121,7 +112,6 @@ const AdminFoodDrinkDetailMobile = () => {
                     sx={{
                         width: '100%',
                         paddingX: 1,
-                        // borderRadius: 4,
                         boxShadow: 0,
 
                     }}>
@@ -166,7 +156,6 @@ const AdminFoodDrinkDetailMobile = () => {
 
                             )
                     }
-
                     <List component={Stack} margin={0} direction='column'>
                         <TextBoxFormMobileFoodDrink
                             open={isEditMode} config={nameConfig} />
@@ -177,19 +166,6 @@ const AdminFoodDrinkDetailMobile = () => {
 
                         <TextBoxFormMobileFoodDrinkDesk
                             open={isEditMode} config={descriptionConfig} />
-
-                        {/* {
-                            isEditMode ?
-                                (<TextField name='description' size='small'
-                                    label='Deskripsi' margin='dense' multiline rows={5}
-                                    fullWidth config={descriptionConfig}
-                                    autoComplete={descriptionConfig} />
-                                ) : (
-                                    <Typography variant="body2" color="text.secondary">
-                                        {data?.description}
-                                    </Typography>
-                                )
-                        } */}
 
                         <List component={Stack} direction="row" width={'50%'} >
                             <MoodRounded content={nilai.like} />
@@ -208,7 +184,6 @@ const AdminFoodDrinkDetailMobile = () => {
                                     { onSuccess: isEditModeTrigger },
                                 )
                             }}
-                            // onClick={isEditModeTrigger}
                             variant='contained'
                             sx={{
                                 borderRadius: 2,
@@ -232,9 +207,6 @@ const AdminFoodDrinkDetailMobile = () => {
 
                     <Button onClick={() => deleteHandler(data.id, { onSuccess: () => navigate('/admin/menus') })} sx={{
                         borderRadius: 2,
-                        // border: 2,
-                        // borderColor: grey[300],
-                        // backgroundColor: blue[300],
                         color: red[400],
                     }}>Hapus </Button>
                 </List>
