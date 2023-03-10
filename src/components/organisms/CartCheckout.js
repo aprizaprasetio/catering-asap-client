@@ -1,11 +1,22 @@
 import React from 'react'
+import { Box, Divider, Button, Card, CardContent, CardActions, Typography, Stack, TextField }
+    from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import useCartStore from 'factory/store/useCartStore'
 import { formatIDR } from 'commands/application/priceCommand'
-import { Box, Button, Card, CardContent, CardActions, Divider, Typography, Stack }
-    from '@mui/material'
+import { storageBuilder, useInput } from 'commands/builders/commonBuilder'
+import CartCheckoutBanks from 'components/organisms/CartCheckoutBanks'
+import { useBankList } from 'api/hooks/bankHook'
 
 const CartCheckout = () => {
-    const cartTotal = useCartStore(state => state.checkedTotal)
+    const navigate = useNavigate()
+
+    const { isCartExist, checkedTotal: cartTotal, isNoCheck } = useCartStore()
+    const addressLocal = storageBuilder('USER_ADDRESS')
+
+    const [address, addressHandler] = useInput(addressLocal.get())
+
+    React.useEffect(() => addressLocal.set(address), [address])
 
     return (
         <Card sx={{
@@ -17,42 +28,29 @@ const CartCheckout = () => {
                 display: 'grid',
                 gap: 3,
             }}>
-                <Box>
-                    <Typography variant="h3" sx={{
-                        fontSize: 18,
-                        fontWeight: 'bold',
-                    }}>
-                        Informasi Rekening
-                    </Typography>
-                    <Stack direction="row" justifyContent="space-between">
-                        <Typography variant="body1" sx={{
-                            fontWeight: 'bold',
-                        }}>
-                            BCA
-                        </Typography>
-                        <Box>
-                            <Typography variant="body1">
-                                Apriza Prasetio
-                            </Typography>
-                            <Typography variant="caption" sx={{
-                                fontWeight: 'bold',
-                            }}>
-                                1234567890123
-                            </Typography>
-                        </Box>
-                    </Stack>
-                </Box>
+                <CartCheckoutBanks />
                 <Divider />
                 <Box>
                     <Typography variant="h3" sx={{
                         fontSize: 18,
                         fontWeight: 'bold',
+                        marginBottom: 1,
                     }}>
                         Alamat Tujuan
                     </Typography>
-                    <Typography variant="body1">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt ut ad distinctio autem consequuntur illum architecto nulla obcaecati repellendus ipsum!
-                    </Typography>
+                    <TextField
+                        value={address}
+                        onChange={addressHandler}
+                        size="small"
+                        rows={5}
+                        multiline
+                        fullWidth
+                        InputProps={{
+                            sx: {
+                                borderRadius: 6,
+                            },
+                        }}
+                    />
                 </Box>
                 <Divider />
                 <Box>
@@ -77,9 +75,17 @@ const CartCheckout = () => {
                 </Box>
             </CardContent>
             <CardActions>
-                <Button variant="contained" fullWidth disableElevation sx={{
-                    borderRadius: 6,
-                }}>Beli</Button>
+                <Button
+                    onClick={() => navigate('/cart/checkout')}
+                    variant="contained"
+                    disabled={!isCartExist() || isNoCheck()}
+                    fullWidth
+                    disableElevation
+                    sx={{
+                        borderRadius: 6,
+                    }}>
+                    Lanjutkan
+                </Button>
             </CardActions>
         </Card>
     )

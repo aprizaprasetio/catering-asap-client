@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { useMutation, useInfiniteQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useInfiniteQuery } from '@tanstack/react-query'
 import useCartStore from 'factory/store/useCartStore'
 import { axios, client } from 'api/initiates/queryInitiate'
-import { fetchCollectCart, fetchQuantityCart, fetchAddCart, fetchCheckboxTrigger, fetchCheckboxAll, fetchOneQuantity, fetchRemoveSingle, fetchRemoveMultiple }
+import { fetchCollectCart, fetchQuantityCart, fetchAddCart, fetchCheckboxTrigger, fetchCheckboxAll, fetchOneQuantity, fetchRemoveSingle, fetchRemoveMultiple, fetchCollectCheckout }
     from 'api/connections/cartRequest'
 
 const useCartCollection = () => {
@@ -31,6 +31,17 @@ const useCartCollection = () => {
     }, [])
 
     return cartCollectionQuery
+}
+
+const useCartCheckout = () => {
+    const checkoutQuery = useQuery({
+        queryKey: ['checkoutCollections'],
+        queryFn: fetchCollectCheckout,
+    })
+
+    useEffect(() => checkoutQuery.remove, [])
+
+    return checkoutQuery
 }
 
 const useCurrentCartQuantity = () => {
@@ -155,6 +166,7 @@ const useRemoveCartMultiple = (stateSync) => {
 
 export {
     useCartCollection,
+    useCartCheckout,
     useCurrentCartQuantity,
     useAddCart,
     useCheckboxCart,
