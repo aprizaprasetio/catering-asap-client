@@ -11,11 +11,13 @@ const useImageByPath = path => {
         },
     })
 
-    useEffect(imageMutation.mutate, [])
+    useEffect(() => {
+        imageMutation.mutate()
+        return imageMutation.reset
+    }, [])
 
     return imageMutation
 }
-
 
 // Example usage
 // const {data: image, isLoading: isImageLoading} = useImageByPath('payment/10-1-payment-2023-03-13.webp')
