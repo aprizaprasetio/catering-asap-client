@@ -47,5 +47,6 @@ const useImage = () => {
 }
 
 export {
+    imageToBase64,
     useImage,
 }
