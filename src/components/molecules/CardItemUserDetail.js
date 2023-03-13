@@ -8,16 +8,16 @@ import { useNavigate } from 'react-router-dom'
 const CardItemUserDetail = ({ id, userName, quantity, totalPriceOrdered }) => {
     const navigate = useNavigate()
     const iconResponsive = {
-        md: 70,
-        lg: 100
+        md: 60,
+        lg: 70
     }
     const fontSizeResponsive = {
-        md: 26,
-        lg: 32
+        md: 22,
+        lg: 28
     }
     const noPesananResponsive = {
-        md: 16,
-        lg: 20
+        md: 12,
+        lg: 16
     }
     return (
         <Grid item xs={12}>
@@ -46,9 +46,9 @@ const CardItemUserDetail = ({ id, userName, quantity, totalPriceOrdered }) => {
                         <Typography component="div" sx={{ fontSize: fontSizeResponsive, fontWeight: 'bold' }}>
                             {userName}
                         </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: 18 }}>{formatIDR(totalPriceOrdered)}</Typography>
+                        <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: 14 }}>{formatIDR(totalPriceOrdered)}</Typography>
                         <Box sx={{ position: 'absolute', right: 25, bottom: 13 }}>
-                            <Typography component="div" sx={{ fontSize: 20, fontWeight: 'bold' }}>{quantity}pcs</Typography>
+                            <Typography component="div" sx={{ fontSize: 16, fontWeight: 'bold' }}>{quantity}pcs</Typography>
                         </Box>
                     </CardContent>
                 </Box>

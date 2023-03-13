@@ -8,6 +8,7 @@ import CardItemUserDetail from 'components/molecules/CardItemUserDetail'
 import OrderManagementWrapper from './OrderManagementWrapper'
 import { useDataOrderUser } from 'api/hooks/ordersManagementHook'
 import CardItemBankUserDetialAdmin from 'components/molecules/CardItemBankUserDetialAdmin'
+import CardItemDoubleBankUserDetailAdmin from 'components/molecules/CardItemDoubleBankUserDetailAdmin'
 
 const UserDetailAdmin = () => {
     const { data } = useUserData()
@@ -17,22 +18,26 @@ const UserDetailAdmin = () => {
         md: 'block'
     }
     const theme = {
-        md: 26,
-        lg: 32
+        md: 22,
+        lg: 28
     }
-    
+
     const profileResponsive = {
         md: 120,
         lg: 160
     }
     const fontSizeResponsive = {
-        md: 16,
-        lg: 20
+        md: 12,
+        lg: 16
     }
     const gapResponsive = {
         md: 1,
         lg: 3
     }
+
+    React.useEffect(() => {
+        console.log(data)
+    }, [data])
 
 
     return (
@@ -71,22 +76,24 @@ const UserDetailAdmin = () => {
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
                         {
-                            data?.bankAccounts.map(item => <CardItemBankUserDetialAdmin key={item.id} {...item}/>)
+                            data?.bankAccounts.length == 2
+                                ? <CardItemDoubleBankUserDetailAdmin {...data} />
+                                : data?.bankAccounts.map(item => <CardItemBankUserDetialAdmin key={item.id} {...item} />)
                         }
                     </Box>
                 </Box>
                 <Box sx={{ backgroundColor: '#E9EEFF', flex: 2, paddingX: 10, paddingY: 3, gap: 3, display: 'flex', flexDirection: 'column' }}>
-                    <Typography sx={{ fontWeight: 'bold', fontSize: 24 }}>History Pesanan</Typography>
+                    <Typography sx={{ fontWeight: 'bold', fontSize: 20 }}>History Pesanan</Typography>
                     <Box sx={{ display: 'flex', gap: 3 }}>
                         <Paper sx={{ display: 'flex', gap: gapResponsive, paddingY: 3, flex: 1, borderRadius: 3 }}>
-                            <ShoppingBagOutlined sx={{ fontSize: 60, marginLeft: gapResponsive }} />
+                            <ShoppingBagOutlined sx={{ fontSize: 56, marginLeft: gapResponsive }} />
                             <Box>
                                 <Typography sx={{ fontWeight: 'bold', fontSize: fontSizeResponsive }}>Total Pesanan</Typography>
                                 <Typography sx={{ fontSize: theme, fontWeight: 'bold' }}>{query?.data?.totalOrdered}</Typography>
                             </Box>
                         </Paper>
                         <Paper sx={{ display: 'flex', gap: 4, paddingY: 3, flex: 2, borderRadius: 3 }}>
-                            <PaymentsOutlined sx={{ fontSize: 60, marginLeft: 3 }} />
+                            <PaymentsOutlined sx={{ fontSize: 56, marginLeft: 3 }} />
                             <Box>
                                 <Typography sx={{ fontWeight: 'bold', fontSize: fontSizeResponsive }}>Total Harga Pesanan</Typography>
                                 <Typography sx={{ fontSize: theme, fontWeight: 'bold' }}>{formatIDR(query?.data?.totalPriceOrdered)}</Typography>

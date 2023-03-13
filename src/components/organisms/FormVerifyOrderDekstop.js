@@ -7,10 +7,12 @@ import FormOrderDataDekstop from './FormOrderDataDekstop'
 import CardItemVerifyDekstop from 'components/molecules/CardItemVerifyDekstop'
 import { formatIDR } from 'commands/application/priceCommand'
 import FormOrderVerifyDekstopWrapper from './FormOrderVerifyDekstopWrapper'
-import { useOrderListMenu, useOrderListWaiting } from 'api/hooks/ordersManagementHook'
+import { useOrderList, useOrderListMenu, useOrderListWaiting } from 'api/hooks/ordersManagementHook'
 
-const FormVerifyOrderDekstop = ({ result, totalPriceOrdered }) => {
+const FormVerifyOrderDekstop = ({ }) => {
     const orderListMenu = useOrderListMenu()
+    const { data } = useOrderList()
+
     const display = {
         xs: 'none',
         md: 'block',
@@ -18,46 +20,56 @@ const FormVerifyOrderDekstop = ({ result, totalPriceOrdered }) => {
 
     return (
         <Box display={display}>
-            <Card sx={{
-                boxShadow: 5,
+            <Box sx={{
                 display: 'flex',
+                boxShadow: 5,
                 borderRadius: 3,
-                position: 'relative',
-                backgroundColor: grey[100]
             }}>
-                <Card sx={{ 
-                    // width: 600, 
-                    padding: 4, 
-                    borderRadius: 3 
+                <Card sx={{
+                    display: 'flex',
+                    borderRadius: 3,
+                    position: 'relative',
+                    flex: 2,
+                }}>
+                    <Card sx={{
+                        padding: 4,
+                        borderRadius: 3,
+                        flex: 1
                     }}>
-                    <Typography sx={{ fontSize: 23, fontWeight: 'bold' }}>List Pesanan</Typography>
-                    <Box sx={{ 
-                        marginTop: 1, 
-                        overflow: 'auto', 
-                        height: 600
+                        <Typography sx={{ fontSize: 18, fontWeight: 'bold' }}>List Pesanan</Typography>
+                        <Box sx={{
+                            marginTop: 1,
+                            overflow: 'auto',
+                            height: 600,
                         }}>
-                        <FormOrderVerifyDekstopWrapper>
-                            {
-                                orderListMenu.data?.map(item => <CardItemVerifyDekstop key={item.id} {...item} />)
-                            }
-                        </FormOrderVerifyDekstopWrapper>
-                    </Box>
-                    <Card sx={{ 
-                        position: 'absolute', 
-                        bottom: 0, 
-                        left: 0, 
-                        boxShadow: 0,
-                        height: 200, 
-                        padding: 2 
-                        }}>
-                        <Box sx={{ marginLeft: 2, marginTop: 4 }}>
-                            <Typography sx={{ fontSize: 24 }}>Total</Typography>
-                            <Typography sx={{ fontWeight: 'bold', fontSize: 36 }}>{formatIDR(totalPriceOrdered)}</Typography>
+                            <FormOrderVerifyDekstopWrapper>
+                                {
+                                    orderListMenu.data?.map(item => <CardItemVerifyDekstop key={item.id} {...item} />)
+                                }
+                            </FormOrderVerifyDekstopWrapper>
                         </Box>
+                        <Card sx={{
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            boxShadow: 0,
+                            height: 200,
+                            padding: 2,
+                        }}>
+                            <Box sx={{ marginLeft: 2, marginTop: 4, }}>
+                                <Typography sx={{ fontSize: 18 }}>Total</Typography>
+                                <Typography sx={{ fontWeight: 'bold', fontSize: 28 }}>{formatIDR(data?.totalPriceOrdered)}</Typography>
+                            </Box>
+                        </Card>
                     </Card>
                 </Card>
-                <FormOrderDataDekstop {...result} />
-            </Card>
+                <Box sx={{
+                    display: 'flex',
+                    flex: 1
+                }}>
+                    <FormOrderDataDekstop {...data} />
+                </Box>
+            </Box>
         </Box>
     )
 }
