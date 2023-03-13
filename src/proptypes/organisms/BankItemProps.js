@@ -4,6 +4,6 @@ export default {
     bankName: string.isRequired,
     bankNumber: string.isRequired,
     name: string.isRequired,
-    onEdit: func.isRequired,
-    onRemove: func.isRequired,
+    onEdit: func,
+    onRemove: func,
 }

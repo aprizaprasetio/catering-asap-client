@@ -17,7 +17,7 @@ const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) 
                 paddingX: 1,
                 position: 'relative'
             }}
-                onClick={() => navigate(`/admin/orders/verify/${id}`)}
+                onClick={() => navigate(`/orders/detail/${id}`)}
             >
                 <Box sx={{
                     display: 'flex',

@@ -15,7 +15,16 @@ const useInput = (initial = '') => {
     return [value, valueChange, valueClear]
 }
 
+// Simple storage get, set, and drop
+const storageBuilder = name => {
+    const get = () => localStorage.getItem(name)
+    const set = value => localStorage.setItem(name, value)
+    const drop = () => localStorage.removeItem(name)
+    return { get, set, drop }
+}
+
 export {
     useTrigger,
     useInput,
+    storageBuilder,
 }

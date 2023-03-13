@@ -1,4 +1,6 @@
 import React from 'react'
+import { Stack, Typography } from '@mui/material'
+import { ProductionQuantityLimits } from '@mui/icons-material'
 import useCartStore from 'factory/store/useCartStore'
 import CartContainer from 'components/organisms/CartContainer'
 import CartHeader from 'components/molecules/CartHeader'
@@ -15,7 +17,14 @@ const CartList = () => {
 
     return (
         <CartContainer checkout={<CartCheckout />}>
-            {store?.pages ? <CartHeader /> : <h1>Nggak ada item</h1>}
+            {store.isCartExist() ? <CartHeader /> : (
+                <Stack alignItems="center" sx={{ opacity: .5 }}>
+                    <ProductionQuantityLimits sx={{ fontSize: 100 }} />
+                    <Typography variant="body1" fontSize={16} fontWeight="medium">
+                        Belum ada makanan atau minuman apapun di keranjang
+                    </Typography>
+                </Stack>
+            )}
             {
                 store.pages?.map((group, index) => (
                     <React.Fragment key={index}>
@@ -47,35 +56,6 @@ const CartList = () => {
             }
         </CartContainer>
     )
-    // return (
-    //     <CartContainer checkout={<CartCheckout />}>
-    //         <CartHeader />
-    //         {
-    //             store.data.map(item => {
-    //                 const { id, quantity, isChecked, ...bodyItem } = item
-
-    //                 return (
-    //                     <CartItem
-    //                         cartBody={bodyItem}
-    //                         cartFooter={{
-    //                             quantity: quantity,
-    //                             quantityClick: {
-    //                                 add: () => store.increaseQuantity(id),
-    //                                 remove: () => store.decreaseQuantity(id),
-    //                             },
-    //                             removeClick: () => store.removeCart(id),
-    //                             isChecked: isChecked,
-    //                             checkboxHandler: () => store.checkboxTrigger(id),
-    //                         }}
-    //                         key={id}
-    //                     />
-    //                 )
-    //             }
-
-    //             )
-    //         }
-    //     </CartContainer>
-    // )
 }
 
 export default CartList

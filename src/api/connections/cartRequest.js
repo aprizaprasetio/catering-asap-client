@@ -10,6 +10,11 @@ const fetchCollectCart = async ({ pageParam = 1 }) => {
     return cartCollection.data.data
 }
 
+const fetchCollectCheckout = async () => {
+    const checkoutCollection = await axios.get('Carts/Checkout')
+    return checkoutCollection.data.data
+}
+
 const fetchQuantityCart = async () => {
     const currentQuantity = await axios.get('Carts/CurrentQuantity')
     return currentQuantity.data.data
@@ -46,6 +51,7 @@ const fetchRemoveMultiple = async config => {
 
 export {
     fetchCollectCart,
+    fetchCollectCheckout,
     fetchQuantityCart,
     fetchAddCart,
     fetchCheckboxTrigger,

@@ -7,10 +7,6 @@ const OrderManagementOnProcces = () => {
     const { data, isFetching, isLoading, hasNextPage, fetchNextPage } = useOrderListOnProcces()
 
     React.useEffect(() => {
-        console.log(data)
-    }, [])
-
-    React.useEffect(() => {
         const refetch = () => {
             const { innerHeight, pageYOffset } = window
             const isBottom = (innerHeight + pageYOffset) >= document.body.offsetHeight
