@@ -1,25 +1,22 @@
-import { axios, client } from 'api/initiates/queryInitiate'
-import { foodDrinkPath } from 'api/initiates/pathInitiate'
-import { authPath } from 'api/initiates/pathInitiate'
+import { axios } from 'api/initiates/queryInitiate'
 
 const fetchFoodDrinkCreate = async foodDrink => {
-    console.info(foodDrink)
-    const { minOrder, ...foodDrinkData } = foodDrink
+    const data = foodDrink
     const foodDrinkList = await axios.post('FoodDrinkMenus/Post', {
-        min_Order: minOrder,
-        image_Url: '',
-        ...foodDrinkData,
+        ...data,
     }, {
-        headers: axios.defaults.headers.Authorization,
+        headers: {
+            Authorization: axios.defaults.headers.Authorization,
+        }
     })
+        .then(res => {
+            console.log("Success")
+        })
+        .catch(error => {
+            console.log(error)
+        })
     return foodDrinkList.data.data
 }
-
-// const fetchFoodDrinkDelete = async foodDrink => {
-//     const foodDrinkList = await axios.delete('FoodDrinkMenu/{id}delete',)
-//     return foodDrink
-// }
-
 const fetchFoodDrinkDelete = async foodDrinkId => {
     await axios.delete(`FoodDrinkMenus/${foodDrinkId}delete`, {
         params: { id: foodDrinkId },
