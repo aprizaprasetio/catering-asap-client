@@ -57,10 +57,6 @@ const useOrderSwitch = () => {
         return orderSwitch.remove
     }, [pathname, sortBy])
 
-    useEffect(() => {
-        console.log(sortBy)
-    }, [sortBy])
-
     return orderSwitch
 }
 

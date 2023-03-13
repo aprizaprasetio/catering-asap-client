@@ -13,7 +13,7 @@ const CardItemUserDetail = ({ id, userName, quantity, totalPriceOrdered }) => {
     }
     const fontSizeResponsive = {
         md: 26,
-        lg: 32        
+        lg: 32
     }
     const noPesananResponsive = {
         md: 16,
@@ -31,7 +31,7 @@ const CardItemUserDetail = ({ id, userName, quantity, totalPriceOrdered }) => {
                 // gap: 4,
                 // justifyContent: 'space-around'
             }}
-                onClick={() => navigate(`/admin/orders/verify/${id}`)}
+                onClick={() => navigate(`/orders/detail/${id}`)}
             >
                 <Box sx={{
                     display: 'flex',
