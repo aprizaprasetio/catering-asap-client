@@ -47,7 +47,7 @@ const SearchBarAdminMobile = () => {
                 }}>
                 <Box sx={{
                     backgroundColor: alpha('#fff', 0.5),
-                    borderRadius: 9,
+                    borderRadius: 3,
                     display: 'flex',
                     position: 'relative',
                     margin: 1,

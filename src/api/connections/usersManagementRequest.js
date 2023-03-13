@@ -13,8 +13,18 @@ const fetchUserList = async (pageParam, keyword) => {
     return userList.data
 }
 
+const fetchUserById = async id => {
+    const userData = await axios.get('/Users/userId', {
+        params: {
+            id: id
+        },
+    })
+
+    return userData.data
+}
+
 const deleteUser = async userId => {
     await axios.delete(authPath.userParam(userId))
 }
 
-export { fetchUserList, deleteUser }
+export { fetchUserList, deleteUser, fetchUserById }

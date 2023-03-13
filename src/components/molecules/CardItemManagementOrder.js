@@ -17,7 +17,7 @@ const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) 
                 paddingX: 1,
                 position: 'relative'
             }}
-                onClick={() => navigate(`/admin/orders/verify/${id}`)}
+                onClick={() => navigate(`/orders/detail/${id}`)}
             >
                 <Box sx={{
                     display: 'flex',
@@ -37,7 +37,7 @@ const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) 
                         </Typography>
                         <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: 18 }}>{formatIDR(totalPriceOrdered)}</Typography>
                         <Box sx={{ position: 'absolute', right: 25, bottom: 13 }}>
-                            <Typography component="div" sx={{ fontSize: 20, fontWeight: 'bold' }}>{quantity}x</Typography>
+                            <Typography component="div" sx={{ fontSize: 20, fontWeight: 'bold' }}>{quantity}pcs</Typography>
                         </Box>
                     </CardContent>
                 </Box>

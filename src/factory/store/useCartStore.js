@@ -4,7 +4,7 @@ import { formatQuantity } from 'commands/application/priceCommand'
 const useCartStore = create((set, get) => (
     {
         pages: null,
-        quantity: '0',
+        quantity: null,
         setCart: value => {
             const isCartExist = get().pages?.length >= 1
             const lastPage = value[value.length - 1]
@@ -21,6 +21,7 @@ const useCartStore = create((set, get) => (
             quantity: value,
         }),
         resetCart: () => set({ pages: null }),
+        isCartExist: () => !!get().pages.find(group => (group.length >= 1)),
         isNoCheck: () => {
             const isSingleCheck = get().pages?.some(group => (
                 group.some(item => {

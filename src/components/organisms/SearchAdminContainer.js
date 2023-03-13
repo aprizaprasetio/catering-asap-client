@@ -6,23 +6,24 @@ import { Box } from '@mui/material'
 
 const SearchAdminContainer = ({ display }) => {
   return (
-    <Box sx={{display: display}}>
+    <Box sx={{ display: display }}>
       <Box sx={{
         width: '100%',
         display: 'flex',
         borderRadius: 3,
         boxShadow: 3,
         background: '#537FE7',
-        justifyContent: 'space-evenly'
+        gap: 3
       }}>
         <Box sx={{
           display: 'flex',
           alignItems: 'center',
-          width: '60%',
+          flex: 1,
         }}>
           <SearcBarAdmin />
         </Box>
         <Box sx={{
+          marginRight: 5
         }}>
           <AdminDashboardUser />
         </Box>

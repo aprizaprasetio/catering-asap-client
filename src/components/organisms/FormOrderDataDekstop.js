@@ -5,27 +5,28 @@ import PopUp from 'components/molecules/PopUp'
 import { CreditCard } from '@mui/icons-material'
 import { grey } from '@mui/material/colors'
 import { useNavigate } from 'react-router-dom'
-import { useUpdateOrder } from 'api/hooks/ordersManagementHook'
+import { useUpdateOrder, useOrderSwitch } from 'api/hooks/ordersManagementHook'
 
 const FormOrderDataDekstop = ({ id, name, orderTime, mealDate, address, bankName, bankNumber, paymentUrl, refetch, status }) => {
     const [openPopup, setOpenPopup] = useTrigger()
     const navigate = useNavigate()
     const { mutate } = useUpdateOrder(id)
+    const query = useOrderSwitch()
     const content = [
         {
-            afterHref: '/admin/orders/waiting',
+            afterHref: '/orders/waiting',
             buttonText: 'Konfirmasi',
         },
         {
-            afterHref: '/admin/orders/onDelivery',
+            afterHref: '/orders/delivering',
             buttonText: 'Kirim',
         },
         {
-            afterHref: '/admin/orders/successful',
+            afterHref: '/orders/success',
             buttonText: 'Selesai',
         },
         {
-            afterHref: '/admin/graphs',
+            afterHref: '/graphs',
             buttonText: 'Simpan Ke Grafik',
         },
     ]
@@ -101,8 +102,8 @@ const FormOrderDataDekstop = ({ id, name, orderTime, mealDate, address, bankName
                     </Card>
                 </Box>
                 {<Button sx={{ marginX: 3, borderRadius: 3, paddingY: 1 }} variant="contained" onClick={() => {
-                    mutate({}, { onSuccess: refetch })
-                    navigate(content[status].afterHref)
+                    mutate({}, { onSuccess: () => navigate(content[status].afterHref).then(() => query.refetch()) })
+                    // navigate(content[status].afterHref)
                 }} >{content[status]?.buttonText}</Button>}
             </Box>
 

@@ -1,7 +1,8 @@
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
 import { useParams, useLocation } from "react-router-dom"
-import { fetchOrderList, fetchOrderListOnProcces, fetchOrderListOnDelivery, fetchOrderListSuccessful, fetchOrderListWaiting, updateOrder, fetchListMenuOrder, fetchListSwitch } from "api/connections/ordersManagementRequest"
+import { fetchOrderList, fetchDataGraph, updateOrder, fetchListMenuOrder, fetchListSwitch, fetchListUserGraph, fetchOrderById } from "api/connections/ordersManagementRequest"
 import { useEffect } from "react"
+import useSortAdmin from "factory/store/useSortAdmin"
 
 const useOrderList = () => {
     const { orderId } = useParams()
@@ -36,11 +37,12 @@ const useOrderListMenu = () => {
 }
 
 const useOrderSwitch = () => {
+    const { sortBy } = useSortAdmin()
     const { pathname } = useLocation()
 
     const orderSwitch = useInfiniteQuery({
         queryKey: ['orderList'],
-        queryFn: ({ pageParam = 1 }) => fetchListSwitch(pageParam, pathname),
+        queryFn: ({ pageParam = 1 }) => fetchListSwitch(pageParam, pathname, sortBy),
         getNextPageParam: (current, pages) => {
             const isLimit = pages.find(current => current.length !== 10)
             if (isLimit) return
@@ -53,18 +55,54 @@ const useOrderSwitch = () => {
     useEffect(() => {
         orderSwitch.refetch()
         return orderSwitch.remove
-    }, [pathname])
+    }, [pathname, sortBy])
 
     return orderSwitch
 }
 
+const useOrderListUserGraph = () => {
+    const userList = useInfiniteQuery({
+        queryKey: ['Graph'],
+        queryFn: fetchListUserGraph,
+        getNextPageParam: (current, pages) => {
+            const isLimit = pages.find(current => current.length !== 5)
+            if (isLimit) return
+            return pages.length + 1
+        },
+        refetchOnMount: true,
+    })
+    return userList
+}
+
+const useDataGraph = () => {
+    const dataGraph = useQuery({
+        queryKey: ['dataGraph'],
+        queryFn: fetchDataGraph
+    })
+
+    return dataGraph
+}
+
+const useDataOrderUser = () => {
+    const { id } = useParams()
+    const dataOrder = useQuery({
+        queryKey: ['dataOrderUser'],
+        queryFn: () => fetchOrderById(id)
+    })
+    useEffect(() => {
+        dataOrder.refetch()
+        return dataOrder.remove
+    }, [id])
+
+    return dataOrder
+}
+
 export {
     useOrderList,
-    // useOrderListWaiting,
-    // useOrderListOnProcces,
-    // useOrderListOnDelivery,
-    // useOrderListSuccessful,
     useUpdateOrder,
     useOrderListMenu,
     useOrderSwitch,
+    useOrderListUserGraph,
+    useDataGraph,
+    useDataOrderUser
 }

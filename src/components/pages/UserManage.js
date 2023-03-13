@@ -1,7 +1,6 @@
 import React from 'react'
 import { useLocation, Navigate } from 'react-router-dom'
 import { ManageAccounts, Key, CreditCard } from '@mui/icons-material'
-import { isUser } from 'commands/application/authCommand'
 import DynamicNavbar from 'components/organisms/DynamicNavbar'
 import ManageUserContainer from 'components/organisms/ManageUserContainer'
 import ManageTab from 'components/templates/ManageTab'
