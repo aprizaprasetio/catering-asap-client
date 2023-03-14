@@ -9,11 +9,11 @@ const CardItemUserDetail = ({ id, userName, quantity, totalPriceOrdered }) => {
     const navigate = useNavigate()
     const iconResponsive = {
         md: 60,
-        lg: 70
+        lg: 60
     }
     const fontSizeResponsive = {
-        md: 16,
-        lg: 22
+        md: 14,
+        lg: 20
     }
     const noPesananResponsive = {
         md: 12,
@@ -50,7 +50,7 @@ const CardItemUserDetail = ({ id, userName, quantity, totalPriceOrdered }) => {
                         </Box>
                     </CardContent>
                 </Box>
-                <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: noPesananResponsive, marginLeft: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>No.Pesanan: {id}</Typography>
+                <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: noPesananResponsive, marginLeft: 3, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>No.Pesanan: {id}</Typography>
             </Card>
         </Grid>
     )
