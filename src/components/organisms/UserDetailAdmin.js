@@ -18,8 +18,8 @@ const UserDetailAdmin = () => {
         md: 'block'
     }
     const theme = {
-        md: 16,
-        lg: 22
+        md: 14,
+        lg: 20
     }
 
     const profileResponsive = {
@@ -41,7 +41,7 @@ const UserDetailAdmin = () => {
                 display: 'flex',
                 boxShadow: 3,
                 borderRadius: 3,
-                height: 820,
+                height: 650,
                 overflow: 'auto'
             }}>
                 <Box sx={{
@@ -95,7 +95,7 @@ const UserDetailAdmin = () => {
                             </Box>
                         </Paper>
                     </Box>
-                    <Box sx={{ height: 700, overflow: 'auto', borderRadius: 3 }}>
+                    <Box sx={{ height: 600, overflow: 'auto', borderRadius: 3, }}>
                         <OrderManagementWrapper>
                             {
                                 query?.data?.listData?.map(listItem => <CardItemUserDetail key={listItem.id} {...listItem} />)
