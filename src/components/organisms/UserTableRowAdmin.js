@@ -13,7 +13,7 @@ const UserTableRowAdmin = ({ id, name, email, image, phone, quantity, totalPrice
     const [openPopup, setOpenPopup] = useTrigger()
     const mutation = useDeleteUser()
     const query = useUserList()
-    const navigate =  useNavigate()
+    const navigate = useNavigate()
     const deleteOnPopup = () => mutation.mutate(id, {
         onSuccess: () => query.refetch().then(setOpenPopup)
     })
@@ -21,7 +21,6 @@ const UserTableRowAdmin = ({ id, name, email, image, phone, quantity, totalPrice
     return (
         <>
             <TableRow component={Box}
-                onClick={() => navigate(`/users/detail/${id}`)}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
             >
                 <TableCell component="th" scope="row">
@@ -29,14 +28,15 @@ const UserTableRowAdmin = ({ id, name, email, image, phone, quantity, totalPrice
                         alt="Remy Sharp"
                         src={image}
                         sx={{ width: 56, height: 56 }}
+                        onClick={() => navigate(`/users/detail/${id}`)}
                     />
                 </TableCell>
-                <TableCell align="left">{name}</TableCell>
-                <TableCell align="left">{email}</TableCell>
-                <TableCell align="left">{phone}</TableCell>
-                <TableCell align="left">{quantity}</TableCell>
-                <TableCell align="left">{formatIDR(totalPriceOrdered)}</TableCell>
-                <TableCell align="left">{gender ? 'Wanita' : 'Pria'}</TableCell>
+                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{name}</TableCell>
+                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{email}</TableCell>
+                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{phone}</TableCell>
+                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{quantity}</TableCell>
+                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{formatIDR(totalPriceOrdered)}</TableCell>
+                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{gender ? 'Wanita' : 'Pria'}</TableCell>
                 <TableCell align="left">
                     <IconButton onClick={setOpenPopup}>
                         <Delete />

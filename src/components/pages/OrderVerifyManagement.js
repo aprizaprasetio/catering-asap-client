@@ -10,8 +10,6 @@ import FormVerifyOrderDekstop from 'components/organisms/FormVerifyOrderDekstop'
 import { useOrderList } from 'api/hooks/ordersManagementHook'
 
 const OrderVerifyManagement = () => {
-    const { data } = useOrderList()
-
     const display = {
         xs: 'block',
         md: 'none'
@@ -23,7 +21,7 @@ const OrderVerifyManagement = () => {
             <DynamicNavbar href={-1}>Verifikasi</DynamicNavbar>
             <CenterLayout admin>
                 <OrderVerifyContainer mobile display={display} />
-                <FormVerifyOrderDekstop {...data} result={data} />
+                <FormVerifyOrderDekstop />
             </CenterLayout>
         </>
     )
