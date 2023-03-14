@@ -12,8 +12,8 @@ const CardItemUserDetail = ({ id, userName, quantity, totalPriceOrdered }) => {
         lg: 70
     }
     const fontSizeResponsive = {
-        md: 22,
-        lg: 28
+        md: 16,
+        lg: 22
     }
     const noPesananResponsive = {
         md: 12,
@@ -28,8 +28,6 @@ const CardItemUserDetail = ({ id, userName, quantity, totalPriceOrdered }) => {
                 cursor: 'pointer',
                 paddingX: 1,
                 position: 'relative',
-                // gap: 4,
-                // justifyContent: 'space-around'
             }}
                 onClick={() => navigate(`/orders/detail/${id}`)}
             >

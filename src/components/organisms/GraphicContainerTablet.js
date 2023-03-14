@@ -7,7 +7,7 @@ import GraphicWrapper from './GraphicWrapper'
 import { useOrderListUserGraph } from 'api/hooks/ordersManagementHook'
 
 const GraphicContainerTablet = () => {
-    const { data, isFetching, isLoading, hasNextPage, fetchNextPage } = useOrderListUserGraph()
+    const { data } = useOrderListUserGraph()
     const display = {
         xs: 'none',
         md: 'block',
@@ -18,7 +18,6 @@ const GraphicContainerTablet = () => {
             <CardItemGraphicTablet />
             <Box sx={{
                 display: 'flex',
-                // justifyContent: 'space-between',
                 gap: 3,
                 marginTop: 3,
             }}>
@@ -42,7 +41,7 @@ const GraphicContainerTablet = () => {
                     <Box sx={{
                         overflow: 'auto',
                         padding: 1,
-                        height: 700,
+                        height: 520,
                     }}>
                         <GraphicWrapper>
                             {

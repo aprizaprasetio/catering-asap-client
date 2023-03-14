@@ -1,6 +1,6 @@
 import React from 'react'
 import { PaymentsOutlined, ShoppingBagOutlined } from '@mui/icons-material'
-import { Avatar, createTheme, Paper, Typography } from '@mui/material'
+import { Avatar, Paper, Typography } from '@mui/material'
 import { Box } from '@mui/material'
 import { formatIDR } from 'commands/application/priceCommand'
 import { useUserData } from 'api/hooks/usersManagementHook'
@@ -18,8 +18,8 @@ const UserDetailAdmin = () => {
         md: 'block'
     }
     const theme = {
-        md: 22,
-        lg: 28
+        md: 16,
+        lg: 22
     }
 
     const profileResponsive = {
@@ -35,11 +35,6 @@ const UserDetailAdmin = () => {
         lg: 3
     }
 
-    React.useEffect(() => {
-        console.log(data)
-    }, [data])
-
-
     return (
         <Box sx={{ display: display }}>
             <Box sx={{
@@ -47,9 +42,9 @@ const UserDetailAdmin = () => {
                 boxShadow: 3,
                 borderRadius: 3,
                 height: 820,
+                overflow: 'auto'
             }}>
                 <Box sx={{
-                    // width: 600,
                     display: 'flex',
                     flex: 1,
                     flexDirection: 'column',
