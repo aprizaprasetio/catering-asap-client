@@ -64,7 +64,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
         helperText: formikConfig.errors.price
     }
     const minOrderConfig = {
-        name: 'minorder',
+        name: 'minOrder',
         label: 'Min. Pemesanan',
         value: formikConfig.values.minOrder,
         onChange: formikConfig.handleChange,
