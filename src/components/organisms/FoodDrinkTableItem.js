@@ -30,10 +30,13 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
             .required(),
         price: yup
             .number()
-            .required(),
+            .required()
+            .positive('Masukan Angka Postive'),
         minOrder: yup
             .number()
-            .required(),
+            .required()
+            .positive('Masukan Angka Postive')
+            .max(99, 'Maximal Min order 99'),
         description: yup
             .string()
             .required(),
@@ -59,6 +62,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
     const priceConfig = {
         name: 'price',
         label: 'Harga',
+        type: 'number',
         value: formikConfig.values.price,
         onChange: formikConfig.handleChange,
         helperText: formikConfig.errors.price
@@ -66,6 +70,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
     const minOrderConfig = {
         name: 'minOrder',
         label: 'Min. Pemesanan',
+        type: 'number',
         value: formikConfig.values.minOrder,
         onChange: formikConfig.handleChange,
         helperText: formikConfig.errors.minOrder,
