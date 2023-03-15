@@ -1,17 +1,16 @@
 import React from 'react'
 import AdminFoodDrinkAddButton from 'components/molecules/AdminFoodDrinkAddButton'
-import AdminFoodDrinkFormPopup from 'components/organisms/AdminFoodDrinkFormPopup'
-import { Box, List } from '@mui/material'
+import AdminFoodDrinkFormPopupDesktop from 'components/organisms/AdminFoodDrinkFormPopupDesktop'
+import { Box } from '@mui/material'
 import { useTrigger } from 'commands/builders/commonBuilder'
 import PopUp from 'components/molecules/PopUp'
 import SearchBarAdmin from 'components/molecules/SearchBarAdmin'
+import AdminFoodDrinkDetailMobile from 'components/pages/AdminFoodDrinkDetailMobile'
 
 const SearchAndFormButtonFoodDrinkAdmin = () => {
-
     const [openPopup, setOpenPopup] = useTrigger()
     return (
         <>
-
             <Box
                 sx={{
                     display: {
@@ -26,9 +25,8 @@ const SearchAndFormButtonFoodDrinkAdmin = () => {
                     <AdminFoodDrinkAddButton />
                 </Box>
             </Box>
-            <PopUp openPopup={openPopup} setOpenPopup={setOpenPopup}>
-                <AdminFoodDrinkFormPopup />
-            </PopUp>
+            <AdminFoodDrinkFormPopupDesktop
+                openPopup={openPopup} setOpenPopup={setOpenPopup} />
         </>
     )
 }
