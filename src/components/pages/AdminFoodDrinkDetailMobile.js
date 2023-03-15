@@ -104,7 +104,7 @@ const AdminFoodDrinkDetailMobile = () => {
 
     return (
         <>
-            <DynamicNavbar>{data?.name}</DynamicNavbar>
+            <DynamicNavbar href={'/menus'} >{data?.name}</DynamicNavbar>
             <CenterLayout>
                 <Box
                     component={Paper}
