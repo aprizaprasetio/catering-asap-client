@@ -1,83 +1,148 @@
-import {
-    TableRow, TableCell,
-    List, Stack, Collapse, Grid, Button, IconButton
-
-} from '@mui/material'
-import * as React from 'react';
-import { MoodRounded, SentimentNeutralRounded, MoodBadRounded } from '@mui/icons-material'
+import React from 'react'
+import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Avatar }
+    from '@mui/material'
+import { MoodRounded, SentimentNeutralRounded, MoodBadRounded, KeyboardArrowDown, KeyboardArrowUp, Edit, Delete, }
+    from '@mui/icons-material'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import FoodDrinkTableCollapsible from './FoodDrinkTableCollapsible'
+import { useTrigger } from 'commands/builders/commonBuilder'
 import ReactListItem from 'components/molecules/ReactListItem'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import FoodDrinkTableCollapsible from './FoodDrinkTableCollapsible';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import FoodDrinkTableCell from 'components/molecules/FoodDrinkTableCell'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import { UseFoodDrinkDelete, UseFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
 
-
-function FoodDrinkTableItem() {
+const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url }) => {
+    const [isEditMode, isEditModeTrigger] = useTrigger()
+    const { mutate: deleteHandler } = UseFoodDrinkDelete()
+    const { mutate: updateHandler } = UseFoodDrinkUpdate()
     const nilai = {
         like: 99,
         ok: 99,
         dislike: 99,
     }
-
-    const Buttonstyle = {
-        sx: {
-            color: 'eror'
-        }
+    const yupConfig = yup.object({
+        image_Url: yup
+            .string()
+            .required(),
+        name: yup
+            .string()
+            .required(),
+        price: yup
+            .number()
+            .required()
+            .positive('Masukan Angka Postive'),
+        minOrder: yup
+            .number()
+            .required()
+            .positive('Masukan Angka Postive')
+            .max(99, 'Maximal Min order 99'),
+        description: yup
+            .string()
+            .required(),
+    })
+    const formikConfig = useFormik({
+        initialValues: {
+            imageUrl: image_Url,
+            name: name,
+            price: price,
+            minOrder: minOrder,
+            description: description,
+        },
+        validationSchema: yupConfig,
+        validateOnChange: false,
+    })
+    const nameConfig = {
+        name: 'name',
+        label: 'Makanan & Minuman',
+        value: formikConfig.values.name,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.errors.email
     }
-
+    const priceConfig = {
+        name: 'price',
+        label: 'Harga',
+        type: 'number',
+        value: formikConfig.values.price,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.errors.price
+    }
+    const minOrderConfig = {
+        name: 'minOrder',
+        label: 'Min. Pemesanan',
+        type: 'number',
+        value: formikConfig.values.minOrder,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.errors.minOrder,
+    }
+    const descriptionConfig = {
+        name: 'description',
+        label: 'Deskripsi',
+        value: formikConfig.values.description,
+        onChange: formikConfig.handleChange,
+        helperText: formikConfig.errors.description,
+    }
     const [open, setOpen] = React.useState(false)
 
     return (
-        <React.Fragment>
-
+        <>
             <TableRow >
                 <TableCell width={1} sx={{ '& > *': { borderBottom: 'unset' } }}>
                     <IconButton
-                        aria-label="expand row"
-                        size="small"
+                        aria-label='expand row'
+                        size='small'
                         onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-
+                        {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
                     </IconButton>
                 </TableCell>
-
-                <TableCell width={1} sx={{ textAlign: 'center' }} component="th" scope="row">1</TableCell>
-                <TableCell width={250} sx={{ textAlign: 'center' }} component="th" scope="row" align="center">
-                    Sambal Matah
+                <TableCell width={1} sx={{ textAlign: 'center' }} component='th'>{id}</TableCell>
+                <TableCell width={20} sx={{ justifyContent: 'center' }} align='center' component='th'><Avatar
+                    alt="Remy Sharp" variant='square' src="/static/images/avatar/1.jpg" />
                 </TableCell>
-                <TableCell widht={10} sx={{ textAlign: 'center' }} component="th" scope="row" align="center">
-                    60.000
-                </TableCell>
-                <TableCell widht={2} sx={{ textAlign: 'center' }} component="th" scope="row" align="center">
-                    20
-                </TableCell>
-                <TableCell width={200} align='center' component="th" scope="row">
+                <FoodDrinkTableCell open={isEditMode} config={nameConfig} />
+                <FoodDrinkTableCell open={isEditMode} config={priceConfig} />
+                <FoodDrinkTableCell open={isEditMode} config={minOrderConfig} />
+                <TableCell align='center' component="th" scope="row" size='small'
+                    sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
                     <List component={Stack} direction="row" disablePadding>
                         <ReactListItem icon={<MoodRounded />} content={nilai.like} />
                         <ReactListItem icon={<SentimentNeutralRounded />} content={nilai.ok} />
                         <ReactListItem icon={<MoodBadRounded />} content={nilai.dislike} />
                     </List>
                 </TableCell>
-                <TableCell widht={200} sx={{ alignItems: 'center' }} component="th" scope="row" align="right">
-                    <List component={Stack} direction="row" disablePadding>
-                        <IconButton>
-                            <EditIcon />
+                <TableCell component="th" scope="row" align="right">
+                    {isEditMode ? (
+                        <IconButton onClick={() => {
+                            updateHandler(
+                                { id, ...formikConfig.values },
+                                { onSuccess: isEditModeTrigger },
+                            )
+                        }}>
+                            <CheckCircleIcon />
                         </IconButton>
-                        <IconButton color='error'>
-                            <DeleteIcon />
+                    ) : (
+                        <IconButton onClick={isEditModeTrigger}>
+                            <Edit />
                         </IconButton>
-                    </List>
+                    )}
+                    <IconButton onClick={() => deleteHandler(id)} color='error'>
+                        <Delete />
+                    </IconButton>
+                    <IconButton size='small' sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
+                        <Checkbox />
+                    </IconButton>
                 </TableCell>
             </TableRow>
-            <TableRow >
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <FoodDrinkTableCollapsible />
-                    </Collapse>
-                </TableCell>
+            <TableRow sx={{
+                width: '100%'
+            }}>
+                <FoodDrinkTableCollapsible
+                    openEdit={isEditMode}
+                    openCollapse={open}
+                    config={descriptionConfig}
+                />
             </TableRow>
-        </React.Fragment>
+        </>
     )
 }
 export default FoodDrinkTableItem
