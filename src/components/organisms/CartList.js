@@ -1,71 +1,58 @@
 import React from 'react'
+import { Stack, Typography } from '@mui/material'
+import { ProductionQuantityLimits } from '@mui/icons-material'
 import useCartStore from 'factory/store/useCartStore'
 import CartContainer from 'components/organisms/CartContainer'
 import CartHeader from 'components/molecules/CartHeader'
 import CartCheckout from 'components/organisms/CartCheckout'
 import CartItem from 'components/organisms/CartItem'
+import { useCartCollection } from 'api/hooks/cartHook'
 import CartSkeleton from './CartSkeleton'
 
 const CartList = () => {
     const store = useCartStore()
+    const { isFetchedAfterMount } = useCartCollection()
 
-    React.useEffect(() => {
-        const cartList = []
-        cartList.push({
-            id: 1,
-            image: 'https://picsum.photos/600.webp',
-            title: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, quidem?',
-            price: 182990,
-            quantity: 99,
-            isChecked: false,
-        })
-        cartList.push({
-            id: 2,
-            image: 'https://picsum.photos/600.webp',
-            title: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, quidem?',
-            price: 182990,
-            quantity: 99,
-            isChecked: false,
-        })
-        cartList.push({
-            id: 3,
-            image: 'https://picsum.photos/600.webp',
-            title: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, quidem?',
-            price: 182990,
-            quantity: 10,
-            isChecked: false,
-        })
-        setTimeout(() => store.setCart(cartList), 5000)
-    }, [])
-
-    if (store.data === null) return <CartSkeleton />
+    if (!isFetchedAfterMount) return <CartSkeleton />
 
     return (
         <CartContainer checkout={<CartCheckout />}>
-            <CartHeader />
+            {store.isCartExist() ? <CartHeader /> : (
+                <Stack alignItems="center" sx={{ opacity: .5 }}>
+                    <ProductionQuantityLimits sx={{ fontSize: 100 }} />
+                    <Typography variant="body1" fontSize={16} fontWeight="medium">
+                        Belum ada makanan atau minuman apapun di keranjang
+                    </Typography>
+                </Stack>
+            )}
             {
-                store.data.map(item => {
-                    const { id, quantity, isChecked, ...bodyItem } = item
-
-                    return (
-                        <CartItem
-                            cartBody={bodyItem}
-                            cartFooter={{
-                                quantity: quantity,
-                                quantityClick: {
-                                    add: () => store.increaseQuantity(id),
-                                    remove: () => store.decreaseQuantity(id),
-                                },
-                                removeClick: () => store.removeCart(id),
-                                isChecked: isChecked,
-                                checkboxHandler: () => store.checkboxTrigger(id),
-                            }}
-                            key={id}
-                        />
-                    )
-                }
-
-                )
+                store.pages?.map((group, index) => (
+                    <React.Fragment key={index}>
+                        {
+                            group?.map(item => {
+                                const { id, quantity, isChecked, ...bodyItem } = item
+                                return (
+                                    <CartItem
+                                        cartBody={bodyItem}
+                                        cartFooter={{
+                                            cartId: id,
+                                            minOrder: item.food_Drink_Menu_Min_Order,
+                                            quantity: quantity,
+                                            quantityClick: {
+                                                add: () => store.increaseQuantity(id),
+                                                remove: () => store.decreaseQuantity(id),
+                                            },
+                                            removeClick: () => store.removeCart(id),
+                                            isChecked: isChecked,
+                                            checkboxHandler: () => store.checkboxTrigger(id),
+                                        }}
+                                        key={id}
+                                    />
+                                )
+                            })
+                        }
+                    </React.Fragment>
+                ))
             }
         </CartContainer>
     )

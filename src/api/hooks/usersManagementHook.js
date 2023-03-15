@@ -1,13 +1,15 @@
-import { useInfiniteQuery, useMutation } from '@tanstack/react-query'
-import { fetchUserList, deleteUser } from 'api/connections/usersManagementRequest'
+import React from 'react'
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query'
+import { fetchUserList, deleteUser, fetchUserById } from 'api/connections/usersManagementRequest'
 import useUserStore from 'factory/store/useUserStore'
+import { useParams } from 'react-router-dom'
 
 const useUserList = () => {
-    const setTotalUser = useUserStore(state => state.setTotalUser)
+    const { keyword, setTotalUser } = useUserStore()
     const userListQuery = useInfiniteQuery({
         queryKey: ['users'],
         queryFn: async ({ pageParam = 1 }) => {
-            const fetch = await fetchUserList(pageParam)
+            const fetch = await fetchUserList(pageParam, keyword)
             setTotalUser(fetch.totalCount)
             return fetch.data
         },
@@ -18,7 +20,27 @@ const useUserList = () => {
         },
     })
 
+    React.useEffect(() => {
+        userListQuery.refetch()
+        return userListQuery.remove
+    }, [keyword])
+
     return userListQuery
+}
+
+const useUserData = () => {
+    const { id } = useParams()
+    const userData = useQuery({
+        queryKey: ['userDetail'],
+        queryFn: () => fetchUserById(id),
+    })
+    React.useEffect(() => {
+        userData.refetch()
+        return userData.remove
+    }, [id])
+    
+    return userData
+
 }
 
 const useDeleteUser = () => {
@@ -30,4 +52,5 @@ const useDeleteUser = () => {
     return mutation
 }
 
-export { useUserList, useDeleteUser }
+
+export { useUserList, useDeleteUser, useUserData }

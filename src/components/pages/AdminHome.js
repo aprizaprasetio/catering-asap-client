@@ -1,58 +1,38 @@
 import React from 'react'
-import { Collapse, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, } from '@mui/material'
+import { Grid } from '@mui/material'
+import { useStale } from 'commands/builders/hookBuilder'
 import CenterLayout from 'components/templates/CenterLayout'
 import AdminNavbar from 'components/organisms/AdminNavbar'
-import { useStale } from 'commands/builders/hookBuilder'
-import FoodDrinkFormRow from 'components/organisms/FoodDrinkFormRow'
-import { useTrigger } from 'commands/builders/commonBuilder'
+import NumberCard from 'components/organisms/NumberCard'
+import AdminWelcome from 'components/organisms/AdminWelcome'
+import AdminAvatar from 'components/organisms/AdminAvatar'
 
 const AdminHome = () => {
     const [user] = useStale('user')
-    const [open] = useTrigger()
 
     return (
         <>
             <AdminNavbar />
             <CenterLayout admin>
-                <TableContainer sx={{ marginTop: 5, boxShadow: 2, }}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>
-                                    Makanan & Minuman
-                                </TableCell>
-                                <TableCell width={200}>
-                                    Harga
-                                </TableCell>
-                                <TableCell width={100}>
-                                    Minimal Pemesanan
-                                </TableCell>
-                                <TableCell>
-                                    Tanggapan
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <Collapse in={open} sx={{ width: '100%' }}>
-                                <FoodDrinkFormRow />
-                            </Collapse>
-                            <TableRow>
-                                <TableCell>
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus.
-                                </TableCell>
-                                <TableCell>
-                                    Rp. xxx.xxx,xx
-                                </TableCell>
-                                <TableCell>
-                                    XX
-                                </TableCell>
-                                <TableCell>
-                                    xxXXxx
-                                </TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <Grid
+                    container
+                    spacing={1}
+                    columns={{
+                        xs: 5,
+                        sm: 6,
+                        md: 7,
+                        lg: 10,
+                        xl: 12,
+                    }}
+                >
+                    <AdminWelcome
+                        header={user?.name ?? 'No Name'}
+                        message="Selamat datang"
+                        body="Kelola data katering lewat website dimana pun anda berada." />
+                    <AdminAvatar />
+                    <NumberCard />
+                    <NumberCard />
+                </Grid>
             </CenterLayout>
         </>
     )

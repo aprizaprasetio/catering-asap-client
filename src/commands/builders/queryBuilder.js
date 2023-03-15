@@ -1,4 +1,5 @@
 import { QueryObserver } from '@tanstack/react-query'
+import { getToken } from 'commands/api/tokenCommand'
 import { client } from 'api/initiates/queryInitiate'
 
 const observerBuilder = queryKey => {
@@ -9,6 +10,9 @@ const observerBuilder = queryKey => {
     return observer
 }
 
+const authHeaderBuilder = () => getToken() ? `Bearer ${getToken()}` : null
+
 export {
     observerBuilder,
+    authHeaderBuilder,
 }

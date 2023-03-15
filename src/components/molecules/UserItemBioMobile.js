@@ -5,7 +5,7 @@ import { Box } from '@mui/system'
 import { Male, Female, Man } from '@mui/icons-material'
 import UserItemBioMobileProps from 'proptypes/organisms/UserItemBioMobileProps'
 
-const UserItemBioMobile = ({ image, name, email, phone }) => {
+const UserItemBioMobile = ({ image, name, email, phone, gender }) => {
     return (
         <Box sx={{
             display: 'flex',
@@ -22,9 +22,7 @@ const UserItemBioMobile = ({ image, name, email, phone }) => {
                 }}
                 alt="Remy Sharp"
                 src={image}
-            >
-                B
-            </Avatar>
+            />
             <Box sx={{
                 paddingTop: 1,
                 marginLeft: 2
@@ -40,7 +38,7 @@ const UserItemBioMobile = ({ image, name, email, phone }) => {
                 }}
                     variant="h3">{phone}</Typography>
             </Box>
-            <Icon><Female fontSize='small'/></Icon>
+            <Icon>{gender ? <Female fontSize='small' /> : <Male  fontSize='small'/>}</Icon>
         </Box>
     )
 }

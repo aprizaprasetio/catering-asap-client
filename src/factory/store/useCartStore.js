@@ -3,65 +3,99 @@ import { formatQuantity } from 'commands/application/priceCommand'
 
 const useCartStore = create((set, get) => (
     {
-        data: null,
-        setCart: value => set({
-            data: value,
-        }),
-        isNoCheck: () => {
-            const isSingleCheck = get().data.some(item => {
-                if (item.isChecked) return true
+        pages: null,
+        quantity: null,
+        setCart: value => {
+            const isCartExist = get().pages?.length >= 1
+            const lastPage = value[value.length - 1]
+            if (isCartExist) {
+                return set(state => ({
+                    pages: state.pages.push(lastPage),
+                }))
+            }
+            set({
+                pages: value,
             })
+        },
+        setQuantity: value => set({
+            quantity: value,
+        }),
+        resetCart: () => set({ pages: null }),
+        isCartExist: () => !!get().pages.find(group => (group.length >= 1)),
+        isNoCheck: () => {
+            const isSingleCheck = get().pages?.some(group => (
+                group.some(item => {
+                    if (item.isChecked) return true
+                })
+            ))
             return !isSingleCheck
         },
         isCheckedAll: () => {
-            const isSingleNoCheck = get().data.some(item => {
-                if (!item.isChecked) return true
-            })
+            const isSingleNoCheck = get().pages?.some(group => (
+                group.some(item => {
+                    if (!item.isChecked) return true
+                })
+            ))
             return !isSingleNoCheck
         },
         checkboxTriggerAll: () => set(state => ({
-            data: state.data.map(item => ({
-                ...item,
-                isChecked: !state.isCheckedAll(),
-            }))
+            pages: state.pages.map(group => (
+                group.map(item => ({
+                    ...item,
+                    isChecked: state.isCheckedAll() ? false : true,
+                }))
+            ))
         })),
         removeCart: id => set(state => ({
-            data: state.data.filter(item => {
-                return item.id !== id
-            }),
+            pages: state.pages.map(group => (
+                group.filter(item => {
+                    return item.id !== id
+                })
+            )),
         })),
         removeChecked: () => set(state => ({
-            data: state.data.filter(item => {
-                return item.isChecked === false
-            }),
+            pages: state.pages.map(group => (
+                group.filter(item => !item.isChecked)
+            )),
         })),
-        checkedTotal: () => get().data.reduce((total, item) => {
-            if (!item.isChecked) return total
-            return total + formatQuantity(item.price, item.quantity)
-        }, 0),
+        checkedTotal: () => get().pages?.reduce((groupTotal, group) => (
+            groupTotal + group.reduce((itemTotal, item) => {
+                if (!item.isChecked) return itemTotal
+                return itemTotal + formatQuantity(item.food_Drink_Menu_Price, item.quantity)
+            }, 0)
+        ), 0),
         checkboxTrigger: id => set(state => ({
-            data: state.data.map(item => {
-                if (item.id !== id) return item
-                return {
-                    ...item,
-                    isChecked: !item.isChecked,
-                }
-            }),
+            pages: state.pages.map(group => (
+                group.map(item => {
+                    if (item.id !== id) return item
+                    return {
+                        ...item,
+                        isChecked: !item.isChecked,
+                    }
+                })
+            )),
         })),
-        increaseQuantity: id => set(state => state.data.map(item => {
-            if (item.id !== id) return item
-            return {
-                ...item,
-                quantity: ++item.quantity,
-            }
+        increaseQuantity: id => set(state => ({
+            pages: state.pages.map(group => (
+                group.map(item => {
+                    if (item.id !== id) return item
+                    return {
+                        ...item,
+                        quantity: ++item.quantity,
+                    }
+                })
+            ))
         })),
-        decreaseQuantity: id => set(state => state.data.map(item => {
-            if (item.id !== id) return item
-            if (item.quantity <= 1) return state.removeCart(id)
-            return {
-                ...item,
-                quantity: --item.quantity,
-            }
+        decreaseQuantity: id => set(state => ({
+            pages: state.pages.map(group => (
+                group.map(item => {
+                    if (item.id !== id) return item
+                    return {
+                        ...item,
+                        quantity: --item.quantity,
+                    }
+                })
+            ))
         })),
     }
 ))

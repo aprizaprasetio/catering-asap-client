@@ -3,7 +3,7 @@ import { Box, CardMedia, CardContent, Typography } from '@mui/material'
 import { formatIDR } from 'commands/application/priceCommand'
 import CartItemBodyProps from 'proptypes/molecules/CartItemBodyProps'
 
-const CartItemBody = ({ image, title, price }) => {
+const CartItemBody = ({ image, title, price, minOrder }) => {
     return (
         <Box sx={{
             display: 'flex',
@@ -23,6 +23,11 @@ const CartItemBody = ({ image, title, price }) => {
                     fontSize: 20,
                 }}>
                     {title}
+                </Typography>
+                <Typography variant="body2" sx={{
+                    fontWeight: 'medium',
+                }}>
+                    Min. {minOrder}
                 </Typography>
                 <Typography variant="body1" sx={{
                     fontSize: 18,

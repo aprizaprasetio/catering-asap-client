@@ -25,7 +25,7 @@ const UserListAdminMobile = () => {
                     return (
                         <React.Fragment key={index}>
                             {
-                                userItem?.map(item => <UserItemMobile key={item.id} userBio={item} userContent={{ orderTotalPrice: 12000000 }} />)
+                                userItem?.map(item => <UserItemMobile key={item.id} userBio={item} userContent={item} />)
                             }
                         </React.Fragment>
                     )

@@ -7,7 +7,12 @@ import CartItemProps from 'proptypes/organisms/CartItemProps'
 const CartItem = ({ cartBody, cartFooter }) => {
     return (
         <CartItemContainer>
-            <CartItemBody {...cartBody} />
+            <CartItemBody
+                image="https://picsum.photos/600.webp"
+                title={cartBody.food_Drink_Menu_Name}
+                price={cartBody.food_Drink_Menu_Price}
+                minOrder={cartFooter.minOrder}
+            />
             <CartItemFooter {...cartFooter} />
         </CartItemContainer>
     )

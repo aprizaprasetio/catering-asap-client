@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { client } from 'api/initiates/queryInitiate'
-import { fetchEditUser } from 'api/connections/manageUserRequest'
+import { fetchEditUser, fetchEditPassword } from 'api/connections/manageUserRequest'
 
 const useProfile = () => {
     // Initiate mutation for put requsest
@@ -16,6 +16,15 @@ const useProfile = () => {
     return mutation
 }
 
+const useChangePassword = () => {
+    // Initiate mutation for put requsest
+    const mutation = useMutation({
+        mutationFn: fetchEditPassword
+    })
+    return mutation
+}
+
 export {
     useProfile,
+    useChangePassword,
 }

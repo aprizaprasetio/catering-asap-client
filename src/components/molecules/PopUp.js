@@ -1,8 +1,7 @@
 import React from 'react'
 import { Dialog, DialogContent, Paper } from '@mui/material'
 
-const PopUp = ({ openPopup, children, setOpenPopup }) => {
-
+const PopUp = ({ openPopup, setOpenPopup, children }) => {
     const PaperProps = {
         display: 'flex',
         flexDirection: 'column',

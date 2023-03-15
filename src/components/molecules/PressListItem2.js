@@ -17,13 +17,13 @@ const iconStyle = {
     justifyContent: 'center',
 }
 
-const PressListItem2 = ({ icon, content, href }) => {
+const PressListItem2 = ({ icon, onClick = undefined, content, href }) => {
     const navigate = useNavigate()
     const { pathname } = useLocation()
 
     return (
         <ListItem disablePadding>
-            <ListItemButton selected={pathname === href} onClick={() => navigate(href)} sx={itemStyle}>
+            <ListItemButton selected={pathname === href} onClick={onClick ?? (() => navigate(href))} sx={itemStyle}>
                 <ListItemIcon sx={iconStyle}>{icon}</ListItemIcon>
                 <ListItemText>{content}</ListItemText>
             </ListItemButton>

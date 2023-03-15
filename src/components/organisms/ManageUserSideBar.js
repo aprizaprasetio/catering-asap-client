@@ -1,9 +1,9 @@
 import React from 'react'
-import { Paper, List, Stack } from '@mui/material'
-import { ManageAccounts, Key } from '@mui/icons-material'
-import PressListItem from 'components/molecules/PressListItem'
-import ListItemVertical from 'components/molecules/ListItemVertical'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { Paper, Tabs, Tab, useMediaQuery } from '@mui/material'
+import { useStale } from 'commands/builders/hookBuilder'
 
+/*
 const listStyle = {
     paddingY: 3,
     paddingX: 1,
@@ -21,54 +21,55 @@ tabList.push({
     href: '/profile/password',
     content: 'Kata Sandi'
 })
-const ManageUserSideBar = () => {
+*/
+
+const ManageUserSideBar = ({ tabList }) => {
+    const [user] = useStale('user')
+    const navigate = useNavigate()
+    const { pathname } = useLocation()
+    const isMobile = useMediaQuery('(max-width:768px)')
+
     return (
-        <>
-            <Paper sx={{
-                height: 'calc(100vh - 64px)',
-                boxShadow: 4,
-                padding: 0,
-                display: {
-                    xs: 'none',
-                    md: 'block',
-                },
-            }}>
-                <List sx={listStyle}>
-                    {
-                        tabList.map(item =>
-                            <PressListItem
+        <Tabs
+            value={pathname}
+            orientation={isMobile ? 'horizontal' : 'vertical'}
+            variant="scrollable"
+            component={Paper}
+            sx={{
+                height: isMobile ? 'auto' : 'calc(100vh - 64px)',
+            }}
+        >
+            {
+                (user.role === 'admin') ?
+                    tabList.map(item => (
+                        item.isAdminVisible && (
+                            <Tab
+                                onClick={() => navigate(item.href)}
+                                value={item.href}
+                                label={item.content}
                                 icon={<item.icon />}
-                                href={item.href}
-                                content={item.content}
+                                sx={{
+                                    paddingX: 4,
+                                }}
                                 key={item.href}
                             />
                         )
-                    }
-                </List>
-            </Paper>
-            <Paper sx={{
-                display: {
-                    xs: 'block',
-                    md: 'none',
-                },
-                paddingX: 1,
-                boxShadow: 3,
-            }}>
-                <List component={Stack} direction="row">
-                    {
-                        tabList.map(item =>
-                            <ListItemVertical
-                                icon={<item.icon />}
-                                href={item.href}
-                                key={item.content}
-                            >
-                                {item.content}
-                            </ListItemVertical>
-                        )
-                    }
-                </List>
-            </Paper>
-        </>
+                    )) :
+                    tabList.map(item => (
+                        <Tab
+                            onClick={() => navigate(item.href)}
+                            value={item.href}
+                            label={item.content}
+                            icon={<item.icon />}
+                            sx={{
+                                paddingX: 4,
+                            }}
+                            key={item.href}
+                        />
+                    ))
+            }
+        </Tabs>
     )
 }
+
 export default ManageUserSideBar

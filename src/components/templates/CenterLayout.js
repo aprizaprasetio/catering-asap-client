@@ -3,7 +3,7 @@ import { Container, Box } from '@mui/material'
 import CenterLayoutProps from 'proptypes/templates/CenterLayoutProps'
 import ButtonScrollTop from 'components/molecules/ButtonScrollTop'
 
-const CenterLayout = ({ admin, children }) => {
+const CenterLayout = ({ admin, header, children }) => {
     const gridStyle = {
         marginY: 3,
         display: 'grid',
@@ -20,6 +20,14 @@ const CenterLayout = ({ admin, children }) => {
 
     return (
         <>
+            <Box sx={{
+                marginLeft: {
+                    xs: 'auto',
+                    sm: admin ? '100px' : 'auto',
+                },
+            }}>
+                {header}
+            </Box>
             <Container sx={gridStyle}>
                 {children}
             </Container>

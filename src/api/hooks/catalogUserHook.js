@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
-import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useQuery, useInfiniteQuery, useMutation } from '@tanstack/react-query'
 import { useStale } from 'commands/builders/hookBuilder'
 import { fetchFoodDrinkList, fetchFoodDrinkList2, fetchFoodDrinkMenuDetail } from 'api/connections/catalogUserRequest'
-import { useParams } from 'react-router-dom'
+import { fetchFoodDrinkList, fetchFoodDrinkList2, fetchOrder, fetchOrderUser } from 'api/connections/catalogUserRequest'
+import useCheckoutStore from 'factory/store/useCheckoutStore'
 
 // This is the old hook, not compatible and do not use this hook
 const useFoodDrinkList = () => {
@@ -37,9 +39,37 @@ const useFoodDrinkList2 = () => {
     return foodDrinkQuery
 }
 
+const useFoodDrinkOrder = () => {
+    const navigate = useNavigate()
+    const { getCheckoutData } = useCheckoutStore()
 
+    const mutation = useMutation({
+        mutationFn: () => fetchOrder(getCheckoutData()),
+        onSuccess: createdOrderId => navigate(`/orders/${createdOrderId}`),
+    })
+
+    return mutation
+}
+
+const useOrderUser = () => {
+    const navigate = useNavigate()
+    const { orderId } = useParams()
+
+    const orderUser = useQuery({
+        queryKey: ['orderUser'],
+        queryFn: () => fetchOrderUser(orderId),
+        onError: () => navigate('/'),
+        retry: false,
+    })
+
+    useEffect(() => orderUser.remove, [])
+
+    return orderUser
+}
 
 export {
     useFoodDrinkList,
     useFoodDrinkList2,
+    useFoodDrinkOrder,
+    useOrderUser,
 }
