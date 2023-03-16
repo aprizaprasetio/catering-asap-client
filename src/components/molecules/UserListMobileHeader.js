@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography, AppBar, Toolbar} from '@mui/material'
+import { Box, Typography, AppBar, Toolbar } from '@mui/material'
 import CenterLayout from 'components/templates/CenterLayout'
 /*
 const UserListMobileHeader = ({ name1, name2 }) => {
@@ -71,9 +71,7 @@ const UserListMobileHeader = ({ name1, name2 }) => {
                 }}
                     variant="subtitle1">{name2}</Typography>
             </Box>
-            {/* <CenterLayout admin {...center}> */}
-
-            {/* </CenterLayout> */}
+           
         </Box>
 */
 

@@ -14,17 +14,23 @@ import { useProfile } from 'api/hooks/manageUserHook'
 const yupConfig = yup.object({
     avatar: yup
         .string()
-        .test('fileFormat', 'Image only', value => {
-            console.info(value)
-            return value.includes('data:image/')
-        }),
+        .test('fileFormat', 'Hanya gambar', value => (
+            value.includes('data:image/')
+        )),
     name: yup
-        .string(),
+        .string()
+        .required('Mohon pastikan nama terisi'),
     email: yup
         .string()
-        .email('Mohon periksa email'),
+        .email('Mohon periksa email')
+        .required('Mohon pastikan email terisi'),
     phone: yup
-        .number('Mohon periksa telepon'),
+        .string()
+        .test('phoneNumberFormat', 'Isikan nomor telepon dengan benar', value => {
+            if (value === undefined) return true
+
+            return !isNaN(value)
+        }),
 })
 
 const PrivateProfileTab = () => {
@@ -56,12 +62,14 @@ const PrivateProfileTab = () => {
 
             const profileForm = new FormData()
 
+            // Conditional field input
             if (formikConfig.values.avatar !== user.avatar)
                 profileForm.append('Avatar', file, fileName)
+            if (formikConfig.values.phone)
+                profileForm.append('Phone', formikConfig.values.phone)
 
             profileForm.append('Name', formikConfig.values.name)
             profileForm.append('Email', formikConfig.values.email)
-            profileForm.append('Phone', formikConfig.values.phone)
 
             mutate(profileForm)
         },
@@ -102,7 +110,11 @@ const PrivateProfileTab = () => {
         name: 'phone',
         label: 'Telepon',
         value: formikConfig.values.phone,
-        onChange: formikConfig.handleChange,
+        onChange: Event => {
+            if (isNaN(Event.target.value)) return
+            formikConfig.handleChange(Event)
+            console.info(Event.target.value)
+        },
         helperText: formikConfig.touched.phone && formikConfig.errors.phone,
     }
 

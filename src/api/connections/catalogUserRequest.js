@@ -30,6 +30,7 @@ const fetchFoodDrinkMenuDetail = async id => {
     })
     // console.table(dataFoodDrinkMenu.data)
     return dataFoodDrinkMenu.data
+}
 
 const fetchOrder = async checkoutData => {
     const order = await axios.post('Orders', checkoutData)
