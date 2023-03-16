@@ -1,7 +1,8 @@
 import React from 'react'
-import { Paper, Box, IconButton, SwipeableDrawer, MenuList, Divider } from '@mui/material'
-import { Menu as MenuIcon, Person, Logout, HourglassBottom, Cached, LocalShipping, Schedule } from '@mui/icons-material'
+import { Paper, Box, IconButton, SwipeableDrawer, MenuList, Divider, Skeleton } from '@mui/material'
+import { Menu as MenuIcon, Logout, HourglassBottom, Cached, LocalShipping, Schedule } from '@mui/icons-material'
 import PressListItem from 'components/molecules/PressListItem'
+import AvatarIcon from 'components/atoms/AvatarIcon'
 import { useStale } from 'commands/builders/hookBuilder'
 import { useTrigger } from 'commands/builders/commonBuilder'
 import { logout } from 'commands/application/authCommand'
@@ -47,7 +48,7 @@ const NavbarRightMobile = () => {
             </IconButton>
             <SwipeableDrawer {...drawerConfig}>
                 <MenuList component={Paper} sx={listStyle}>
-                    <PressListItem href="profile" icon={<Person />} content={user?.name ?? 'No Name'} />
+                    <PressListItem href="profile" icon={<AvatarIcon />} content={user?.name ?? <Skeleton width="100%" height="100%" variant="rounded" />} />
                     <PressListItem onClick={logout} icon={<Logout />} content="Keluar" />
                 </MenuList>
                 <MenuList component={Paper} sx={listStyle}>

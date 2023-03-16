@@ -7,10 +7,7 @@ const useProfile = () => {
     const mutation = useMutation({
         mutationFn: fetchEditUser,
         onSuccess: res => {
-            client.setQueryData(['user'], {
-                ...client.getQueryData(['user']),
-                ...res,
-            })
+            client.setQueryData(['user'], res)
         }
     })
     return mutation
