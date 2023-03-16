@@ -10,14 +10,14 @@ import { Typography, TextField, Button, Dialog, DialogTitle, DialogContent, Dial
 import { FormatStrikethroughSharp } from '@mui/icons-material'
 
 const yupConfig = yup.object({
-    image_Url: yup
-        .mixed()
-        .required('Required')
-        .test(
-            "fileFormat",
-            "Unsupported Format",
-            value => value && value.type.includes('image/')
-        ),
+    // image_Url: yup
+    //     .mixed()
+    //     .required('Required')
+    //     .test(
+    //         "fileFormat",
+    //         "Unsupported Format",
+    //         value => value && value.type.includes('image/')
+    //     ),
     name: yup
         .string('Masukan alphabet')
         .required('Harus Diisi'),
@@ -50,8 +50,7 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
         validationSchema: yupConfig,
         validateOnChange: false,
         // onSubmit: () => console.info(formikConfig.values),
-        onSubmit: () => postHandler(
-            { ...formikConfig.values },
+        onSubmit: () => postHandler({ ...formikConfig.values },
             { onSuccess: () => (query.refetch(), setOpenPopup()) },
         ),
     })
@@ -64,6 +63,12 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
     //     onBlur: formikConfig.handleBlur,
     //     helperText: formikConfig.touched.image && formikConfig.errors.image,
     // }
+    // React.useEffect(() => {
+    //     formikConfig.setFieldValue('name', values.name)
+    //     formikConfig.setFieldValue('price', values.price)
+    //     formikConfig.setFieldValue('minOrder', values.minOrder)
+    //     formikConfig.setFieldValue('description', values.description)
+    // }, [values])
 
     const nameConfig = {
         name: 'name',
@@ -110,7 +115,6 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
     }
 
     return (
-
         <Dialog
             component="form"
             onSubmit={formikConfig.handleSubmit}
@@ -139,7 +143,7 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
                     }}
                     {...descriptionConfig} />
             </DialogContent>
-            <DialogActions>
+            <DialogActions  >
                 <Button
                     type="submit"
                     sx={{
