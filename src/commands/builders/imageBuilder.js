@@ -42,6 +42,7 @@ const useImage = () => {
         imageHandler,
         {
             fileName,
+            file,
         },
     ]
 }

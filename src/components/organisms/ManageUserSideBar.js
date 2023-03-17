@@ -3,6 +3,26 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { Paper, Tabs, Tab, useMediaQuery } from '@mui/material'
 import { useStale } from 'commands/builders/hookBuilder'
 
+/*
+const listStyle = {
+    paddingY: 3,
+    paddingX: 1,
+    display: 'grid',
+    gap: 1,
+}
+const tabList = []
+tabList.push({
+    icon: ManageAccounts,
+    href: '/profile',
+    content: 'Biodata'
+})
+tabList.push({
+    icon: Key,
+    href: '/profile/password',
+    content: 'Kata Sandi'
+})
+*/
+
 const ManageUserSideBar = ({ tabList }) => {
     const [user] = useStale('user')
     const navigate = useNavigate()

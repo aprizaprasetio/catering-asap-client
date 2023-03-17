@@ -17,5 +17,4 @@ const ManageUserContainer = ({ tabList, children }) => {
         </Box>
     )
 }
-
 export default ManageUserContainer

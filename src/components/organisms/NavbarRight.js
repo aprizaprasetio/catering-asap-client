@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, Menu, MenuList, Stack, Paper, Divider } from '@mui/material'
+import { Box, Menu, MenuList, Stack, Paper, Divider, Skeleton } from '@mui/material'
 import { Person, HelpCenter, HourglassBottom, Cached, LocalShipping, Schedule, Logout } from '@mui/icons-material'
+import AvatarIcon from 'components/atoms/AvatarIcon'
 import PressIconLink from 'components/atoms/PressIconLink'
 import PressAvatar from 'components/atoms/PressAvatar'
 import PressListItem from 'components/molecules/PressListItem'
@@ -96,11 +97,25 @@ const NavbarRight = () => {
                 <CartIcon />
             </PressIconLink>
             <PressAvatar onClick={menuTrigger}>
-                <Person />
+                {user?.avatar ? (
+                    <Box
+                        component="img"
+                        src={user.avatar}
+                        sx={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                        }}
+                    />
+                ) : <Person />}
             </PressAvatar>
             <Menu {...menuConfig}>
                 <MenuList component={Paper}{...listConfig}>
-                    <PressListItem href="profile" icon={<Person />} content={user?.name ?? 'No Name'} />
+                    <PressListItem
+                        href="profile"
+                        icon={<AvatarIcon />}
+                        content={user?.name ?? <Skeleton variant="rounded" width="100%" height={20} />}
+                    />
                     <PressListItem onClick={logout} icon={<Logout />} content="Keluar" />
                 </MenuList>
                 <MenuList component={Paper} {...listConfig}>
