@@ -37,9 +37,20 @@ const fetchOrderUser = async orderId => {
     return order.data.data
 }
 
+const fetchFoodDrinkDetail = async fooddrinkid => {
+    const foodDrinkDetail = await axios.get(`/FoodDrinkMenus/${fooddrinkid}/detail`, {
+        params: {
+            id: fooddrinkid
+        }
+    })
+
+    return foodDrinkDetail.data
+}
+
 export {
     fetchFoodDrinkList,
     fetchFoodDrinkList2,
     fetchOrder,
     fetchOrderUser,
+    fetchFoodDrinkDetail
 }

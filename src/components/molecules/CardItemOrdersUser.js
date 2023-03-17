@@ -1,10 +1,10 @@
-import React from 'react'
-import { Grid, Box, Card, CardContent, CardMedia, Typography, Icon } from '@mui/material'
-import { formatIDR } from 'commands/application/priceCommand'
-import { useNavigate } from 'react-router-dom'
 import { FastfoodOutlined } from '@mui/icons-material'
+import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { formatIDR } from 'commands/application/priceCommand'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) => {
+const CardItemOrdersUser = ({ id, quantity, totalPriceOrdered }) => {
     const navigate = useNavigate()
 
     return (
@@ -17,7 +17,7 @@ const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) 
                 paddingX: 1,
                 position: 'relative'
             }}
-                onClick={() => navigate(`/orders/detail/${id}`)}
+                onClick={() => navigate(`/orders/${id}`)}
             >
                 <Box sx={{
                     display: 'flex',
@@ -25,15 +25,12 @@ const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) 
                     alignItems: 'center',
                     marginX: 2
                 }}>
-                    <FastfoodOutlined sx={{ fontSize: 70 }} />
+                    <FastfoodOutlined sx={{ fontSize: 60 }} />
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: 15 }}>
                             No.Pesanan: {id}
-                        </Typography>
-                        <Typography component="div" sx={{ fontSize: 28, fontWeight: 'bold' }}>
-                            {userName}
                         </Typography>
                         <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: 18 }}>{formatIDR(totalPriceOrdered)}</Typography>
                         <Box sx={{ position: 'absolute', right: 25, bottom: 13 }}>
@@ -46,4 +43,4 @@ const CardItemManagementOrder = ({ id, userName, quantity, totalPriceOrdered }) 
     )
 }
 
-export default CardItemManagementOrder
+export default CardItemOrdersUser

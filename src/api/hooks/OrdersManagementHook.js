@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
 import { useParams, useLocation } from "react-router-dom"
-import { fetchOrderList, fetchDataGraph, updateOrder, fetchListMenuOrder, fetchListSwitch, fetchListUserGraph, fetchOrderById } from "api/connections/ordersManagementRequest"
+import { fetchOrderList, fetchDataGraph, updateOrder, fetchListMenuOrder, fetchListSwitch, fetchListUserGraph, fetchOrderById, fetchListSwitchUser } from "api/connections/ordersManagementRequest"
 import { useEffect } from "react"
 import useSortAdmin from "factory/store/useSortAdmin"
 
@@ -97,6 +97,29 @@ const useDataOrderUser = () => {
     return dataOrder
 }
 
+const useOrderSwitchUser = () => {
+    const { pathname } = useLocation()
+
+    const orderSwitch = useInfiniteQuery({
+        queryKey: ['orderListUser'],
+        queryFn: ({ pageParam = 1 }) => fetchListSwitchUser(pageParam, pathname),
+        getNextPageParam: (current, pages) => {
+            const isLimit = pages.find(current => current.length !== 10)
+            if (isLimit) return
+            return pages.length + 1
+        },
+        refetchOnMount: true,
+        refetchOnWindowFocus: true,
+    })
+
+    useEffect(() => {
+        orderSwitch.refetch()
+        return orderSwitch.remove
+    }, [pathname])
+
+    return orderSwitch
+}
+
 export {
     useOrderList,
     useUpdateOrder,
@@ -104,5 +127,6 @@ export {
     useOrderSwitch,
     useOrderListUserGraph,
     useDataGraph,
-    useDataOrderUser
+    useDataOrderUser,
+    useOrderSwitchUser
 }

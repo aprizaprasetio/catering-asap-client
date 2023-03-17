@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Card } from '@mui/material'
+import { Grid, Card, Button } from '@mui/material'
 import FoodDrinkItemProps from 'proptypes/organisms/FoodDrinkItemProps'
 import { useTrigger } from 'commands/builders/commonBuilder'
 
@@ -19,6 +19,7 @@ const FoodDrinkItem = ({ children }) => {
         transitionDuration: '.33s',
         height: '100%',
         display: 'grid',
+        cursor: 'pointer'
     }
 
     return (

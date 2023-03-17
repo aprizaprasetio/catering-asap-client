@@ -46,28 +46,22 @@ const UserOrderDetail = () => {
                 <Typography variant="h3" fontSize={18} fontWeight="bold" marginBottom={3}>
                   Status
                 </Typography>
-                <StatusStepper currentStatus={data.status} />
+                <StatusStepper currentStatus={data?.status} />
               </Box>
               <Box>
                 <Typography variant="h3" fontSize={18} fontWeight="bold">
                   Daftar Pesanan
                 </Typography>
-                <OrderInvoiceTable dataRow={data.orders} />
-              </Box>
-              <Box>
-                <Typography variant="h3" fontSize={18} fontWeight="bold">
-                  Daftar Pesanan
-                </Typography>
-                <OrderInvoiceTable dataRow={data.orders} />
+                <OrderInvoiceTable dataRow={data?.orders} status={data?.status} />
               </Box>
               <Box>
                 <Typography fontSize={16} fontWeight="bold">Total Pembayaran</Typography>
-                <Typography variant="body1">{formatIDR(data.totalPriceOrdered)}</Typography>
+                <Typography variant="body1">{formatIDR(data?.totalPriceOrdered)}</Typography>
               </Box>
               <Box>
                 <Typography fontSize={16} fontWeight="bold">Rekening Bank</Typography>
                 <Typography variant="body1" textTransform="uppercase" letterSpacing={3}>
-                  {data.usedBank.bankName} {data.usedBank.bankNumber}<br />Atas Nama {data.usedBank.name}
+                  {data?.usedBank.bankName} {data?.usedBank.bankNumber}<br />Atas Nama {data?.usedBank.name}
                 </Typography>
               </Box>
             </>

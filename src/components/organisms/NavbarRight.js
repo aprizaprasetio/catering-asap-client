@@ -105,18 +105,18 @@ const NavbarRight = () => {
                 </MenuList>
                 <MenuList component={Paper} {...listConfig}>
                     <Stack direction="row">
-                        <ListItemVertical href="order/wait" icon={<HourglassBottom />}>
+                        <ListItemVertical href="/statusorders" icon={<HourglassBottom />}>
                             Menunggu<br />Verifikasi
                         </ListItemVertical>
-                        <ListItemVertical href="order/onprocess" icon={<Cached />}>
+                        <ListItemVertical href="/statusorders/onproccess" icon={<Cached />}>
                             Sedang<br />Diproses
                         </ListItemVertical>
-                        <ListItemVertical href="order/ondelivery" icon={<LocalShipping />}>
+                        <ListItemVertical href="/statusorders/ondelivery" icon={<LocalShipping />}>
                             Dalam<br />Perjalanan
                         </ListItemVertical>
                     </Stack>
                     <Divider sx={dividerStyle} />
-                    <PressListItem icon={<Schedule />} content="Riwayat Pesanan" />
+                    <PressListItem icon={<Schedule />} content="Riwayat Pesanan" href='/statusorders/successful' />
                 </MenuList>
             </Menu>
         </Box >
