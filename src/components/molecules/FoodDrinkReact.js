@@ -6,10 +6,10 @@ import ReactListItem from 'components/molecules/ReactListItem'
 
 const listConfig = {
     direction: {
-        xs: 'column',
+        xs: 'row',
         sm: 'row',
     },
-    spacing: 1,
+    spacing: 0,
 }
 
 const FoodDrinkReact = ({ values }) => {

@@ -2,6 +2,10 @@ import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useInfiniteQuery, useMutation } from '@tanstack/react-query'
 import { useStale } from 'commands/builders/hookBuilder'
+<<<<<<< HEAD
+=======
+// import { fetchFoodDrinkList, fetchFoodDrinkList2, fetchFoodDrinkMenuDetail } from 'api/connections/catalogUserRequest'
+>>>>>>> 46b7925d13ab53234145e1fc99ea5ddacddd7877
 import { fetchFoodDrinkList, fetchFoodDrinkList2, fetchOrder, fetchOrderUser } from 'api/connections/catalogUserRequest'
 import useCheckoutStore from 'factory/store/useCheckoutStore'
 import useFoodDrinkStore from 'factory/store/UseFoodDrinkStore'
@@ -72,9 +76,24 @@ const useOrderUser = () => {
     return orderUser
 }
 
+const useFoodDrinkDetail = () => {
+    const { fooddrinkid } = useParams()
+    const foodDrinkDetail = useQuery({
+        queryKey: ['detailMenu'],
+        queryFn: () => fetchFoodDrinkDetail(fooddrinkid),
+    })
+
+    useEffect(() => {
+        foodDrinkDetail.refetch()
+    }, [fooddrinkid, foodDrinkDetail.data])
+
+    return foodDrinkDetail
+}
+
 export {
     useFoodDrinkList,
     useFoodDrinkList2,
     useFoodDrinkOrder,
     useOrderUser,
+    useFoodDrinkDetail
 }

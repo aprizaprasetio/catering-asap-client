@@ -31,6 +31,7 @@ const fetchFoodDrinkMenuDetail = async id => {
     // console.table(dataFoodDrinkMenu.data)
     return dataFoodDrinkMenu.data
 }
+
 const fetchOrder = async checkoutData => {
     const order = await axios.post('Orders', checkoutData)
     return order.data.data
@@ -44,10 +45,21 @@ const fetchOrderUser = async orderId => {
     return order.data.data
 }
 
+const fetchFoodDrinkDetail = async fooddrinkid => {
+    const foodDrinkDetail = await axios.get(`/FoodDrinkMenus/${fooddrinkid}/detail`, {
+        params: {
+            id: fooddrinkid
+        }
+    })
+
+    return foodDrinkDetail.data
+}
+
 export {
     fetchFoodDrinkList,
     fetchFoodDrinkList2,
     fetchFoodDrinkMenuDetail,
     fetchOrder,
     fetchOrderUser,
+    fetchFoodDrinkDetail
 }

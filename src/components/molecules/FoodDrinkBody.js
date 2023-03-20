@@ -18,9 +18,9 @@ const priceStyle = {
     fontSize: 16,
 }
 
-const FoodDrinkBody = ({ name, price }) => {
+const FoodDrinkBody = ({ name, price, onClick }) => {
     return (
-        <CardContent component={Grid} container {...cardConfig}>
+        <CardContent onClick={onClick} component={Grid} container {...cardConfig}>
             <Typography variant="h3" sx={titleStyle}>{name}</Typography>
             <Typography variant="subtitle1" sx={priceStyle}>{formatIDR(price)}</Typography>
         </CardContent>

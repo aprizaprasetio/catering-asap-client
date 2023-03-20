@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, Menu, MenuList, Stack, Paper, Divider } from '@mui/material'
+import { Box, Menu, MenuList, Stack, Paper, Divider, Skeleton } from '@mui/material'
 import { Person, HelpCenter, HourglassBottom, Cached, LocalShipping, Schedule, Logout } from '@mui/icons-material'
+import AvatarIcon from 'components/atoms/AvatarIcon'
 import PressIconLink from 'components/atoms/PressIconLink'
 import PressAvatar from 'components/atoms/PressAvatar'
 import PressListItem from 'components/molecules/PressListItem'
@@ -96,27 +97,41 @@ const NavbarRight = () => {
                 <CartIcon />
             </PressIconLink>
             <PressAvatar onClick={menuTrigger}>
-                <Person />
+                {user?.avatar ? (
+                    <Box
+                        component="img"
+                        src={user.avatar}
+                        sx={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                        }}
+                    />
+                ) : <Person />}
             </PressAvatar>
             <Menu {...menuConfig}>
                 <MenuList component={Paper}{...listConfig}>
-                    <PressListItem href="profile" icon={<Person />} content={user?.name ?? 'No Name'} />
+                    <PressListItem
+                        href="profile"
+                        icon={<AvatarIcon />}
+                        content={user?.name ?? <Skeleton variant="rounded" width="100%" height={20} />}
+                    />
                     <PressListItem onClick={logout} icon={<Logout />} content="Keluar" />
                 </MenuList>
                 <MenuList component={Paper} {...listConfig}>
                     <Stack direction="row">
-                        <ListItemVertical href="order/wait" icon={<HourglassBottom />}>
+                        <ListItemVertical href="/statusorders" icon={<HourglassBottom />}>
                             Menunggu<br />Verifikasi
                         </ListItemVertical>
-                        <ListItemVertical href="order/onprocess" icon={<Cached />}>
+                        <ListItemVertical href="/statusorders/onproccess" icon={<Cached />}>
                             Sedang<br />Diproses
                         </ListItemVertical>
-                        <ListItemVertical href="order/ondelivery" icon={<LocalShipping />}>
+                        <ListItemVertical href="/statusorders/ondelivery" icon={<LocalShipping />}>
                             Dalam<br />Perjalanan
                         </ListItemVertical>
                     </Stack>
                     <Divider sx={dividerStyle} />
-                    <PressListItem icon={<Schedule />} content="Riwayat Pesanan" />
+                    <PressListItem icon={<Schedule />} content="Riwayat Pesanan" href='/statusorders/successful' />
                 </MenuList>
             </Menu>
         </Box >

@@ -8,7 +8,7 @@ const useUserStore = create((set, get )=> ({
     keyword: '',
     setKeyword: value => set({
         keyword: value,
-    })
+    }),
 }))
 
 export default useUserStore

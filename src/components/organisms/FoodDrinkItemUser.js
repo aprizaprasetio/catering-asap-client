@@ -9,6 +9,7 @@ import FoodDrinkBody from 'components/molecules/FoodDrinkBody'
 import FoodDrinkReact from 'components/molecules/FoodDrinkReact'
 import FoodDrinkButton from 'components/molecules/FoodDrinkButton'
 import { useAddCart } from 'api/hooks/cartHook'
+import { useNavigate } from 'react-router-dom'
 
 const FoodDrinkItemUser = ({ id, name, price }) => {
     const reactValues = {
@@ -31,13 +32,14 @@ const FoodDrinkItemUser = ({ id, name, price }) => {
         },
         fontFamily: 'sans-serif',
     }
+    const navigate = useNavigate()
 
     const addCart = useAddCart()
 
     return (
         <FoodDrinkItem>
-            <FoodDrinkImage image="https://picsum.photos/600.webp" />
-            <FoodDrinkBody name={name} price={price} />
+            <FoodDrinkImage image="https://picsum.photos/600.webp" onClick={() => navigate(`/menus/${id}`)} />
+            <FoodDrinkBody name={name} price={price} onClick={() => navigate(`/menus/${id}`)} />
             <FoodDrinkFooter>
                 <FoodDrinkReact values={reactValues} />
                 <FoodDrinkButton onClick={() => addCart(id)} component={Grid} item sx={addStyle}>

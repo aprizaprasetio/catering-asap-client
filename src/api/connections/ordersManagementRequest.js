@@ -66,6 +66,23 @@ const fetchOrderById = async id => {
     return dataOrder.data.data
 }
 
+const fetchListSwitchUser = async (page = 1, status) => {
+    const switchOrder = {
+        '/statusorders': 0,
+        '/statusorders/onproccess': 1,
+        '/statusorders/ondelivery': 2,
+        '/statusorders/successful': 3,
+    }
+    const orderList = await axios.get('/Orders/Switch/User', {
+        params: {
+            Filter: switchOrder[status],
+            PageNumber: page,
+            PageSize: 10,
+        },
+    })
+    return orderList.data.data
+}
+
 export {
     fetchOrderList,
     fetchListMenuOrder,
@@ -73,5 +90,6 @@ export {
     updateOrder,
     fetchListUserGraph,
     fetchDataGraph,
-    fetchOrderById
+    fetchOrderById,
+    fetchListSwitchUser
 }

@@ -8,7 +8,8 @@ const Arrow = ({ percent }) => {
     if (percent > 0)
         return (percent >= 5) ?
             <KeyboardDoubleArrowUp sx={{ fontSize: 50, color: '#1bf538' }} /> : <KeyboardArrowUp sx={{ fontSize: 50, color: '#1bf538' }} />
-
+    else if(percent == 0)
+        return 
     return (percent <= -5) ?
         <KeyboardDoubleArrowDown sx={{ fontSize: 50, color: '#f52020' }} /> : <KeyboardArrowDown sx={{ fontSize: 50, color: '#f52020' }} />
 }
