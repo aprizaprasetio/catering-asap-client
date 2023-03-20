@@ -10,12 +10,12 @@ import { useTrigger } from 'commands/builders/commonBuilder'
 import ReactListItem from 'components/molecules/ReactListItem'
 import FoodDrinkTableCell from 'components/molecules/FoodDrinkTableCell'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { UseFoodDrinkDelete, UseFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
+import { useFoodDrinkDelete, useFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
 
 const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url }) => {
     const [isEditMode, isEditModeTrigger] = useTrigger()
-    const { mutate: deleteHandler } = UseFoodDrinkDelete()
-    const { mutate: updateHandler } = UseFoodDrinkUpdate()
+    const { mutate: deleteHandler } = useFoodDrinkDelete()
+    const { mutate: updateHandler } = useFoodDrinkUpdate()
     const nilai = {
         like: 99,
         ok: 99,
@@ -32,18 +32,19 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
             .number()
             .required()
             .positive('Masukan Angka Postive'),
-        minOrder: yup
+        Min_Order: yup
             .number()
             .required()
             .positive('Masukan Angka Postive')
-            .max(99, 'Maximal Min order 99'),
+            .max(99, 'Maximal Min order 99')
+            .integer(),
         description: yup
             .string()
             .required(),
     })
     const formikConfig = useFormik({
         initialValues: {
-            imageUrl: image_Url,
+            // imageUrl: image_Url,
             name: name,
             price: price,
             minOrder: minOrder,
@@ -68,8 +69,8 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
         helperText: formikConfig.errors.price
     }
     const minOrderConfig = {
-        name: 'minOrder',
-        label: 'Min. Pemesanan',
+        name: 'Min_Order',
+        label: 'Min.Pemesanan',
         type: 'number',
         value: formikConfig.values.minOrder,
         onChange: formikConfig.handleChange,

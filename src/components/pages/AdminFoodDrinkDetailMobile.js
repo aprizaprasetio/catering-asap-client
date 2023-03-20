@@ -11,7 +11,7 @@ import { useTrigger } from 'commands/builders/commonBuilder'
 import EditIcon from '@mui/icons-material/Edit'
 import { useFoodDrinkDetail } from 'api/hooks/catalogAdminHook'
 import { useNavigate } from 'react-router-dom'
-import { UseFoodDrinkDelete, UseFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
+import { useFoodDrinkDelete, useFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import TextBoxFormMobileFoodDrink from 'components/molecules/TextBoxFormMobileFoodDrink'
@@ -21,9 +21,9 @@ import TextBoxFormMobileFoodDrinkDesk from 'components/molecules/TextBoxFormMobi
 const AdminFoodDrinkDetailMobile = () => {
     const { data, isFetchedAfterMount } = useFoodDrinkDetail()
     const [isEditMode, isEditModeTrigger] = useTrigger()
-    const { mutate: updateHandler } = UseFoodDrinkUpdate()
+    const { mutate: updateHandler } = useFoodDrinkUpdate()
     const navigate = useNavigate()
-    const { mutate: deleteHandler } = UseFoodDrinkDelete()
+    const { mutate: deleteHandler } = useFoodDrinkDelete()
     const nilai = {
         like: 99,
         ok: 99,
@@ -41,7 +41,10 @@ const AdminFoodDrinkDetailMobile = () => {
             .required(),
         minOrder: yup
             .number()
-            .required(),
+            .required('Harus Diisi')
+            .positive('Masukan Angka Postive')
+            .max(99, 'Maximal Min order 99')
+            .integer(),
         description: yup
             .string()
             .required(),
@@ -81,13 +84,15 @@ const AdminFoodDrinkDetailMobile = () => {
     const priceConfig = {
         name: 'price',
         label: 'Harga',
+        type: 'number',
         value: formikConfig.values.price,
         onChange: formikConfig.handleChange,
         helperText: formikConfig.errors.price
     }
     const minOrderConfig = {
-        name: 'minorder',
-        label: 'Min. Pemesanan',
+        name: 'minOrder',
+        label: 'Min.Pemesanan',
+        type: 'number',
         value: formikConfig.values.minOrder,
         onChange: formikConfig.handleChange,
         helperText: formikConfig.errors.minOrder,
@@ -205,7 +210,7 @@ const AdminFoodDrinkDetailMobile = () => {
 
                     }
 
-                    <Button onClick={() => deleteHandler(data.id, { onSuccess: () => navigate('/admin/menus') })} sx={{
+                    <Button onClick={() => deleteHandler(data.id, { onSuccess: () => navigate('/menus') })} sx={{
                         borderRadius: 2,
                         color: red[400],
                     }}>Hapus </Button>

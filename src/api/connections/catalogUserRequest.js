@@ -11,7 +11,7 @@ const fetchFoodDrinkList = async () => {
 }
 
 // Requesting a bunch of food and drink menu with pageparam
-const fetchFoodDrinkList2 = async ({ pageParam = 1 }) => {
+const fetchFoodDrinkList2 = async pageParam => {
     const foodDrinkList = await axios.get(foodDrinkPath.menu, {
         params: {
             Keyword: client.getQueryData(['search']).keyword,
@@ -21,7 +21,7 @@ const fetchFoodDrinkList2 = async ({ pageParam = 1 }) => {
             PageSize: 10,
         },
     })
-    return foodDrinkList.data.data
+    return foodDrinkList.data
 }
 
 const fetchFoodDrinkMenuDetail = async id => {
@@ -30,7 +30,7 @@ const fetchFoodDrinkMenuDetail = async id => {
     })
     // console.table(dataFoodDrinkMenu.data)
     return dataFoodDrinkMenu.data
-
+}
 const fetchOrder = async checkoutData => {
     const order = await axios.post('Orders', checkoutData)
     return order.data.data

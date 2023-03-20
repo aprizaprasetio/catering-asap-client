@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useInfiniteQuery, useMutation } from '@tanstack/react-query'
 import { useStale } from 'commands/builders/hookBuilder'
-import { fetchFoodDrinkList, fetchFoodDrinkList2, fetchFoodDrinkMenuDetail } from 'api/connections/catalogUserRequest'
 import { fetchFoodDrinkList, fetchFoodDrinkList2, fetchOrder, fetchOrderUser } from 'api/connections/catalogUserRequest'
 import useCheckoutStore from 'factory/store/useCheckoutStore'
+import useFoodDrinkStore from 'factory/store/UseFoodDrinkStore'
 
 // This is the old hook, not compatible and do not use this hook
 const useFoodDrinkList = () => {
@@ -18,11 +18,16 @@ const useFoodDrinkList = () => {
 }
 
 const useFoodDrinkList2 = () => {
+    const setTotalFoodDrink = useFoodDrinkStore(state => state.setTotalFoodDrink)
     const [search] = useStale('search')
 
     const foodDrinkQuery = useInfiniteQuery({
         queryKey: ['foodDrinkList'],
-        queryFn: fetchFoodDrinkList2,
+        queryFn: async ({ pageParam = 1 }) => {
+            const fetch = await fetchFoodDrinkList2(pageParam)
+            setTotalFoodDrink(fetch.totalCount)
+            return fetch.data
+        },
         getNextPageParam: (current, pages) => {
             // Fetching will stop if the last data founded less than 10
             // Because each fetch limited to 10, ofcourse that case must be stop

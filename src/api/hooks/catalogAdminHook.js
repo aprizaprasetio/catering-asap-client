@@ -3,7 +3,9 @@ import { useQuery, useInfiniteQuery, useMutation } from '@tanstack/react-query'
 import { fetchFoodDrinkMenuDetail, fetchPost } from 'api/connections/catalogUserRequest'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
-import { fetchFoodDrinkCreate, fetchFoodDrinkDelete, fetchFoodDrinkUpdate, fetchFoodDrinkupdate } from 'api/connections/catalogAdminRequest'
+import { fetchFoodDrinkCount, fetchFoodDrinkCreate, fetchFoodDrinkDelete, fetchFoodDrinkQuantity, fetchFoodDrinkUpdate, fetchFoodDrinkupdate }
+    from 'api/connections/catalogAdminRequest'
+
 
 const useFoodDrinkDetail = () => {
     const { menuId } = useParams()
@@ -17,9 +19,8 @@ const useFoodDrinkDetail = () => {
     return foodDetail
 }
 
-const UseFoodDrinkCreate = () => {
+const useFoodDrinkCreate = () => {
     const { refetch } = useFoodDrinkList2()
-
     const mutation = useMutation({
         mutationFn: fetchFoodDrinkCreate,
         onSuccess: refetch,
@@ -28,7 +29,7 @@ const UseFoodDrinkCreate = () => {
     return mutation
 }
 
-const UseFoodDrinkDelete = () => {
+const useFoodDrinkDelete = () => {
     const { refetch } = useFoodDrinkList2()
     const mutation = useMutation({
         mutationFn: fetchFoodDrinkDelete,
@@ -37,7 +38,7 @@ const UseFoodDrinkDelete = () => {
     return mutation
 }
 
-const UseFoodDrinkUpdate = () => {
+const useFoodDrinkUpdate = () => {
     const { refetch } = useFoodDrinkList2()
     const mutation = useMutation({
         mutationFn: fetchFoodDrinkUpdate,
@@ -46,9 +47,21 @@ const UseFoodDrinkUpdate = () => {
     return mutation
 }
 
+const useFoodDrinkQuantity = () => {
+
+    const query = useQuery({
+        queryKey: ['foodDrinkQuantity'],
+        queryFn: fetchFoodDrinkQuantity,
+        refetchInterval: 20000,
+    })
+
+    return query
+}
+
 export {
     useFoodDrinkDetail,
-    UseFoodDrinkCreate,
-    UseFoodDrinkDelete,
-    UseFoodDrinkUpdate,
+    useFoodDrinkCreate,
+    useFoodDrinkDelete,
+    useFoodDrinkUpdate,
+    useFoodDrinkQuantity,
 }

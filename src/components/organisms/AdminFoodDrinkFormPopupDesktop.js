@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { UseFoodDrinkCreate } from 'api/hooks/catalogAdminHook'
+import { useFoodDrinkCreate } from 'api/hooks/catalogAdminHook'
 import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
 import UploudImageAdmin from 'components/molecules/UploudImageAdmin'
 import TextFieldFoodDrinkAdmin from 'components/molecules/TextFieldFoodDrinkAdmin'
-import { Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions }
+import { Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions, FormControl, Radio, FormControlLabel, RadioGroup }
     from '@mui/material'
 import { FormatStrikethroughSharp } from '@mui/icons-material'
+import RadioField from 'components/molecules/RadioField'
+import LabeledRadio from 'components/molecules/LabeledRadio'
 
 const yupConfig = yup.object({
     // image_Url: yup
@@ -26,7 +28,7 @@ const yupConfig = yup.object({
         .required('Harus Diisi')
         .positive('Masukan Angka Postive')
         .integer(),
-    minOrder: yup
+    Min_Order: yup
         .number()
         .required('Harus Diisi')
         .positive('Masukan Angka Postive')
@@ -34,27 +36,34 @@ const yupConfig = yup.object({
         .integer(),
     description: yup
         .string()
-        .required('Harus Diisi')
+        .required('Harus Diisi'),
+    type: yup
+        .string()
+        .required('Mohon pastikan jenis kelamin terisi'),
+
 })
 const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
-    const { mutate: postHandler } = UseFoodDrinkCreate()
+    const { mutate: postHandler } = useFoodDrinkCreate()
     const query = useFoodDrinkList2()
     const formikConfig = useFormik({
         initialValues: {
             // image: undefined,
             name: '',
             price: '',
-            minOrder: '',
+            Min_Order: '',
             description: '',
+            type: '',
         },
         validationSchema: yupConfig,
         validateOnChange: false,
         // onSubmit: () => console.info(formikConfig.values),
-        onSubmit: () => postHandler({ ...formikConfig.values },
-            { onSuccess: () => (query.refetch(), setOpenPopup()) },
-        ),
+        onSubmit: () => {
+            postHandler({ ...formikConfig.values },
+                { onSuccess: () => (query.refetch(), setOpenPopup()) },
+            )
+            console.info(formikConfig.values)
+        },
     })
-    // const refetch = () => query?.refetch().then()
 
     // const imageConfig = {
     //     name: 'image',
@@ -88,7 +97,7 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
     }
 
     const minOrderConfig = {
-        name: 'minOrder',
+        name: 'Min_Order',
         label: 'Min.Order',
         type: 'number',
         value: formikConfig.values.minOrder,
@@ -112,6 +121,12 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
         borderRadius: 10,
         boxShadow: 3,
         cursor: 'default',
+    }
+
+    const typeConfig = {
+        name: 'type',
+        value: '' || formikConfig.values.type,
+        onChange: formikConfig.handleChange,
     }
 
     return (
@@ -142,6 +157,10 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
                         },
                     }}
                     {...descriptionConfig} />
+                <RadioField config={typeConfig} >
+                    <LabeledRadio value="food" label="Makanan" />
+                    <LabeledRadio value="drink" label="Minuman" />
+                </RadioField>
             </DialogContent>
             <DialogActions  >
                 <Button
@@ -152,17 +171,6 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
                     }} variant='contained' fullWidth size="medium">
                     Simpan
                 </Button>
-                {/* <Button
-                    onClick={() => postHandler(
-                        { ...formikConfig.values },
-                        { onSuccess: refetch },
-                    )}
-                    sx={{
-                        borderRadius: 20,
-                        justifyContent: 'center',
-                    }} variant='contained' fullWidth size="medium">
-                        Unggah
-                    </Button> */}
             </DialogActions>
         </Dialog >
     )
