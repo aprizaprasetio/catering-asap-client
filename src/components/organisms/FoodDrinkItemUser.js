@@ -11,11 +11,11 @@ import FoodDrinkButton from 'components/molecules/FoodDrinkButton'
 import { useAddCart } from 'api/hooks/cartHook'
 import { useNavigate } from 'react-router-dom'
 
-const FoodDrinkItemUser = ({ id, name, price }) => {
+const FoodDrinkItemUser = ({ id, name, price, like, ok, dislike }) => {
     const reactValues = {
-        like: 99,
-        ok: 99,
-        dislike: 99,
+        like: like,
+        ok: ok,
+        dislike: dislike,
     }
 
     const addStyle = {

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useInfiniteQuery, useMutation } from '@tanstack/react-query'
 import { useStale } from 'commands/builders/hookBuilder'
 // import { fetchFoodDrinkList, fetchFoodDrinkList2, fetchFoodDrinkMenuDetail } from 'api/connections/catalogUserRequest'
-import { fetchFoodDrinkList, fetchFoodDrinkList2, fetchOrder, fetchOrderUser } from 'api/connections/catalogUserRequest'
+import { fetchFoodDrinkDetail, fetchFoodDrinkList, fetchFoodDrinkList2, fetchOrder, fetchOrderUser } from 'api/connections/catalogUserRequest'
 import useCheckoutStore from 'factory/store/useCheckoutStore'
 
 // This is the old hook, not compatible and do not use this hook

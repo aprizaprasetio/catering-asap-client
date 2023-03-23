@@ -10,11 +10,16 @@ import SkeletonListDetail from './SkeletonListDetail'
 
 const UserDetailFoodDrinkMenuDekstop = () => {
     const { data, isFetching } = useFoodDrinkDetail()
+
     const reactValues = {
-        like: 99,
-        ok: 99,
-        dislike: 99,
+        like: data?.data?.like,
+        ok: data?.data?.ok,
+        dislike: data?.data?.dislike,
     }
+
+    React.useEffect(() => {
+        console.log(data)
+    },[data])
 
     const buttonStyle = {
 
@@ -103,15 +108,15 @@ const UserDetailFoodDrinkMenuDekstop = () => {
                         isFetching ? <SkeletonListDetail />
                             :
                             <Box sx={{}}>
-                                <Typography sx={{ fontWeight: 'bold', fontSize: fontRespon }}>{data?.name}</Typography>
-                                <Typography sx={{ fontWeight: 'bold', fontSize: fontIdrRespon }}>{formatIDR(data?.price)}</Typography>
-                                <Typography>min: {data?.min_Order}</Typography>
-                                <Typography>{data?.description}</Typography>
+                                <Typography sx={{ fontWeight: 'bold', fontSize: fontRespon }}>{data?.data?.name}</Typography>
+                                <Typography sx={{ fontWeight: 'bold', fontSize: fontIdrRespon }}>{formatIDR(data?.data?.price)}</Typography>
+                                <Typography>min: {data?.data?.min_Order}</Typography>
+                                <Typography>{data?.data?.description}</Typography>
                             </Box>
                     }
                     {
                         isFetching ? <Skeleton width={300} height={50} />
-                            : <Button variant="contained" sx={{ borderRadius: 3, width: widthButton }} onClick={() => addCart(data?.id)}>
+                            : <Button variant="contained" sx={{ borderRadius: 3, width: widthButton }} onClick={() => addCart(data?.data?.id)}>
                                 <AddShoppingCart />
                                 <Typography component="p" sx={buttonStyle}>Tambah</Typography>
                             </Button>

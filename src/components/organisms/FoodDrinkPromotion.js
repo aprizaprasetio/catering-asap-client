@@ -1,15 +1,17 @@
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
 import { Container } from '@mui/material'
-import { KeyboardArrowRight, KeyboardArrowLeft } from '@mui/icons-material'
+import { KeyboardArrowRight, KeyboardArrowLeft, Key } from '@mui/icons-material'
 import BannerItem from 'components/atoms/BannerItem'
+import { useFetchBanner } from 'api/hooks/bannerHook'
 
 const FoodDrinkPromotion = () => {
+    const { data } = useFetchBanner()
     return (
         <Carousel component={Container} NextIcon={<KeyboardArrowRight />} PrevIcon={<KeyboardArrowLeft />} >
-            <BannerItem image="https://picsum.photos/1200/500?a.webp" />
-            <BannerItem image="https://picsum.photos/1200/500?b.webp" />
-            <BannerItem image="https://picsum.photos/1200/500?c.webp" />
+            {
+                data?.map(result => <BannerItem key={result.id} image={result.imagePath} />)
+            }
         </Carousel>
     )
 }

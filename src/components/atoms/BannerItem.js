@@ -12,6 +12,6 @@ const bannerStyle = {
     objectFit: 'cover',
 }
 
-const BannerItem = image => <Paper component="img" src={`https://picsum.photos/1200/500.webp`} sx={bannerStyle} />
+const BannerItem = ({ image }) => <Paper component={"img"} src={image} sx={bannerStyle} />
 
 export default BannerItem

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Home, Timeline, Assignment, Groups, RestaurantMenu } from '@mui/icons-material'
+import { Home, Timeline, Assignment, Groups, RestaurantMenu, ViewCarousel } from '@mui/icons-material'
 import SideNavbar from 'components/organisms/SideNavbar'
 import BottomNavbar from 'components/organisms/BottomNavbar'
 

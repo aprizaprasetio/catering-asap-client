@@ -6,6 +6,7 @@ import AdminNavbar from 'components/organisms/AdminNavbar'
 import NumberCard from 'components/organisms/NumberCard'
 import AdminWelcome from 'components/organisms/AdminWelcome'
 import AdminAvatar from 'components/organisms/AdminAvatar'
+import AdminHomeCardLainnya from 'components/organisms/AdminHomeCardLainnya'
 
 const AdminHome = () => {
     const [user] = useStale('user')
@@ -30,8 +31,7 @@ const AdminHome = () => {
                         message="Selamat datang"
                         body="Kelola data katering lewat website dimana pun anda berada." />
                     <AdminAvatar />
-                    <NumberCard />
-                    <NumberCard />
+                    <AdminHomeCardLainnya />
                 </Grid>
             </CenterLayout>
         </>
