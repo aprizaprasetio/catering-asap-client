@@ -3,6 +3,7 @@ import React from 'react'
 import { useDataGraph } from 'api/hooks/ordersManagementHook'
 import { formatIDR } from 'commands/application/priceCommand'
 
+
 const CardItemGraphic = ({ title }) => {
     const { data } = useDataGraph()
 

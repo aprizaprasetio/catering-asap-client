@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Avatar }
+import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Avatar, Box, CardMedia }
     from '@mui/material'
 import { MoodRounded, SentimentNeutralRounded, MoodBadRounded, KeyboardArrowDown, KeyboardArrowUp, Edit, Delete, }
     from '@mui/icons-material'
@@ -10,16 +10,20 @@ import { useTrigger } from 'commands/builders/commonBuilder'
 import ReactListItem from 'components/molecules/ReactListItem'
 import FoodDrinkTableCell from 'components/molecules/FoodDrinkTableCell'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { UseFoodDrinkDelete, UseFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
+import { useFoodDrinkDelete, useFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
+import { useImage } from 'commands/builders/imageBuilder'
+import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
 
-const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url }) => {
+const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url, like, ok, dislike }) => {
     const [isEditMode, isEditModeTrigger] = useTrigger()
-    const { mutate: deleteHandler } = UseFoodDrinkDelete()
-    const { mutate: updateHandler } = UseFoodDrinkUpdate()
+    const { mutate: deleteHandler } = useFoodDrinkDelete()
+    const { mutate: updateHandler } = useFoodDrinkUpdate()
+    const query = useFoodDrinkList2()
+    const [image, imageHandler, { fileName, file }] = useImage()
     const nilai = {
-        like: 99,
-        ok: 99,
-        dislike: 99,
+        like: like,
+        ok: ok,
+        dislike: dislike,
     }
     const yupConfig = yup.object({
         image_Url: yup
@@ -32,11 +36,12 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
             .number()
             .required()
             .positive('Masukan Angka Postive'),
-        minOrder: yup
+        min_Order: yup
             .number()
             .required()
             .positive('Masukan Angka Postive')
-            .max(99, 'Maximal Min order 99'),
+            .max(99, 'Maximal Min order 99')
+            .integer(),
         description: yup
             .string()
             .required(),
@@ -51,6 +56,29 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
         },
         validationSchema: yupConfig,
         validateOnChange: false,
+        //eror
+        onSubmit: () => {
+            // postHandler({ ...formikConfig.values },
+            //     { onSuccess: () => (query.refetch(), setOpenPopup()) },
+            // )
+            // console.info(formikConfig.values)
+
+            const profileForm = new FormData()
+
+            profileForm.append('name', formikConfig.values.name)
+            profileForm.append('price', formikConfig.values.price)
+            profileForm.append('min_Order', formikConfig.values.minOrder)
+            profileForm.append('description', formikConfig.values.description)
+            profileForm.append('type', formikConfig.values.type)
+            profileForm.append('imageUrl', file, fileName)
+
+
+            updateHandler(profileForm, {
+                onSuccess: () => (query.refetch()),
+            })
+        },
+        //error
+
     })
     const nameConfig = {
         name: 'name',
@@ -68,8 +96,8 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
         helperText: formikConfig.errors.price
     }
     const minOrderConfig = {
-        name: 'minOrder',
-        label: 'Min. Pemesanan',
+        name: 'min_Order',
+        label: 'Min.Pemesanan',
         type: 'number',
         value: formikConfig.values.minOrder,
         onChange: formikConfig.handleChange,
@@ -96,8 +124,20 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url 
                     </IconButton>
                 </TableCell>
                 <TableCell width={1} sx={{ textAlign: 'center' }} component='th'>{id}</TableCell>
-                <TableCell width={20} sx={{ justifyContent: 'center' }} align='center' component='th'><Avatar
-                    alt="Remy Sharp" variant='square' src="/static/images/avatar/1.jpg" />
+                <TableCell width={20} sx={{ justifyContent: 'center' }} align='center' component='th'>
+                    {image_Url ? (
+                        <CardMedia
+
+                            variant='square'
+                            component={"img"}
+                            image={image_Url}
+                        />
+                    ) :
+                        <Avatar
+                            alt="Remy Sharp"
+                            variant='square'
+                            src="/static/images/avatar/1.jpg" />
+                    }
                 </TableCell>
                 <FoodDrinkTableCell open={isEditMode} config={nameConfig} />
                 <FoodDrinkTableCell open={isEditMode} config={priceConfig} />

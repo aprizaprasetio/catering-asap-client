@@ -7,7 +7,7 @@ const FoodDrinkCardMobile = ({ id, name, price }) => {
 
     return (
         <Card
-            onClick={() => navigate(`/admin/menus/detail/${id}`)}
+            onClick={() => navigate(`/menus/${id}`)}
             sx={{
                 borderRadius: 4,
                 marginX: 0.5,

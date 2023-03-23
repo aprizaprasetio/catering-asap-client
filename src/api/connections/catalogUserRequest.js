@@ -17,6 +17,7 @@ const fetchFoodDrinkList2 = async ({ pageParam = 1, status }) => {
         'Makanan': 0,
         'Minuman': 1,
     }
+    
     const foodDrinkList = await axios.get(foodDrinkPath.menu, {
         params: {
             Keyword: client.getQueryData(['search']).keyword,
@@ -27,7 +28,7 @@ const fetchFoodDrinkList2 = async ({ pageParam = 1, status }) => {
             PageSize: 10,
         },
     })
-    return foodDrinkList.data.data
+    return foodDrinkList.data
 }
 
 const fetchFoodDrinkMenuDetail = async id => {

@@ -2,8 +2,11 @@ import { Box, Paper, Stack, Typography } from '@mui/material'
 import LunchDining from '@mui/icons-material/LunchDining'
 import FoodDrinkMenuDynamic from 'components/organisms/FoodDrinkMenuDynamic'
 import WineBarIcon from '@mui/icons-material/WineBar'
+import { useFoodDrinkQuantity } from 'api/hooks/catalogAdminHook'
 
 const FoodDrinkMenuTotal = () => {
+    const { data } = useFoodDrinkQuantity()
+
     return (
         <Box
             component={Paper}
@@ -27,8 +30,8 @@ const FoodDrinkMenuTotal = () => {
 
             }}>Total Makanan Dan Minum</Typography>
             <Box component={Stack} direction="row" marginBottom={1} spacing={1}>
-                <FoodDrinkMenuDynamic icon={<LunchDining />} />
-                <FoodDrinkMenuDynamic icon={<WineBarIcon />} />
+                <FoodDrinkMenuDynamic icon={<LunchDining />} quantity={data?.foodQuantity} />
+                <FoodDrinkMenuDynamic icon={<WineBarIcon />} quantity={data?.drinkQuantity} />
             </Box>
         </Box >
     )

@@ -1,5 +1,4 @@
 import React from 'react'
-import UserListMobileHeader from 'components/molecules/UserListMobileHeader'
 import UsersDashboardMobile from 'components/molecules/UsersDashboardMobile'
 import CenterLayout from 'components/templates/CenterLayout'
 import AdminNavbar from 'components/organisms/AdminNavbar'

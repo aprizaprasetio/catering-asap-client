@@ -1,10 +1,8 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 import { blue } from '@mui/material/colors'
-import useFoodDrinkStore from 'factory/store/UseFoodDrinkStore'
 
-const FoodDrinkMenuDynamic = ({ icon }) => {
-    const totalFoodDrink = useFoodDrinkStore(state => state.totalFoodDrink)
+const FoodDrinkMenuDynamic = ({ icon, quantity }) => {
     return (
         <Box sx={{
             backgroundColor: blue[50],
@@ -22,7 +20,7 @@ const FoodDrinkMenuDynamic = ({ icon }) => {
                 marginX: 2,
             }}>
                 {icon}
-                {totalFoodDrink}
+                {quantity}
             </Typography>
         </Box>
     )
