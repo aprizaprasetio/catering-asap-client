@@ -15,7 +15,7 @@ const NavbarCenter = () => {
             }}>
                 <SearchBar />
             </Box>
-            <UserFilterListFoodDrinkMenu />
+            {/* <UserFilterListFoodDrinkMenu /> */}
         </Box>
     )
 }

@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 
-const userFilterListMenuUserStore = create((set, get) => ({
+const useFilterListMenuUserStore = create((set, get) => ({
     filterBy: '',
     setFilterBy: value => set({
         filterBy: value,
     })
 }))
 
-export default userFilterListMenuUserStore
+export default useFilterListMenuUserStore

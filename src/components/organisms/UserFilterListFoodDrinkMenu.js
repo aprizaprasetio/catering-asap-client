@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import { Box } from '@mui/material'
-import userFilterListMenuUserStore from 'factory/store/useFilterListMenuUserStore'
+import useFilterListMenuUserStore from 'factory/store/useFilterListMenuUserStore'
 
 // const ITEM_HEIGHT = 48;
 // const ITEM_PADDING_TOP = 8;
@@ -35,7 +35,7 @@ function getStyles(name, personName, theme) {
 }
 
 const UserFilterListFoodDrinkMenu = () => {
-    const { setFilterBy, filterBy } = userFilterListMenuUserStore()
+    const { setFilterBy, filterBy } = useFilterListMenuUserStore()
     const theme = useTheme();
     const [personName, setPersonName] = React.useState('Semua')
 
