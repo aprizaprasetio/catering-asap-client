@@ -1,4 +1,5 @@
 import React from 'react'
+import { Skeleton } from '@mui/material'
 import UserItemMobileContainer from './UserItemMobileContainer'
 import UserItemBioMobile from 'components/molecules/UserItemBioMobile'
 import UserItemContent from 'components/molecules/UserItemContent'

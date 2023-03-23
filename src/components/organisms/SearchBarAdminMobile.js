@@ -19,11 +19,6 @@ const SearchBarAdminMobile = () => {
             xs: 0,
             md: 1,
         },
-        // width: {
-        //     xs: 'auto',
-        //     md: 450,
-        //     lg: 500,
-        // },
         width: '100%',
         paddingLeft: 2,
         fontSize: {
@@ -35,23 +30,22 @@ const SearchBarAdminMobile = () => {
 
     const iconStyle = {
         transition: 'all 1s',
-        marginLeft: 2,
         color: 'white',
     }
     return (
         <>
-            <Box sx={{ 
+            <Box sx={{
                 backgroundColor: '#537FE7',
-                boxShadow: 5,
+                boxShadow: 3,
                 borderRadius: 3
-                }}>
+            }}>
                 <Box sx={{
-                    backgroundColor: alpha('#fff', 0.5),
-                    borderRadius: 3,
+                    borderRadius: 10,
                     display: 'flex',
                     position: 'relative',
-                    margin: 1,
+                    paddingX: 3,
                     alignItems: 'center',
+
                 }}>
                     <Search sx={{ ...iconStyle, rotate: searchRotate ? '90deg' : '0deg', }} />
                     <InputBase

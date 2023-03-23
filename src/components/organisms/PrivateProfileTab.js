@@ -37,7 +37,7 @@ const PrivateProfileTab = () => {
     const { mutate } = useProfile()
     const [user] = useStale('user')
     const [isEditMode, isEditModeTrigger] = useTrigger()
-    const [image, imageHandler, { fileName, file }] = useImage()
+    const [image, imageHandler, { fileError, fileName, file }] = useImage()
 
     const formikConfig = useFormik({
         initialValues: {
@@ -86,6 +86,7 @@ const PrivateProfileTab = () => {
         id: 'avatar',
         value: formikConfig.values.avatar,
         onChange: imageHandler,
+        helperText: fileError,
         type: 'file',
         accept: 'image/*',
     }
@@ -121,62 +122,6 @@ const PrivateProfileTab = () => {
     return (
         <ProfileContainer isEditMode={isEditMode} onSubmit={formikConfig.handleSubmit}>
             <ImageProfileField isEditMode={isEditMode} config={avatarConfig} />
-            {/* <Stack spacing={1} sx={{
-                width: 150,
-                position: 'relative',
-                borderRadius: 6,
-                boxSizing: 'border-box',
-                overflow: 'auto',
-            }}>
-                {formikConfig.values?.avatar ? (
-                    <Box
-                        component="img"
-                        src={formikConfig.values.avatar}
-                        sx={{
-                            height: 150,
-                            objectFit: 'cover',
-                            // borderRadius: 10,
-                        }}
-                    />
-                ) : (
-                    <Box sx={{
-                        backgroundColor: 'rgba(15, 14, 14, .3)',
-                    }}>
-                        <Person sx={{
-                            width: 150,
-                            height: 150,
-                            objectFit: 'cover',
-                        }} />
-                    </Box>
-                )}
-
-                <Box
-                    component="input"
-                    display="none"
-                    {...avatarConfig}
-                />
-                <label htmlFor="avatar" style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    width: '100%',
-                }}>
-                    <Button
-                        variant="contained"
-                        component="span"
-                        fullWidth
-                        sx={{
-                            borderRadius: 0,
-                            backgroundColor: 'rgba(15, 14, 14, .5)',
-                            textAlign: 'center',
-                            display: isEditMode ? 'block' : 'none',
-                            '&:hover': {
-                                backgroundColor: 'rgba(15, 14, 14, 1)',
-                            },
-                        }}>
-                        Unggah Foto
-                    </Button>
-                </label>
-            </Stack> */}
             <ProfileField isEditMode={isEditMode} config={nameConfig} />
             <ProfileField isEditMode={isEditMode} config={emailConfig} />
             <ProfileField isEditMode={isEditMode} config={phoneConfig} />

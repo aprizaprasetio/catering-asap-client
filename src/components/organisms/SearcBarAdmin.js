@@ -21,55 +21,45 @@ const SearcBarAdmin = () => {
             xs: 0,
             md: 1,
         },
-        // width: {
-        //     xs: 'auto',
-        //     md: 450,
-        //     lg: 500,
-        // },
         width: '100%',
         paddingLeft: 2,
         fontSize: {
             xs: 20,
             md: 18,
         },
-        marginY: 1,
+        padding: 0,
         color: 'white'
     }
 
     const iconStyle = {
         transition: 'all 1s',
-        marginLeft: 4,
+        marginX: 2,
         color: 'white',
     }
 
     return (
-        <>
-            <Box sx={{
-                backgroundColor: alpha('#fff', 0.5),
-                borderRadius: 3,
-                width: '100%',
-                display: 'flex',
-                position: 'relative',
-                marginX: 1,
-                alignItems: 'center',
-            }}>
-                <Search sx={{ ...iconStyle, rotate: searchRotate ? '90deg' : '0deg', }} />
-                <InputBase
-                    component="input"
-                    placeholder="Pencarian user"
-                    sx={inputStyle}
-                    onFocus={searchTrigger}
-                    onChange={searchValueChange}
-                    onKeyDown={ e => {
-                        if (e.key !== 'Enter') return
-                        searchTrigger()
-                        setKeyword(searchValue)
-                    }}
-                    value={searchValue}
-                />
-                <CloseAnimatedButton onClick={searchValueClear} />
-            </Box>
-        </>
+        <Box sx={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            position: 'relative',
+        }}>
+            <Search sx={{ ...iconStyle, rotate: searchRotate ? '90deg' : '0deg', }} />
+            <InputBase
+                component="input"
+                placeholder="Pencarian user"
+                sx={inputStyle}
+                onFocus={searchTrigger}
+                onChange={searchValueChange}
+                onKeyDown={e => {
+                    if (e.key !== 'Enter') return
+                    searchTrigger()
+                    setKeyword(searchValue)
+                }}
+                value={searchValue}
+            />
+            <CloseAnimatedButton onClick={searchValueClear} />
+        </Box>
     )
 }
 
