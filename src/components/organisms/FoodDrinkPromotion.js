@@ -10,7 +10,7 @@ const FoodDrinkPromotion = () => {
     return (
         <Carousel component={Container} NextIcon={<KeyboardArrowRight />} PrevIcon={<KeyboardArrowLeft />} >
             {
-                data?.map(result => <BannerItem key={result.id} image={result.imagePath} />)
+                data?.map(result => <BannerItem key={result.id} image={result.imagePath} link={result.link} />)
             }
         </Carousel>
     )

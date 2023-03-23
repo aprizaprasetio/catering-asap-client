@@ -43,7 +43,7 @@ const UserListDekstop = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {isFetching ? [...Array(5)].map((item, index) => (
+                        {isLoading ? [...Array(5)].map((item, index) => (
                             <TableRow key={index}>
                                 <TableCell>
                                     <Skeleton variant="circular" width={56} height={56} />

@@ -17,11 +17,6 @@ const AdminBannerRow = ({ id, subject, link, imagePath, setOpenPopup }) => {
         onSuccess: () => query.refetch().then(setPopup)
     })
 
-    // React.useEffect(() => {
-    //     console.log(idBanner)
-    // }, [idBanner])
-
-
     return (
         <>
             <TableRow
@@ -30,13 +25,12 @@ const AdminBannerRow = ({ id, subject, link, imagePath, setOpenPopup }) => {
             >
                 <TableCell component="th">{id}</TableCell>
                 <TableCell component={Link} to={link}>
-                    <AdminBannerImage imagePath={imagePath} subject={subject} />
+                    <AdminBannerImage imagePath={imagePath} subject={subject} link={link} />
                 </TableCell>
-                <TableCell component={Link} to={link} align='center'>{link}</TableCell>
                 <TableCell align='center'>
-                    {/* <IconButton onClick={setOpenPopup}>
-                        <Edit />
-                    </IconButton> */}
+                    <a href={link} target='_blank'>{link}</a>
+                </TableCell>
+                <TableCell align='center'>
                     <IconButton onClick={setPopup}>
                         <Delete />
                     </IconButton>
@@ -63,4 +57,4 @@ const AdminBannerRow = ({ id, subject, link, imagePath, setOpenPopup }) => {
     )
 }
 
-export default AdminBannerRow
+export default AdminBannerRow   

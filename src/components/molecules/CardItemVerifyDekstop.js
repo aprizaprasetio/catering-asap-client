@@ -3,7 +3,7 @@ import { formatIDR } from 'commands/application/priceCommand'
 import { Grid } from '@mui/material'
 import React from 'react'
 
-const CardItemVerifyDekstop = ({ foodDrinkName, quantity, price }) => {
+const CardItemVerifyDekstop = ({ foodDrinkName, quantity, price, imagePath }) => {
     return (
         <Grid item xs={12}>
             <Box sx={{
@@ -30,7 +30,7 @@ const CardItemVerifyDekstop = ({ foodDrinkName, quantity, price }) => {
                                 boxShadow: 3,
                                 marginY: 1
                             }}
-                            image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8ZwZ2tuTvWJXRIRDBjpHM--O-J6sULrMbJA&usqp=CAU'
+                            image={imagePath}
                             alt='Zonk' />
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                             <Typography sx={{ fontSize: 18, fontWeight: 'bold' }}>{foodDrinkName}</Typography>

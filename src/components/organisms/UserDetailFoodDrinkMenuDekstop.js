@@ -17,10 +17,6 @@ const UserDetailFoodDrinkMenuDekstop = () => {
         dislike: data?.data?.dislike,
     }
 
-    React.useEffect(() => {
-        console.log(data)
-    },[data])
-
     const buttonStyle = {
 
         fontFamily: 'sans-serif',
@@ -89,13 +85,10 @@ const UserDetailFoodDrinkMenuDekstop = () => {
                                     height: heightImage,
                                     borderRadius: 3,
                                 }}
-                                image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV_8PuktduXM8rAdk78cHXFM0E3m9D-fuznw&usqp=CAU'
+                                image={data?.data?.image_Url}
                                 alt='Zonk'
                             />
                     }
-                    {/* {
-                        isFetching ? <Skeleton /> : <FoodDrinkReact values={reactValues} />
-                    } */}
                     <FoodDrinkReact values={reactValues} />
                 </Box>
                 <Box sx={{

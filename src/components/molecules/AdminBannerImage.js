@@ -1,7 +1,7 @@
 import { Box, Button, CardMedia, Stack } from '@mui/material'
 import React from 'react'
 
-const AdminBannerImage = ({ imagePath, subject }) => {
+const AdminBannerImage = ({ imagePath, subject, link }) => {
     return (
         <>
             <Stack spacing={1} sx={{
@@ -21,7 +21,7 @@ const AdminBannerImage = ({ imagePath, subject }) => {
                             height: 100,
                         }}
                         image={imagePath}
-                        alt='Zonk' />
+                        alt={link} />
                 </Box>
                 <Box
                     component="input"

@@ -35,7 +35,7 @@ function getStyles(name, personName, theme) {
 }
 
 const UserFilterListFoodDrinkMenu = () => {
-    const { setFilterBy, filterBy } = useFilterListMenuUserStore()
+    const { setFilterBy  } = useFilterListMenuUserStore()
     const theme = useTheme();
     const [personName, setPersonName] = React.useState('Semua')
 
@@ -60,14 +60,9 @@ const UserFilterListFoodDrinkMenu = () => {
         <>
             <Box>
                 <FormControl sx={{ m: 1, width: style, }}>
-                    {/* <InputLabel id="demo-multiple-name-label" >Filter</InputLabel> */}
                     <Select
-                        // labelId="demo-multiple-name-label"
-                        // id="demo-multiple-name"
                         value={personName}
                         onChange={handleChange}
-                        // input={<OutlinedInput label="Name" />}
-                        // MenuProps={MenuProps}
                         sx={{
                             backgroundColor: alpha('#fff', 0.5),
                             color: 'white',

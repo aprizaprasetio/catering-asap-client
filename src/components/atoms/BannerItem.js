@@ -1,5 +1,6 @@
 import React from 'react'
 import { Paper } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 const bannerStyle = {
     width: '100%',
@@ -12,6 +13,12 @@ const bannerStyle = {
     objectFit: 'cover',
 }
 
-const BannerItem = ({ image }) => <Paper component={"img"} src={image} sx={bannerStyle} />
+const BannerItem = ({ image, link }) => {
+    return (
+        <a href={link} target='_blank'>
+            <Paper component={"img"} src={image} sx={bannerStyle} />
+        </a>
+    )
+}
 
 export default BannerItem
