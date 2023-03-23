@@ -10,16 +10,10 @@ import { Typography, TextField, Button, Dialog, DialogTitle, DialogContent, Dial
 import { FormatStrikethroughSharp } from '@mui/icons-material'
 import RadioField from 'components/molecules/RadioField'
 import LabeledRadio from 'components/molecules/LabeledRadio'
+import ImageFooDrink from 'components/molecules/ImageFoodDrink'
+import { useImage } from 'commands/builders/imageBuilder'
 
 const yupConfig = yup.object({
-    // image_Url: yup
-    //     .mixed()
-    //     .required('Required')
-    //     .test(
-    //         "fileFormat",
-    //         "Unsupported Format",
-    //         value => value && value.type.includes('image/')
-    //     ),
     name: yup
         .string('Masukan alphabet')
         .required('Harus Diisi'),
@@ -28,7 +22,7 @@ const yupConfig = yup.object({
         .required('Harus Diisi')
         .positive('Masukan Angka Postive')
         .integer(),
-    Min_Order: yup
+    min_Order: yup
         .number()
         .required('Harus Diisi')
         .positive('Masukan Angka Postive')
@@ -39,32 +33,51 @@ const yupConfig = yup.object({
         .required('Harus Diisi'),
     type: yup
         .string()
-        .required('Mohon pastikan jenis kelamin terisi'),
+        .required('Mohon pastikan jenis menu harus diisi'),
+    image: yup
+        .string()
+        .test('fileFormat', 'Hanya gambar', value => (
+            value.includes('data:image/')
+        )),
 
 })
 const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
-    const { mutate: postHandler } = useFoodDrinkCreate()
+    const { mutate } = useFoodDrinkCreate()
     const query = useFoodDrinkList2()
+    const [image, imageHandler, { fileName, file }] = useImage()
     const formikConfig = useFormik({
         initialValues: {
-            // image: undefined,
+            image: '',
             name: '',
             price: '',
-            Min_Order: '',
+            min_Order: '',
             description: '',
             type: '',
         },
         validationSchema: yupConfig,
         validateOnChange: false,
-        // onSubmit: () => console.info(formikConfig.values),
         onSubmit: () => {
-            postHandler({ ...formikConfig.values },
-                { onSuccess: () => (query.refetch(), setOpenPopup()) },
-            )
-            console.info(formikConfig.values)
+            // postHandler({ ...formikConfig.values },
+            //     { onSuccess: () => (query.refetch(), setOpenPopup()) },
+            // )
+            // console.info(formikConfig.values)
+
+            const profileForm = new FormData()
+
+            profileForm.append('name', formikConfig.values.name)
+            profileForm.append('price', formikConfig.values.price)
+            profileForm.append('min_Order', formikConfig.values.min_Order)
+            profileForm.append('description', formikConfig.values.description)
+            profileForm.append('type', formikConfig.values.type)
+            profileForm.append('imageUrl', file, fileName)
+
+
+            mutate(profileForm, {
+                onSuccess: () => (query.refetch(), setOpenPopup()),
+            })
         },
     })
-
+    // 
     // const imageConfig = {
     //     name: 'image',
     //     type: 'file',
@@ -72,12 +85,20 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
     //     onBlur: formikConfig.handleBlur,
     //     helperText: formikConfig.touched.image && formikConfig.errors.image,
     // }
-    // React.useEffect(() => {
-    //     formikConfig.setFieldValue('name', values.name)
-    //     formikConfig.setFieldValue('price', values.price)
-    //     formikConfig.setFieldValue('minOrder', values.minOrder)
-    //     formikConfig.setFieldValue('description', values.description)
-    // }, [values])
+    React.useEffect(() => {
+        if (!image) return formikConfig.resetForm
+        formikConfig.setFieldValue('image', image.binary)
+        return formikConfig.resetForm
+    }, [image])
+
+    const imageConfig = {
+        name: 'image',
+        id: 'image',
+        value: formikConfig.values.image,
+        onChange: imageHandler,
+        type: 'file',
+        accept: 'image/*',
+    }
 
     const nameConfig = {
         name: 'name',
@@ -97,12 +118,12 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
     }
 
     const minOrderConfig = {
-        name: 'Min_Order',
+        name: 'min_Order',
         label: 'Min.Order',
         type: 'number',
-        value: formikConfig.values.minOrder,
+        value: formikConfig.values.min_Order,
         onChange: formikConfig.handleChange,
-        helperText: formikConfig.touched.minOrder && formikConfig.errors.minOrder,
+        helperText: formikConfig.touched.min_Order && formikConfig.errors.min_Order,
     }
 
     const descriptionConfig = {
@@ -125,9 +146,12 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
 
     const typeConfig = {
         name: 'type',
+        label: 'Jenis Menu',
         value: '' || formikConfig.values.type,
         onChange: formikConfig.handleChange,
     }
+
+
 
     return (
         <Dialog
@@ -143,14 +167,16 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
             <DialogContent sx={{
                 display: 'grid',
                 gap: 1,
+                justifyItems: 'center',
+
 
             }}>
-                {/* <UploudImageAdmin {...imageConfig} /> */}
+                <ImageFooDrink config={imageConfig} />
                 <TextFieldFoodDrinkAdmin config={nameConfig} />
                 <TextFieldFoodDrinkAdmin config={priceConfig} />
                 <TextFieldFoodDrinkAdmin config={minOrderConfig} />
 
-                <TextField id="outlined-basic" label="Deskripsi" variant="outlined" multiline rows={4}
+                <TextField id="outlined-basic" label="Deskripsi" variant="outlined" fullWidth multiline rows={4}
                     FormHelperTextProps={{
                         sx: {
                             color: 'error.main',

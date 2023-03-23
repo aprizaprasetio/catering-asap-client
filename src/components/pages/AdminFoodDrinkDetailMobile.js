@@ -30,9 +30,9 @@ const AdminFoodDrinkDetailMobile = () => {
         dislike: 99,
     }
     const yupConfig = yup.object({
-        image_Url: yup
-            .string()
-            .required(),
+        // image_Url: yup
+        //     .string()
+        //     .required(),
         name: yup
             .string()
             .required(),
