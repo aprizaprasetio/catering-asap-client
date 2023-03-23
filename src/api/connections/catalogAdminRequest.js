@@ -1,16 +1,15 @@
 import { axios } from 'api/initiates/queryInitiate'
 
 const fetchFoodDrinkCreate = async foodDrink => {
-    const data = foodDrink
     const typeEnum = {
         food: 0,
         drink: 1,
     }
-    if (!(foodDrink.type in typeEnum)) return
+    console.info(foodDrink.get('type') in typeEnum)
+    console.info(foodDrink)
+    if (!(foodDrink.get('type') in typeEnum)) return
     foodDrink.type = typeEnum[foodDrink.type]
-    const foodDrinkList = await axios.post('FoodDrinkMenus/Post', {
-        ...data,
-    }, {
+    const foodDrinkList = await axios.post('FoodDrinkMenus/Post', foodDrink, {
         headers: {
             Authorization: axios.defaults.headers.Authorization,
         }

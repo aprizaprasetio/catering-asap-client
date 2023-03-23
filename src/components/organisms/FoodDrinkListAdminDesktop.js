@@ -72,7 +72,7 @@ const FoodDrinkListAdminDesktop = () => {
             return (
                 <React.Fragment key={index}>
                     {
-                        group?.map(item => <FoodDrinkTableItem key={item.id} minOrder={item.min_Order} {...item} />)
+                        group?.map(item => <FoodDrinkTableItem key={item.id} minOrder={item.min_Order} image_Url={item.image_Url} {...item} />)
                     }
                 </React.Fragment>
             )

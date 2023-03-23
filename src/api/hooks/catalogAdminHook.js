@@ -3,7 +3,7 @@ import { useQuery, useInfiniteQuery, useMutation } from '@tanstack/react-query'
 import { fetchFoodDrinkMenuDetail, fetchPost } from 'api/connections/catalogUserRequest'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
-import { fetchFoodDrinkCount, fetchFoodDrinkCreate, fetchFoodDrinkDelete, fetchFoodDrinkQuantity, fetchFoodDrinkUpdate, fetchFoodDrinkupdate }
+import { fetchFoodDrinkCount, fetchFoodDrinkCreate, fetchFoodDrinkDelete, fetchFoodDrinkQuantity, fetchFoodDrinkUpdate }
     from 'api/connections/catalogAdminRequest'
 
 
