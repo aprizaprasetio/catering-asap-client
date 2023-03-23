@@ -78,7 +78,7 @@ const CartCheckout = () => {
                 <Button
                     onClick={() => navigate('/cart/checkout')}
                     variant="contained"
-                    disabled={!isCartExist() || isNoCheck()}
+                    disabled={!isCartExist() || isNoCheck() || (address.length < 20)}
                     fullWidth
                     disableElevation
                     sx={{

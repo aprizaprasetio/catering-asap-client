@@ -9,7 +9,7 @@ import PopUp from 'components/molecules/PopUp'
 import { Button, Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-const UserTableRowAdmin = ({ id, name, email, image, phone, quantity, totalPriceOrdered, gender }) => {
+const UserTableRowAdmin = ({ id, avatar, name, email, phone, quantity, totalPriceOrdered, gender }) => {
     const [openPopup, setOpenPopup] = useTrigger()
     const mutation = useDeleteUser()
     const query = useUserList()
@@ -25,8 +25,8 @@ const UserTableRowAdmin = ({ id, name, email, image, phone, quantity, totalPrice
             >
                 <TableCell component="th" scope="row">
                     <Avatar
-                        alt="Remy Sharp"
-                        src={image}
+                        alt={name}
+                        src={avatar}
                         sx={{ width: 56, height: 56 }}
                         onClick={() => navigate(`/users/detail/${id}`)}
                     />

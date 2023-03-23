@@ -1,11 +1,12 @@
 import React from 'react'
 import { Paper, Box, IconButton, SwipeableDrawer, MenuList, Divider, Skeleton } from '@mui/material'
-import { Menu as MenuIcon, Logout, HourglassBottom, Cached, LocalShipping, Schedule } from '@mui/icons-material'
+import { Menu as MenuIcon, Logout, HourglassBottom, Cached, LocalShipping, Schedule, CardTravel } from '@mui/icons-material'
 import PressListItem from 'components/molecules/PressListItem'
 import AvatarIcon from 'components/atoms/AvatarIcon'
 import { useStale } from 'commands/builders/hookBuilder'
 import { useTrigger } from 'commands/builders/commonBuilder'
 import { logout } from 'commands/application/authCommand'
+import CartIcon from 'components/molecules/CartIcon'
 
 const boxStyle = {
     display: {
@@ -48,7 +49,8 @@ const NavbarRightMobile = () => {
             </IconButton>
             <SwipeableDrawer {...drawerConfig}>
                 <MenuList component={Paper} sx={listStyle}>
-                    <PressListItem href="profile" icon={<AvatarIcon />} content={user?.name ?? <Skeleton width="100%" height="100%" variant="rounded" />} />
+                    <PressListItem href="/profile" icon={<AvatarIcon />} content={user?.name ?? <Skeleton width="100%" height="100%" variant="rounded" />} />
+                    <PressListItem href="/cart" icon={<CartIcon />} content="Keranjang" />
                     <PressListItem onClick={logout} icon={<Logout />} content="Keluar" />
                 </MenuList>
                 <MenuList component={Paper} sx={listStyle}>

@@ -1,4 +1,4 @@
-import { Box, Card, Typography } from '@mui/material'
+import { Box, Card, Typography, Grid, Skeleton } from '@mui/material'
 import React from 'react'
 import FormItemOrderVerifyManagement from './FormItemOrderVerifyManagement'
 import CardItemVerifyOrder from 'components/molecules/CardItemVerifyOrder'
@@ -11,12 +11,21 @@ import { useOrderList, useOrderListMenu, useOrderListWaiting } from 'api/hooks/o
 
 const FormVerifyOrderDekstop = ({ }) => {
     const orderListMenu = useOrderListMenu()
-    const { data } = useOrderList()
+    const { data, isFetching } = useOrderList()
 
     const display = {
         xs: 'none',
         md: 'block',
     }
+
+    const SkeletonBox = (
+        <Grid item xs={12}>
+            <Skeleton
+                variant="rounded"
+                height={120}
+            />
+        </Grid>
+    )
 
     return (
         <Box display={display}>
@@ -43,9 +52,11 @@ const FormVerifyOrderDekstop = ({ }) => {
                             height: 600,
                         }}>
                             <FormOrderVerifyDekstopWrapper>
-                                {
+                                {isFetching ? (
+                                    [...Array(3)].map(() => SkeletonBox)
+                                ) : (
                                     orderListMenu.data?.map(item => <CardItemVerifyDekstop key={item.id} {...item} />)
-                                }
+                                )}
                             </FormOrderVerifyDekstopWrapper>
                         </Box>
                         <Card sx={{
@@ -58,7 +69,11 @@ const FormVerifyOrderDekstop = ({ }) => {
                         }}>
                             <Box sx={{ marginLeft: 2, marginTop: 4, }}>
                                 <Typography sx={{ fontSize: 18 }}>Total</Typography>
-                                <Typography sx={{ fontWeight: 'bold', fontSize: 28 }}>{formatIDR(data?.totalPriceOrdered)}</Typography>
+                                {isFetching ? (
+                                    <Skeleton variant="text" width={300} sx={{ fontSize: 28 }} />
+                                ) : (
+                                    <Typography sx={{ fontWeight: 'bold', fontSize: 28 }}>{formatIDR(data?.totalPriceOrdered)}</Typography>
+                                )}
                             </Box>
                         </Card>
                     </Card>
