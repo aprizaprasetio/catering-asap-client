@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { Dialog, DialogTitle, TextField, DialogContent, DialogActions, Button }
+import { Dialog, DialogTitle, TextField, DialogContent, DialogActions, Button, Select, MenuItem, Autocomplete }
     from '@mui/material'
 import BankItemEditProps from 'proptypes/organisms/BankItemEditProps'
 import { useBankAdd, useBankEdit } from 'api/hooks/bankHook'
@@ -17,6 +17,10 @@ const yupConfig = yup.object({
         .string()
         .required('Mohon isi nama pemilik rekening')
 })
+
+const mostUsedBanks = [
+    'BRI', 'BNI', 'BCA', 'MANDIRI', 'DKI', 'BSI', 'MUAMALAT'
+]
 
 const BankItemEdit = ({ open, openTrigger, values, type }) => {
     const { mutate: addMutate } = useBankAdd()
@@ -50,9 +54,9 @@ const BankItemEdit = ({ open, openTrigger, values, type }) => {
     const bankNameConfig = {
         name: 'bankName',
         label: 'Nama Bank',
-        value: formikConfig.values.bankName.toUpperCase(),
-        onChange: formikConfig.handleChange,
-        helperText: formikConfig.touched.bankName && formikConfig.errors.bankName,
+        inputValue: formikConfig.values.bankName.toUpperCase(),
+        onInputChange: (Event, newValue) => formikConfig.setFieldValue('bankName', newValue.toUpperCase()),
+        onChange: (Event, newValue) => formikConfig.setFieldValue('bankName', newValue.toUpperCase()),
     }
     const bankNumberConfig = {
         name: 'bankNumber',
@@ -95,9 +99,18 @@ const BankItemEdit = ({ open, openTrigger, values, type }) => {
                     gap: 2,
                 }}
             >
-                <TextField
+                <Autocomplete
+                    options={mostUsedBanks}
+                    freeSolo
+                    disableClearable
                     {...bankNameConfig}
-                    fullWidth
+                    renderInput={params => (
+                        <TextField
+                            label={bankNameConfig.label}
+                            helperText={formikConfig.touched.bankName && formikConfig.errors.bankName}
+                            {...params}
+                        />
+                    )}
                 />
                 <TextField
                     {...bankNumberConfig}
