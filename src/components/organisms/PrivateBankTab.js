@@ -3,11 +3,12 @@ import { Card, CardContent, CardActions, Button, Snackbar, Alert, Box, Paper, Ta
 import BankItem from 'components/organisms/BankItem'
 import BankItemForm from 'components/organisms/BankItemForm'
 import BankAddButton from 'components/organisms/BankAddButton'
-import { useBankList, useBankRemove } from 'api/hooks/bankHook'
+import { useBankList, useBankRemove, useBankChoose } from 'api/hooks/bankHook'
 import { useTrigger } from 'commands/builders/commonBuilder'
 
 const PrivatePasswordTab = () => {
     const { data, isFetchedAfterMount } = useBankList()
+    const { mutate: chooseMutate } = useBankChoose()
     const [formOpen, formOpenTrigger] = useTrigger()
 
     const [formValue, setFormValue] = React.useState({
@@ -35,6 +36,7 @@ const PrivatePasswordTab = () => {
                 {...item}
                 onEdit={() => (setValueFromTarget(item.id), formOpenTrigger())}
                 onRemove={() => removeMutate(item.id)}
+                onChoose={() => chooseMutate(item.id)}
                 key={item.bankNumber}
             />)}
             {!data?.isLimit && <BankAddButton onClick={() => (setValueToEmpty(), formOpenTrigger())} />}

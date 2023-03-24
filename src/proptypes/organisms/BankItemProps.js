@@ -6,4 +6,5 @@ export default {
     name: string.isRequired,
     onEdit: func,
     onRemove: func,
+    isChoosen: func,
 }

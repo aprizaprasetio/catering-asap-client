@@ -51,6 +51,9 @@ const useBankEdit = () => {
 const useBankChoose = () => {
     const bankMutation = useMutation({
         mutationFn: fetchBankChoose,
+        onSuccess: () => client.refetchQueries({
+            queryKey: ['bankCollections'],
+        }),
     })
 
     return bankMutation
