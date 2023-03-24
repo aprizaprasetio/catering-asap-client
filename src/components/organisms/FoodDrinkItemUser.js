@@ -38,8 +38,8 @@ const FoodDrinkItemUser = ({ id, name, price, type, image_Url, like, ok, dislike
 
     return (
         <FoodDrinkItem>
-            <FoodDrinkImage image={image_Url} type={type} onClick={() => navigate(`/menus/${id}`)} />
-            <FoodDrinkBody name={name} price={price} onClick={() => navigate(`/menus/${id}`)} />
+            <FoodDrinkImage image={image_Url} onClick={() => navigate(`/menus/${id}`)} />
+            <FoodDrinkBody name={name} price={price} type={type} onClick={() => navigate(`/menus/${id}`)} />
             <FoodDrinkFooter>
                 <FoodDrinkReact values={reactValues} />
                 <FoodDrinkButton onClick={() => addCart(id)} component={Grid} item sx={addStyle}>
