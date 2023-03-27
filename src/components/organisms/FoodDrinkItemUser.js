@@ -11,7 +11,7 @@ import FoodDrinkButton from 'components/molecules/FoodDrinkButton'
 import { useAddCart } from 'api/hooks/cartHook'
 import { useNavigate } from 'react-router-dom'
 
-const FoodDrinkItemUser = ({ id, name, price, like, ok, dislike, image_Url }) => {
+const FoodDrinkItemUser = ({ id, name, price, type, image_Url, like, ok, dislike }) => {
     const reactValues = {
         like: like,
         ok: ok,
@@ -39,7 +39,7 @@ const FoodDrinkItemUser = ({ id, name, price, like, ok, dislike, image_Url }) =>
     return (
         <FoodDrinkItem>
             <FoodDrinkImage image={image_Url} onClick={() => navigate(`/menus/${id}`)} />
-            <FoodDrinkBody name={name} price={price} onClick={() => navigate(`/menus/${id}`)} />
+            <FoodDrinkBody name={name} price={price} type={type} onClick={() => navigate(`/menus/${id}`)} />
             <FoodDrinkFooter>
                 <FoodDrinkReact values={reactValues} />
                 <FoodDrinkButton onClick={() => addCart(id)} component={Grid} item sx={addStyle}>

@@ -34,9 +34,7 @@ const UserPayment = () => {
                             <>
                                 {(!cartData.carts || !bankData) && <Navigate to="/" />}
                                 <BankItem
-                                    bankNumber={bankData?.bankNumber}
-                                    bankName={bankData?.bankName}
-                                    name={bankData?.bankName}
+                                    {...bankData}
                                 />
                             </>
                         ) : (
