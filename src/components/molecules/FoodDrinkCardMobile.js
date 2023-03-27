@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
 
-const FoodDrinkCardMobile = ({ id, name, price }) => {
+const FoodDrinkCardMobile = ({ id, name, price, image_Url }) => {
     const navigate = useNavigate()
 
     return (
@@ -24,7 +24,7 @@ const FoodDrinkCardMobile = ({ id, name, price }) => {
                     padding: 1,
                     borderRadius: 4,
                 }}
-                image='https://picsum.photos/600.webp'
+                image={image_Url}
             />
             <CardContent >
                 <Typography sx={{ fontWeight: 500 }} component="div" variant='subtitle' position='flex'>
