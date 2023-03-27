@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom"
 import { fetchOrderList, fetchDataGraph, updateOrder, fetchListMenuOrder, fetchListSwitch, fetchListUserGraph, fetchOrderById, fetchListSwitchUser } from "api/connections/ordersManagementRequest"
 import { useEffect } from "react"
 import useSortAdmin from "factory/store/useSortAdmin"
+import useGrapStore from "factory/store/useGrapStore"
 
 const useOrderList = () => {
     const { orderId } = useParams()
@@ -75,10 +76,15 @@ const useOrderListUserGraph = () => {
 }
 
 const useDataGraph = () => {
+    const { filterBy } = useGrapStore()
     const dataGraph = useQuery({
         queryKey: ['dataGraph'],
-        queryFn: fetchDataGraph
+        queryFn: () => fetchDataGraph(filterBy)
     })
+
+    useEffect(() => {
+        dataGraph.refetch()
+    }, [filterBy])
 
     return dataGraph
 }

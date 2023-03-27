@@ -109,7 +109,7 @@ const UserDetailFoodDrinkMenuDekstop = () => {
                     }
                     {
                         isFetching ? <Skeleton width={300} height={50} />
-                            : <Button variant="contained" sx={{ borderRadius: 3, width: widthButton }} onClick={() => addCart(data?.data?.id)}>
+                            : <Button variant="contained" sx={{ borderRadius: 3, width: widthButton, marginTop: 5 }} onClick={() => addCart(data?.data?.id)}>
                                 <AddShoppingCart />
                                 <Typography component="p" sx={buttonStyle}>Tambah</Typography>
                             </Button>

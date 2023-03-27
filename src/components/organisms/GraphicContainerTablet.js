@@ -5,6 +5,7 @@ import { Box, Card, Typography } from '@mui/material'
 import CardItemUserGraphic from 'components/molecules/CardItemUserGraphic'
 import GraphicWrapper from './GraphicWrapper'
 import { useOrderListUserGraph } from 'api/hooks/ordersManagementHook'
+import AdminGraphFilterMonth from 'components/molecules/AdminGraphFilterMonth'
 
 const GraphicContainerTablet = () => {
     const { data } = useOrderListUserGraph()
@@ -27,6 +28,9 @@ const GraphicContainerTablet = () => {
                     borderRadius: 3,
                     padding: 3
                 }}>
+                    <Box sx={{ width: 200}}>
+                        <AdminGraphFilterMonth />
+                    </Box>
                     <Graphic height={100} />
                 </Card>
                 <Card sx={{

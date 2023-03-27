@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Paper, BottomNavigation, BottomNavigationAction } from '@mui/material'
+import { Paper, BottomNavigation, BottomNavigationAction, Drawer } from '@mui/material'
 import BottomNavbarProps from 'proptypes/organisms/BottomNavbarProps'
 
 const paperStyle = {
@@ -20,19 +20,21 @@ const BottomNavbar = ({ navbarData }) => {
     const { pathname } = useLocation()
 
     return (
-        <Paper sx={paperStyle}>
-            <BottomNavigation value={pathname}>
-                {navbarData.map(item => (
-                    <BottomNavigationAction
-                        key={item.href}
-                        value={item.href}
-                        icon={item.icon}
-                        onClick={() => navigate(item.href)}
-                    />
-                )
-                )}
-            </BottomNavigation>
-        </Paper>
+        <Drawer variant='permanent' anchor='bottom'>
+            <Paper sx={paperStyle}>
+                <BottomNavigation value={pathname}>
+                    {navbarData.map(item => (
+                        <BottomNavigationAction
+                            key={item.href}
+                            value={item.href}
+                            icon={item.icon}
+                            onClick={() => navigate(item.href)}
+                        />
+                    )
+                    )}
+                </BottomNavigation>
+            </Paper>
+        </Drawer>
     )
 }
 

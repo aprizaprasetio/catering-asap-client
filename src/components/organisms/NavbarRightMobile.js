@@ -54,11 +54,11 @@ const NavbarRightMobile = () => {
                     <PressListItem onClick={logout} icon={<Logout />} content="Keluar" />
                 </MenuList>
                 <MenuList component={Paper} sx={listStyle}>
-                    <PressListItem icon={<HourglassBottom />} content="Menunggu Verifikasi" />
-                    <PressListItem icon={<Cached />} content="Sedang Diproses" />
-                    <PressListItem icon={<LocalShipping />} content="Dalam Perjalanan" />
+                    <PressListItem icon={<HourglassBottom />} content="Menunggu Verifikasi" href='/statusorders'/>
+                    <PressListItem icon={<Cached />} content="Sedang Diproses" href='/statusorders/onproccess' />
+                    <PressListItem icon={<LocalShipping />} content="Dalam Perjalanan" href='/statusorders/ondelivery' />
                     <Divider sx={dividerStyle} />
-                    <PressListItem icon={<Schedule />} content="Riwayat Pesanan" />
+                    <PressListItem icon={<Schedule />} content="Riwayat Pesanan" href='/statusorders/successful' />
                 </MenuList>
             </SwipeableDrawer>
         </Box >

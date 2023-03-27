@@ -52,8 +52,10 @@ const fetchListUserGraph = async (page = 1) => {
     return userList.data.data
 }
 
-const fetchDataGraph = async () => {
-    const dataGraph = await axios.get('Orders/DataGraph')
+const fetchDataGraph = async filter => {
+    const dataGraph = await axios.get('Orders/DataGraph',{
+        params: { Filter: filter}
+    })
     return dataGraph.data.data
 }
 
