@@ -3,11 +3,12 @@ import { Box, Stack, Button } from '@mui/material'
 import { Person } from '@mui/icons-material'
 import ImageProfileFieldProps from 'proptypes/molecules/ImageProfileFieldProps'
 
-const ImageFooDrink = ({ config }) => {
+const ImageFooDrinkForm = ({ isEditMode, config }) => {
     const { value, ...imageConfig } = config
 
     return (
         <Stack spacing={1} sx={{
+            // width: 80,
             position: 'relative',
             borderRadius: 10,
             boxSizing: 'border-box',
@@ -18,9 +19,10 @@ const ImageFooDrink = ({ config }) => {
                     component="img"
                     src={value}
                     sx={{
-                        height: 80,
+                        height: 150,
+                        width: 150,
                         objectFit: 'cover',
-                        borderRadius: 3,
+                        borderRadius: 5,
                     }}
                 />
             ) : (
@@ -58,6 +60,7 @@ const ImageFooDrink = ({ config }) => {
                         '&:hover': {
                             backgroundColor: 'rgba(15, 14, 14, 1)',
                         },
+
                     }}>
                     Unggah Foto
                 </Button>
@@ -65,7 +68,4 @@ const ImageFooDrink = ({ config }) => {
         </Stack>
     )
 }
-
-ImageFooDrink.propTypes = ImageProfileFieldProps
-
-export default ImageFooDrink
+export default ImageFooDrinkForm

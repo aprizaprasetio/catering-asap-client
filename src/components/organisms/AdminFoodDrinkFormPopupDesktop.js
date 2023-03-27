@@ -10,7 +10,7 @@ import { Typography, TextField, Button, Dialog, DialogTitle, DialogContent, Dial
 import { FormatStrikethroughSharp } from '@mui/icons-material'
 import RadioField from 'components/molecules/RadioField'
 import LabeledRadio from 'components/molecules/LabeledRadio'
-import ImageFooDrink from 'components/molecules/ImageFoodDrink'
+import ImageFooDrinkForm from 'components/molecules/ImageFoodDrinkForm'
 import { useImage } from 'commands/builders/imageBuilder'
 
 const yupConfig = yup.object({
@@ -92,8 +92,8 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
     }, [image])
 
     const imageConfig = {
-        name: 'image',
-        id: 'image',
+        name: 'imageUrl',
+        id: 'imageUrl',
         value: formikConfig.values.image,
         onChange: imageHandler,
         type: 'file',
@@ -171,7 +171,7 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
 
 
             }}>
-                <ImageFooDrink config={imageConfig} />
+                <ImageFooDrinkForm config={imageConfig} />
                 <TextFieldFoodDrinkAdmin config={nameConfig} />
                 <TextFieldFoodDrinkAdmin config={priceConfig} />
                 <TextFieldFoodDrinkAdmin config={minOrderConfig} />
