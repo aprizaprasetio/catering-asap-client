@@ -17,7 +17,7 @@ const MenuProps = {
             width: 250,
         },
     },
-};
+}
 
 const names = [
     'Semua',
@@ -25,7 +25,7 @@ const names = [
     'Pesanan Terdikit',
     'Pesanan Terbaru',
     'Pesanan Terlama',
-];
+]
 
 function getStyles(name, personName, theme) {
     return {
@@ -33,7 +33,7 @@ function getStyles(name, personName, theme) {
             personName.indexOf(name) === -1
                 ? theme.typography.fontWeightRegular
                 : theme.typography.fontWeightMedium,
-    };
+    }
 }
 
 const SortingAdmin = ({display}) => {
@@ -50,7 +50,7 @@ const SortingAdmin = ({display}) => {
             target: { value },
         } = event;
         setPersonName(value)
-    };
+    }
 
     return (
         <Box display={display}>

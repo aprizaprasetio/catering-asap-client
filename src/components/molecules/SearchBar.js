@@ -57,8 +57,8 @@ const SearchBar = () => {
         },
         width: {
             xs: 'auto',
-            md: 450,
-            lg: 500,
+            md: 350,
+            lg: 450,
         },
         paddingLeft: 1,
         fontSize: {
@@ -120,7 +120,7 @@ const SearchBar = () => {
                         sortBy: sortOptions.checked,
                         isAsc: sortOptions.isAsc,
                     })
-                }}
+            }}
                 value={searchValue}
                 sx={inputStyle}
             />

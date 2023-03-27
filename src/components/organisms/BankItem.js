@@ -1,16 +1,21 @@
 import React from 'react'
-import { Box, Card, CardContent, CardActions, IconButton, Typography, InputBase } from '@mui/material'
-import { CreditCard, Edit, Delete } from '@mui/icons-material'
+import { Box, Card, CardContent, CardActions, IconButton, Typography, Button, Chip } from '@mui/material'
+import { Edit, Delete, Check } from '@mui/icons-material'
 import BankItemProps from 'proptypes/organisms/BankItemProps'
 
-const BankItem = ({ bankName, bankNumber, name, onEdit, onRemove }) => {
+const BankItem = ({ bankName, bankNumber, isChoosen, name, onChoose, onEdit, onRemove }) => {
     return (
         <Card sx={{
+            flex: 2,
             borderRadius: 4,
             boxShadow: 3,
         }}>
             <CardContent sx={{
                 display: 'flex',
+                flexDirection: {
+                    xs: 'column',
+                    md: 'row',
+                },
                 justifyContent: 'space-between',
                 gap: 10,
             }}>
@@ -47,14 +52,29 @@ const BankItem = ({ bankName, bankNumber, name, onEdit, onRemove }) => {
                         </Typography>
                     </Box>
                 </Box>
-                <CreditCard sx={{
-                    display: {
-                        xs: 'none',
-                        lg: 'block',
-                    },
-                    opacity: .33,
-                    fontSize: 100,
-                }} />
+                {isChoosen ? (
+                    <Chip
+                        icon={<Check />}
+                        label="Digunakan"
+                        color="success"
+                        sx={{
+                            textTransform: 'uppercase',
+                            fontWeight: 'medium',
+                        }}
+                    />
+                ) : onChoose && (
+                    <Button
+                        onClick={onChoose}
+                        variant="outlined"
+                        color="success"
+                        size="small"
+                        sx={{
+                            height: 'fit-content',
+                            borderRadius: 6,
+                        }}>
+                        Gunakan
+                    </Button>
+                )}
             </CardContent >
             {onEdit && (
                 <CardActions sx={{

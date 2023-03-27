@@ -1,5 +1,6 @@
 import React from 'react'
-import { CardContent, Typography, Grid } from '@mui/material'
+import { CardContent, Typography, Grid, Chip } from '@mui/material'
+import { LocalBar, LunchDining } from '@mui/icons-material'
 import { formatIDR } from 'commands/application/priceCommand'
 import FoodDrinkBodyProps from 'proptypes/molecules/FoodDrinkBodyProps'
 
@@ -18,11 +19,17 @@ const priceStyle = {
     fontSize: 16,
 }
 
-const FoodDrinkBody = ({ name, price, onClick }) => {
+const typeMenu = ['Makanan', 'Minuman']
+
+const FoodDrinkBody = ({ name, price, type, onClick }) => {
     return (
         <CardContent onClick={onClick} component={Grid} container {...cardConfig}>
             <Typography variant="h3" sx={titleStyle}>{name}</Typography>
             <Typography variant="subtitle1" sx={priceStyle}>{formatIDR(price)}</Typography>
+            <Chip icon={type ? <LocalBar /> : <LunchDining />} label={typeMenu[type]} color={type ? 'info' : 'warning'} sx={{
+                width: 'fit-content',
+                fontSize: 10,
+            }} />
         </CardContent>
     )
 }

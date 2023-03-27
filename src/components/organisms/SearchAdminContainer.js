@@ -13,7 +13,8 @@ const SearchAdminContainer = ({ display }) => {
         borderRadius: 3,
         boxShadow: 3,
         background: '#537FE7',
-        gap: 3
+        // gap: 1,
+        overflow: 'auto',
       }}>
         <Box sx={{
           display: 'flex',
@@ -23,7 +24,7 @@ const SearchAdminContainer = ({ display }) => {
           <SearcBarAdmin />
         </Box>
         <Box sx={{
-          marginRight: 5
+          backgroundColor: 'white',
         }}>
           <AdminDashboardUser />
         </Box>

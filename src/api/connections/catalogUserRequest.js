@@ -11,16 +11,24 @@ const fetchFoodDrinkList = async () => {
 }
 
 // Requesting a bunch of food and drink menu with pageparam
-const fetchFoodDrinkList2 = async pageParam => {
+const fetchFoodDrinkList2 = async (pageParam = 1, status) => {
+    const filter = {
+        'Makanan': 0,
+        'Minuman': 1,
+        'Semua': 2,
+    }
+
     const foodDrinkList = await axios.get(foodDrinkPath.menu, {
         params: {
             Keyword: client.getQueryData(['search']).keyword,
             SortBy: client.getQueryData(['search']).sortBy,
+            Filter: filter[status],
             IsAsc: client.getQueryData(['search']).isAsc,
             PageNumber: pageParam,
             PageSize: 10,
         },
     })
+    
     return foodDrinkList.data
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Skeleton } from '@mui/material'
 import UserTableRowAdmin from './UserTableRowAdmin'
 import { useUserList } from 'api/hooks/usersManagementHook'
 import LoadingFull from 'components/atoms/LoadingFull'
@@ -27,7 +27,7 @@ const UserListDekstop = () => {
 
     return (
         <>
-            <SearchAdminContainer display={display}/>
+            <SearchAdminContainer display={display} />
             <TableContainer component={Paper} sx={{ display: display, boxShadow: 3 }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -43,7 +43,16 @@ const UserListDekstop = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {
+                        {isLoading ? [...Array(5)].map((item, index) => (
+                            <TableRow key={index}>
+                                <TableCell>
+                                    <Skeleton variant="circular" width={56} height={56} />
+                                </TableCell>
+                                <TableCell width="100%" colSpan={7} padding={0}>
+                                    <Skeleton variant="rounded" width="100%" height={30} />
+                                </TableCell>
+                            </TableRow>
+                        )) : (
                             data?.pages?.map((userItem, index) => {
                                 return (
                                     <React.Fragment key={index}>
@@ -53,7 +62,7 @@ const UserListDekstop = () => {
                                     </React.Fragment>
                                 )
                             })
-                        }
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>

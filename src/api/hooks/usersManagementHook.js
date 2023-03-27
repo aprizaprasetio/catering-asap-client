@@ -21,6 +21,7 @@ const useUserList = () => {
     })
 
     React.useEffect(() => {
+        if (!keyword) return userListQuery.remove
         userListQuery.refetch()
         return userListQuery.remove
     }, [keyword])
@@ -38,7 +39,7 @@ const useUserData = () => {
         userData.refetch()
         return userData.remove
     }, [id])
-    
+
     return userData
 
 }

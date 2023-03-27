@@ -1,13 +1,15 @@
 import React from 'react'
-import { Typography, Card, CardHeader, CardMedia, CardActions, Button, Box }
+import { Typography, Card, CardHeader, CardMedia, CardContent, CardActions, Button, Box }
     from '@mui/material'
 import { Image } from '@mui/icons-material'
 import { useImage } from 'commands/builders/imageBuilder'
 import { useFoodDrinkOrder } from 'api/hooks/catalogUserHook'
 import { useUsedBank } from 'api/hooks/bankHook'
+import useCheckoutStore from 'factory/store/useCheckoutStore'
 
 const ImageUploadPanel = () => {
-    const [image, imageHandler] = useImage()
+    const setImage = useCheckoutStore(state => state.setImage)
+    const [image, imageHandler, { fileError }] = useImage(setImage)
     const { data: usedBank } = useUsedBank()
     const { mutate } = useFoodDrinkOrder()
 
@@ -40,6 +42,13 @@ const ImageUploadPanel = () => {
                     borderRadius: 6,
                 }}
             />
+            {fileError && (
+                <CardContent>
+                    <Typography variant="caption" color="red">
+                        {fileError}
+                    </Typography>
+                </CardContent>
+            )}
             <CardActions sx={{
                 display: 'grid',
                 gap: 1,

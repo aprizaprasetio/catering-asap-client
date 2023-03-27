@@ -5,6 +5,7 @@ import { useStale } from 'commands/builders/hookBuilder'
 import { fetchFoodDrinkList, fetchFoodDrinkDetail, fetchFoodDrinkList2, fetchOrder, fetchOrderUser } from 'api/connections/catalogUserRequest'
 import useCheckoutStore from 'factory/store/useCheckoutStore'
 import useFoodDrinkStore from 'factory/store/UseFoodDrinkStore'
+import useFilterListMenuUserStore from 'factory/store/useFilterListMenuUserStore'
 
 // This is the old hook, not compatible and do not use this hook
 const useFoodDrinkList = () => {
@@ -19,12 +20,13 @@ const useFoodDrinkList = () => {
 
 const useFoodDrinkList2 = () => {
     const setTotalFoodDrink = useFoodDrinkStore(state => state.setTotalFoodDrink)
+    const { filterBy } = useFilterListMenuUserStore()
     const [search] = useStale('search')
 
     const foodDrinkQuery = useInfiniteQuery({
         queryKey: ['foodDrinkList'],
         queryFn: async ({ pageParam = 1 }) => {
-            const fetch = await fetchFoodDrinkList2(pageParam)
+            const fetch = await fetchFoodDrinkList2(pageParam, filterBy)
             setTotalFoodDrink(fetch.totalCount)
             return fetch.data
         },
@@ -39,7 +41,7 @@ const useFoodDrinkList2 = () => {
 
     useEffect(() => {
         foodDrinkQuery?.refetch()
-    }, [search])
+    }, [search,filterBy])
 
     return foodDrinkQuery
 }
@@ -91,5 +93,5 @@ export {
     useFoodDrinkList2,
     useFoodDrinkOrder,
     useOrderUser,
-    // useFoodDrinkDetail
+    useFoodDrinkDetail
 }

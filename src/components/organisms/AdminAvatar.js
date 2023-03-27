@@ -4,6 +4,7 @@ import { Person, Logout } from '@mui/icons-material'
 import { useStale } from 'commands/builders/hookBuilder'
 import PressListItem from 'components/molecules/PressListItem'
 import { logout } from 'commands/application/authCommand'
+import { Box } from '@mui/system'
 
 const AdminAvatar = () => {
     const [user] = useStale('user')
@@ -13,40 +14,34 @@ const AdminAvatar = () => {
             <Card sx={{
                 borderRadius: 4,
             }}>
-                <CardMedia
-                    component="img"
-                    image="https://picsum.photos/600.webp"
-                    sx={{
-                        height: 200,
-                    }}
-                />
                 <CardContent sx={{
                     position: 'flex',
                     display: 'flex',
-                    gap: 1,
+                    gap: 3,
                     flexDirection: {
                         xs: 'column',
                         sm: 'row',
                     },
                     alignItems: 'center',
                 }}>
-                    <Avatar sx={{
-                        width: 60,
-                        height: 60,
-                    }}>
-                        <Person />
-                    </Avatar>
-                    <Typography variant="h3" sx={{ fontSize: 20 }}>{user.name}</Typography>
+                    {
+                        user.avatar == null ? <Person sx={{ fontSize: 100 }} /> :
+                            <Avatar
+                                alt="Remy Sharp"
+                                src={user.avatar}
+                                sx={{ width: 100, height: 100 }}
+                            />
+                    }
+
+                    <Box>
+                        <Typography sx={{ fontSize: 26, fontWeight: 'medium' }}>{user.name}</Typography>
+                        <Typography sx={{ fontSize: 16 }}>Admin</Typography>
+                    </Box>
                 </CardContent>
                 <CardActions>
                     <List sx={{
                         width: '100%',
                     }}>
-                        <PressListItem
-                            href="profile"
-                            icon={<Person />}
-                            content="Profil"
-                        />
                         <PressListItem
                             onClick={logout}
                             icon={<Logout />}
@@ -54,6 +49,35 @@ const AdminAvatar = () => {
                         />
                     </List>
                 </CardActions>
+                <Box sx={{
+                    marginX: 3,
+                    marginBottom: 2,
+                    display: 'flex',
+                    gap: {
+                        xs: 2,
+                        md: 6
+                    },
+                    flexDirection: {
+                        xs: 'column',
+                        md: 'row'
+                    }
+                }}>
+                    <Box>
+                        <Typography sx={{ fontWeight: 'medium' }}>Jenis Kelamin</Typography>
+                        <Typography>{user.gender == 0 ? 'Pria' : 'Wanita'}</Typography>
+                    </Box>
+                    <Box>
+                        <Typography sx={{ fontWeight: 'medium' }}>Email</Typography>
+                        <Typography>{user.email == "" ? '-' : user.email}</Typography>
+                    </Box>
+                </Box>
+                <Box sx={{
+                    marginX: 3,
+                    marginBottom: 2
+                }}>
+                    <Typography sx={{ fontWeight: 'medium' }}>Telepon</Typography>
+                    <Typography>{user.phone == "" ? '-' : user.phone}</Typography>
+                </Box>
             </Card>
         </Grid>
     )

@@ -90,9 +90,6 @@ const NavbarRight = () => {
 
     return (
         <Box sx={boxStyle}>
-            <PressIconLink href="/register">
-                <HelpCenter />
-            </PressIconLink>
             <PressIconLink href="/cart">
                 <CartIcon />
             </PressIconLink>

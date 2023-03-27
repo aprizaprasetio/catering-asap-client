@@ -18,7 +18,7 @@ const SearchAndFormButtonFoodDrinkAdmin = () => {
                     },
                     marginX: {
                         lg: 20
-                    }
+                    },
                 }}>
                 <SearchBarAdmin />
                 <Box onClick={setOpenPopup}>
