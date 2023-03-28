@@ -13,8 +13,8 @@ function FoodDrinkTableHeader() {
                 <TableCell align="center">Harga</TableCell>
                 <TableCell align="center">Min.Pemesanan</TableCell>
                 <TableCell width={2} align='right' sx={{ textAlign: 'center' }} >Ulasan</TableCell>
-                {/* <TableCell align="right" sx={{ marginRight: 10 }}>
-                    <Button
+                <TableCell align="center" >
+                    {/* <Button
                         size="small"
                         color="error"
                         startIcon={<Delete />}
@@ -25,8 +25,8 @@ function FoodDrinkTableHeader() {
                         }} >
                         Hapus Terpilih
                     </Button>
-                    <Checkbox />
-                </TableCell> */}
+                    <Checkbox /> */}
+                </TableCell>
             </TableRow>
         </TableHead>
     )

@@ -1,7 +1,7 @@
 import React from 'react'
-import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Box, }
+import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Box, Chip }
     from '@mui/material'
-import { MoodRounded, SentimentNeutralRounded, MoodBadRounded, KeyboardArrowDown, KeyboardArrowUp, Edit, Delete, }
+import { MoodRounded, SentimentNeutralRounded, MoodBadRounded, KeyboardArrowDown, KeyboardArrowUp, Edit, Delete, LocalBar, LunchDining }
     from '@mui/icons-material'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -37,7 +37,7 @@ const yupConfig = yup.object({
         .required(),
 })
 
-const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url, like, ok, dislike }) => {
+const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url, like, ok, dislike, type }) => {
     const [isEditMode, isEditModeTrigger] = useTrigger()
     const { mutate: deleteHandler } = useFoodDrinkDelete()
     const { mutate: updateHandler } = useFoodDrinkUpdate()
@@ -108,6 +108,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
     }
 
     const [open, setOpen] = React.useState(false)
+    const typeMenu = ['Makanan', 'Minuman']
 
     return (
         <>
@@ -149,6 +150,12 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
                         <ReactListItem icon={<SentimentNeutralRounded />} content={nilai.ok} />
                         <ReactListItem icon={<MoodBadRounded />} content={nilai.dislike} />
                     </List>
+                </TableCell>
+                <TableCell width="fit-content" sx={{ textAlign: 'center' }} component="th" scope="row">
+                    <Chip icon={type ? <LocalBar /> : <LunchDining />} label={typeMenu[type]} color={type ? 'info' : 'warning'} sx={{
+                        width: 'fit-content',
+                        fontSize: 10,
+                    }} />
                 </TableCell>
                 <TableCell component="th" scope="row" align="right">
                     {isEditMode ? (
