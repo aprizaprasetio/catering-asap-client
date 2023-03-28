@@ -180,9 +180,9 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
                     <IconButton onClick={() => deleteHandler(id)} color='error'>
                         <Delete />
                     </IconButton>
-                    <IconButton size='small' sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
+                    {/* <IconButton size='small' sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
                         <Checkbox />
-                    </IconButton>
+                    </IconButton> */}
                 </TableCell>
             </TableRow>
             <TableRow sx={{
