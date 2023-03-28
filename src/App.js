@@ -22,6 +22,11 @@ import UserOrderDetail from 'components/pages/UserOrderDetail'
 import AdminUserDetail from 'components/pages/AdminUserDetail'
 import OrderVerifyManagement from 'components/pages/OrderVerifyManagement'
 import { useLoginOnLoad } from 'api/hooks/authHook'
+import AdminFoodDrinkDetailMobile from 'components/pages/AdminFoodDrinkDetailMobile'
+import UserStatusPesanan from 'components/pages/UserStatusPesanan'
+import UserFoodDrinkMenuDetail from 'components/pages/UserFoodDrinkMenuDetail'
+import AdminBanner from 'components/pages/AdminBanner'
+import AdminFormBanner from 'components/organisms/AdminFormBanner'
 
 const App = () => {
   useLoginOnLoad()
@@ -51,12 +56,14 @@ const App = () => {
 
       <Route path="/profile" element={<PrivateRoute element={<UserManage />} />} exact />
       <Route path="/profile/*" element={<PrivateRoute element={<UserManage />} />} exact />
+      <Route path="/statusorders/*" element={<PrivateRoute element={<UserStatusPesanan />} />} exact />
       <Route path="/cart" element={<PrivateRoute element={<UserCart />} />} exact />
       <Route path="/cart/checkout" element={<PrivateRoute element={<UserCheckout />} />} exact />
       <Route path="/cart/payment" element={<PrivateRoute element={<UserPayment />} />} exact />
       <Route path="/login" element={<GuestRoute element={<LoginForm />} />} exact />
       <Route path="/register" element={<GuestRoute element={<RegisterForm />} />} exact />
       <Route path="/orders" element={<PrivateRoute element={<AdminOrderManagement />} role="admin" />} exact />
+      <Route path="/menus/:fooddrinkid" element={<PrivateRoute element={<UserFoodDrinkMenuDetail />} />} exact />
 
       <Route path="/graphs" element={<PrivateRoute element={<AdminManagementGraphic />} role="admin" />} exact />
       <Route path="/users" element={<PrivateRoute element={<AdminUserList />} role="admin" />} exact />
@@ -65,6 +72,9 @@ const App = () => {
       <Route path="/graphs" element={<PrivateRoute element={<AdminManagementGraphic />} role="admin" />} exact />
       <Route path="/users" element={<PrivateRoute element={<PrivateRoute element={<AdminUserList />} role="admin" />} role="admin" />} exact />
       <Route path="/users/detail/:id" element={<PrivateRoute element={<AdminUserDetail />} role="admin" />} exact />
+      <Route path="/menus" element={<PrivateRoute element={<AdminFoodDrink />} role="admin" />} exact />
+      <Route path="/menus/:menusId" element={<PrivateRoute element={<AdminFoodDrinkDetailMobile />} role="admin" />} exact />
+      <Route path="/banners" element={<PrivateRoute element={<AdminBanner />} role="admin" />} exact />
 
       <Route path="*" element={<Navigate to="/" replace={false} />} exact />
     </Routes>
