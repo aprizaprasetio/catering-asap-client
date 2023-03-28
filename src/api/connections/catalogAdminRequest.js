@@ -29,14 +29,8 @@ const fetchFoodDrinkDelete = async foodDrinkId => {
 }
 
 const fetchFoodDrinkUpdate = async edited => {
-    const { id, minOrder, imageUrl, ...data } = edited
-    await axios.put(`FoodDrinkMenus/${id}/edit`, {
-        ...edited,
-        min_Order: minOrder,
-        image_Url: imageUrl,
-    }, {
-        params: { id },
-    })
+    // const { id, minOrder, imageUrl, ...data } = edited
+    await axios.put('FoodDrinkMenus/edit', edited)
 }
 
 const fetchFoodDrinkQuantity = async () => {

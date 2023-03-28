@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Avatar, Box, CardMedia }
+import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Box, }
     from '@mui/material'
 import { MoodRounded, SentimentNeutralRounded, MoodBadRounded, KeyboardArrowDown, KeyboardArrowUp, Edit, Delete, }
     from '@mui/icons-material'
@@ -13,6 +13,29 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useFoodDrinkDelete, useFoodDrinkUpdate } from 'api/hooks/catalogAdminHook'
 import { useImage } from 'commands/builders/imageBuilder'
 import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
+import ImageFooDrink from 'components/molecules/ImageFoodDrink'
+
+const yupConfig = yup.object({
+    image_Url: yup
+        .string()
+        .required(),
+    name: yup
+        .string()
+        .required(),
+    price: yup
+        .number()
+        .required()
+        .positive('Masukan Angka Postive'),
+    minOrder: yup
+        .number()
+        .required()
+        .positive('Masukan Angka Postive')
+        .max(99, 'Maximal Min order 99')
+        .integer(),
+    description: yup
+        .string()
+        .required(),
+})
 
 const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url, like, ok, dislike }) => {
     const [isEditMode, isEditModeTrigger] = useTrigger()
@@ -25,27 +48,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
         ok: ok,
         dislike: dislike,
     }
-    const yupConfig = yup.object({
-        image_Url: yup
-            .string()
-            .required(),
-        name: yup
-            .string()
-            .required(),
-        price: yup
-            .number()
-            .required()
-            .positive('Masukan Angka Postive'),
-        min_Order: yup
-            .number()
-            .required()
-            .positive('Masukan Angka Postive')
-            .max(99, 'Maximal Min order 99')
-            .integer(),
-        description: yup
-            .string()
-            .required(),
-    })
+
     const formikConfig = useFormik({
         initialValues: {
             imageUrl: image_Url,
@@ -56,30 +59,23 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
         },
         validationSchema: yupConfig,
         validateOnChange: false,
-        //eror
-        onSubmit: () => {
-            // postHandler({ ...formikConfig.values },
-            //     { onSuccess: () => (query.refetch(), setOpenPopup()) },
-            // )
-            // console.info(formikConfig.values)
-
-            const profileForm = new FormData()
-
-            profileForm.append('name', formikConfig.values.name)
-            profileForm.append('price', formikConfig.values.price)
-            profileForm.append('min_Order', formikConfig.values.minOrder)
-            profileForm.append('description', formikConfig.values.description)
-            profileForm.append('type', formikConfig.values.type)
-            profileForm.append('imageUrl', file, fileName)
-
-
-            updateHandler(profileForm, {
-                onSuccess: () => (query.refetch()),
-            })
-        },
-        //error
 
     })
+    React.useEffect(() => {
+        if (!image) return formikConfig.resetForm
+        formikConfig.setFieldValue('imageUrl', image.binary)
+        return formikConfig.resetForm
+    }, [image])
+
+    const imageConfig = {
+        name: 'imageUrl',
+        id: 'imageUrl',
+        label: 'Makanan & Minuman',
+        value: formikConfig.values.imageUrl,
+        type: 'file',
+        accept: 'image/*',
+        onChange: imageHandler,
+    }
     const nameConfig = {
         name: 'name',
         label: 'Makanan & Minuman',
@@ -96,7 +92,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
         helperText: formikConfig.errors.price
     }
     const minOrderConfig = {
-        name: 'min_Order',
+        name: 'minOrder',
         label: 'Min.Pemesanan',
         type: 'number',
         value: formikConfig.values.minOrder,
@@ -110,11 +106,12 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
         onChange: formikConfig.handleChange,
         helperText: formikConfig.errors.description,
     }
+
     const [open, setOpen] = React.useState(false)
 
     return (
         <>
-            <TableRow >
+            <TableRow>
                 <TableCell width={1} sx={{ '& > *': { borderBottom: 'unset' } }}>
                     <IconButton
                         aria-label='expand row'
@@ -125,19 +122,22 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
                 </TableCell>
                 <TableCell width={1} sx={{ textAlign: 'center' }} component='th'>{id}</TableCell>
                 <TableCell width={20} sx={{ justifyContent: 'center' }} align='center' component='th'>
-                    {image_Url ? (
-                        <CardMedia
 
-                            variant='square'
-                            component={"img"}
-                            image={image_Url}
+                    {isEditMode ? (
+                        <ImageFooDrink config={imageConfig} />
+                    ) : (
+
+                        <Box
+                            component="img"
+                            src={image_Url}
+                            sx={{
+                                height: 80,
+                                objectFit: 'cover',
+                                borderRadius: 3
+                            }}
                         />
-                    ) :
-                        <Avatar
-                            alt="Remy Sharp"
-                            variant='square'
-                            src="/static/images/avatar/1.jpg" />
-                    }
+                    )}
+
                 </TableCell>
                 <FoodDrinkTableCell open={isEditMode} config={nameConfig} />
                 <FoodDrinkTableCell open={isEditMode} config={priceConfig} />
@@ -153,24 +153,36 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
                 <TableCell component="th" scope="row" align="right">
                     {isEditMode ? (
                         <IconButton onClick={() => {
-                            updateHandler(
-                                { id, ...formikConfig.values },
-                                { onSuccess: isEditModeTrigger },
-                            )
+                            const profileForm = new FormData()
+
+                            profileForm.append('id', id)
+                            profileForm.append('name', formikConfig.values.name)
+                            profileForm.append('price', formikConfig.values.price)
+                            profileForm.append('minOrder', formikConfig.values.minOrder)
+                            profileForm.append('description', formikConfig.values.description)
+
+                            if (formikConfig.values.imageUrl !== image_Url)
+                                profileForm.append('imageUrl', file, fileName)
+
+                            console.info(profileForm)
+
+                            updateHandler(profileForm, {
+                                onSuccess: () => (query.refetch(), isEditModeTrigger()),
+                            })
                         }}>
                             <CheckCircleIcon />
                         </IconButton>
                     ) : (
-                        <IconButton onClick={isEditModeTrigger}>
+                        <IconButton onClick={() => isEditModeTrigger()}>
                             <Edit />
                         </IconButton>
                     )}
                     <IconButton onClick={() => deleteHandler(id)} color='error'>
                         <Delete />
                     </IconButton>
-                    <IconButton size='small' sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
+                    {/* <IconButton size='small' sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
                         <Checkbox />
-                    </IconButton>
+                    </IconButton> */}
                 </TableCell>
             </TableRow>
             <TableRow sx={{
