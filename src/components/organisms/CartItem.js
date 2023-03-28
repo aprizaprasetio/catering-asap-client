@@ -8,7 +8,7 @@ const CartItem = ({ cartBody, cartFooter }) => {
     return (
         <CartItemContainer>
             <CartItemBody
-                image="https://picsum.photos/600.webp"
+                image={cartBody.imageUrl}
                 title={cartBody.food_Drink_Menu_Name}
                 price={cartBody.food_Drink_Menu_Price}
                 minOrder={cartFooter.minOrder}

@@ -17,6 +17,12 @@ const AdminBannerRow = ({ id, subject, link, imagePath, setOpenPopup }) => {
         onSuccess: () => query.refetch().then(setPopup)
     })
 
+    const widthLink = {
+        xs: 100,
+        md: 300,
+        lg: 600
+    }
+
     return (
         <>
             <TableRow
@@ -27,7 +33,7 @@ const AdminBannerRow = ({ id, subject, link, imagePath, setOpenPopup }) => {
                 <TableCell component={Link} to={link}>
                     <AdminBannerImage imagePath={imagePath} subject={subject} link={link} />
                 </TableCell>
-                <TableCell align='center'>
+                <TableCell align='center' sx={{ width: widthLink}}>
                     <a href={link} target='_blank'>{link}</a>
                 </TableCell>
                 <TableCell align='center'>

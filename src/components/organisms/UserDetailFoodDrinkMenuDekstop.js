@@ -84,6 +84,7 @@ const UserDetailFoodDrinkMenuDekstop = () => {
                                     width: imageRespon,
                                     height: heightImage,
                                     borderRadius: 3,
+                                    objectFit: 'cover'
                                 }}
                                 image={data?.data?.image_Url}
                                 alt='Zonk'
