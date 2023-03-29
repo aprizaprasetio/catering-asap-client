@@ -4,6 +4,7 @@ import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Box, Chip }
 import { MoodRounded, SentimentNeutralRounded, MoodBadRounded, KeyboardArrowDown, KeyboardArrowUp, Edit, Delete, LocalBar, LunchDining }
     from '@mui/icons-material'
 import { useFormik } from 'formik'
+import { client } from 'api/initiates/queryInitiate'
 import * as yup from 'yup'
 import FoodDrinkTableCollapsible from './FoodDrinkTableCollapsible'
 import { useTrigger } from 'commands/builders/commonBuilder'
@@ -41,7 +42,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
     const [isEditMode, isEditModeTrigger] = useTrigger()
     const { mutate: deleteHandler } = useFoodDrinkDelete()
     const { mutate: updateHandler } = useFoodDrinkUpdate()
-    const query = useFoodDrinkList2()
+    // const query = useFoodDrinkList2()
     const [image, imageHandler, { fileName, file }] = useImage()
     const nilai = {
         like: like,
@@ -174,7 +175,7 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
                             console.info(profileForm)
 
                             updateHandler(profileForm, {
-                                onSuccess: () => (query.refetch(), isEditModeTrigger()),
+                                onSuccess: () => (client.refetchQueries({ queryKey: ['foodDrinkList'] }), isEditModeTrigger()),
                             })
                         }}>
                             <CheckCircleIcon />

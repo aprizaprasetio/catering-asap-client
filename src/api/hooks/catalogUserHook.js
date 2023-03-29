@@ -40,8 +40,9 @@ const useFoodDrinkList2 = () => {
     })
 
     useEffect(() => {
+        if (foodDrinkQuery.isFetching) return
         foodDrinkQuery?.refetch()
-    }, [search,filterBy])
+    }, [search, filterBy])
 
     return foodDrinkQuery
 }

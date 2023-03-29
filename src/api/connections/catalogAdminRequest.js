@@ -14,13 +14,8 @@ const fetchFoodDrinkCreate = async foodDrink => {
             Authorization: axios.defaults.headers.Authorization,
         }
     })
-        .then(res => {
-            console.log("Success")
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    return foodDrinkList.data.data
+
+    return foodDrinkList.data
 }
 const fetchFoodDrinkDelete = async foodDrinkId => {
     await axios.delete(`FoodDrinkMenus/${foodDrinkId}delete`, {

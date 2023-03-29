@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Stack, Button } from '@mui/material'
-import { Person } from '@mui/icons-material'
+import { Person, Fastfood } from '@mui/icons-material'
 import ImageProfileFieldProps from 'proptypes/molecules/ImageProfileFieldProps'
 
 const ImageFooDrinkForm = ({ isEditMode, config }) => {
@@ -27,12 +27,17 @@ const ImageFooDrinkForm = ({ isEditMode, config }) => {
                 />
             ) : (
                 <Box sx={{
+                    display: 'flex',
+                    width: 150,
+                    height: 150,
                     backgroundColor: 'rgba(15, 14, 14, .3)',
                     borderRadius: 5,
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 }}>
-                    <Person sx={{
-                        width: 150,
-                        height: 150,
+                    <Fastfood sx={{
+                        width: 70,
+                        height: 70,
                         objectFit: 'cover',
                     }} />
                 </Box>

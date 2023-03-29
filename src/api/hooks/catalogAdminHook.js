@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useQuery, useInfiniteQuery, useMutation } from '@tanstack/react-query'
+import { client } from 'api/initiates/queryInitiate'
 import { fetchFoodDrinkMenuDetail, fetchPost } from 'api/connections/catalogUserRequest'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
@@ -8,10 +9,10 @@ import { fetchFoodDrinkCount, fetchFoodDrinkCreate, fetchFoodDrinkDelete, fetchF
 
 
 const useFoodDrinkDetail = () => {
-    const { menuId } = useParams()
+    const { fooddrinkid } = useParams()
     const foodDetail = useQuery({
         queryKey: ['foodDrinkDetail'],
-        queryFn: () => fetchFoodDrinkMenuDetail(menuId),
+        queryFn: () => fetchFoodDrinkMenuDetail(fooddrinkid),
     })
 
     useEffect(() => foodDetail.remove, [])
@@ -20,29 +21,29 @@ const useFoodDrinkDetail = () => {
 }
 
 const useFoodDrinkCreate = () => {
-    const { refetch } = useFoodDrinkList2()
+    // const { refetch } = useFoodDrinkList2()
     const mutation = useMutation({
         mutationFn: fetchFoodDrinkCreate,
-        onSuccess: refetch,
+        onSuccess: () => client.refetchQueries({ queryKey: ['foodDrinkList'] }),
     })
 
     return mutation
 }
 
 const useFoodDrinkDelete = () => {
-    const { refetch } = useFoodDrinkList2()
+    // const { refetch } = useFoodDrinkList2()
     const mutation = useMutation({
         mutationFn: fetchFoodDrinkDelete,
-        onSuccess: refetch,
+        onSuccess: () => client.refetchQueries({ queryKey: ['foodDrinkList'] }),
     })
     return mutation
 }
 
 const useFoodDrinkUpdate = () => {
-    const { refetch } = useFoodDrinkList2()
+    // const { refetch } = useFoodDrinkList2()
     const mutation = useMutation({
         mutationFn: fetchFoodDrinkUpdate,
-        onSuccess: refetch,
+        onSuccess: () => client.refetchQueries({ queryKey: ['foodDrinkList'] }),
     })
     return mutation
 }

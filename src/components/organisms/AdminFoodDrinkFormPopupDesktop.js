@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import { client } from 'api/initiates/queryInitiate'
 import { useFoodDrinkCreate } from 'api/hooks/catalogAdminHook'
 import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
 import UploudImageAdmin from 'components/molecules/UploudImageAdmin'
@@ -43,7 +44,7 @@ const yupConfig = yup.object({
 })
 const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
     const { mutate } = useFoodDrinkCreate()
-    const query = useFoodDrinkList2()
+    // const query = useFoodDrinkList2()
     const [image, imageHandler, { fileName, file }] = useImage()
     const formikConfig = useFormik({
         initialValues: {
@@ -71,20 +72,13 @@ const AdminFoodDrinkFormPopupDesktop = ({ setOpenPopup, openPopup, }) => {
             profileForm.append('type', formikConfig.values.type)
             profileForm.append('imageUrl', file, fileName)
 
-
+            console.info(fileName)
             mutate(profileForm, {
-                onSuccess: () => (query.refetch(), setOpenPopup()),
+                onSuccess: () => (client.refetchQueries({ queryKey: ['foodDrinkList'] }), setOpenPopup()),
             })
         },
     })
-    // 
-    // const imageConfig = {
-    //     name: 'image',
-    //     type: 'file',
-    //     value: formikConfig.values.image,
-    //     onBlur: formikConfig.handleBlur,
-    //     helperText: formikConfig.touched.image && formikConfig.errors.image,
-    // }
+
     React.useEffect(() => {
         if (!image) return formikConfig.resetForm
         formikConfig.setFieldValue('image', image.binary)
