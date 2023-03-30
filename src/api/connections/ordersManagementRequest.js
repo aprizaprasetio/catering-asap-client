@@ -10,12 +10,17 @@ const fetchOrderList = async id => {
 }
 
 const updateOrder = async id => {
-    const orderList = await axios.put('Orders/Update', {
-        id: id,
-        isForward: true,
-    })
-    return orderList.data
+    const order = await axios.put('Orders/Update', { id, isForward: true })
+
+    return order.data
 }
+
+const updateOrderControl = async ({ id, status }) => {
+    const order = await axios.put('Orders/StatusControl', { id, status })
+
+    return order.data
+}
+
 
 const fetchListMenuOrder = async id => {
     const orderList = await axios.get('FoodDrinkOrders/WithOrderId', {
@@ -30,6 +35,7 @@ const fetchListSwitch = async (page = 1, status, sortBy) => {
         '/orders/waiting': 1,
         '/orders/delivering': 2,
         '/orders/success': 3,
+        '/orders/rejected': 4,
     }
     const orderList = await axios.get('Orders/Switch', {
         params: {
@@ -53,14 +59,14 @@ const fetchListUserGraph = async (page = 1) => {
 }
 
 const fetchDataGraph = async filter => {
-    const dataGraph = await axios.get('Orders/DataGraph',{
-        params: { Filter: filter}
+    const dataGraph = await axios.get('Orders/DataGraph', {
+        params: { Filter: filter }
     })
     return dataGraph.data.data
 }
 
 const fetchOrderById = async id => {
-    const dataOrder = await axios.get('/Orders/UserId',{
+    const dataOrder = await axios.get('/Orders/UserId', {
         params: {
             id: id
         }
@@ -90,6 +96,7 @@ export {
     fetchListMenuOrder,
     fetchListSwitch,
     updateOrder,
+    updateOrderControl,
     fetchListUserGraph,
     fetchDataGraph,
     fetchOrderById,

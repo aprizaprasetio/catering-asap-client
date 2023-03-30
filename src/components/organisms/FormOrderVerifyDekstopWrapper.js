@@ -1,18 +1,11 @@
-import { Box, Grid } from '@mui/material'
 import React from 'react'
+import { Grid } from '@mui/material'
 
 const FormOrderVerifyDekstopWrapper = ({ children }) => {
-    const display = {
-        xs: 'block',
-        md: 'none'
-    }
-
     return (
-        <Box >
-            <Grid container spacing={1}>
-                {children}
-            </Grid>
-        </Box>
+        <Grid container spacing={1} paddingX={1} paddingY={3} maxHeight={600} overflow="auto">
+            {children}
+        </Grid>
     )
 }
 

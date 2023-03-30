@@ -1,11 +1,14 @@
 import React from 'react'
-import { Box, Typography, CardMedia, Button, Card, CardContent, Skeleton } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { Box, Stack, Typography, CardMedia, Button, Card, CardContent, Skeleton, Chip, Paper }
+    from '@mui/material'
+import { grey } from '@mui/material/colors'
+import { CreditCard } from '@mui/icons-material'
 import { useTrigger } from 'commands/builders/commonBuilder'
 import PopUp from 'components/molecules/PopUp'
-import { CreditCard } from '@mui/icons-material'
-import { grey } from '@mui/material/colors'
-import { useNavigate } from 'react-router-dom'
 import { useUpdateOrder, useOrderSwitch } from 'api/hooks/ordersManagementHook'
+import OrderAdminAdvanceTool from './OrderAdminAdvanceTool'
+import StatusStepper from 'components/molecules/StatusStepper'
 import { useImageByPath } from 'api/hooks/imageHook'
 
 const SkeletonList = (
@@ -73,107 +76,113 @@ const FormOrderDataDekstop = ({ id, name, orderTime, mealDate, address, bankName
         },
         {
             afterHref: '/graphs',
-            buttonText: 'Simpan Ke Grafik',
+            buttonText: 'Buka Grafik',
         },
     ]
 
     return (
         <>
             {!name ? SkeletonList : (
-                <Box sx={{
-                    margin: 3,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 3,
-                }}>
+                <Stack spacing={3} padding={3}>
                     <Box>
-                        <Typography sx={{ fontWeight: 'bold' }}>Nama</Typography>
-                        <Typography>{name}</Typography>
+                        <Typography sx={{ fontWeight: 'bold' }}>No. Pesanan <Chip label={id} /></Typography>
                     </Box>
-                    <Box>
-                        <Typography sx={{ fontWeight: 'bold' }}>No.Pesanan</Typography>
-                        <Typography>{id}</Typography>
-                    </Box>
-                    <Box>
-                        <Typography sx={{ fontWeight: 'bold' }}>Tgl Ordered</Typography>
-                        <Typography>{orderTime}</Typography>
-                    </Box>
-                    <Box>
-                        <Typography sx={{ fontWeight: 'bold' }}>Estimasi Pengiriman</Typography>
-                        <Typography>{mealDate}</Typography>
-                    </Box>
-                    <Box>
-                        <Typography sx={{ fontWeight: 'bold' }}>Alamat</Typography>
-                        <Typography>{address}</Typography>
-                    </Box>
-                    <Box>
-                        <Card sx={{ paddingX: 3, borderRadius: 3, }}>
+                    <Stack spacing={3} maxHeight={300} overflow="auto" >
+                        <Box>
+                            <Typography sx={{ fontWeight: 'bold' }}>
+                                Status
+                            </Typography>
+                            <StatusStepper currentStatus={status} />
+                        </Box>
+                        <Box>
+                            <Typography sx={{ fontWeight: 'bold' }}>Nama Pemesan</Typography>
+                            <Typography>{name}</Typography>
+                        </Box>
+                        <Box>
+                            <Typography sx={{ fontWeight: 'bold' }}>Tg. Pesanan Dibuat</Typography>
+                            <Typography>{orderTime}</Typography>
+                        </Box>
+                        <Box>
+                            <Typography sx={{ fontWeight: 'bold' }}>Tg. Santap</Typography>
+                            <Typography>{mealDate}</Typography>
+                        </Box>
+                        <Box>
+                            <Typography sx={{ fontWeight: 'bold' }}>Alamat</Typography>
+                            <Typography>{address}</Typography>
+                        </Box>
+                    </Stack>
+                    <Stack spacing={3}>
+                        <Card sx={{ borderRadius: 4, }}>
                             <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <Box>
                                     <Typography sx={{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: 16 }}>{bankName}</Typography>
                                     <Typography sx={{ fontWeight: 'bold', fontSize: 24, fontFamily: 'monospace' }}>{name}</Typography>
                                     <Typography sx={{ backgroundColor: grey[100], borderRadius: 3, paddingX: 1 }} variant='subtitle1' color='GrayText'>{bankNumber}</Typography>
                                 </Box>
-                                <CreditCard sx={{ fontSize: 100 }} />
+                                <CreditCard sx={{ fontSize: 100, opacity: .1 }} />
                             </CardContent>
                         </Card>
-                    </Box>
-                    <Box>
-                        <Typography sx={{ fontWeight: 'bold' }}>Screenshoot</Typography>
-                        <Card sx={{
-                            display: 'flex',
-                            gap: 3,
-                            cursor: 'pointer',
-                            width: 350,
-                            borderRadius: 3,
-                            paddingX: 1,
-                            marginTop: 2
-                        }}
-                            onClick={setOpenPopup}>
-                            {queryImage.isLoading ? (
-                                <>
-                                    <Skeleton
-                                        variant="rounded"
-                                        width={160}
-                                        height={160}
-                                        sx={{
-                                            padding: 1,
-                                        }}
-                                    />
-                                    <Skeleton
-                                        variant="text"
-                                        width={160}
-                                        sx={{
-                                            fontSize: 20,
-                                        }}
-                                    />
-                                </>
-                            ) : (
-                                <>
-                                    <CardMedia
-                                        component={'img'}
-                                        sx={{
-                                            width: 160,
-                                            height: 160,
-                                            borderRadius: 3,
-                                            boxShadow: 3,
-                                            marginY: 1
-                                        }}
-                                        image={queryImage?.data}
-                                        alt='Zonk'
-                                    />
-                                    <Box>
-                                        <Button variant='contained' sx={{ marginTop: 8 }}>Lihat Gambar</Button>
-                                    </Box>
-                                </>
-                            )}
-                        </Card>
-                    </Box>
-                    {<Button sx={{ marginX: 3, borderRadius: 3, paddingY: 1 }} variant="contained" onClick={() => {
-                        mutate({}, { onSuccess: () => navigate(content[status].afterHref).then(() => query.refetch()) })
-                    }} >{content[status]?.buttonText}</Button>}
-                </Box>
-            )}
+                        <Box>
+                            <Typography sx={{ fontWeight: 'bold', marginBottom: 1, }}>Bukti Pembayaran</Typography>
+                            <Paper sx={{
+                                position: 'relative',
+                                overflow: 'auto',
+                                boxShadow: 1,
+                                borderRadius: 4,
+                            }}>
+                                <Box
+                                    component="img"
+                                    src={queryImage?.data}
+                                    width="100%"
+                                    height={160}
+                                    sx={{
+                                        objectFit: 'cover',
+                                        objectPosition: 'top center',
+                                    }}
+                                />
+                                <Button
+                                    onClick={setOpenPopup}
+                                    variant="contained"
+                                    fullWidth
+                                    sx={{
+                                        position: 'absolute',
+                                        bottom: 0,
+                                        left: 0,
+                                        backgroundColor: 'rgba(15, 14, 14, .5)',
+                                        textAlign: 'center',
+                                        '&:hover': {
+                                            backgroundColor: 'rgba(15, 14, 14, 1)',
+                                        },
+                                    }}>
+                                    Lihat Gambar
+                                </Button>
+                            </Paper>
+                        </Box>
+                        <Box display="flex" gap={1}>
+                            <OrderAdminAdvanceTool id={id} status={status} />
+                            {<Button
+                                variant="contained"
+                                disabled={!content[status]?.buttonText}
+                                onClick={() => {
+                                    if (status >= 3)
+                                        return navigate('/graphs')
+
+                                    mutate({}, {
+                                        onSuccess: () => navigate(content[status].afterHref)
+                                            .then(() => query.refetch())
+                                    })
+                                }}
+                                sx={{
+                                    flex: 2,
+                                    borderRadius: 4,
+                                }}
+                            >
+                                {content[status]?.buttonText ?? 'Ditolak'}</Button>}
+                        </Box>
+                    </Stack>
+                </Stack>
+            )
+            }
 
             <PopUp openPopup={openPopup} setOpenPopup={setOpenPopup}>
                 <CardMedia

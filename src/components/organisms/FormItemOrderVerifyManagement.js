@@ -1,8 +1,8 @@
 import React from 'react'
-import { Box, Typography, Button, CardMedia, Card } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { Box, Typography, Button, CardMedia } from '@mui/material'
 import { useTrigger } from 'commands/builders/commonBuilder'
 import PopUp from 'components/molecules/PopUp'
-import { useNavigate } from 'react-router-dom'
 import { useUpdateOrder } from 'api/hooks/ordersManagementHook'
 import { useImageByPath } from 'api/hooks/imageHook'
 import { useOrderSwitch } from 'api/hooks/ordersManagementHook'
@@ -15,20 +15,24 @@ const FormItemOrderVerifyManagement = ({ id, orderTime, mealDate, address, name,
     const query = useOrderSwitch()
     const content = [
         {
-            afterHref: '/admin/orders/waiting',
+            afterHref: '/orders/waiting',
             buttonText: 'Konfirmasi',
         },
         {
-            afterHref: '/admin/orders/onDelivery',
+            afterHref: '/orders/delivering',
             buttonText: 'Kirim',
         },
         {
-            afterHref: '/admin/orders/successful',
+            afterHref: '/orders/success',
             buttonText: 'Selesai',
         },
         {
-            afterHref: '/admin/orders/success',
-            buttonText: 'Simpan ke Grafik',
+            afterHref: '/graphs',
+            buttonText: 'Buka Grafik',
+        },
+        {
+            afterHref: '/',
+            buttonText: 'Ditolak',
         },
     ]
 
@@ -90,9 +94,21 @@ const FormItemOrderVerifyManagement = ({ id, orderTime, mealDate, address, name,
                 </Box>
             </Box>
 
-            {<Button sx={{ marginX: 3, borderRadius: 3, paddingY: 1, width: '92%' }} variant="contained" onClick={() => {
-                mutate({}, { onSuccess: () => navigate(content[status].afterHref).then(() => query.refetch()) })
-            }} >{content[status]?.buttonText}</Button>}
+            <Button
+                onClick={() => {
+                    if (status === 3)
+                        return navigate('/graphs')
+
+                    mutate({}, {
+                        onSuccess: () => (navigate(content[status].afterHref), query.refetch())
+                    })
+                }}
+                variant="contained"
+                disabled={status === 4}
+                sx={{ marginX: 3, borderRadius: 3, paddingY: 1, width: '92%' }}
+            >
+                {content[status]?.buttonText}
+            </Button>
 
             <PopUp openPopup={openPopup} setOpenPopup={setOpenPopup}>
                 <CardMedia

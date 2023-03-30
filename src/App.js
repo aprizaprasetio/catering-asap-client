@@ -74,7 +74,7 @@ const App = () => {
       <Route path="/graphs" element={<PrivateRoute element={<AdminManagementGraphic />} role="admin" />} exact />
       <Route path="/users" element={<PrivateRoute element={<AdminUserList />} role="admin" />} exact />
 
-      <Route path="/orders/detail/:orderId" element={<OrderVerifyManagement />} exact />
+      <Route path="/orders/detail/:orderId" element={<PrivateRoute element={<OrderVerifyManagement />} role="admin" />} exact />
       <Route path="/graphs" element={<PrivateRoute element={<AdminManagementGraphic />} role="admin" />} exact />
       <Route path="/users" element={<PrivateRoute element={<PrivateRoute element={<AdminUserList />} role="admin" />} role="admin" />} exact />
       <Route path="/users/detail/:id" element={<PrivateRoute element={<AdminUserDetail />} role="admin" />} exact />

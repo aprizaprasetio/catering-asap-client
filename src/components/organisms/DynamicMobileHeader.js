@@ -21,11 +21,26 @@ tabList.push({
     href: '/orders/success',
     content: 'Selesai',
 })
+tabList.push({
+    href: '/orders/rejected',
+    content: 'Ditolak',
+})
+
 
 const DynamicMobileHeader = ({ title, isMenuVisible }) => {
     const { pathname } = useLocation()
     const navigate = useNavigate()
-  
+
+    const tabColor = () => {
+        if (pathname === tabList[4].href)
+            return '#e53e3e'
+
+        if (pathname === tabList[3].href)
+            return '#2e7d32'
+
+        return undefined
+    }
+
     return (
         <>
             <Box sx={{
@@ -62,6 +77,12 @@ const DynamicMobileHeader = ({ title, isMenuVisible }) => {
                         elevation={3}
                         sx={{
                             display: 'flex',
+                            '& .MuiTabs-indicator': {
+                                backgroundColor: tabColor(),
+                            },
+                            '& .MuiTab-root.Mui-selected': {
+                                color: tabColor(),
+                            },
                         }}
                     >
                         {tabList.map(tab => (

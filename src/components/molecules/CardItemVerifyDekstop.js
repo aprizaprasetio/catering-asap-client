@@ -1,9 +1,10 @@
-import { CardMedia, Box, Typography, Card } from '@mui/material'
+import { Box, Typography, Card, CardMedia, CardContent, Paper, Chip } from '@mui/material'
 import { formatIDR } from 'commands/application/priceCommand'
 import { Grid } from '@mui/material'
 import React from 'react'
+import { Stack } from '@mui/system'
 
-const CardItemVerifyDekstop = ({ foodDrinkName, quantity, price, imagePath }) => {
+const CardItemVerifyDekstop = ({ foodDrinkName, food_Drink_Id, quantity, price, imagePath }) => {
     return (
         <Grid item xs={12}>
             <Box sx={{
@@ -11,46 +12,39 @@ const CardItemVerifyDekstop = ({ foodDrinkName, quantity, price, imagePath }) =>
                 flexDirection: 'column',
             }}>
                 <Card sx={{
-                    boxShadow: 5,
-                    display: 'flex',
-                    justifyContent: 'space-between',
                     padding: 1,
+                    display: 'flex',
+                    boxShadow: 3,
                     borderRadius: 3
                 }}>
-                    <Box sx={{
+                    <CardMedia
+                        component={'img'}
+                        sx={{
+                            width: 100,
+                            height: 100,
+                            borderRadius: 3,
+                            boxShadow: 1,
+                        }}
+                        image={imagePath}
+                        alt='Zonk' />
+                    <CardContent sx={{
+                        flex: 1,
                         display: 'flex',
-                        gap: 3
+                        justifyContent: 'space-between',
+
                     }}>
-                        <CardMedia
-                            component={'img'}
-                            sx={{
-                                width: 100,
-                                height: 100,
-                                borderRadius: 3,
-                                boxShadow: 3,
-                                marginY: 1
-                            }}
-                            image={imagePath}
-                            alt='Zonk' />
-                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                            <Typography sx={{ fontSize: 18, fontWeight: 'bold' }}>{foodDrinkName}</Typography>
-                            <Typography sx={{ fontSize: 12 }}>{formatIDR(price)}</Typography>
+                        <Box >
+                            <Typography fontSize={14}>{foodDrinkName}</Typography>
+                            <Stack spacing={1} direction="row" alignItems="center">
+                                <Typography variant="body2">{quantity} x</Typography>
+                                <Typography fontSize={18} fontWeight="bold">{formatIDR(price)}</Typography>
+                            </Stack>
                         </Box>
-                    </Box>
-                    <Box sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                        <Typography sx={{
-                            fontSize: 18,
-                            fontWeight: 'bold',
-                            marginRight: 1
-                        }}>{quantity}pcs</Typography>
-                    </Box>
+                        <Chip label={`MENU ID: ${food_Drink_Id}`} size="small" />
+                    </CardContent>
                 </Card>
             </Box>
-        </Grid>
+        </Grid >
     )
 }
 

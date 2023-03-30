@@ -1,9 +1,11 @@
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
-import { useParams, useLocation } from "react-router-dom"
-import { fetchOrderList, fetchDataGraph, updateOrder, fetchListMenuOrder, fetchListSwitch, fetchListUserGraph, fetchOrderById, fetchListSwitchUser } from "api/connections/ordersManagementRequest"
-import { useEffect } from "react"
-import useSortAdmin from "factory/store/useSortAdmin"
-import useGrapStore from "factory/store/useGrapStore"
+import { useEffect } from 'react'
+import { useParams, useLocation } from 'react-router-dom'
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query'
+import { fetchOrderList, fetchDataGraph, updateOrder, fetchListMenuOrder, fetchListSwitch, fetchListUserGraph, fetchOrderById, fetchListSwitchUser, updateOrderControl }
+    from 'api/connections/ordersManagementRequest'
+import useSortAdmin from 'factory/store/useSortAdmin'
+import useGrapStore from 'factory/store/useGrapStore'
+import { client } from 'api/initiates/queryInitiate'
 
 const useOrderList = () => {
     const { orderId } = useParams()
@@ -22,6 +24,15 @@ const useUpdateOrder = id => {
     })
 
     return updateOrderQuery
+}
+
+const useUpdateOrderAdvance = () => {
+    const mutation = useMutation({
+        mutationFn: updateOrderControl,
+        onSuccess: () => client.refetchQueries({ queryKey: ['orders'] }),
+    })
+
+    return mutation
 }
 
 const useOrderListMenu = () => {
@@ -129,6 +140,7 @@ const useOrderSwitchUser = () => {
 export {
     useOrderList,
     useUpdateOrder,
+    useUpdateOrderAdvance,
     useOrderListMenu,
     useOrderSwitch,
     useOrderListUserGraph,
