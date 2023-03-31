@@ -5,10 +5,10 @@ function FoodDrinkTableContainer({ children, header }) {
     return (
         <TableContainer component={Paper} sx={{
             borderRadius: 3,
-            display: {
-                xs: 'none',
-                lg: 'block',
-            }
+            // display: {
+            //     xs: 'none',
+            //     lg: 'block',
+            // }
         }} >
             <Table sx={{
                 minWidth: 650

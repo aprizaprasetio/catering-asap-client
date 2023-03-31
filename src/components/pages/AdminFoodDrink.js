@@ -16,7 +16,7 @@ const AdminFoodDrink = () => {
                 header={<DynamicMobileHeader title="Food and Drink Menu" />}>
                 <FoodDrinkMenuTotal />
                 <SearchAndFormButtonFoodDrinkAdmin />
-                <FoodDrinkMobile />
+                {/* <FoodDrinkMobile /> */}
                 <FoodDrinkAdminDesktop />
             </CenterLayout>
         </>

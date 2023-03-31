@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Box, Chip }
+import { TableRow, TableCell, List, Stack, IconButton, Checkbox, Box, Chip, Skeleton }
     from '@mui/material'
 import { MoodRounded, SentimentNeutralRounded, MoodBadRounded, KeyboardArrowDown, KeyboardArrowUp, Edit, Delete, LocalBar, LunchDining }
     from '@mui/icons-material'
@@ -42,13 +42,21 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
     const [isEditMode, isEditModeTrigger] = useTrigger()
     const { mutate: deleteHandler } = useFoodDrinkDelete()
     const { mutate: updateHandler } = useFoodDrinkUpdate()
-    // const query = useFoodDrinkList2()
+    const { isFetchedAfterMount } = useFoodDrinkList2()
     const [image, imageHandler, { fileName, file }] = useImage()
     const nilai = {
         like: like,
         ok: ok,
         dislike: dislike,
     }
+
+    // const SkeletonFoodDrink = (
+    //     <>
+    //         <Stack >
+    //             <Skeleton height={60} width={100} variant="rounded" />
+    //         </Stack>
+    //     </>
+    // )
 
     const formikConfig = useFormik({
         initialValues: {
@@ -141,57 +149,64 @@ const FoodDrinkTableItem = ({ id, name, price, minOrder, description, image_Url,
                     )}
 
                 </TableCell>
-                <FoodDrinkTableCell open={isEditMode} config={nameConfig} />
-                <FoodDrinkTableCell open={isEditMode} config={priceConfig} />
-                <FoodDrinkTableCell open={isEditMode} config={minOrderConfig} />
-                <TableCell align='center' component="th" scope="row" size='small'
-                    sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
-                    <List component={Stack} direction="row" disablePadding>
-                        <ReactListItem icon={<MoodRounded />} content={nilai.like} />
-                        <ReactListItem icon={<SentimentNeutralRounded />} content={nilai.ok} />
-                        <ReactListItem icon={<MoodBadRounded />} content={nilai.dislike} />
-                    </List>
-                </TableCell>
-                <TableCell width="fit-content" sx={{ textAlign: 'center' }} component="th" scope="row">
-                    <Chip icon={type ? <LocalBar /> : <LunchDining />} label={typeMenu[type]} color={type ? 'info' : 'warning'} sx={{
-                        width: 'fit-content',
-                        fontSize: 10,
-                    }} />
-                </TableCell>
-                <TableCell component="th" scope="row" align="right">
-                    {isEditMode ? (
-                        <IconButton onClick={() => {
-                            const profileForm = new FormData()
+                {/* {!isFetchedAfterMount ? SkeletonFoodDrink : */}
+                {/* ( */}
+                <>
+                    <FoodDrinkTableCell open={isEditMode} config={nameConfig} />
+                    <FoodDrinkTableCell open={isEditMode} config={priceConfig} />
+                    <FoodDrinkTableCell open={isEditMode} config={minOrderConfig} />
+                    <TableCell align='center' component="th" scope="row" size='small'
+                        sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
+                        <List component={Stack} direction="row" disablePadding>
+                            <ReactListItem icon={<MoodRounded />} content={nilai.like} />
+                            <ReactListItem icon={<SentimentNeutralRounded />} content={nilai.ok} />
+                            <ReactListItem icon={<MoodBadRounded />} content={nilai.dislike} />
+                        </List>
+                    </TableCell>
+                    <TableCell width="fit-content" sx={{ textAlign: 'center' }} component="th" scope="row">
+                        <Chip icon={type ? <LocalBar /> : <LunchDining />} label={typeMenu[type]} color={type ? 'info' : 'warning'} sx={{
+                            width: 'fit-content',
+                            fontSize: 10,
+                        }} />
+                    </TableCell>
+                    <TableCell component="th" scope="row" align="right">
+                        {isEditMode ? (
+                            <IconButton onClick={() => {
+                                const profileForm = new FormData()
 
-                            profileForm.append('id', id)
-                            profileForm.append('name', formikConfig.values.name)
-                            profileForm.append('price', formikConfig.values.price)
-                            profileForm.append('minOrder', formikConfig.values.minOrder)
-                            profileForm.append('description', formikConfig.values.description)
+                                profileForm.append('id', id)
+                                profileForm.append('name', formikConfig.values.name)
+                                profileForm.append('price', formikConfig.values.price)
+                                profileForm.append('minOrder', formikConfig.values.minOrder)
+                                profileForm.append('description', formikConfig.values.description)
 
-                            if (formikConfig.values.imageUrl !== image_Url)
-                                profileForm.append('imageUrl', file, fileName)
+                                if (formikConfig.values.imageUrl !== image_Url)
+                                    profileForm.append('imageUrl', file, fileName)
 
-                            console.info(profileForm)
+                                console.info(profileForm)
 
-                            updateHandler(profileForm, {
-                                onSuccess: () => (client.refetchQueries({ queryKey: ['foodDrinkList'] }), isEditModeTrigger()),
-                            })
-                        }}>
-                            <CheckCircleIcon />
+                                updateHandler(profileForm, {
+                                    onSuccess: () => (client.refetchQueries({ queryKey: ['foodDrinkList'] }), isEditModeTrigger()),
+                                })
+                            }}>
+                                <CheckCircleIcon />
+                            </IconButton>
+                        ) : (
+                            <IconButton onClick={() => isEditModeTrigger()}>
+                                <Edit />
+                            </IconButton>
+                        )}
+                        <IconButton onClick={() => deleteHandler(id)} color='error'>
+                            <Delete />
                         </IconButton>
-                    ) : (
-                        <IconButton onClick={() => isEditModeTrigger()}>
-                            <Edit />
-                        </IconButton>
-                    )}
-                    <IconButton onClick={() => deleteHandler(id)} color='error'>
-                        <Delete />
-                    </IconButton>
-                    {/* <IconButton size='small' sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
+                        {/* <IconButton size='small' sx={{ visibility: isEditMode ? 'hidden' : 'visible' }} disabled={isEditMode}>
                         <Checkbox />
                     </IconButton> */}
-                </TableCell>
+                    </TableCell>
+                </>
+                {/* ) */}
+
+                {/* } */}
             </TableRow>
             <TableRow sx={{
                 width: '100%'

@@ -1,11 +1,11 @@
-import { Box, Paper, Stack, Typography } from '@mui/material'
+import { Box, Paper, Stack, Typography, Skeleton } from '@mui/material'
 import LunchDining from '@mui/icons-material/LunchDining'
 import FoodDrinkMenuDynamic from 'components/organisms/FoodDrinkMenuDynamic'
 import WineBarIcon from '@mui/icons-material/WineBar'
 import { useFoodDrinkQuantity } from 'api/hooks/catalogAdminHook'
 
 const FoodDrinkMenuTotal = () => {
-    const { data } = useFoodDrinkQuantity()
+    const { data, isLoading } = useFoodDrinkQuantity()
 
     return (
         <Box
@@ -30,8 +30,31 @@ const FoodDrinkMenuTotal = () => {
 
             }}>Total Makanan Dan Minum</Typography>
             <Box component={Stack} direction="row" marginBottom={1} spacing={1}>
-                <FoodDrinkMenuDynamic icon={<LunchDining />} quantity={data?.foodQuantity} />
-                <FoodDrinkMenuDynamic icon={<WineBarIcon />} quantity={data?.drinkQuantity} />
+                <>
+                    {isLoading ? [...Array(1)].map((item, index) => (
+
+                        <Skeleton variant="circular" width={20} height={30} key={index} />
+                    ))
+                        :
+                        (
+                            <FoodDrinkMenuDynamic icon={<LunchDining />} quantity={data?.foodQuantity} />
+                        )
+
+                    }
+                </>
+                <>
+                    {isLoading ? [...Array(1)].map((item, index) => (
+
+                        <Skeleton variant="circular" width={20} height={30} key={index} />
+                    ))
+
+                        :
+                        (
+                            <FoodDrinkMenuDynamic icon={<WineBarIcon />} quantity={data?.drinkQuantity} />
+                        )
+                    }
+                </>
+
             </Box>
         </Box >
     )

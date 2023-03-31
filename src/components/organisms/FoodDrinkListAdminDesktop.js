@@ -2,7 +2,7 @@ import React from 'react'
 import UsersWrapperMobile from './UsersWrapperMobile'
 import FoodDrinkTableItem from './FoodDrinkTableItem'
 import { useFoodDrinkList2 } from 'api/hooks/catalogUserHook'
-import { Grid } from '@mui/material'
+import { Box, Grid, Table, TableCell, Skeleton, TableRow } from '@mui/material'
 import SkeletonList from './SkeletonList'
 
 const FoodDrinkListAdminDesktop = () => {
@@ -68,16 +68,39 @@ const FoodDrinkListAdminDesktop = () => {
     // )
 
     return (
-        data?.pages?.map((group, index) => {
-            return (
-                <React.Fragment key={index}>
-                    {
-                        group?.map(item => <FoodDrinkTableItem key={item.id} minOrder={item.min_Order} image_Url={item.image_Url} {...item} />)
-                    }
-                </React.Fragment>
-            )
-        })
+        // <Box >
+        //     {
+        <>
+            {
+                isLoading ? [...Array(5)].map((item, index) => (
+                    <TableRow key={index}>
+                        <TableCell>
+                            <Skeleton variant="circular" width={56} height={56} />
+                        </TableCell>
+                        <TableCell width="100%" colSpan={7} padding={0}>
+                            <Skeleton variant="rounded" width="100%" height={30} />
+                        </TableCell>
+                    </TableRow>
 
+                )) :
+                    (
+                        data?.pages?.map((group, index) => {
+                            return (
+                                <React.Fragment key={index}>
+                                    {
+                                        group?.map(item => <FoodDrinkTableItem key={item.id} minOrder={item.min_Order} image_Url={item.image_Url} {...item} />)
+                                    }
+                                </React.Fragment>
+                            )
+                        })
+                    )
+            }
+        </>
+
+
+        //     }
+        //     {(isFetching || isLoading) && <SkeletonList />}
+        // </Box >
 
     )
 }

@@ -21,7 +21,12 @@ const SearchAndFormButtonFoodDrinkAdmin = () => {
                     },
                 }}>
                 <SearchBarAdmin />
-                <Box onClick={setOpenPopup}>
+                <Box sx={{
+                    marginY: {
+                        lg: 0,
+                        xs: 2
+                    }
+                }} onClick={setOpenPopup}>
                     <AdminFoodDrinkAddButton />
                 </Box>
             </Box>
