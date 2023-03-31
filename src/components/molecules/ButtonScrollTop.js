@@ -10,7 +10,10 @@ const fabConfig = {
     sx: {
         position: 'fixed',
         right: 20,
-        bottom: 20,
+        bottom: {
+            xs: 100,
+            md: 20,
+        },
     },
 }
 

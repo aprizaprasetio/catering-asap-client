@@ -82,6 +82,7 @@ const useOrderListUserGraph = () => {
             return pages.length + 1
         },
         refetchOnMount: true,
+        refetchInterval: 20000,
     })
     return userList
 }
@@ -90,7 +91,8 @@ const useDataGraph = () => {
     const { filterBy } = useGrapStore()
     const dataGraph = useQuery({
         queryKey: ['dataGraph'],
-        queryFn: () => fetchDataGraph(filterBy)
+        queryFn: () => fetchDataGraph(filterBy),
+        refetchInterval: 20000,
     })
 
     useEffect(() => {
@@ -104,7 +106,7 @@ const useDataOrderUser = () => {
     const { id } = useParams()
     const dataOrder = useQuery({
         queryKey: ['dataOrderUser'],
-        queryFn: () => fetchOrderById(id)
+        queryFn: () => fetchOrderById(id),
     })
     useEffect(() => {
         dataOrder.refetch()

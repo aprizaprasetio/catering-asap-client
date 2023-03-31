@@ -17,7 +17,7 @@ const AdminUserDetail = () => {
     return (
         <>
             <AdminNavbar />
-            <DynamicNavbar href={-1}>Detail</DynamicNavbar>
+            <DynamicNavbar href={-1} revert>Detail</DynamicNavbar>
             <CenterLayout admin>
                 <UserDetailAdmin />
                 <UserItemMobilePopup userBio={data} userContent={data} />

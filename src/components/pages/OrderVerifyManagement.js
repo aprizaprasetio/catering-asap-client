@@ -5,9 +5,7 @@ import CenterLayout from 'components/templates/CenterLayout'
 import OrderItemDetail from 'components/organisms/OrderItem'
 import OrderVerifyContainer from 'components/organisms/OrderVerifyContainer'
 import DynamicNavbar from 'components/organisms/DynamicNavbar'
-import { useParams } from 'react-router-dom'
 import FormVerifyOrderDekstop from 'components/organisms/FormVerifyOrderDekstop'
-import { useOrderList } from 'api/hooks/ordersManagementHook'
 
 const OrderVerifyManagement = () => {
     const display = {
@@ -18,7 +16,7 @@ const OrderVerifyManagement = () => {
     return (
         <>
             <AdminNavbar />
-            <DynamicNavbar href={-1}>Verifikasi</DynamicNavbar>
+            <DynamicNavbar href={-1} revert>Pesanan</DynamicNavbar>
             <CenterLayout admin>
                 <OrderVerifyContainer mobile display={display} />
                 <FormVerifyOrderDekstop />

@@ -31,7 +31,7 @@ const FormVerifyOrderDekstop = ({ }) => {
                     <Typography fontSize={16} fontWeight="bold" paddingBottom={3}>Daftar Pesanan</Typography>
                     <FormOrderVerifyDekstopWrapper>
                         {isFetching ? (
-                            [...Array(3)].map(() => SkeletonBox)
+                            [...Array(3)].map((item, index) => <React.Fragment key={index}>{SkeletonBox}</React.Fragment>)
                         ) : (
                             orderListMenu.data?.map(item => <CardItemVerifyDekstop key={item.id} {...item} />)
                         )}

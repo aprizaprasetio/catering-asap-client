@@ -12,6 +12,10 @@ const CenterLayout = ({ admin, header, children }) => {
             xs: 'auto',
             sm: admin ? '100px' : 'auto',
         },
+        marginBottom: {
+            xs: 10,
+            sm: 5,
+        },
         maxWidth: {
             xs: 'auto',
             sm: 'calc(100% - 100px)'

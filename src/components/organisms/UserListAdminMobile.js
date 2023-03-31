@@ -28,8 +28,6 @@ const UserListAdminMobile = () => {
             if (!isFetching && (isBottom && hasNextPage)) fetchNextPage()
         }
 
-        // console.info(isFetching)
-
         window.addEventListener('scroll', refetch)
         return () => window.removeEventListener('scroll', refetch)
     }, [isFetching])

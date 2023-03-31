@@ -12,6 +12,7 @@ const useImageByPath = path => {
     })
 
     useEffect(() => {
+        if (!path) return
         imageMutation.mutate()
         return imageMutation.reset
     }, [path])

@@ -9,7 +9,6 @@ import { client } from 'api/initiates/queryInitiate'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  // <React.StrictMode>
   <BrowserRouter>
     <QueryClientProvider client={client}>
       <ReactQueryDevtools initialIsOpen={false} />
@@ -17,5 +16,4 @@ root.render(
       <App />
     </QueryClientProvider>
   </BrowserRouter>
-  // </React.StrictMode>
 )

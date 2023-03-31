@@ -5,9 +5,6 @@ import { axios } from 'api/initiates/queryInitiate'
 const useCreateReaction = foodDrinkId => {
     const { mutate } = useMutation({
         mutationFn: createReaction,
-        onSuccess: (data) => {
-            console.log(data)
-        }
     })
 
     return reaction => {
@@ -22,9 +19,6 @@ const useCreateReaction = foodDrinkId => {
 const useUpdateReaction = foodDrinkId => {
     const { mutate } = useMutation({
         mutationFn: updateReaction,
-        onSuccess: (data) => {
-            console.log(data)
-        }
     })
 
     return (id, reaction) => {

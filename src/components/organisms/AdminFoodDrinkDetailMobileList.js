@@ -5,10 +5,6 @@ import AdminFoodDrinkDetailMobile from 'components/pages/AdminFoodDrinkDetailMob
 const AdminFoodDrinkDetailMobileList = () => {
     const { data } = useFoodDrinkList2()
 
-    React.useEffect(() => {
-        console.log(data)
-    }, [])
-
     return data?.pages?.map((group, index) => (
         <React.Fragment key={index}>
             {

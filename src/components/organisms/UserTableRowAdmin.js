@@ -1,42 +1,48 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { formatIDR } from 'commands/application/priceCommand'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar, IconButton, Typography } from '@mui/material'
+import { Button, Box, TableCell, TableRow, Avatar, IconButton, Typography } from '@mui/material'
 import { Delete } from '@mui/icons-material'
+import PopUp from 'components/molecules/PopUp'
 import UserTableRowAdminProps from 'proptypes/organisms/UserTableRowAdminProps'
 import { useDeleteUser, useUserList } from 'api/hooks/usersManagementHook'
 import { useTrigger } from 'commands/builders/commonBuilder'
-import PopUp from 'components/molecules/PopUp'
-import { Button, Box } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
-
 const UserTableRowAdmin = ({ id, avatar, name, email, phone, quantity, totalPriceOrdered, gender }) => {
     const [openPopup, setOpenPopup] = useTrigger()
+    const [isHover, isHoverTrigger] = useTrigger()
     const mutation = useDeleteUser()
     const query = useUserList()
-    const navigate = useNavigate()
     const deleteOnPopup = () => mutation.mutate(id, {
         onSuccess: () => query.refetch().then(setOpenPopup)
     })
 
     return (
         <>
-            <TableRow component={Box}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
+            <TableRow
+                component={Link}
+                onMouseOver={isHoverTrigger}
+                onMouseOut={isHoverTrigger}
+                to={`/users/detail/${id}`}
+                sx={{
+                    textDecoration: 'none',
+                    backgroundColor: isHover ? '#f5f5f5' : 'white',
+                    transition: 'all .33s',
+                }}
             >
                 <TableCell component="th" scope="row">
                     <Avatar
                         alt={name}
                         src={avatar}
                         sx={{ width: 56, height: 56 }}
-                        onClick={() => navigate(`/users/detail/${id}`)}
+                        onClick={() => { }}
                     />
                 </TableCell>
-                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{name}</TableCell>
-                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{email}</TableCell>
-                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{phone}</TableCell>
-                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{quantity}</TableCell>
-                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{formatIDR(totalPriceOrdered)}</TableCell>
-                <TableCell align="left" onClick={() => navigate(`/users/detail/${id}`)} >{gender ? 'Wanita' : 'Pria'}</TableCell>
+                <TableCell align="left" onClick={() => { }} >{name}</TableCell>
+                <TableCell align="left" onClick={() => { }} >{email}</TableCell>
+                <TableCell align="left" onClick={() => { }} >{phone}</TableCell>
+                <TableCell align="left" onClick={() => { }} >{quantity}</TableCell>
+                <TableCell align="left" onClick={() => { }} >{formatIDR(totalPriceOrdered)}</TableCell>
+                <TableCell align="left" onClick={() => { }} >{gender ? 'Wanita' : 'Pria'}</TableCell>
                 <TableCell align="left">
                     <IconButton onClick={setOpenPopup}>
                         <Delete />
